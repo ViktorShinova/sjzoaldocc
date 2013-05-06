@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+
+	<head>
+	
+		<title></title>
+
+		<meta charset="iso-8859-1" />
+		
+		<meta name="description" content="" />
+
+		<meta name="robots" content="index,follow" />
+		<meta name="revisit-after" content="7 days" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link href="http://careershire.localhost/css/main.css" media="all" type="text/css" rel="stylesheet">
+		<link href="http://careershire.localhost/css/bootstrap.css" media="all" type="text/css" rel="stylesheet">
+    	<script src="http://careershire.localhost/js/vendor/LAB/LAB.js"></script>
+		<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+		<![endif]-->				
+	</head>
+ 
+	<body>
+	
+		<div id="wrapper">
+		
+			<div id="container">
+				
+				<header role="navbar" class="navbar navbar-static-top">
+					<div class="navbar-inner">
+						<div class="container">
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</a>
+
+							<a class="brand" href="/"><img src="/img/logo-top.png"></a>
+
+							<div class="nav-collapse collapse navbar-responsive-collapse">
+								<ul class="nav">
+									<li class="active"><a href="/">Home</a></li>
+									<li><a href="#">About Us</a></li>
+									<li><a href="#">Pricing</a></li>
+									<li><a href="#">Career Advice</a></li>
+								</ul>
+								<ul class="nav pull-right">
+									<li class="divider-vertical"></li>
+									<li class="dropdown">
+										<div class="btn-group">
+																						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+												<i class="icon-user icon-black"></i> Sign In <span class="caret"></span>
+											</a>
+											<form action="/home/login" method="post" class="dropdown-menu" style="padding: 15px;">
+										      <ul>
+										      	<li><label for="nav-username">Username</label><input type="text" id="nav-username" name="username" /></li>
+										      	<li><label for="nav-password">Password</label><input type="password" id="nav-password" name="password" /></li>
+										      	<li><input type="submit" class="btn btn-primary pull-right" value="Sign In" /></li>
+										      </ul>
+										    </form>											
+																					</div>
+									</li>
+								</ul>							
+							</div><!-- /.nav-collapse -->
+						</div>
+					</div>
+
+				</header>
+
+				<div id="content" class="container">
+				
+					<div id="primary">
+
+							<div class="container-fluid">
+								<div class="row-fluid">
+									
+									<div class="form-field profile span5 pull-right">
+										<span class="container-header">Current Photo</span>
+
+										<div id="photo">
+											<img src="/img/profile/1.jpg"/>
+											<div><a href="#">Edit</a> | <a href="#">Delete</a></div>
+										</div>
+
+										<p>
+											You can upload a JPG, GIF or PNG file <br/> (File size limit is 4 MB).
+											<input type="file" />
+										</p>
+									</div>
+
+									<div class="form-field span7 alpha">
+										<span class="container-header">Basic Information</span>
+										<form class="advertiser-post-form validate-form" method="POST" action="" accept-charset="UTF-8">
+											<ol>
+													<li><label for="username">Username</label><input class="validate[required]" type="text" name="username" id="username"></li>
+													<li><label for="email">Email</label><input class="validate[required, custom[email]]" type="text" name="email" id="email"></li>
+											</ol>
+											<ol>
+													<li><label for="password">Password</label><input type="password" name="password" id="password"></li>
+													<li><label for="password_confirmation">Confirm Password</label><input type="password" name="password_confirmation" id="password_confirmation"></li>
+													<li>
+														<input type="submit" class="btn btn-primary pull-right" value="Save">
+													</li>
+											</ol>
+										</form>
+										<div class="clearfix"></div>								
+									</div>
+
+									<div class="form-field span5 pull-right">
+										<span class="container-header">Quick Summary</span>
+										<form class="advertiser-post-form validate-form" method="POST" action="" accept-charset="UTF-8">
+											<ol>
+												<li>
+													<label for="summary">Summary</label>
+													<textarea rows="5" cols="50"></textarea>
+												</li>
+												<li>
+													<label for="industry">Which working industry are you in?</label>
+													<input type="text" name="industry" id="industry">
+												</li>
+												<li>
+													<label for="years-exp">Years of experience in this field?</label>
+													<input type="text" name="years-exp" id="years-exp">
+												</li>
+												<li>
+														<input type="submit" class="btn btn-primary pull-right" value="Save">
+												</li>
+											</ol>
+										</form>
+									</div>
+
+									<div class="form-field span7 alpha">
+										<span class="container-header">Resume</span>
+										<form class="advertiser-post-form validate-form" method="POST" action="" accept-charset="UTF-8">
+											<p class="content">
+												You can upload a PDF, DOC or DOCX file (File size limit is 4 MB).
+												<input type="file" />									
+											</p>
+
+											<hr>
+
+											<ul class="listing" id="document-listing">
+												<li class="item">
+													<a href="#"><span class="icon doc"></span></a>
+													<span class="title"><a title="sample_doc.doc" href="/page/Home/Developer/Style_Guide/Document_Listing/Sample_Doc/">DOC Document</a></span>
+													<span class="filesize">0 B</span>
+													<span class="date-upload">December 13, 2012</span>
+												</li>
+
+												<li class="item">
+													<a href="#"><span class="icon pdf"></span></a>
+													<span class="title"><a title="Membership_Application_Form.pdf" href="/page/Home/Developer/Style_Guide/Document_Listing/Membership_Application_Form/">PDF Document</a></span>
+													<span class="filesize">850 kB</span>
+													<span class="date-upload">December 13, 2012</span>
+												</li>
+											</ul>
+										</form>
+										<div class="clearfix"></div>									
+									</div>
+
+									<div class="form-field span7 alpha">
+										<span class="container-header">Coverletter</span>
+										<form class="advertiser-post-form validate-form" method="POST" action="" accept-charset="UTF-8">
+											<p class="content">
+												You can upload a PDF, DOC or DOCX file (File size limit is 4 MB).
+												<input type="file" />									
+											</p>
+
+											<hr>
+
+											<ul class="listing" id="document-listing">
+												<li class="item">
+													<a href="#"><span class="icon doc"></span></a>
+													<span class="title"><a title="sample_doc.doc" href="/page/Home/Developer/Style_Guide/Document_Listing/Sample_Doc/">DOC Document</a></span>
+													<span class="filesize">0 B</span>
+													<span class="date">December 13, 2012</span>
+												</li>
+
+												<li class="item">
+													<a href="#"><span class="icon pdf"></span></a>
+													<span class="title"><a title="Membership_Application_Form.pdf" href="/page/Home/Developer/Style_Guide/Document_Listing/Membership_Application_Form/">PDF Document</a></span>
+													<span class="filesize">850 kB</span>
+													<span class="date">December 13, 2012</span>
+												</li>
+
+												<li class="item">
+													<a href="#"><span class="icon doc"></span></a>
+													<span class="title"><a title="Membership_Application_Form.pdf" href="/page/Home/Developer/Style_Guide/Document_Listing/Membership_Application_Form/">DOC Document</a></span>
+													<span class="filesize">850 kB</span>
+													<span class="date">December 13, 2012</span>
+												</li>
+
+												<li class="item">
+													<a href="#"><span class="icon doc"></span></a>
+													<span class="title"><a title="Membership_Application_Form.pdf" href="/page/Home/Developer/Style_Guide/Document_Listing/Membership_Application_Form/">DOC Document</a></span>
+													<span class="filesize">850 kB</span>
+													<span class="date">December 13, 2012</span>
+												</li>
+											</ul>
+										</form>
+										<div class="clearfix"></div>									
+									</div>
+								</div>
+								<!-- /.row-fluid -->
+
+							</div>
+							<!-- /.container-fluid -->					
+
+					</div>
+					<!-- /#primary -->
+					
+				</div>
+				<!-- /#content -->
+				
+				
+			</div>
+			<!-- /#container -->
+
+			<div id="footer-toolbar">
+
+				<div id="toggler" class="toolbar-btn"><span><i class="icon-resize-small icon-white"></i></span></div>
+				<div class="toolbar-btn"><span><i class="icon-time icon-white"></i></span></div>	
+				<div class="toolbar-btn current"><span><i class="icon-star icon-white"></i></span></div>
+
+				<div class="container">
+					<div id="shortlistings-prev"><span></span></div>
+					<div id="shortlistings-next"><span></span></div>
+
+					<ul id="shortlistings">
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+
+
+					</ul>			
+				</div>
+			</div>
+			<!-- /#footer-toolbar -->
+
+			<footer id="footer">
+				<div class="container">
+					<ul>
+						<li>
+							<strong>Advertisers</strong>
+							<ul>
+								<li><a href="#">Create an Account</a></li>
+								<li><a href="#">Advertise a Job</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>Job Seekers</strong>
+							<ul>
+								<li><a href="#">Search Jobs</a></li>
+								<li><a href="#">Create an Account</a></li>
+								<li><a href="#">Upload Resume</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>About Us</strong>
+							<ul>
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Privacy Statement</a></li>
+								<li><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Site Map</a></li>
+								<li><a href="#">Contact Us</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>More</strong>
+							<ul>
+								<li><a href="#">Pricing</a></li>
+								<li><a href="#">Career Advice</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Tips</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="pull-right">
+						<a href="/"><img src="/img/logo-bottom.png" class="pull-right" alt="Careershire"></a>
+					</div>
+				</div>
+				<div id="footer-bottom">
+					<div class="container">
+						<span class="pull-right"> Copyright &copy; CareersHire 2013. All rights reserved.</span>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+		<!-- /#wrapper -->
+
+		<script>
+    	$LAB.setGlobalDefaults({ BasePath : '/js/' , CacheBust : false });
+		$LAB
+		
+  		.script("jquery-1.9.0.js").wait()
+  		.script("jquery-ui-1.10.0.custom.js").wait()
+  		.script(
+  			"jquery.validationEngine-en.js",
+  			"jquery.validationEngine.js",
+  			"vendor/fancybox/jquery.fancybox.js",
+        "bootstrap.js",
+        "jquery.carouFredSel-6.1.0-packed.js").wait()
+  		.script("site.js").wait(function () {
+  			jSite.start();
+  		})
+  		
+	.wait(function(){
+		$("#job-category").trigger("change");
+		$("#job-location").trigger("change");
+	})
+
+;
+	  
+    </script>	</body>
+	
+</html>

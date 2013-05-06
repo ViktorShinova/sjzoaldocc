@@ -1,0 +1,391 @@
+/* =FORMS STYLES 
+=================================================================== */
+.validate-form, .form {
+	h4 {
+		.font-normal();
+		margin-bottom: 21px;
+	}
+
+	> div, > section {
+		.box-sizing(border-box);
+		border: 1px solid #dadada;
+		padding: 10px 20px;
+		margin-bottom: 21px;
+	}
+
+	.alert {
+		border: 1px solid #fbeed5 !important;
+	}
+	
+	.btn-primary {
+		margin-left: 5px;
+	}
+
+	ol, ul {
+		margin: 0;
+		//padding: 0 0 20px 20px;
+		//float: left;
+		margin-right: 34px;
+
+		li {
+			list-style: none;
+
+			label { 
+				
+				float: left; 
+				line-height: 30px;
+				width: 215px;
+
+			}
+
+			input[type="submit"], input[type="button"] {
+				margin-top: 10px;
+				margin-left: 5px;
+			}
+
+		}
+	}
+
+	&#applicant-privacy-settings, &#job-apply{
+		margin-bottom: 0;
+		div {  margin-bottom: 0;}
+	}
+
+	&#job-apply div { border: 0; }
+}
+	.form-field {
+		// background: #fff;
+		// border: 1px solid #dadada;
+		// margin-bottom: 20px;
+		// .box-shadow(1px 1px 9px #ddd);
+
+		
+
+		// #summary {
+		// 	dt {
+		// 		float: left;
+		// 		width: 125px;
+		// 		color: @gray-dark;
+		// 	}
+
+		// 	dd {
+		// 		float: left;
+		// 		width: 125px;
+		// 		margin-bottom: 15px;
+
+		// 	}
+		// }
+
+		// #related-jobs {
+			
+
+		// 	li {
+		// 		margin-left: 20px;
+		// 		padding-left: 15px;
+		// 		background: url(/img/list-arrow.png) no-repeat;
+		// 	}
+		// }
+	}
+
+	//.template-form { width: 100%;}
+
+
+	// .third {
+	// 	width: 330px;
+	// 	float: right;
+	// 	background: #fff;
+	// 	border: 1px solid #dadada;
+	// }
+
+.form-signin {
+	
+	max-width: 424px;
+	margin: 0 auto;
+	border: 1px solid #dadada;
+	form { 
+		padding: 20px; 
+		overflow: hidden; 
+
+		ol li label { width: 130px;}
+	}
+}
+
+
+/* =APPLICANT ACCOUNT
+=================================================================== */
+	
+	.public-profile-link {
+		input[type="text"] { .size(80px, 30px); }
+		.add-on {
+			line-height: 30px;
+			.size(310px, 30px);
+		}
+		button { height: 40px; }
+	}
+
+	#profile-photo {
+
+		float: right;
+
+		img {
+			max-width: inherit !important;
+		}
+
+		#current-photo {
+			float: left;
+
+			#photo { 
+				
+				position: relative;
+				.size(150px, 150px);
+				overflow: hidden;
+
+				img {
+					.size(150px, 150px);
+					overflow: hidden;
+				}
+
+				#photo-edit-btn {
+					position: absolute;
+					bottom: 0;
+					background: url(/img/opac-bg.png);
+					width: 150px;
+					text-align: center;
+					color: #fff;
+					a { color: #fff; }
+				}	
+			}
+
+			#upload-profile-pic { display: none; }
+
+			p {
+				margin-top: 3px;
+				line-height: 18px;
+			}			
+		}
+
+		#edit-photo {
+
+			#crop-profile-pic-btn {
+				display: none;
+
+			}
+
+		}
+
+	}
+
+	#qualifications-field, #workhistory-field {
+
+		.hide { display: none; }
+		.open { display: list-item; }
+
+		.qualifications-field-child, .workhistory-field-child {
+			padding: 10px;
+
+			&:hover {
+				background: #f0f0f0;
+			}
+		}
+
+		ol {
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 10px;
+			margin-right: 0;
+			padding: 10px 0;		
+		}
+
+		li {
+			textarea {
+				.size(95%, 150px)
+			}
+
+			.add-qualification, .add-workhistory {
+				border: 0;
+			}
+		}
+	}
+
+	button.remove { display: none; }
+	
+	#resume-file, #coverletter-file { display: none; }
+
+	#profile-progress {
+		height: 273px;
+		background: #e1ecf8;
+
+		#progress {
+			li {
+				padding: 2px 5px;
+
+				.icon-plus {
+					color: #0b67cd;
+				}
+				// &:nth-child(odd) {
+				// 	background: #f7c542;
+				// }
+			}
+		}
+	}
+
+#expertise {
+	text-align: center;
+	width: 100%;
+	span {
+		.border-radius(@radius:15px);
+		height: 14px;
+		line-height: 14px;
+		.inline-block();
+		font-size: 12px;
+		margin: 5px 5px 5px 0;
+		white-space: nowrap;
+		background-color: #0066bd;
+		color: #FFF;
+		padding: 3px 8px;    
+	}
+}
+
+.box-form-layout {
+	.box-sizing(border-box);
+	border: 1px solid #dadada;
+	padding: 10px 20px;
+}
+
+/* =APPLY JOB
+=================================================================== */
+#job-apply {
+	
+	ol {
+		width: 100%;
+		li {
+			width: 100%;
+			label {
+				//width: 23%;
+			}
+			input[type=text], input[type=email] {
+				//width: 70%;
+			}
+			textarea {
+				display: none;
+				.size(80%, 150px);
+			}
+			#upload-resume, #upload-coverletter {
+				display: none;
+			}
+		}
+	}
+}
+
+
+/* =APPLICANT SETTINGS
+=================================================================== */
+#applicant-privacy-settings {
+	ol {
+		li {
+			.clearfix();
+		}
+	}
+}
+
+
+
+/* =EMPLOYER REGISTER FORM
+=================================================================== */
+
+.employer-register-form {
+
+	h3 { 
+		text-align: center;
+	}
+	ol {
+		width: 50%;
+		margin: 20px auto;
+		li {
+			overflow: hidden;
+			label { width: 150px; }
+			input[type=text],input[type=password], select {
+				width: 285px;
+			}
+		}
+
+	}
+}
+
+
+/* =LOGIN MODAL */
+
+#login-modal {
+	.validate-form {
+		padding-top: 53px;
+
+		> div {
+			padding: 0;
+			border: 0;
+		}
+	}
+}
+
+
+@media (min-width: 1200px) {
+	.employer-register-form {
+		h3 { text-align: center; }
+		ol {
+			li {
+				
+				input[type=text],input[type=password], select {
+					width: 400px;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+	.employer-register-form {
+
+		h3 { text-align: center; }
+		ol {
+			width: 75%;
+			li {
+				
+				input[type=text],input[type=password], select {
+					width: 55%;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) { 
+
+	.employer-register-form {
+
+		h3 { text-align: center; }
+		ol {
+			width: 75%;
+			li {
+				
+				input[type=text],input[type=password], select {
+					width: 45%;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 480px) { 
+
+	.employer-register-form {
+
+		h3 { text-align: center; }
+		ol {
+			width: 75%;
+			li {
+				
+				input[type=text],input[type=password], select {
+					width: 90%;
+				}
+			}
+		}
+	}
+}

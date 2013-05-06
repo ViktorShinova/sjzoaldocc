@@ -1,0 +1,330 @@
+@charset "utf-8";
+/*	......................................................................
+	C A R E E R D B
+	----------------------------------------------------------------------
+	base.css
+	----------------------------------------------------------------------
+	© 2013 CareersHire. All Rights Reserved.
+	...................................................................... */
+
+//@import 'mixins/all';
+//@import 'partial/colour-code.less';
+
+body {
+	
+	.font-normal();
+	// // background: -moz-linear-gradient(top,  rgba(11,103,205,0) 0%, rgba(11,103,205,0.28) 49%, rgba(13,105,206,0.29) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+	// // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(11,103,205,0)), color-stop(49%,rgba(11,103,205,0.28)), color-stop(50%,rgba(13,105,206,0.29)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+	// // background: -webkit-linear-gradient(top,  rgba(11,103,205,0) 0%,rgba(11,103,205,0.28) 49%,rgba(13,105,206,0.29) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+	// // background: -o-linear-gradient(top,  rgba(11,103,205,0) 0%,rgba(11,103,205,0.28) 49%,rgba(13,105,206,0.29) 50%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+	// // background: -ms-linear-gradient(top,  rgba(11,103,205,0) 0%,rgba(11,103,205,0.28) 49%,rgba(13,105,206,0.29) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+	// background: linear-gradient(to bottom,  rgba(11,103,205,0) 0%,rgba(11,103,205,0.28) 49%,rgba(13,105,206,0.29) 50%,rgba(125,185,232,0) 100%); /* W3C */
+	// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000b67cd', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+
+}
+@import 'shadow';
+
+a {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.white-bg {
+	background: white;
+}
+
+
+.clearfix {
+	clear:both;
+}
+
+.navbar.navbar-fixed-top {
+	a{
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 12px;
+	}
+	.brand {
+		padding: 0;
+		padding-right: 20px;
+		margin-top: 2px;
+		width: 26px;
+		display: block;
+		position: relative;
+		img {
+			position:absolute;
+		}
+	}
+}
+.login {
+	ul {
+		margin-left: 0;
+		margin-bottom: 10px;
+		li {
+			list-style: none;
+		}
+	}
+}
+
+.container-header {
+	background: @green;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+	clear: both;
+	color: #fff;
+	display: block;
+	font-size: 21px;
+	.font-light();
+	line-height: 40px;
+	//#gradient .vertical(#ffffff, #f5f5f5);
+	text-indent: 10px;
+	margin-bottom: 21px;
+	margin-top: 0;
+	padding: 0;
+
+
+	#emp-reg {
+		float: right;
+		color: white;
+		font-size:12px;
+		margin-right: 20px;
+		font-weight: bold;
+		&:hover{
+			text-decoration: underline;
+
+		}
+	}
+	
+}
+
+//@import "header";
+
+#content {
+	margin-top: 80px;
+	margin-bottom: 60px;
+
+
+
+	#search-filter { 
+
+		font-size: 11px !important;
+		background: #fff;
+		border: 1px solid #dadada;
+		.box-sizing(border-box);
+		#search-filter-form {
+			padding:  0 10px 10px;
+			select { width: 97%; }
+		}
+
+		h4 { .font-normal(); }
+		
+		#search-filter-form > ul { margin: 0;}
+		ul {
+
+			li {
+				list-style: none;
+			}
+		}
+
+		#min-salary {
+			margin-bottom: 10px;
+		}
+
+		.btn-primary {
+			margin-top: 12px;
+		}
+	}
+
+	#emp-register {
+		.container-header{
+			margin-bottom: 0;
+		}
+		.span12, .validate-form {
+			border-top: 0;
+		}
+		
+	}
+
+	.validation {
+		.border-radius(5px);
+		margin-bottom: 21px;
+		//margin: 0 20px 21px 20px;
+		padding: 13px 30px 13px 47px;
+
+		p { 
+			font-family: Arial, Helvetica, sans-serif;
+			margin: 0;	
+			margin-bottom:6px;
+		}
+		ul {
+			margin-left:20px;
+			li{
+				background: none;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size:12px;
+				list-style: disc;
+				padding: 0px;
+				line-height:24px;
+			}
+		}
+		&.error {
+			border: 1px solid #f4b6b6;
+			background: #faeeee;
+			background-image: url('/img/validation-sprite.png');
+			background-repeat: no-repeat;
+			background-position: 10px 13px;
+		}
+
+		&.success {
+			border: 1px solid #83d10c;
+			background: #f1faee;
+			background-image: url('/img/validation-sprite.png');
+			background-repeat: no-repeat;
+			background-position: 10px -730px;
+		}
+	}
+	
+	#side-info {
+		> img {
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 21px;
+			max-width: 370px;
+		}
+		> div {
+			padding-bottom: 10px;
+			margin-bottom: 20px;
+			
+
+			.data-list {
+				.box-sizing(border-box);
+				padding: 10px;
+				padding-top: 0;
+			}
+			.controls {
+				padding: 10px;
+			}
+		}
+
+		#feature-listing {
+
+			i { 
+				color: #222;
+				font-size: 20px;
+				line-height: 20px;
+				position: relative;
+				top: 2px;
+				margin-right: 10px;
+				width: 27px;	
+			}
+
+		}
+	}
+
+
+	#btn-apply {
+		width: 86%;
+		display: block;
+		margin: 0 auto;
+	}
+
+	.login-form {
+		.validation {
+			max-width: 347px;
+			margin: 0 auto 12px auto;
+
+		}
+	}
+
+	.notice-container {
+		border: 1px solid #dadada;
+		.box-sizing(border-box);
+	}
+
+	.alert-info {
+		font-family: tahoma, san-serif;
+	}
+
+} 
+
+#search-page {
+	#content {
+		margin-top: 20px;
+	}
+}
+@import "feature";
+@import "guide";
+@import 'form';
+@import "listing";
+@import "footer-toolbar";
+@import "footer";
+@import "datepicker";
+@import "jscrop";
+
+
+@media (min-width: 1200px) {
+	#content {
+		#btn-apply {
+			width: 88%;
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+	.login {
+		ul li {
+			input[type=text], input[type=password] {
+				width: 100%;
+			}
+		}
+	}
+
+	#content {
+		#btn-apply {
+			width: 81% ;
+		}
+	}
+	
+}
+
+@media (max-width: 767px) { 
+	.login {
+		ul li {
+			input[type=text], input[type=password] {
+				width: 100%;
+			}
+		}
+	}
+	
+	#content {
+		#btn-apply {
+			width: 90% ;
+			margin: 0 auto;
+
+		}
+
+		.notice-container {
+			margin-bottom: 21px;
+		}
+	}
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	.login {
+		ul li {
+			input[type=text], input[type=password] {
+				width: 100%;
+			}
+		}
+	}
+
+	#content {
+		#btn-apply {
+			width: 83% ;
+		}
+	}
+	
+}

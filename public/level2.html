@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+
+	<head>
+	
+		<title></title>
+
+		<meta charset="iso-8859-1" />
+		
+		<meta name="description" content="" />
+
+		<meta name="robots" content="index,follow" />
+		<meta name="revisit-after" content="7 days" />
+		
+		<link rel="shortcut icon" href="favicon.ico" />
+
+		<link rel="stylesheet" media="screen" href="/css/main.css" />
+		<link rel="stylesheet" media="screen" href="/css/bootstrap.css" />
+
+		<!--[if lt IE 9]>
+		<script src="js/html5.js"></script>
+		<![endif]-->				
+	</head>
+ 
+	<body>
+	
+		<div id="wrapper">
+		
+			<div id="container">
+				
+				<header role="navbar" class="navbar navbar-static-top">
+					<div class="navbar-inner">
+						<div class="container">
+							<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</a>
+
+							<a class="brand" href="/"><img src="/img/logo-top.png"></a>
+
+							<div class="nav-collapse collapse navbar-responsive-collapse">
+								<ul class="nav">
+									<li class="active"><a href="#">Home</a></li>
+									<li><a href="#">About Us</a></li>
+									<li><a href="#">Pricing</a></li>
+									<li><a href="#">Career Advice</a></li>
+								</ul>
+								<ul class="nav pull-right">
+									<li class="divider-vertical"></li>
+									<li><a href="#">Submit a Job</a></li>
+									<li class="divider-vertical"></li>
+									<li class="dropdown">
+										<div class="btn-group">
+											<a class="btn" href="#"><i class="icon-user icon-black"></i> User</a>
+											<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+											<ul class="dropdown-menu">
+												<li><a href="#"><i class="icon-book"></i> My Account</a></li>
+												<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+												<li class="divider"></li>
+												<li><a href="#"><i class="icon-off"></i> Log Out</a></li>
+											</ul>
+										</div>
+									</li>
+								</ul>							
+							</div><!-- /.nav-collapse -->
+						</div>
+					</div>
+
+				</header>
+
+				<div id="content" class="container">
+				
+					<div id="primary">
+
+							<div class="container-fluid">
+								<div class="row-fluid">
+
+									<aside class="span4" id="search-filter">
+
+										<span class="container-header">Refine this search</span>
+
+										<form class="form-horizontal" method="get" action="/job/search">
+
+											<div class="input-append">
+												<input class="span2" id="appendedInputButton" type="text" placeholder="Keywords">
+												<button class="btn" type="button">Search</button>
+											</div>
+
+											<hr/>
+
+											<h4>Work Types</h4>
+											<ul>
+												<li>
+													<label class="checkbox">
+														<input type="checkbox"> All Work Types
+													</label>
+												</li>
+												<li>
+													<ul>
+														<li>
+															<label class="checkbox">
+																<input type="checkbox"> Full Time
+															</label>
+														</li>
+														<li>
+															<label class="checkbox">
+																<input type="checkbox"> Part Time
+															</label>
+														</li>
+														<li>
+															<label class="checkbox">
+																<input type="checkbox"> Contract
+															</label>
+														</li>
+														<li>
+															<label class="checkbox">
+																<input type="checkbox"> Casual
+															</label>
+														</li>
+													</ul>
+												</li>
+											</ul>
+
+											<button type="submit" class="btn btn-primary small">Update</button>
+
+											<hr/>
+
+											<h4>Salary Range</h4>
+											<div class="input-prepend">
+												<span class="add-on">$</span>
+												<input class="span2" id="prependedInput" type="text" placeholder="Minimum">
+											</div>
+											<div class="input-prepend">
+												<span class="add-on">$</span>
+												<input class="span2" id="prependedInput" type="text" placeholder="Maximum">
+											</div>
+
+											<button type="submit" class="btn btn-primary small">Update</button>
+
+										</form>
+														
+									</aside>
+									<!-- #search-filter -->
+
+									<section class="span8" id="listings">
+										<div class="media">
+											<div class="description pull-right">
+												<img src="http://quickimage.it/180x50">	
+												<span class="location">Melbourne Inner Suburbs, VIC</span>
+												<span class="salary">$70,000 - $75,000</span>
+
+												<div class="btn-group pull-right">
+													<button class="btn"><i class="icon-star"></i> Shortlist</button>
+													<button class="btn dropdown-toggle" data-toggle="dropdown">
+													<span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a href="#">High salary</a></li>
+														<li><a href="#">Close to home</a></li>
+														<li><a href="#">Will consider</a></li>
+														<li class="divider"></li>
+														<li><a href="#"><i class="icon-th-large"></i> Create new group</a></li>
+													</ul>
+												</div>
+
+												<a href="#" class="btn btn-primary pull-left">Apply</a>
+												<span class="date">11/12/2012</span>	
+											</div>
+											<div class="media-body">
+												<h4 class="media-heading">ASP.NET Developer</h4>
+												<span class="yellow-code">Information Technology</span>
+												<p>
+													Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+												</p>
+											</div>
+										</div>
+
+										
+										<div class="media">
+											<div class="description pull-right">
+												<img src="http://quickimage.it/180x50">	
+												<span class="location">Melbourne Inner Suburbs, VIC</span>
+												<span class="salary">$70,000 - $75,000</span>
+
+												<div class="btn-group pull-right">
+													<button class="btn"><i class="icon-star"></i> Shortlist</button>
+													<button class="btn dropdown-toggle" data-toggle="dropdown">
+													<span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a href="#">High salary</a></li>
+														<li><a href="#">Close to home</a></li>
+														<li><a href="#">Will consider</a></li>
+														<li class="divider"></li>
+														<li><a href="#"><i class="icon-th-large"></i> Create new group</a></li>
+													</ul>
+												</div>
+
+												<a href="#" class="btn btn-primary pull-left">Apply</a>
+												<span class="date">11/12/2012</span>	
+											</div>
+											<div class="media-body">
+												<h4 class="media-heading">ASP.NET Developer</h4>
+												<span class="yellow-code">Information Technology</span>
+												<p>
+													Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+												</p>
+											</div>
+										</div>
+
+										<div class="pagination">
+											<ul>
+												<li><a href="#"><<</a></li>
+												<li><a href="#">1</a></li>
+												<li><a href="#">2</a></li>
+												<li><a href="#">3</a></li>
+												<li><a href="#">4</a></li>
+												<li><a href="#">5</a></li>
+												<li><a href="#">>></a></li>
+											</ul>
+										</div>									
+										<!-- #pagination -->
+
+									</section>
+									<!-- #listings -->
+
+								</div>
+								<!-- /.row-fluid -->
+
+							</div>
+							<!-- /.container-fluid -->					
+
+					</div>
+					<!-- /#primary -->
+					
+				</div>
+				<!-- /#content -->
+				
+				
+			</div>
+			<!-- /#container -->
+
+			<div id="footer-toolbar">
+
+				<div id="toggler" class="toolbar-btn"><span><i class="icon-resize-small icon-white"></i></span></div>
+				<div class="toolbar-btn"><span><i class="icon-time icon-white"></i></span></div>	
+				<div class="toolbar-btn current"><span><i class="icon-star icon-white"></i></span></div>
+
+				<div class="container">
+					<div id="shortlistings-prev"><span></span></div>
+					<div id="shortlistings-next"><span></span></div>
+
+					<ul id="shortlistings">
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Web Developer</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+						<li>
+							<div class="inner">
+								<h5>Document Contoller</h5>
+								<span class="red-code">Information Technology</span>
+							</div>
+						</li>
+					</ul>			
+				</div>
+			</div>
+			<!-- /#footer-toolbar -->
+
+			<footer id="footer">
+				<div class="container">
+					<ul>
+						<li>
+							<strong>Advertisers</strong>
+							<ul>
+								<li><a href="#">Create an Account</a></li>
+								<li><a href="#">Advertise a Job</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>Job Seekers</strong>
+							<ul>
+								<li><a href="#">Search Jobs</a></li>
+								<li><a href="#">Create an Account</a></li>
+								<li><a href="#">Upload Resume</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>About Us</strong>
+							<ul>
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Privacy Statement</a></li>
+								<li><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Site Map</a></li>
+								<li><a href="#">Contact Us</a></li>
+							</ul>
+						</li>
+						<li>
+							<strong>More</strong>
+							<ul>
+								<li><a href="#">Pricing</a></li>
+								<li><a href="#">Career Advice</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Tips</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="pull-right">
+						<a href="/"><img src="/img/logo-bottom.png" class="pull-right" alt="Careershire"></a>
+					</div>
+				</div>
+				<div id="footer-bottom">
+					<div class="container">
+						<span class="pull-right"> Copyright &copy; CareersHire 2013. All rights reserved.</span>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+		<!-- /#wrapper -->
+		
+		<script src="/js/jquery-1.9.0.js"></script>
+		<script src="/js/jquery-ui-1.10.0.custom.js"></script>
+		<script src="/js/jquery.carouFredSel-6.1.0-packed.js"></script>
+		<script src="/js/bootstrap.js"></script>
+		<script src="/js/site.js"></script>
+
+	</body>
+	
+</html>

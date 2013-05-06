@@ -1,0 +1,53 @@
+@media print {
+	
+	body {
+		height: 100%;
+		> header,
+		> nav,
+		.container-header,
+		.print-button {
+			display: none !important;
+		}
+
+		#board {
+		
+			height: 100%;
+			width: 100%;
+
+			left: 0px !important;
+			top: 0;
+
+			.show-on-print {
+				display: block !important;
+			}
+
+			.print-header {
+				font-size: 2em;
+				float: left;
+				line-height: 140px;
+				margin-left: 40px;
+			}
+
+			.print-logo {
+				float: left;
+			}
+
+
+			.header {
+				overflow: hidden;
+				margin-bottom: 20px;
+			}
+			.content { clear: both;}
+
+			.watermark {
+				position: absolute;
+				bottom: 100px;
+				left: 50px;
+				.opacity(0.4);
+
+			}
+		}
+	}
+	
+	
+}

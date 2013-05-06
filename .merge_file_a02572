@@ -1,0 +1,244 @@
+<?php
+
+class Job_Controller extends Base_Controller {
+
+	private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
+
+	private function tokenizer($keywords) {
+		//first we check for quotes. If they are present, we must put them together as a phrase. If not, separate them.
+		//var_dump($keywords);
+		if (strpos($keywords, '"') !== false) {
+
+			$all_phrase = $this->advance_tokenizer($keywords);
+		}
+
+		//this will be the last one do be done.
+		// a better tokenizer is to remove conjuntive from the phrase.
+		// Conjuntive are as follows: The, And, Is, ... 
+		$tokens = explode(' ', preg_replace('/\s\s+/', ' ', trim($keywords)));
+		$keywords = array_diff($tokens, $this->words);
+
+		return $keywords;
+	}
+
+	private function advance_tokenizer($token, $test = true) {
+		//this will return an array of token phrase
+		//
+		
+		$tokens = array();
+
+		if ($test === false) {
+			//var_dump($first);
+			//var_dump($token);
+		}
+		//get all values in quotes
+		preg_match_all('/\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
+		var_dump(preg_split('/\"([^\"]*?)\"/', $token));
+		//preg_match_all('/\^\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
+		// foreach($matches as $value) {
+		// 	$tokens[] = $value[1];
+		// }
+
+		var_dump($matches);
+	}
+
+	public function get_search() {
+		//search parameters 
+		//1. title
+		//2. category
+		//3. location
+		//4. emp type
+		//5. salary range
+		//6. descrption
+		//7. company
+
+		$job_categories = Category::lists('name', 'id');
+		$locations = Location::lists('name', 'id');
+		$work_types = WorkType::lists('name', 'id');
+
+		//get the pre selected work type
+		$selected_work_types = Input::get('work-type');
+
+		$params = Input::all();
+
+		//tokenize the keywords
+		$filtered_keywords = $this->tokenizer($params['keywords']);
+
+
+		//var_dump($search_params);
+
+		$jobs = DB::table('jobs')->order_by('created_at', 'asc')
+				->join('employers', 'jobs.employer_id', '=', 'employers.id')
+				->join('job_category', 'jobs.category_id', '=', 'job_category.id')
+				->join('job_sub_category', 'jobs.sub_category_id', '=', 'job_sub_category.id')
+				->join('locations', 'jobs.location_id', '=', 'locations.id')
+				->where(function ($query) use ($filtered_keywords, $params) {
+
+
+							// over here, we check to see if the search params are avalialbe
+							//Job Category and Sub Category
+							if (isset($params['job-category']) && !empty($params['job-category'])) {
+								$query->where('job_category.id', '=', $params['job-category']);
+							}
+							if (isset($params['job-sub-category']) && !empty($params['job-category'])) {
+								$query->where('job_sub_category.id', '=', $params['job-sub-category']);
+							}
+							//Location and Sub Location
+							if (isset($params['job-location']) && !empty($params['job-location'])) {
+								$query->where('jobs.location_id', '=', $params['job-location']);
+							}
+							if (isset($params['job-sub-location']) && !empty($params['job-sub-location'])) {
+								$query->where('jobs.sub_location_id', '=', $params['job-sub-location']);
+							}
+
+							//SALARY
+							if (isset($params['min-salary'])) {
+								$query->where('jobs.min_salary', '>=', $params['min-salary']);
+							}
+
+							if (isset($params['max-salary']) && !empty($params['max-salary'])) {
+								$query->where('jobs.max_salary', '<=', $params['max-salary']);
+							}
+
+							if (isset($params['work-type']) && !empty($params['work-type'])) {
+								//$query->where('jobs.location_id', '=', $params['work-type']);
+							}
+							
+							if(isset($params['keywords']) && !empty($params['keywords'])) {
+								$query->raw_where("MATCH (jobs.title, jobs.description, jobs.intro) AGAINST ('" . $params['keywords'] . "' IN BOOLEAN MODE)");
+							}
+						})
+
+				//->raw_where("CONTAINS (jobs.title,")
+				->distinct()
+				->paginate(10, array(
+			'jobs.id',
+			'jobs.title',
+			'jobs.salary_range',
+			'jobs.intro',
+			'employers.company',
+			'jobs.created_at',
+			'locations.name as location_name',
+			'job_category.name as category_name',
+			'job_category.id as category_id',
+				)
+		);
+
+
+		//The search field can be search in title, desciption, company. Search for each word instead of searching the pharse which will yield more results
+		//
+		
+		//sort by most recent
+		//sort by salary highest
+		//sort by most relevant (title)
+		//sort by alphabet
+
+		return View::make('job.jobs')->with(array("jobs" => $jobs, 'locations' => $locations, 'categories' => $job_categories, 'work_types' => $work_types, 'selected_work_types' => $selected_work_types, 'selected_category' => Input::get('job-category'), 'selected_location' => Input::get('location'), 'keywords' => Input::get('keywords')));
+	}
+
+	public function get_article($id = null) {
+
+		if ($id == null) {
+			//return the job listing page. or return a 404 page not found or tell the user the job has expired
+		}
+
+		$job = Job::find($id);
+
+		$user = Auth::user();
+		if (isset($user->id)) {
+			$shortlist_categories = ApplicantShortlistCategory::where('applicant_id', '=', $user->id)->get();
+		} else {
+			$shortlist_categories = null;
+		}
+
+		return View::make('job.article')->with(array(
+					'job' => $job,
+					'shortlist_categories' => $shortlist_categories
+		));
+	}
+
+	public function post_get_shortlist_tag() {
+		$user = Auth::user();
+		$tag = null;
+		if (isset($user->id)) {
+			$shortlist_categories = ApplicantShortlistCategory::where('applicant_id', '=', $user->id)->get();
+			foreach ($shortlist_categories as $shortlist_category) {
+				$tag[] = $shortlist_category->name;
+			}
+		}
+		return json_encode($tag);
+	}
+
+	public function post_update_shortlist_tag() {
+		$user = Auth::user();
+		$tags = Input::get('tags');
+
+		$shortlist_categories = ApplicantShortlistCategory::where('applicant_id', '=', $user->id)->get();
+
+		$shortlist_categories_array = array();
+
+		foreach ($shortlist_categories as $shortlist_category) {
+
+			$shortlist_categories_array[] = $shortlist_category->name;
+
+			if (count($tags) > 0) {
+				if (!in_array($shortlist_category->name, $tags)) {
+					$shortlist_category->delete($shortlist_category->id);
+				}
+			} else {
+				$shortlist_category->delete($shortlist_category->id);
+			}
+		}
+
+		foreach ($tags as $tag) {
+			if (count($shortlist_categories_array) > 0) {
+				if (!in_array($tag, $shortlist_categories_array)) {
+					$new_shortlist_category = new ApplicantShortlistCategory();
+					$new_shortlist_category->applicant_id = $user->id;
+					$new_shortlist_category->name = $tag;
+					$new_shortlist_category->save();
+				}
+			} else {
+				$new_shortlist_category = new ApplicantShortlistCategory();
+				$new_shortlist_category->applicant_id = $user->id;
+				$new_shortlist_category->name = $tag;
+				$new_shortlist_category->save();
+			}
+		}
+	}
+
+	public function post_set_shortlist() {
+		$user = Auth::user();
+		$job_id = Input::get('articleID');
+		$shortlist_category_id = Input::get('chosenTag');
+
+		//insert/update into applicant_job table
+		//ApplicantJob
+		//job_id, applicant_id, status, shortlist_category_id
+
+		$applicant_job = ApplicantJobs::where('applicant_id', '=', $user->id)
+						->where('job_id', '=', $job_id)->first();
+		if ($applicant_job != null) {
+			$applicant_job->shortlist_category_id = $shortlist_category_id;
+			$applicant_job->save();
+		} else {
+			$new_applicant_job = new ApplicantJobs();
+			$new_applicant_job->job_id = $job_id;
+			$new_applicant_job->applicant_id = $user->id;
+			$new_applicant_job->shortlist_category_id = $shortlist_category_id;
+			$new_applicant_job->status = SHORTLIST;
+			$new_applicant_job->save();
+		}
+	}
+
+	public function get_apply($id = null) {
+		if ($id == null) {
+			return;
+		} else {
+			$job = Job::find($id);
+			//continue to the apply page
+			return View::make("job.apply")->with(array('job' => $job));
+		}
+	}
+
+}

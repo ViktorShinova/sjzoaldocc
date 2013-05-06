@@ -1,0 +1,116 @@
+#footer-toolbar {
+		.transition-duration();
+		position: fixed;
+		height: 60px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index:11000;
+		border-top: solid 1px #000;
+		#gradient > .vertical(#323232, #232323);
+
+
+		i {
+			color: #fff;
+		}
+
+		#shortlistings-prev, #shortlistings-next {
+			#gradient > .vertical(#323232, #232323);
+			.size(30px, 60px);
+			z-index: 100;
+			cursor: pointer;
+		}
+
+		#shortlistings-prev {
+			position: absolute;
+			//.box-shadow(1px -1px 1px);
+
+			span {
+				.size(15px, 35px);
+				display: block;
+				margin-top: 12px;
+				background: url('@{img-dir}arrow-prev.png') no-repeat; 
+			}
+		}
+
+		#shortlistings-next {
+			float: right;
+			position: relative;
+			//.box-shadow(-1px -1px 1px);
+
+			span {
+				.size(15px, 35px);
+				display: block;
+				margin: 12px 0 0 10px;
+				background: url('@{img-dir}arrow-next.png') no-repeat; 
+			}			
+		}
+
+		#shortlistings {
+			li {
+				list-style: none;
+				float: left;
+				width: 170px;
+				background: #fff;
+				margin-left: 5px;
+				margin-top: 6px;
+				padding: 2px 5px;
+				#gradient > .vertical(#ffffff, #dddddd);
+				.border-radius(2px);
+				border: 1px solid #d4d4d4;
+
+				&:hover {
+					cursor: pointer;
+					background: #f1f5f8;
+				}
+				&:active {
+					position: relative;
+					top: 1px;
+				}
+				h5 { margin: 0;}
+				span { font-size: 12px;}
+			}
+		}
+
+		.empty {
+			width: 90%;
+			height: 25px;
+			background: #fff;
+			margin-left: 5px;
+			margin-top: 6px;
+			padding: 10px 5px;
+			background: #1b1b1b;
+			.border-radius(2px);
+			border: 1px solid #000000;
+			text-align: center;
+			.inner-shadow();
+			color: @gray-light;
+			text-shadow: 1px 1px 4px #000000;
+		}
+
+		.toolbar-btn {
+			#gradient > .vertical(#323232, #232323);
+			float: right;
+			.size(50px, 60px);
+			border-left: 1px solid #000;
+		
+
+			&:hover, &.current {
+				#gradient > .vertical(#3a3a3a, #2b2b2b);
+			}
+
+			span {
+				display: block;
+				border-left: 1px solid #323232;
+				.size(18px, 28px);
+				padding: 16px;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}							
+		}
+
+		#toggler { margin-right: 0;}
+
+	}

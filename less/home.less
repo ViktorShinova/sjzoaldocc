@@ -1,0 +1,308 @@
+@charset "utf-8";
+/*	......................................................................
+	C A R E E R D B
+	----------------------------------------------------------------------
+	home.css
+	----------------------------------------------------------------------
+	© 2012 CareersHire. All Rights Reserved.
+	...................................................................... */
+
+@import 'mixins/all';
+//@import 'partial/colour-code.less';
+
+#home {
+	background: #fff url('/img/backgrounds/home-bg.png') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/backgrounds/home-bg.jpeg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/backgrounds/home-bg.jpeg', sizingMethod='scale')";
+	zoom:1;  	
+
+	#top-feature{
+		margin-top: 64px;
+		text-align: center;
+		#brand {
+			//float: left;
+			width: 370px;
+		}
+		#ads {
+			float: right;
+			margin-top: 10px;
+		}
+	}
+	#job-search {
+		border: 5px solid @green;
+		border-top: 0;
+		//.box-shadow(0px 5px 9px #d5d5d5);
+		padding-bottom: 10px;
+		input.input-xlarge { width: 256px;}
+		.span1 { width: 92px;}
+		#search {
+			float: right;
+			margin-right: 119px;
+		}
+
+		#job-sub-category {
+			margin-left: 20px;
+		}
+
+		#job-sub-location {
+			margin-left: 20px;
+		}
+
+
+	}
+	#content {
+		margin-top: 15px;
+	}
+}
+
+
+// MEDIA QUERIES
+
+@media (min-width: 979px) and (max-width: 1199px) {
+	#home {
+		
+		#job-search {
+			#search {
+				margin-right: 10px;
+			}
+			#job-sub-category, #job-sub-location {
+				width: 89%;
+			}
+
+		}
+	}
+}
+@media (min-width: 768px) and (max-width: 979px) { 
+	#home {
+		#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				width: 710px;
+				input.input-xlarge {
+					width: 97%;
+				}
+				select{
+					width: 528px;
+
+					&#job-sub-category, &#job-sub-location {
+						width: 508px;
+					}
+				
+					&#min-salary, &#max-salary {
+						width: 502px;
+					}
+
+					&#min-salary { margin-bottom: 12px;}
+				}
+
+				
+			}
+			.span1 { width: 165px; }
+			#search {
+				margin-right: 15px;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) { 
+#home {
+	#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				
+				input.input-xlarge, select {
+					width: 97%;
+				}
+
+				select {
+					&#job-sub-category, &#job-sub-location {
+						width: 90% !important;
+					} 
+					&#min-salary { margin-bottom: 12px;}
+				}
+			}
+			#search {
+				margin-right: 13px;
+			}
+
+			.input-prepend { width: 100%; 
+				span { float: left;}
+				select { float: left; width: 88%; }
+
+			}
+		}
+	}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	#home {
+		#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				label { margin-left: 5px;}
+				input.input-xlarge, select {
+					width: 97%;
+					margin-left: 5px;
+				}
+				select {
+					&#job-sub-category, &#job-sub-location {
+						width: 92% !important;
+
+					}
+				}
+			}
+			.add-on {margin-left: 5px;}
+
+			.input-prepend { width: 100%; 
+				span { float: left;}
+				select { float: left; width: 88%; margin-left: 0;}
+
+			}
+		}
+	}
+}
+	// #content {
+	// 	margin-top: 15px;
+
+	// 	#primary {
+	// 		float: left;
+	// 		width: 100%;
+
+	// 		#job-search {
+	// 			background: #fff;
+	// 			.border-radius(3px);
+	// 			.box-shadow(0px 5px 9px #d5d5d5);
+	// 			height: 260px;
+
+	// 			.span6 { width: auto; }
+
+	// 			#job-category { width: 338px; }
+	// 			#job-keywords { width: 324px; }
+	// 			select[multiple] {
+	// 				height: 90px !important;
+	// 			}
+
+	// 			button {
+	// 				margin: 0 auto;
+	// 				width: 620px;
+	// 				display: block;
+	// 			}
+	// 		}
+
+	// 		#feature-jobs {	
+	// 			margin-top: 15px;
+												
+	// 			> li {
+	// 				.size(311px, 365px);
+	// 				list-style: none;
+	// 				border: 1px solid @gray;
+	// 				float: left;
+	// 				margin: 0 10px 10px 0;
+	// 				background: #fff;
+	// 				position: relative;
+	// 				.box-shadow(1px 1px 9px #ddd);
+
+	// 				> .job {
+						
+	// 					h3 {
+	// 						overflow: hidden;
+	// 						font-weight: normal;
+	// 						line-height: 35px;
+	// 						color: @gray-dark;
+	// 						margin-left: 10px;
+	// 					}
+
+	// 					header[role="job-category"] {
+	// 						span { 
+	// 							color: #fff;
+	// 							font-size: 13px;
+	// 						}
+	// 					}
+	// 					header[role="job-category"], footer {
+	// 						padding: 10px;
+	// 					}
+
+	// 					.arrow-down {
+	// 						width: 0; 
+	// 						height: 0; 
+	// 						border-left: 10px solid transparent;
+	// 						border-right: 10px solid transparent;
+	// 						margin-left: 10px;
+	// 					}
+
+	// 					.description {
+
+	// 						padding: 0 10px;
+
+	// 						img {
+	// 							margin-bottom: 5px;
+	// 						}
+
+	// 						span { 
+	// 							display: block;
+	// 							&.location { color: @gray-dark;}
+	// 							&.salary { .font(12px, bold, normal); }
+	// 						}
+
+	// 						p {
+
+	// 							color: @gray-darker;
+	// 						}
+							
+	// 						> .date {
+	// 							.font(10px, normal, italic);
+	// 							float: right;
+	// 						}												
+	// 					}
+
+	// 					footer {
+	// 						position: absolute;
+	// 						bottom: 0;
+	// 						width: 291px;
+	// 						#gradient .vertical(#ffffff, #f5f5f5);
+	// 						border-top: 1px solid #e4e4e4;
+
+
+	// 					}
+
+	// 				}
+	// 			} 
+
+	// 			.advertise {
+	// 				background: @gray;
+	// 				text-align: center;
+	// 				div {
+	// 					margin-top: 160px;
+	// 					color:#3b3b3b;
+	// 					text-shadow: 0 1px 0px #fff;
+	// 				}
+
+	// 				&:hover {
+	// 					cursor: pointer;
+	// 					background: @gray-dark;
+	// 				}		
+	// 			}			
+	// 		}		 
+	// 	}
+
+	// 	#secondary {
+	// 		aside {}
+	// 	}
+
+	//}
+
+
+
+
