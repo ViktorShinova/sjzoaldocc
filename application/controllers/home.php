@@ -53,40 +53,34 @@ class Home_Controller extends Base_Controller {
 		$password = Input::get('password');
 
 		$user = User::login($username, $password);
-
+		
+		
+		
 		if (!$user) {
 			return Redirect::to('login')->with('error', true);
 		} else {
-
+			$referer = "";
 			if (User::is_in_role('employer', $user)) {
 				$employer_id = Employer::where('user_id', '=', $user->id)->first()->id;
 				Session::put('employer_id', $employer_id);
-
-
-				if (Session::has('referer')) {
-
-					$referer = Session::get('referer');
-					Session::forget('referer');
-					
-					return Redirect::to( $this->_cleanReturnUrl($referer) );
-				} else {
-					return Redirect::to('/employer/post/list');
-				}
+				//default if refer is empty
+				$referer = '/employer/post/list';
+				
 			} elseif ( User::is_in_role ('applicant', $user) ) {
+				
 				$applicant_id = Applicant::where('user_id', '=', $user->id)->first()->id;
 				Session::put('applicant_id', $applicant_id);
-				
-				if (Session::has('referer')) {
-					
-					$referer = Session::get('referer');
-					Session::forget('referer');
-					
-					return Redirect::to( $this->_cleanReturnUrl($referer) );
-				} else {
-					return Redirect::to('/');
-				}
+	
+				$referer = "/";
 			}
+			
+			if (Session::has('referer')) {
+				$referer = Session::get('referer');
+			} 
+			
+			return Redirect::to( $this->_cleanReturnUrl($referer) );
 		}
+		
 	}
 
 	public function get_logout() {
