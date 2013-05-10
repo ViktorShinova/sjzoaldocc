@@ -124,6 +124,11 @@ Event::listen('500', function()
 
 Route::filter('before', function()
 {
+	if( isset ( $_SERVER['HTTP_REFERER'] ) ) {
+		$referer = $_SERVER['HTTP_REFERER'];
+		Session::put('referer', $referer);
+	}
+		
 	//return Redirect::to('/employer/register');
 });
 
