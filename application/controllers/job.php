@@ -1,7 +1,10 @@
 <?php
 
 class Job_Controller extends Base_Controller {
-
+	
+	
+	const NO_FILE_UPLOAD = 4;
+	
 	private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
 
 	private function tokenizer($keywords) {
@@ -161,23 +164,22 @@ class Job_Controller extends Base_Controller {
 		$applicant_shortlists = null;
 		//check if the user is login and if he is employer or applicant
 		if (Auth::check() && Auth::user()->role_id == '2') {
-			
+
 			$applicant_id = Session::get('applicant_id');
-			
+
 			$is_applicant = true;
-			
-			
+
+
 			//Get shortlist	
 			$applicant_shortlists = Shortlists::where('applicant_id', '=', $applicant_id)->lists('job_id');
-			
 		} else if (Auth::check() && Auth::user()->role_id == '1') {
 			$is_employer = true;
 		}
-		
-	
-		
-		
-		
+
+
+
+
+
 		//The search field can be search in title, desciption, company. Search for each word instead of searching the pharse which will yield more results
 		//
 
@@ -186,28 +188,28 @@ class Job_Controller extends Base_Controller {
 		//sort by most relevant (title)
 		//sort by alphabet
 
-		
+
 
 		return View::make('job.jobs')->with(array(
-					"jobs" =>					$jobs,
-					'locations' =>				$locations,
-					'categories' =>				$job_categories,
-					'work_types' =>				$work_types,
-					'selected_work_types' =>	$selected_work_types,
-					'selected_category' =>		Input::get('job-category'),
-					'selected_sub_category' =>	Input::get('job-sub-category'),
-					'selected_location' =>		Input::get('job-location'),
-					'selected_sub_location' =>	Input::get('job-sub-location'),
-					'selected_min_salary' =>	Input::get('min-salary'),
-					'selected_max_salary' =>	Input::get('max-salary'),
-					'min_salary' =>				$this->_min_salary,
-					'max_salary' =>				$max_salary,
-					'keywords' =>				Input::get('keywords'),
-					'sort_order' =>				Input::get('sort'),
-					'is_applicant' =>			$is_applicant,
-					'applicant_shortlists' =>	$applicant_shortlists,
-					'is_employer' =>			$is_employer
-				)
+					"jobs" => $jobs,
+					'locations' => $locations,
+					'categories' => $job_categories,
+					'work_types' => $work_types,
+					'selected_work_types' => $selected_work_types,
+					'selected_category' => Input::get('job-category'),
+					'selected_sub_category' => Input::get('job-sub-category'),
+					'selected_location' => Input::get('job-location'),
+					'selected_sub_location' => Input::get('job-sub-location'),
+					'selected_min_salary' => Input::get('min-salary'),
+					'selected_max_salary' => Input::get('max-salary'),
+					'min_salary' => $this->_min_salary,
+					'max_salary' => $max_salary,
+					'keywords' => Input::get('keywords'),
+					'sort_order' => Input::get('sort'),
+					'is_applicant' => $is_applicant,
+					'applicant_shortlists' => $applicant_shortlists,
+					'is_employer' => $is_employer
+						)
 		);
 	}
 
@@ -216,7 +218,7 @@ class Job_Controller extends Base_Controller {
 		if (!$id) {
 			//return the job listing page. or return a 404 page not found or tell the user the job has expired
 		}
-		
+
 		$job = Job::find($id);
 
 		//Relevant Jobs
@@ -243,9 +245,9 @@ class Job_Controller extends Base_Controller {
 		$is_applicant = false;
 		$is_employer = false;
 		//check if the user is login and if he is employer or applicant
-		if ( Auth::check() && Auth::user()->role_id == '2' ) {
+		if (Auth::check() && Auth::user()->role_id == '2') {
 			$is_applicant = true;
-		} else if ( Auth::check() && Auth::user()->role_id == '1' ) {
+		} else if (Auth::check() && Auth::user()->role_id == '1') {
 			$is_employer = true;
 		}
 
@@ -259,15 +261,13 @@ class Job_Controller extends Base_Controller {
 		}
 
 		return View::make('job.article')->with(array(
-					'job' =>			$job,
+					'job' => $job,
 					//'related_jobs' =>			$related_jobs,
-					'is_applicant' =>	$is_applicant,
-					'is_applied' =>		$is_applied,
-					'is_employer' =>	$is_employer,
+					'is_applicant' => $is_applicant,
+					'is_applied' => $is_applied,
+					'is_employer' => $is_employer,
 		));
 	}
-
-	
 
 //	public function post_load_shortlist_category($job_id = null) {
 //
@@ -360,28 +360,28 @@ class Job_Controller extends Base_Controller {
 		switch ($type) {
 
 			case "insert":
-				
+
 				$shortlist = Shortlists::where('applicant_id', '=', $applicant_id)
-					->where('job_id', '=', $job_id)
-					->first();
-				
-				
-				if( $shortlist ) {
+						->where('job_id', '=', $job_id)
+						->first();
+
+
+				if ($shortlist) {
 					return json_encode(array('success' => false, 'message' => 'You have already shortlisted this job'));
 				}
-				
+
 				$shortlist = new Shortlists();
 
 				$shortlist->applicant_id = $applicant_id;
 				$shortlist->job_id = $job_id;
-				
+
 				try {
-					if ( $shortlist->save() ) {
-						return json_encode(array('success' => true ));
+					if ($shortlist->save()) {
+						return json_encode(array('success' => true));
 					} else {
-						throw new SystemException('Unable to add job to shortlist for ' . $applicant_id . ' with job : ' . $job_id );
+						throw new SystemException('Unable to add job to shortlist for ' . $applicant_id . ' with job : ' . $job_id);
 					}
-				} catch (Exception $e ) {
+				} catch (Exception $e) {
 					throw new SystemException($e->getMessage(), $e->getCode());
 				}
 
@@ -389,23 +389,22 @@ class Job_Controller extends Base_Controller {
 
 			case "delete":
 				try {
-					
+
 					$affected = $shortlist = DB::table('shortlists')->where('applicant_id', '=', $applicant_id)
 							->where('job_id', '=', $job_id)
 							->delete();
-					
-					
+
+
 					if (!$affected) {
 						throw new SystemException("No records found or deleted");
 					} else {
-						return json_encode(array('success' => true ));
+						return json_encode(array('success' => true));
 					}
-					
 				} catch (Exception $e) {
 					throw new SystemException($e->getMessage(), $e->getCode());
 				}
 
-				
+
 				break;
 
 			default:
@@ -457,123 +456,108 @@ class Job_Controller extends Base_Controller {
 	}
 
 	public function post_apply($id = null) {
-		if ($id == null) {
-			return;
+		if (!$id) {
+			return false;
+		}
+
+		$input = Input::all();
+var_dump($input);
+die();
+		//email employer
+		$employer = Job::find($id)->employer;
+		$mail = new SendEmail();
+		$mail->email_subject = 'You\'ve received a new job application! - Careerhire';
+		$mail->email_recipients = array(
+			$employer->application_email => $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name
+		);
+		//set email template
+		$mail->email_template = 'job-apply-email';
+
+		//gather all the this job and employer details
+		$data['job'] = Job::find($id)->original;
+		$data['employer'] = $employer->original;
+
+		//pass applicant email
+		$mail->email_from_applicant = $input['email'];
+
+		//if user logged-in
+		if (Session::get('applicant_id')) {
+
+			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
+							->where('job_id', '=', $id)->first();
+
+			
+			$apply_job = new ApplicantJobs();
+			$apply_job->job_id = $id;
+			$apply_job->applicant_id = Session::get('applicant_id');
+			$apply_job->applicant_resume_id = $input['selected-resume'];
+			$apply_job->applicant_coverletter_id = $input['selected-coverletter'];
+			$apply_job->write_resume = strip_tags(nl2br($input['write-resume']));
+			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
+			$apply_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
+			$apply_job->status = APPLIED;
+			$apply_job->save();
+
+			//gather data of applicant
+			$data['applicant'] = array_merge((array) $apply_job->original, (array) Applicant::find($apply_job->applicant_id)->original);
+		
+
+			//gather data of attachments
+			if ($input['select_resume'] != 0) {
+				$resume_file = ApplicantResumes::find($input['selected-resume'])->original;
+				$resume_file['name'] = $resume_file['resume'];
+				unset($resume_file['resume']);
+				$resume_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $resume_file['path'];
+				unset($resume_file['path']);
+				$resume_file['error'] = 0;
+				$applicant_resume_file = $resume_file;
+			} else {
+				$applicant_resume_file = Input::file('upload-resume');
+			}
+
+			if ($input['select_coverletter'] != 0) {
+				$coverletter_file = ApplicantCoverletters::find($input['selected-coverletter'])->original;
+				$coverletter_file['name'] = $coverletter_file['coverletter'];
+				unset($coverletter_file['coverletter']);
+				$coverletter_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $coverletter_file['path'];
+				unset($coverletter_file['path']);
+				$coverletter_file['error'] = 0;
+				$applicant_coverletter_file = $coverletter_file;
+			} else {
+				$applicant_coverletter_file = Input::file('upload-coverletter');
+			}
+
+			$data['applicant']['attachments'] = array('resume' => $applicant_resume_file, 'coverletter' => $applicant_coverletter_file);
 		} else {
 
-			$input = Input::all();
+			//non-registered users
+			$apply_job = new ApplicantJobs();
+			$apply_job->job_id = $id;
+			$apply_job->write_resume = strip_tags(nl2br($input['write-resume']));
+			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
+			$apply_job->non_registered_users = serialize(array($input['first_name'], $input['last_name'],
+				$input['email'], $input['contact']));
+			$apply_job->status = APPLIED;
+			$apply_job->save();
 
-			//email employer
-			$employer = Job::find($id)->employer;
-			$mail = new SendEmail();
-			$mail->email_subject = 'You\'ve received a new job application! - Careerhire';
-			$mail->email_recipients = array(
-				$employer->application_email => $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name
-					//'victorlim86@hotmail.com' => 'Yuan Sheng',
-			);
-			//set email template
-			$mail->email_template = 'job-apply-email';
+			//gather data of applicant
+			$data['applicant'] = $apply_job->original;
 
-			//gather all the this job and employer details
-			$data['job'] = Job::find($id)->original;
-			$data['employer'] = $employer->original;
+			//gather data of attachments
+			$data['applicant']['attachments'] = array('resume' => Input::file('upload-resume'), 'coverletter' => Input::file('upload-coverletter'));
+		}
 
-			//pass applicant email
-			$mail->email_from_applicant = $input['email'];
+		//pass all attachments
+		$mail->email_attachments = $data['applicant']['attachments'];
 
-			//if user logged-in
-			if (Session::get('applicant_id')) {
+		//pass all gathered data
+		$mail->email_data = $data;
 
-				$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
-								->where('job_id', '=', $id)->first();
+		//die(var_dump($data));	
 
-				//if in shortlist, update
-				if ($applicant_job != null) {
-					$applicant_job->applicant_resume_id = $input['select_resume'];
-					$applicant_job->applicant_coverletter_id = $input['select_coverletter'];
-					$applicant_job->write_resume = strip_tags(nl2br($input['write-resume']));
-					$applicant_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
-					$applicant_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
-					$applicant_job->status = APPLIED;
-					$applicant_job->save();
-
-					//gather data of applicant
-					$data['applicant'] = array_merge((array) $applicant_job->original, (array) Applicant::find($applicant_job->applicant_id)->original);
-				} else {
-
-					//if not in shortlist, insert a new record
-					$new_applicant_job = new ApplicantJobs();
-					$new_applicant_job->job_id = $id;
-					$new_applicant_job->applicant_id = Session::get('applicant_id');
-					$new_applicant_job->applicant_resume_id = $input['select_resume'];
-					$new_applicant_job->applicant_coverletter_id = $input['select_coverletter'];
-					$new_applicant_job->write_resume = strip_tags(nl2br($input['write-resume']));
-					$new_applicant_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
-					$new_applicant_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
-					$new_applicant_job->status = APPLIED;
-					$new_applicant_job->save();
-
-					//gather data of applicant
-					$data['applicant'] = array_merge((array) $new_applicant_job->original, (array) Applicant::find($new_applicant_job->applicant_id)->original);
-				}
-
-				//gather data of attachments
-				if ($input['select_resume'] != 0) {
-					$resume_file = ApplicantResumes::find($input['select_resume'])->original;
-					$resume_file['name'] = $resume_file['resume'];
-					unset($resume_file['resume']);
-					$resume_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $resume_file['path'];
-					unset($resume_file['path']);
-					$resume_file['error'] = 0;
-					$applicant_resume_file = $resume_file;
-				} else {
-					$applicant_resume_file = Input::file('upload-resume');
-				}
-
-				if ($input['select_coverletter'] != 0) {
-					$coverletter_file = ApplicantCoverletters::find($input['select_coverletter'])->original;
-					$coverletter_file['name'] = $coverletter_file['coverletter'];
-					unset($coverletter_file['coverletter']);
-					$coverletter_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $coverletter_file['path'];
-					unset($coverletter_file['path']);
-					$coverletter_file['error'] = 0;
-					$applicant_coverletter_file = $coverletter_file;
-				} else {
-					$applicant_coverletter_file = Input::file('upload-coverletter');
-				}
-
-				$data['applicant']['attachments'] = array('resume' => $applicant_resume_file, 'coverletter' => $applicant_coverletter_file);
-			} else {
-
-				//non-registered users
-				$new_applicant_job = new ApplicantJobs();
-				$new_applicant_job->job_id = $id;
-				$new_applicant_job->write_resume = strip_tags(nl2br($input['write-resume']));
-				$new_applicant_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
-				$new_applicant_job->non_registered_users = serialize(array($input['first_name'], $input['last_name'],
-					$input['email'], $input['contact']));
-				$new_applicant_job->status = APPLIED;
-				$new_applicant_job->save();
-
-				//gather data of applicant
-				$data['applicant'] = $new_applicant_job->original;
-
-				//gather data of attachments
-				$data['applicant']['attachments'] = array('resume' => Input::file('upload-resume'), 'coverletter' => Input::file('upload-coverletter'));
-			}
-
-			//pass all attachments
-			$mail->email_attachments = $data['applicant']['attachments'];
-
-			//pass all gathered data
-			$mail->email_data = $data;
-
-			//die(var_dump($data));	
-
-			if ($mail->send()) {
-				Session::flash('success', true);
-				return Redirect::to('job/apply/' . $id);
-			}
+		if ($mail->send()) {
+			Session::flash('success', true);
+			return Redirect::to('job/apply/' . $id);
 		}
 	}
 

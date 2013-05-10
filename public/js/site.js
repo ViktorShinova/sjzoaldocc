@@ -20,6 +20,10 @@ var jSite = {
 		
 		//jSite.attachGetShortlistTags();
 		
+		if( $("[rel=popover]").length ) {
+			$("[rel=popover]").popover();
+		}
+		
 		
 	},
 			
@@ -36,28 +40,56 @@ var jSite = {
 	
 	attachApplyJob: function() {
 
-		//Select resume
-		$("input[name='select_resume']").click(function() {
-			$('#write-resume').hide();
-			var selected = $(this).siblings('span').text();
-			if(selected == "Write one") {
-				$('#write-resume').show();
-			}
-			$('#drop-resume').html(selected + ' <b class="caret"></b>');
-		});
-		//Select coverletter
-		$("input[name='select_coverletter']").click(function() {
-			$('#write-coverletter').hide();
-			var selected = $(this).siblings('span').text();
-			if(selected == "Write one") {
-				$('#write-coverletter').show();
-			}
-			$('#drop-coverletter').html(selected + ' <b class="caret"></b>');
-		});
 
-		$("#upload-resume-link").click(function(e) {
+//		//Select coverletter
+
+		$("#cover-write").click( function (e) {
+			e.preventDefault();
+			$('#write-coverletter').show();
+			$("#drop-coverletter").html($(this).html() + ' <b class="caret"></b>');
+			
+		});
+		
+		$(".cover-btn").click( function (e) {
+			e.preventDefault();
+			$('#write-coverletter').hide();
+			$("#drop-coverletter").html($(this).html() + ' <b class="caret"></b>');
+			
+			$("#select-coverletter").val($(this).data('value'));
+			
+		});
+		
+		$("#upload-coverletter-link").click(function(e) {
+			e.preventDefault();
+			
+			$("#upload-coverletter:hidden").trigger('click');
+			$("#upload-coverletter:hidden").change(function() {
+				var filename = $(this).val().split('\\').pop();
+				$('#drop-coverletter').html(filename + ' <b class="caret"></b>');
+			});	
+		});
+		
+		//Select Coverletter
+		
+		$("#resume-write").click( function (e) {
+			e.preventDefault();
+			$('#write-resume').show();
+			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
+			
+		});
+		
+		$(".resume-btn").click( function (e) {
 			e.preventDefault();
 			$('#write-resume').hide();
+			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
+			
+			$("#select-resume").val($(this).data('value'));
+			
+		});
+		
+		$("#upload-resume-link").click(function(e) {
+			e.preventDefault();
+			
 			$("#upload-resume:hidden").trigger('click');
 			$("#upload-resume:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();
@@ -65,15 +97,6 @@ var jSite = {
 			});			
 		});
 
-		$("#upload-coverletter-link").click(function(e) {
-			e.preventDefault();
-			$('#write-coverletter').hide();
-			$("#upload-coverletter:hidden").trigger('click');
-			$("#upload-coverletter:hidden").change(function() {
-				var filename = $(this).val().split('\\').pop();
-				$('#drop-coverletter').html(filename + ' <b class="caret"></b>');
-			});	
-		});
 	},
 	attachToggleShortList: function() {
 
@@ -856,10 +879,6 @@ var jSite = {
 	}
 }
 
-$(document).ready(function($) {
-	//$('#custom-template').tinyscrollbar();
-	$("[rel=popover]").popover();
-});
 
 function startjcrop() {
 	$('#profilepic-preview').Jcrop({
