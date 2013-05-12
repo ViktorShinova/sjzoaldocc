@@ -8,6 +8,7 @@ class Formatter {
 	const DATE_MONTH_YEAR = 'month_year';
 	const DATE_LONG_W_TIME = 'tlwt'; // abbr of date long with time
 	const DATE_SHORT_W_TIME = 'tswt'; //abbr of date short with time
+	const PART_TIME = 'PT';
 	
 	public static function format_date($date, $type) {
 		
@@ -85,6 +86,19 @@ class Formatter {
 			return 'pdf';
 		break;
 		}         
+	}
+	
+	public static function format_worktype( $type ) {
+		
+		switch ($type) {
+			
+			case self::PART_TIME:
+				return 'Part time';
+			default: 
+				return 'test';
+			
+		
+		}
 	}
 
 	// private static function format_date($date) {

@@ -17,9 +17,9 @@
 		border: 1px solid #fbeed5 !important;
 	}
 	
-	.btn-primary {
-		margin-left: 5px;
-	}
+	// .btn-primary {
+	// 	margin-left: 5px;
+	// }
 
 	ol, ul {
 		margin: 0;
@@ -35,6 +35,12 @@
 				float: left; 
 				line-height: 30px;
 				width: 215px;
+
+				&.checkbox { 
+					line-height: inherit;
+					margin-top: 5px;
+					margin-left: 10px;
+				}
 
 			}
 
@@ -260,19 +266,27 @@
 		li {
 			width: 100%;
 			label {
-				//width: 23%;
+				width: 120px;
 			}
-			input[type=text], input[type=email] {
-				//width: 70%;
+			input[type=text], input[type=email] { 
+				width: 285px;
 			}
 			textarea {
 				display: none;
-				.size(80%, 150px);
+				margin-top: 21px;
+				.size(285px, 150px);
 			}
-			#upload-resume, #upload-coverletter {
+			#upload-resume, #upload-coverletter, #add-to-account {
 				display: none;
 			}
 		}
+	}
+
+	#apply-job-btn {
+		height: 45px;
+		font-size: 16px;
+		margin-top: 21px;
+		width: 100%;
 	}
 }
 
@@ -338,6 +352,16 @@
 			}
 		}
 	}
+
+	#job-apply {
+		ol li {
+			input[type=text], input[type=email], textarea {
+				width: 385px;
+			}
+		}
+	}
+
+
 }
 
 @media (min-width: 768px) and (max-width: 979px) { 
@@ -371,6 +395,13 @@
 			}
 		}
 	}
+	#job-apply {
+		ol li {
+			input[type=text], input[type=email], textarea {
+				width: 80%;
+			}
+		}
+	}
 }
 
 @media (max-width: 480px) { 
@@ -385,6 +416,13 @@
 				input[type=text],input[type=password], select {
 					width: 90%;
 				}
+			}
+		}
+	}
+	#job-apply {
+		ol li {
+			input[type=text], input[type=email], textarea {
+				width: 99%;
 			}
 		}
 	}

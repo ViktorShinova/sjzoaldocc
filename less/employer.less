@@ -473,7 +473,14 @@ body {
 						}
 
 						.table-data-row {
-							
+							a { 
+								color: #333;
+								
+								&:hover { 
+									text-decoration: underline;
+									color: @green;
+								}
+							}
 							&:hover { background: #e8eaef; }
 							
 							td {

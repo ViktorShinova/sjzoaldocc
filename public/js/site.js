@@ -71,25 +71,17 @@ var jSite = {
 		
 		//Select Coverletter
 		
-		$("#resume-write").click( function (e) {
-			e.preventDefault();
-			$('#write-resume').show();
-			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
-			
-		});
-		
 		$(".resume-btn").click( function (e) {
 			e.preventDefault();
-			$('#write-resume').hide();
+			$("#add-to-account").hide();
 			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
-			
 			$("#select-resume").val($(this).data('value'));
 			
 		});
 		
 		$("#upload-resume-link").click(function(e) {
 			e.preventDefault();
-			
+			$("#add-to-account").show();
 			$("#upload-resume:hidden").trigger('click');
 			$("#upload-resume:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();

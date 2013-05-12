@@ -53,7 +53,7 @@ Route::get('job/search', 'job@search');
 Route::get('job/shortlist_tag', 'job@shortlist_tag');
 Route::get('job/shortlist_category', 'job@shortlist_category');
 Route::post('job/shortlist', 'job@shortlist');
-Route::get('job/(:any)', 'job@article');
+Route::get('job/article', 'job@article');
 
 Route::controller('home');
 //EMPLOYER//

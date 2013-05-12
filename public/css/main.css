@@ -189,36 +189,6 @@ a:hover {
   background-repeat: no-repeat;
   background-position: 10px -730px;
 }
-#content #side-info > img {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 21px;
-  max-width: 370px;
-}
-#content #side-info > div {
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-#content #side-info > div .data-list {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 10px;
-  padding-top: 0;
-}
-#content #side-info > div .controls {
-  padding: 10px;
-}
-#content #side-info #feature-listing i {
-  color: #222222;
-  font-size: 20px;
-  line-height: 20px;
-  position: relative;
-  top: 2px;
-  margin-right: 10px;
-  width: 27px;
-}
 #content #btn-apply {
   width: 86%;
   display: block;
@@ -361,6 +331,54 @@ body #side-feature-mobile a:hover {
 }
 body #aside-mobile {
   clear: both;
+}
+body #side-info > img {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 21px;
+  max-width: 370px;
+}
+body #side-info > div {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+body #side-info > div .data-list {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-top: 0;
+  margin: 0;
+}
+body #side-info > div .data-list li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+body #side-info > div .data-list li label {
+  float: left;
+  width: 80px;
+}
+body #side-info > div .data-list li span {
+  font-weight: bold;
+}
+body #side-info > div .controls {
+  padding: 10px;
+}
+body #side-info > div.summary p {
+  color: #666666;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+body #side-info #feature-listing i {
+  color: #222222;
+  font-size: 20px;
+  line-height: 20px;
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+  width: 27px;
 }
 @media (min-width: 1200px) {
   body #side-feature.affix {
@@ -584,10 +602,6 @@ form input {
 .form .alert {
   border: 1px solid #fbeed5 !important;
 }
-.validate-form .btn-primary,
-.form .btn-primary {
-  margin-left: 5px;
-}
 .validate-form ol,
 .form ol,
 .validate-form ul,
@@ -608,6 +622,14 @@ form input {
   float: left;
   line-height: 30px;
   width: 215px;
+}
+.validate-form ol li label.checkbox,
+.form ol li label.checkbox,
+.validate-form ul li label.checkbox,
+.form ul li label.checkbox {
+  line-height: inherit;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 .validate-form ol li input[type="submit"],
 .form ol li input[type="submit"],
@@ -798,14 +820,29 @@ button.remove {
 #job-apply ol li {
   width: 100%;
 }
+#job-apply ol li label {
+  width: 120px;
+}
+#job-apply ol li input[type=text],
+#job-apply ol li input[type=email] {
+  width: 285px;
+}
 #job-apply ol li textarea {
   display: none;
-  width: 80%;
+  margin-top: 21px;
+  width: 285px;
   height: 150px;
 }
 #job-apply ol li #upload-resume,
-#job-apply ol li #upload-coverletter {
+#job-apply ol li #upload-coverletter,
+#job-apply ol li #add-to-account {
   display: none;
+}
+#job-apply #apply-job-btn {
+  height: 45px;
+  font-size: 16px;
+  margin-top: 21px;
+  width: 100%;
 }
 /* =APPLICANT SETTINGS
 =================================================================== */
@@ -864,6 +901,11 @@ button.remove {
   .employer-register-form ol li select {
     width: 400px;
   }
+  #job-apply ol li input[type=text],
+  #job-apply ol li input[type=email],
+  #job-apply ol li textarea {
+    width: 385px;
+  }
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .employer-register-form h3 {
@@ -890,6 +932,11 @@ button.remove {
   .employer-register-form ol li select {
     width: 45%;
   }
+  #job-apply ol li input[type=text],
+  #job-apply ol li input[type=email],
+  #job-apply ol li textarea {
+    width: 80%;
+  }
 }
 @media (max-width: 480px) {
   .employer-register-form h3 {
@@ -902,6 +949,11 @@ button.remove {
   .employer-register-form ol li input[type=password],
   .employer-register-form ol li select {
     width: 90%;
+  }
+  #job-apply ol li input[type=text],
+  #job-apply ol li input[type=email],
+  #job-apply ol li textarea {
+    width: 99%;
   }
 }
 #content #sort-toolbar {

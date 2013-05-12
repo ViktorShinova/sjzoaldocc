@@ -10,7 +10,7 @@
 	
 		<title>Careershire | Advertiser</title>
 
-		<meta charset="iso-8859-1" />
+		<meta charset="utf-8" />
 		
 		<meta name="description" content="" />
 

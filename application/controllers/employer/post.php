@@ -28,7 +28,7 @@ class Employer_Post_Controller extends Base_Controller {
 	public function get_list() {
 		$jobs = Job::where('end_at', '>', date('Y:m:d H:i:s'))
 				->where('employer_id', '=', Session::get('employer_id'))
-				->paginate(30);
+				->order_by('created_at', 'desc')->paginate(30);
 
 		return View::make('employer.post_list')->with(array('jobs' => $jobs));
 	}

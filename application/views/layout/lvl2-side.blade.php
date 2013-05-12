@@ -9,7 +9,7 @@
 
 		<title></title>
 
-		<meta charset="iso-8859-1" />
+		<meta charset="utf-8" />
 
 		<meta name="description" content="" />
 
@@ -25,8 +25,8 @@
 		<![endif]-->	
 		{{ HTML::style('/css/font-awesome.min.css') }}
 		{{ HTML::style('/css/main.css') }}
-		{{ HTML::style('/css/home.css') }}
-		{{ Asset::scripts(); }}
+		
+		{{ Asset::scripts() }}
 		<!--[if lt IE 9]>
 		<script src="/js/html5.js"></script>
 		<![endif]-->				

@@ -16,7 +16,16 @@
 		You have successfully applied for this job!
 	</div>
 @endif
-
+@if ($is_applied )
+<div class="alert fade in alert-danger">
+	You have already applied for this job!
+</div>
+@endif
+@if ( $is_employer )
+<div class="alert fade in alert-danger">
+	You are logged in as an employer. Application should only be submitted by applicants only. Please login as an applicant before continuing with the application process. Thank you very much.
+</div>
+@endif
 <div class="row">
 
 	<section class="span6 white-bg drop-shadow">
@@ -31,19 +40,31 @@
 				<ol>
 					<li>
 						<label for="email">First Name *</label>
-						<input type="text" class="validate[required]" type="text" name="first_name" id="first_name"  value="{{ $applicant->first_name }}">
+						<input type="text" class="validate[required]" type="text" name="first_name" id="first_name"  value="{{ ($applicant) ? $applicant->first_name : '' }}">
 					</li>
 					<li>
 						<label for="contact">Last Name *</label>
-						<input type="text" class="validate[required]" type="text" name="last_name" id="last_name"  value="{{ $applicant->last_name }}">
+						<input type="text" class="validate[required]" type="text" name="last_name" id="last_name"  value="{{ ($applicant) ? $applicant->last_name : '' }}">
 					</li>
 					<li>
 						<label for="email">Email *</label>
-						<input type="email" class="validate[required,custom[email]]" type="text" name="email" id="email" value="{{ $applicant->email }}">
+						<input type="email" class="validate[required,custom[email]]" type="text" name="email" id="email" value="{{ ($applicant) ? $applicant->email : ''}}">
 					</li>
 					<li>
 						<label for="contact">Contact Number *</label>
-						<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ $applicant->contact_number }}">
+						<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					</li>
+					<li>
+						<label for="contact">Current Employment *</label>
+						<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					</li>
+					<li>
+						<label for="contact">Duration *</label>
+						<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					</li>
+					<li>
+						<label for="contact">Contact Number *</label>
+						<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
 					</li>
 					<li><hr></li>
 					<li>
@@ -54,13 +75,10 @@
 								@if($is_applicant)	
 									@foreach ($resumes as $resume)
 									<li role="presentation">
-										<a class="btn-link" href="#" data-value="{{ $resume->id }}">{{ $resume->resume }}</a>
+										<a class="resume-btn" href="#" data-value="{{ $resume->id }}">{{ $resume->resume }}</a>
 									</li>
 									@endforeach
 								@endif
-								<li role="presentation">
-									<a id="resume-write" href="#" data-value="1">Write one</a>
-								</li>
 								<li role="presentation">
 									<a class="resume-btn" href="#" data-value="0">No resume</a>
 								</li>
@@ -71,11 +89,11 @@
 								</li>
 							</ul>
 						</div>
+						@if( $is_applicant )
+						<label id="add-to-account" class="checkbox"><input type="checkbox" name="add-to-account" value="1" />Add to my account</label>
+						@endif
 						<input id="select-resume" name="selected-resume" type="hidden" value="0" />
-					</li>
-					<li>
-						<label for="write-resume"></label>
-						<textarea type="text" name="write-resume" id="write-resume"></textarea>
+						
 					</li>
 
 					<li><hr></li>
@@ -88,7 +106,7 @@
 								@if($is_applicant)	
 									@foreach ($coverletters as $coverletter)
 									<li role="presentation">
-										<a class="btn-link" href="#" data-value="{{ $coverletter->id }}">{{ $coverletter->coverletter }}</a>
+										<a class="cover-btn" href="#" data-value="{{ $coverletter->id }}">{{ $coverletter->coverletter }}</a>
 										<!--<input type="radio" name="select_coverletter" value="{{ $coverletter->id }}"> <span class="coverletter-name"></span>-->
 									</li>
 									@endforeach
@@ -112,12 +130,9 @@
 						<input id="select-coverletter" name="selected-coverletter" type="hidden" value="0" />
 					</li>
 					<li>
-						<label for="write-coverletter"></label>
 						<textarea type="text" name="write-coverletter" id="write-coverletter"></textarea>
 					</li>
-					@if($is_applied)
-					<li><a href="javascript:void(0);" class='btn pull-right'>You have applied for this job</a></li>
-					@else
+					@if(!$is_applied && !$is_employer)
 					<li><button class="btn btn-primary" type="submit" id="apply-job-btn">Apply</button></li>
 					@endif
 				</ol>
@@ -133,7 +148,7 @@
 			{{ $job->description }}
 		</article>
 		<footer class="notice-footer">
-			Your contact details or any other information.
+			{{ $job->contact }}
 		</footer>
 	</section>
 		

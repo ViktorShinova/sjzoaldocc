@@ -103,6 +103,64 @@ body {
 	#aside-mobile {
 		clear: both;
 	}
+
+	#side-info {
+		> img {
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 21px;
+			max-width: 370px;
+		}
+		> div {
+			padding-bottom: 10px;
+			margin-bottom: 20px;
+			
+
+			.data-list {
+				.box-sizing(border-box);
+				padding: 10px;
+				padding-top: 0;
+				margin: 0;
+
+				li { 
+					list-style: none; 
+					margin-bottom: 10px;
+					label { 
+						float: left; 
+						width: 80px;
+					}
+					span { font-weight: bold; }
+				}
+			}
+			.controls {
+				padding: 10px;
+			}
+
+			&.summary {
+				p { 
+					color: #666;
+					font-size: 16px;
+					font-weight: bold;
+					padding: 0 10px;
+
+				}
+			}
+		}
+
+		#feature-listing {
+
+			i { 
+				color: #222;
+				font-size: 20px;
+				line-height: 20px;
+				position: relative;
+				top: 2px;
+				margin-right: 10px;
+				width: 27px;	
+			}
+
+		}
+	}
 }
 
 @media (min-width: 1200px) {

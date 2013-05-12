@@ -49,42 +49,33 @@ class SendEmail {
 		$mail->Subject  = $this->email_subject;
 
 		if(isset($this->email_recipients)) {
-			$recipients = $this->email_recipients;
-			foreach($recipients as $email => $name) {
+			
+			foreach($this->email_recipients as $email => $name) {
 				$mail->AddAddress($email, $name);
 			}
 		}
 		if(isset($this->email_recipients_CC)) {
-			$recipients_CC = $this->email_recipients_CC;
-			foreach($recipients_CC as $email => $name) {
+			
+			foreach( $this->email_recipients_CC as $email => $name ) {
 				$mail->AddCC($email, $name);
 			}			
 		}
 		if(isset($this->email_recipients_BCC)) {
-			$recipients_BCC = $this->email_recipients_BCC;
-			foreach($recipients_BCC as $email => $name) {
-				$recipient->AddBCC($email, $name);
+			
+			foreach( $this->email_recipients_BCC as $email => $name) {
+				$mail->AddBCC($email, $name);
 			}
 		}
 
 		/** mail attachments **/
-		$attachments = $this->email_attachments;
-		foreach($attachments as $attachment) {
+		
+		foreach( $this->email_attachments as $attachment ) {
 			//error Value: 0; There is no error, the file uploaded with success.
 			//error Value: 4; No file was uploaded.
 			if($attachment['error'] == 0) {
 				$mail->AddAttachment($attachment['tmp_name'], $attachment['name']);
 			}
 		}	
-
-		/** prepare email template **/
-		$data = $this->email_data;
-
-		//die(var_dump($data));
-		// if(isset($data['applicant']['non_registered_users'])) {
-		// 	list($first_name, $last_name, $email, $contact_number) = unserialize($data['applicant']['non_registered_users']);
-		// 	die(var_dump($contact_number));
-		// }
 
 		$mail->Body = View::make('email.'.$this->email_template)->with(array(
 							'data' => $this->email_data

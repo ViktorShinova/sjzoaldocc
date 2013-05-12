@@ -4,46 +4,53 @@ class Job_Controller extends Base_Controller {
 	
 	
 	const NO_FILE_UPLOAD = 4;
+	const JOB_APPLY_TPL = 'job-apply-email';
+	const APPLIED = 1;
 	
-	private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
+	
+	//private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
+	
+	
+	
+	
+	
+//	private function tokenizer($keywords) {
+//		//first we check for quotes. If they are present, we must put them together as a phrase. If not, separate them.
+//		//var_dump($keywords);
+//		if (strpos($keywords, '"') !== false) {
+//
+//			$all_phrase = $this->advance_tokenizer($keywords);
+//		}
+//
+//		//this will be the last one do be done.
+//		// a better tokenizer is to remove conjuntive from the phrase.
+//		// Conjuntive are as follows: The, And, Is, ... 
+//		$tokens = explode(' ', preg_replace('/\s\s+/', ' ', trim($keywords)));
+//		$keywords = array_diff($tokens, $this->words);
+//
+//		return $keywords;
+//	}
 
-	private function tokenizer($keywords) {
-		//first we check for quotes. If they are present, we must put them together as a phrase. If not, separate them.
-		//var_dump($keywords);
-		if (strpos($keywords, '"') !== false) {
-
-			$all_phrase = $this->advance_tokenizer($keywords);
-		}
-
-		//this will be the last one do be done.
-		// a better tokenizer is to remove conjuntive from the phrase.
-		// Conjuntive are as follows: The, And, Is, ... 
-		$tokens = explode(' ', preg_replace('/\s\s+/', ' ', trim($keywords)));
-		$keywords = array_diff($tokens, $this->words);
-
-		return $keywords;
-	}
-
-	private function advance_tokenizer($token, $test = true) {
-		//this will return an array of token phrase
-		//
-		
-		$tokens = array();
-
-		if ($test === false) {
-			//var_dump($first);
-			//var_dump($token);
-		}
-		//get all values in quotes
-		preg_match_all('/\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
-		var_dump(preg_split('/\"([^\"]*?)\"/', $token));
-		//preg_match_all('/\^\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
-		// foreach($matches as $value) {
-		// 	$tokens[] = $value[1];
-		// }
-
-		var_dump($matches);
-	}
+//	private function advance_tokenizer($token, $test = true) {
+//		//this will return an array of token phrase
+//		//
+//		
+//		$tokens = array();
+//
+//		if ($test === false) {
+//			//var_dump($first);
+//			//var_dump($token);
+//		}
+//		//get all values in quotes
+//		preg_match_all('/\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
+//		var_dump(preg_split('/\"([^\"]*?)\"/', $token));
+//		//preg_match_all('/\^\"([^\"]*?)\"/', $token, $matches, PREG_SET_ORDER);
+//		// foreach($matches as $value) {
+//		// 	$tokens[] = $value[1];
+//		// }
+//
+//		var_dump($matches);
+//	}
 
 	public function get_search() {
 		$job_categories = array('' => 'All Categories') + Category::lists('name', 'id');
@@ -261,7 +268,7 @@ class Job_Controller extends Base_Controller {
 		}
 
 		return View::make('job.article')->with(array(
-					'job' => $job,
+					'job1' => $job,
 					//'related_jobs' =>			$related_jobs,
 					'is_applicant' => $is_applicant,
 					'is_applied' => $is_applied,
@@ -413,46 +420,49 @@ class Job_Controller extends Base_Controller {
 	}
 
 	public function get_apply($id = null) {
-		if ($id == null) {
-			return;
-		} else {
+		if (!$id) {
+			return false;
+		}
 
-			$applicant = $applicant_resumes = $applicant_coverletters = null;
-			$is_applied = $is_applicant = false;
+		$applicant = $applicant_resumes = $applicant_coverletters = null;
+		$is_employer = $is_applied = $is_applicant = false;
 
-			$job = Job::find($id);
+		$job = Job::find($id);
 
 
-			if (Auth::check() && Auth::user()->role_id == '2') {
-				$applicant = Applicant::find(Session::get('applicant_id'));
-				$is_applicant = true;
-				$applicant->email = Auth::user()->email;
-				$applicant_resumes = $applicant->resumes()->get();
-				$applicant_coverletters = $applicant->coverletters()->get();
+		if (Auth::check() && Auth::user()->role_id == '2') {
+			$applicant = Applicant::find(Session::get('applicant_id'));
+			$is_applicant = true;
+			$applicant->email = Auth::user()->email;
+			$applicant_resumes = $applicant->resumes()->get();
+			$applicant_coverletters = $applicant->coverletters()->get();
 
-				$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
-								->where('job_id', '=', $id)->first();
+			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
+							->where('job_id', '=', $id)->first();
 
-				if ($applicant_job != null && $applicant_job->status == 1) {
-					$is_applied = true;
-				}
-			} else {
-				$applicant = new Applicant();
-				$applicant->email = null;
-				$applicant->first_name = null;
-				$applicant->last_name = null;
-				$applicant->contact_number = null;
+			if ($applicant_job != null && $applicant_job->status == 1) {
+				$is_applied = true;
 			}
 
-			return View::make("job.apply")->with(array(
-						'job' => $job,
-						'applicant' => $applicant,
-						'resumes' => $applicant_resumes,
-						'coverletters' => $applicant_coverletters,
-						'is_applicant' => $is_applicant,
-						'is_applied' => $is_applied
-			));
+		} else if (Auth::check() && Auth::user()->role_id == '1') {
+			$is_employer = true;
+//				$applicant = new Applicant();
+//				$applicant->email = null;
+//				$applicant->first_name = null;
+//				$applicant->last_name = null;
+//				$applicant->contact_number = null;
 		}
+
+		return View::make("job.apply")->with(array(
+					'job' => $job,
+					'applicant' => $applicant,
+					'resumes' => $applicant_resumes,
+					'coverletters' => $applicant_coverletters,
+					'is_applicant' => $is_applicant,
+					'is_applied' => $is_applied,
+					'is_employer' => $is_employer,
+		));
+		
 	}
 
 	public function post_apply($id = null) {
@@ -461,61 +471,79 @@ class Job_Controller extends Base_Controller {
 		}
 
 		$input = Input::all();
-var_dump($input);
-die();
+
+
+
+		$job = Job::find($id);
+		
+		$employer = $job->employer;
+		
 		//email employer
-		$employer = Job::find($id)->employer;
+		
 		$mail = new SendEmail();
 		$mail->email_subject = 'You\'ve received a new job application! - Careerhire';
+		
+		//email => name
 		$mail->email_recipients = array(
 			$employer->application_email => $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name
 		);
+		
 		//set email template
-		$mail->email_template = 'job-apply-email';
+		$mail->email_template = self::JOB_APPLY_TPL;
 
 		//gather all the this job and employer details
-		$data['job'] = Job::find($id)->original;
+		$data['job'] = $job->original;
 		$data['employer'] = $employer->original;
 
 		//pass applicant email
 		$mail->email_from_applicant = $input['email'];
 
 		//if user logged-in
-		if (Session::get('applicant_id')) {
-
+		if (Session::has('applicant_id')) {
+			$applicant_id = Session::get('applicant_id');
 			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
 							->where('job_id', '=', $id)->first();
 
 			
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
-			$apply_job->applicant_id = Session::get('applicant_id');
+			$apply_job->applicant_id = $applicant_id;
 			$apply_job->applicant_resume_id = $input['selected-resume'];
+			
 			$apply_job->applicant_coverletter_id = $input['selected-coverletter'];
-			$apply_job->write_resume = strip_tags(nl2br($input['write-resume']));
+			
 			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
 			$apply_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
-			$apply_job->status = APPLIED;
+			
+			$apply_job->status = self::APPLIED;
+			
 			$apply_job->save();
 
 			//gather data of applicant
 			$data['applicant'] = array_merge((array) $apply_job->original, (array) Applicant::find($apply_job->applicant_id)->original);
-		
-
+			
+			
+			
 			//gather data of attachments
-			if ($input['select_resume'] != 0) {
+			if ($input['selected-resume'] != 0) {
 				$resume_file = ApplicantResumes::find($input['selected-resume'])->original;
 				$resume_file['name'] = $resume_file['resume'];
 				unset($resume_file['resume']);
+				
+				
 				$resume_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $resume_file['path'];
+				
+				
 				unset($resume_file['path']);
 				$resume_file['error'] = 0;
 				$applicant_resume_file = $resume_file;
+				
 			} else {
 				$applicant_resume_file = Input::file('upload-resume');
+				
 			}
 
-			if ($input['select_coverletter'] != 0) {
+			if ($input['selected-coverletter'] != 0) {
 				$coverletter_file = ApplicantCoverletters::find($input['selected-coverletter'])->original;
 				$coverletter_file['name'] = $coverletter_file['coverletter'];
 				unset($coverletter_file['coverletter']);
@@ -533,7 +561,6 @@ die();
 			//non-registered users
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
-			$apply_job->write_resume = strip_tags(nl2br($input['write-resume']));
 			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
 			$apply_job->non_registered_users = serialize(array($input['first_name'], $input['last_name'],
 				$input['email'], $input['contact']));

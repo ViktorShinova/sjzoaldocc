@@ -132,7 +132,7 @@ body {
   height: 100%;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 400;
   font-size: 12px;
   background: white;
@@ -156,7 +156,7 @@ body > header img {
   margin: 7px 10px 0 10px ;
 }
 body > header h1 {
-  color: #00aeef;
+  color: #7dbe32;
   font-size: 16px;
   line-height: 74px;
 }
@@ -221,7 +221,7 @@ body nav ul li i {
 }
 body nav ul li a {
   display: block;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 400;
   padding-left: 35px;
   line-height: 30px;
@@ -242,7 +242,7 @@ body nav ul li.active:after {
   right: 0;
 }
 body nav ul li:hover {
-  background: #00aeef;
+  background: #7dbe32;
 }
 body nav ul li:hover a {
   color: white !important;
@@ -335,7 +335,7 @@ body #board .content .validation {
   padding: 13px 30px 13px 47px;
 }
 body #board .content .validation p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 400;
   margin: 0;
 }
@@ -576,7 +576,7 @@ body #board .content .table-container .table-header-wrapper {
 }
 body #board .content .table-container .table-header-wrapper h2 {
   color: white;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 300;
   font-size: 19px;
   line-height: 34px;
@@ -587,7 +587,7 @@ body #board .content .table-container .table-header-wrapper .table-toolbar {
   background: #1571d7;
   border: 1px solid #1571d7;
   float: right;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 300;
 }
 body #board .content .table-container .table-header-wrapper .table-toolbar a {
@@ -606,15 +606,22 @@ body #board .content .table-container table .table-header-row {
   color: white;
 }
 body #board .content .table-container table .table-header-row th {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 300;
-  background: #00aeef;
+  background: #7dbe32;
   padding: 4px;
   font-size: 15px;
   text-align: left;
 }
 body #board .content .table-container table .table-header-row th:first-child {
   width: 20%;
+}
+body #board .content .table-container table .table-data-row a {
+  color: #333333;
+}
+body #board .content .table-container table .table-data-row a:hover {
+  text-decoration: underline;
+  color: #7dbe32;
 }
 body #board .content .table-container table .table-data-row:hover {
   background: #e8eaef;
@@ -652,15 +659,15 @@ body #board .content .tab-container .tab a:hover {
   text-decoration: none;
 }
 body #board .content .tab-container .tab:hover {
-  background: #00aeef;
-  border: 1px solid #00aeef;
+  background: #7dbe32;
+  border: 1px solid #7dbe32;
   border-bottom: 0;
 }
 body #board .content .tab-container .tab.active {
-  background: #00aeef;
+  background: #7dbe32;
   padding-top: 6px;
   position: relative;
-  border-color: #00aeef;
+  border-color: #7dbe32;
 }
 body #board .content .tab-container .tab.active a {
   color: white;
@@ -744,7 +751,7 @@ body #board .content #candidate-list li .profile-content {
   z-index: 1000;
 }
 body #board .content #candidate-list li .poptop {
-  background: #00aeef;
+  background: #7dbe32;
   border: 1px solid #cccccc;
   color: white;
   cursor: pointer;
@@ -772,7 +779,7 @@ body #board .content #candidate-list li:hover .poptop {
 #page-email nav ul li.page-employer-email,
 #page-invoice nav ul li.page-employer-invoice,
 #page-search body nav ul li.page-employer-search {
-  background: #00aeef;
+  background: #7dbe32;
 }
 #page-index nav ul li.page-employer-index a,
 #page-post nav ul li.page-employer-post a,
@@ -919,7 +926,7 @@ form input {
   text-indent: #444444 0 -1px 0;
 }
 #custom-template .container-header {
-  background: #00aeef;
+  background: #7dbe32;
   color: white;
   font-weight: normal !important;
 }
@@ -976,7 +983,7 @@ form input {
 }
 #custom-templating {
   font-size: 12px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 400;
   width: 100%;
 }
@@ -1032,7 +1039,7 @@ form input {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 300;
   width: 100%;
 }

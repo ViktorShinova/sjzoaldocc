@@ -143,7 +143,6 @@ class Employer_Payment_Controller extends Base_Controller {
 			'summary' => $job_ads['summary'],
 			'description' => $job_ads['desc'],
 			'more_info' => $job_ads['more-info'],
-			'video' => $job_ads['video'],
 			'contact' => $job_ads['contact'],
 			'category_id' => $job_ads['job-category'],
 			'sub_category_id' => $job_ads['sub-category'],
@@ -159,7 +158,11 @@ class Employer_Payment_Controller extends Base_Controller {
 			'end_at' => date("Y-m-d H:i:s", strtotime("+1 month", strtotime(date('Y-m-d H:i:s')))),
 			'status' => 1,
 		);
-
+		
+		if( isset($job_ads['video'])) {
+			$__job['video'] = $job_ads['video'];
+		}
+		
 		if ( isset($job_ads['custom-apply-select']) && $job_ads['custom-apply-select'] === 'Y') {
 			$_job['apply'] = $job_ads['custom-apply'];
 		} else {

@@ -234,12 +234,7 @@
 																					<td>&nbsp;</td>
 																					<td>&nbsp;</td>
 																				</tr>
-																				@if( $data['applicant']['write_resume'] != "" )
-																				<tr valign="top">
-																					<td><strong>Resume</strong></td>
-																					<td>{{ $data['applicant']['write_resume'] }}</td>
-																				</tr>
-																				@endif
+																				
 																				@if( $data['applicant']['attachments']['resume']['error'] == 0 )
 																				<tr valign="top">
 																					<td><strong>Attached Resume</strong></td>

@@ -3353,11 +3353,11 @@ input[type="button"].btn-block {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #7DBE32;
   *background-color: #7DBE32;
-  background-image: -moz-linear-gradient(top, #7DBE32, #7DBE32);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7DBE32), to(#7DBE32));
-  background-image: -webkit-linear-gradient(top, #7DBE32, #7DBE32);
-  background-image: -o-linear-gradient(top, #7DBE32, #7DBE32);
-  background-image: linear-gradient(to bottom, #7DBE32, #7DBE32);
+  background-image: -moz-linear-gradient(top, #7DBE32, rgb(107, 177, 43));
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7DBE32), to(rgb(107, 177, 43)));
+  background-image: -webkit-linear-gradient(top, #7DBE32, rgb(107, 177, 43));
+  background-image: -o-linear-gradient(top, #7DBE32, rgb(107, 177, 43));
+  background-image: linear-gradient(to bottom, #7DBE32, rgb(107, 177, 43));
   background-repeat: repeat-x;
   border-color: #7DBE32 #7DBE32 #7DBE32;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
@@ -3372,7 +3372,7 @@ input[type="button"].btn-block {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   color: #ffffff;
-  background-color: #7DBE32;
+  background-color: rgb(107, 177, 43);
   *background-color: #7DBE32;
 }
 

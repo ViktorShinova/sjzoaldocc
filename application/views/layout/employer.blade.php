@@ -10,13 +10,12 @@
 	
 		<title>Careershire | Advertiser</title>
 
-		<meta charset="iso-8859-1" />
+		<meta charset="utf-8" />
 		
 		<meta name="description" content="" />
 
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="/favicon.ico" />
 		
 		<!--[if lt IE 9]>
