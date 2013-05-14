@@ -6,7 +6,7 @@
 
 <section id="job-search" class="span12 white-bg drop-shadow-black">
 
-	<h2 class="container-header">Search for Jobs<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i> Employer Register here</a></h2>
+	<h2 class="container-header">Search for Jobs<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i></a></h2>
 
 	<form class="row form-horizontal" method="get" action="/job/search">
 		<div class="span6">

@@ -397,6 +397,3 @@
 </div>
 @endsection
 
-@section('LAB-scripts')
-.script('jquery.easytabs.js')
-@endsection

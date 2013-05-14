@@ -563,3 +563,9 @@ function salaryMaxCheck(field, rules, i, options) {
 		return "Minimum value cannot be more than maximum value."
 	} 
 }
+
+
+
+$('document').ready( function () {
+	empSite.start();
+});

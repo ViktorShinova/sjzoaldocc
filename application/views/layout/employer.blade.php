@@ -18,14 +18,12 @@
 		<meta name="revisit-after" content="7 days" />
 		<link rel="shortcut icon" href="/favicon.ico" />
 		
-		<!--[if lt IE 9]>
-		<script src="/js/html5.js"></script>
-		<![endif]-->
-		{{ HTML::style('/css/bootstrap.css') }}
 		{{ HTML::style('/css/employer.css') }}
     	@yield('custom_styles')
-		{{ Asset::scripts(); }}
-
+		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+		<script type="text/javascript" src="//use.typekit.net/ypy5trg.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		
 	</head>
 
 	<body id="@yield('page-id')">

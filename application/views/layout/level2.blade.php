@@ -15,21 +15,18 @@
 
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
-		
 		<link rel="shortcut icon" href="favicon.ico" />
-		{{ HTML::style('/css/bootstrap.css') }}
-		{{ HTML::style('/css/bootstrap-responsive.css') }}
-		{{ HTML::style('/css/jquery.taghandler.css') }}
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->
 		{{ HTML::style('/css/font-awesome.min.css') }}
 		{{ HTML::style('/css/main.css') }}
 		@yield('custom_styles')
-		{{ Asset::scripts() }}
-		<!--[if lt IE 9]>
-		<script src="/js/html5.js"></script>
-		<![endif]-->					
+		
+		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+		<script type="text/javascript" src="//use.typekit.net/ypy5trg.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+				
 	</head>
 
 	<body>

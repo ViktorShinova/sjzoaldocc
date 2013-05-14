@@ -17,18 +17,16 @@
 		<meta name="revisit-after" content="7 days" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="favicon.ico" />
-		{{ HTML::style('/css/bootstrap.css') }}
-		{{ HTML::style('/css/bootstrap-responsive.css') }}
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->	
 		{{ HTML::style('/css/font-awesome.min.css') }}
 		{{ HTML::style('/css/main.css') }}
 		{{ HTML::style('/css/home.css') }}
-		{{ Asset::scripts(); }}
-		<!--[if lt IE 9]>
-		<script src="/js/html5.js"></script>
-		<![endif]-->				
+
+		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+		<script type="text/javascript" src="//use.typekit.net/ypy5trg.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</head>
 
 	<body id="home">
@@ -37,10 +35,6 @@
 
 		<div id="top-feature" class="container">
 			<img id="brand" src="/img/logo.png" alt="Careershire">
-
-<!--			<div id="ads">
-				<img src="http://quickimage.it/550x80&text=advertisement%20(550x80)">
-			</div>-->
 		</div>
 		<!-- BRAND LOGO -->
 

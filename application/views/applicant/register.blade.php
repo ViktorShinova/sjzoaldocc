@@ -17,7 +17,7 @@
 </div>
 @endif
 
-<h1 class="container-header span12">Registration<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i> Are you an employer?</a></h1>
+<h1 class='span12'>Registration</h1>
 
 <div class="span6 white-bg drop-shadow">
 	<h4>Personal Details</h4>

@@ -184,13 +184,15 @@
 @endsection
 
 
-@section('LAB-script')
+@section('scripts')
+<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+@endsection
 
-.script('https://www.paypalobjects.com/js/external/dg.js').wait( function () {
+@section('page-scripts')
 dg = new PAYPAL.apps.DGFlow({
 trigger: 'paypal_submit',
 expType: 'instant'
 });
-})
-
 @endsection
+
+

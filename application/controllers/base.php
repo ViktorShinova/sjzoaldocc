@@ -31,7 +31,6 @@ class Base_Controller extends Controller {
 	 * @return Response
 	 */
 	public function __construct() {
-		Asset::add('LAB', 'js/vendor/LAB/LAB.js');
 		$this->_host = $_SERVER['HTTP_HOST'];
 		parent::__construct();
 	}

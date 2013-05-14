@@ -1,0 +1,181 @@
+/* =APPLICANT ACCOUNT
+=================================================================== */
+	
+
+
+#profile-basic {
+	input[type=text] { width: 245px;}
+	select { width: 259px;}
+}
+#profile-slug {
+	input[type=text] { width: 104px;}
+}
+#profile-photo {
+
+	float: right;
+
+	img {
+		max-width: inherit !important;
+	}
+
+	#current-photo {
+		float: left;
+
+		#photo { 
+			
+			position: relative;
+			.size(150px, 150px);
+			overflow: hidden;
+
+			img {
+				.size(150px, 150px);
+				overflow: hidden;
+			}
+
+			#photo-edit-btn {
+				position: absolute;
+				bottom: 0;
+				background: url(/img/opac-bg.png);
+				width: 150px;
+				text-align: center;
+				color: #fff;
+				a { color: #fff; }
+			}	
+		}
+
+		#upload-profile-pic { display: none; }
+
+		p {
+			margin-top: 3px;
+			line-height: 18px;
+		}			
+	}
+
+	#edit-photo {
+
+		#crop-profile-pic-btn {
+			display: none;
+
+		}
+
+	}
+
+}
+
+#qualifications-field, #workhistory-field {
+
+	.hide { display: none; }
+	.open { display: list-item; }
+
+	.qualifications-field-child, .workhistory-field-child {
+		padding: 10px;
+
+		&:hover {
+			background: #f0f0f0;
+		}
+	}
+
+	ol {
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 10px;
+		margin-right: 0;
+		padding: 10px 0;		
+	}
+
+	li {
+		textarea {
+			.size(95%, 150px)
+		}
+
+		.add-qualification, .add-workhistory {
+			border: 0;
+		}
+	}
+}
+
+button.remove { display: none; }
+
+#resume-file, #coverletter-file { display: none; }
+
+#profile-progress {
+	height: 273px;
+}
+
+#expertise {
+	text-align: center;
+	width: 100%;
+	span {
+		.border-radius(@radius:15px);
+		height: 14px;
+		line-height: 14px;
+		.inline-block();
+		font-size: 12px;
+		margin: 5px 5px 5px 0;
+		white-space: nowrap;
+		background-color: #0066bd;
+		color: #FFF;
+		padding: 3px 8px;    
+	}
+}
+
+.box-form-layout {
+	.box-sizing(border-box);
+	border: 1px solid #dadada;
+	padding: 10px 20px;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+	#profile-basic {
+		input[type=text] { width: 412px;}
+		select {width: 426px;}
+	}
+
+	#profile-slug {
+		input[type=text] { width: 269px;}
+	}
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+
+	.applicant .span9 { width: 100%;}
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+	.applicant label { display: block;}
+	#profile-photo {
+		float: none;
+		overflow: hidden;
+	}
+	#profile-basic {
+		input[type=text] { width: 100%;}
+		select {width: 103%;}
+	}
+
+	#profile-slug {
+		clear: both;
+		display: block;
+		input[type=text] { width: 30%;}
+	}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+	#profile-photo {
+		float: none;
+		overflow: hidden;
+	}
+	#profile-basic {
+		input[type=text] { width: 100%;}
+		select {width: 105%;}
+	}
+	#profile-slug {
+		clear: both;
+		display: block;
+		input[type=text] { width: 30%;}
+	}
+}

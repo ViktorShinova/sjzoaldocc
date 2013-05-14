@@ -7,7 +7,7 @@
 		<p>You have signed in with the wrong credentials. Please try again. </p>
 	</div>
 	@endif
-	<div class="form-signin white-bg">
+	<div class="form-signin white-bg drop-shadow-butterfly">
 		<h1 class="container-header">Login</h1>
 
 		{{ Form::open('login', 'POST', array('class' => 'validate-form')); }}
