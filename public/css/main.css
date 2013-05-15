@@ -6623,36 +6623,36 @@ h1.span12 {
 /* =APPLICANT ACCOUNT
 =================================================================== */
 
-#profile-basic input[type=text] {
+.applicant #profile-basic input[type=text] {
   width: 245px;
 }
-#profile-basic select {
+.applicant #profile-basic select {
   width: 259px;
 }
-#profile-slug input[type=text] {
+.applicant #profile-slug input[type=text] {
   width: 104px;
 }
-#profile-photo {
+.applicant #profile-photo {
   float: right;
 }
-#profile-photo img {
+.applicant #profile-photo img {
   max-width: inherit !important;
 }
-#profile-photo #current-photo {
+.applicant #profile-photo #current-photo {
   float: left;
 }
-#profile-photo #current-photo #photo {
+.applicant #profile-photo #current-photo #photo {
   position: relative;
   width: 150px;
   height: 150px;
   overflow: hidden;
 }
-#profile-photo #current-photo #photo img {
+.applicant #profile-photo #current-photo #photo img {
   width: 150px;
   height: 150px;
   overflow: hidden;
 }
-#profile-photo #current-photo #photo #photo-edit-btn {
+.applicant #profile-photo #current-photo #photo #photo-edit-btn {
   position: absolute;
   bottom: 0;
   background: url(/img/opac-bg.png);
@@ -6660,57 +6660,56 @@ h1.span12 {
   text-align: center;
   color: white;
 }
-#profile-photo #current-photo #photo #photo-edit-btn a {
+.applicant #profile-photo #current-photo #photo #photo-edit-btn a {
   color: white;
 }
-#profile-photo #current-photo #upload-profile-pic {
+.applicant #profile-photo #current-photo #upload-profile-pic {
   display: none;
 }
-#profile-photo #current-photo p {
+.applicant #profile-photo #current-photo p {
   margin-top: 3px;
   line-height: 18px;
 }
-#profile-photo #edit-photo #crop-profile-pic-btn {
+.applicant #profile-photo #edit-photo #crop-profile-pic-btn {
   display: none;
 }
-#qualifications-field .hide,
-#workhistory-field .hide {
-  display: none;
+.applicant .accordion-inner {
+  overflow: hidden;
 }
-#qualifications-field .open,
-#workhistory-field .open {
-  display: list-item;
+.applicant .accordion-group {
+  margin-bottom: 21px;
 }
-#qualifications-field .qualifications-field-child,
-#workhistory-field .qualifications-field-child,
-#qualifications-field .workhistory-field-child,
-#workhistory-field .workhistory-field-child {
-  padding: 10px;
-}
-#qualifications-field .qualifications-field-child:hover,
-#workhistory-field .qualifications-field-child:hover,
-#qualifications-field .workhistory-field-child:hover,
-#workhistory-field .workhistory-field-child:hover {
-  background: #f0f0f0;
-}
-#qualifications-field ol,
-#workhistory-field ol {
-  border-bottom: 1px solid #dddddd;
-  margin-bottom: 10px;
-  margin-right: 0;
-  padding: 10px 0;
-}
-#qualifications-field li textarea,
-#workhistory-field li textarea {
-  width: 95%;
-  height: 150px;
-}
-#qualifications-field li .add-qualification,
-#workhistory-field li .add-qualification,
-#qualifications-field li .add-workhistory,
-#workhistory-field li .add-workhistory {
-  border: 0;
-}
+/*#qualifications-field, #workhistory-field {
+
+	.hide { display: none; }
+	.open { display: list-item; }
+
+	.qualifications-field-child, .workhistory-field-child {
+		padding: 10px;
+
+		&:hover {
+			background: #f0f0f0;
+		}
+	}
+
+	ol {
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 10px;
+		margin-right: 0;
+		padding: 10px 0;		
+	}
+
+	li {
+		textarea {
+			.size(95%, 150px)
+		}
+
+		.add-qualification, .add-workhistory {
+			border: 0;
+		}
+	}
+}*/
+
 button.remove {
   display: none;
 }
@@ -6754,13 +6753,13 @@ button.remove {
 /* Large desktop */
 
 @media (min-width: 1200px) {
-  #profile-basic input[type=text] {
+  .applicant #profile-basic input[type=text] {
     width: 412px;
   }
-  #profile-basic select {
+  .applicant #profile-basic select {
     width: 426px;
   }
-  #profile-slug input[type=text] {
+  .applicant #profile-slug input[type=text] {
     width: 269px;
   }
 }
@@ -6777,42 +6776,42 @@ button.remove {
   .applicant label {
     display: block;
   }
-  #profile-photo {
+  .applicant #profile-photo {
     float: none;
     overflow: hidden;
   }
-  #profile-basic input[type=text] {
+  .applicant #profile-basic input[type=text] {
     width: 100%;
   }
-  #profile-basic select {
+  .applicant #profile-basic select {
     width: 103%;
   }
-  #profile-slug {
+  .applicant #profile-slug {
     clear: both;
     display: block;
   }
-  #profile-slug input[type=text] {
+  .applicant #profile-slug input[type=text] {
     width: 30%;
   }
 }
 /* Landscape phones and down */
 
 @media (max-width: 480px) {
-  #profile-photo {
+  .applicant #profile-photo {
     float: none;
     overflow: hidden;
   }
-  #profile-basic input[type=text] {
+  .applicant #profile-basic input[type=text] {
     width: 100%;
   }
-  #profile-basic select {
+  .applicant #profile-basic select {
     width: 105%;
   }
-  #profile-slug {
+  .applicant #profile-slug {
     clear: both;
     display: block;
   }
-  #profile-slug input[type=text] {
+  .applicant #profile-slug input[type=text] {
     width: 30%;
   }
 }

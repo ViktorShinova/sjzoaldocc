@@ -564,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   FULLTEXT KEY `title` (`title`,`description`,`summary`),
   FULLTEXT KEY `contact` (`contact`),
   FULLTEXT KEY `contact_2` (`contact`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `jobs`
