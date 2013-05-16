@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 14, 2013 at 10:54 PM
+-- Generation Time: May 16, 2013 at 09:31 PM
 -- Server version: 5.6.11-log
 -- PHP Version: 5.3.13
 
@@ -140,10 +140,11 @@ INSERT INTO `applicant_job` (`id`, `job_id`, `applicant_id`, `status`, `cover_le
 CREATE TABLE IF NOT EXISTS `applicant_qualifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `applicant_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `school` varchar(255) DEFAULT NULL,
+  `level` varchar(55) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `institude` varchar(255) DEFAULT NULL,
   `field_of_study` varchar(255) DEFAULT NULL,
-  `description` text,
+  `achievements` text,
   `started` int(4) DEFAULT NULL,
   `ended` int(4) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -156,9 +157,9 @@ CREATE TABLE IF NOT EXISTS `applicant_qualifications` (
 -- Dumping data for table `applicant_qualifications`
 --
 
-INSERT INTO `applicant_qualifications` (`id`, `applicant_id`, `name`, `school`, `field_of_study`, `description`, `started`, `ended`, `created_at`, `updated_at`) VALUES
-(18, 2, 'Bachelor of IT', 'University of Queensland', 'Software Information Systems Major', 'the quick brown fox', 2011, 2012, '2013-04-01 01:27:28', '2013-04-01 01:32:12'),
-(20, 2, 'Diploma in Info-communications Engineering', 'Temasek Poly', '', '', 2004, 2007, '2013-04-01 01:57:05', '2013-04-01 01:57:05');
+INSERT INTO `applicant_qualifications` (`id`, `applicant_id`, `level`, `title`, `institude`, `field_of_study`, `achievements`, `started`, `ended`, `created_at`, `updated_at`) VALUES
+(18, 2, NULL, 'Bachelor of IT', 'University of Queensland', 'Software Information Systems Major', 'the quick brown fox', 2011, 2012, '2013-04-01 01:27:28', '2013-04-01 01:32:12'),
+(20, 2, NULL, 'Diploma in Info-communications Engineering', 'Temasek Poly', '', '', 2004, 2007, '2013-04-01 01:57:05', '2013-04-01 01:57:05');
 
 -- --------------------------------------------------------
 
@@ -564,7 +565,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   FULLTEXT KEY `title` (`title`,`description`,`summary`),
   FULLTEXT KEY `contact` (`contact`),
   FULLTEXT KEY `contact_2` (`contact`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `jobs`
