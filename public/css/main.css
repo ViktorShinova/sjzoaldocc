@@ -6420,6 +6420,29 @@ a.badge:focus {
 	...................................................................... */
 
 body {
+  background-color: white;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#dddddd), to(white));
+  /* Konqueror */
+  background-image: -moz-linear-gradient(#dddddd, white);
+  /* FF 3.6+ */
+  background-image: -ms-linear-gradient(#dddddd, white);
+  /* IE10 */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd), color-stop(100%, white));
+  /* Safari 4+, Chrome 2+ */
+  background-image: -webkit-linear-gradient(#dddddd, white);
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -o-linear-gradient(#dddddd, white);
+  /* Opera 11.10 */
+  background-image: -ms-linear-gradient(top, #dddddd 0%, white 100%);
+  /* IE10+ */
+  background-image: linear-gradient(#dddddd, white);
+  /* the standard */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dddddd', endColorstr='white', GradientType=0);
+  /* IE6 & IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#dddddd', endColorstr='white', GradientType=0)";
+  /* IE8+ */
+
   font-family: 'Arial', sans-serif;
   font-weight: 400;
 }
@@ -6463,6 +6486,9 @@ body {
 }
 a:hover {
   text-decoration: none;
+}
+.hidden {
+  display: none;
 }
 .white-bg {
   background: white;
@@ -6677,41 +6703,22 @@ h1.span12 {
   overflow: hidden;
 }
 .applicant .accordion-group {
+  background: white;
+  border-color: #dadada;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   margin-bottom: 21px;
 }
-/*#qualifications-field, #workhistory-field {
-
-	.hide { display: none; }
-	.open { display: list-item; }
-
-	.qualifications-field-child, .workhistory-field-child {
-		padding: 10px;
-
-		&:hover {
-			background: #f0f0f0;
-		}
-	}
-
-	ol {
-		border-bottom: 1px solid #ddd;
-		margin-bottom: 10px;
-		margin-right: 0;
-		padding: 10px 0;		
-	}
-
-	li {
-		textarea {
-			.size(95%, 150px)
-		}
-
-		.add-qualification, .add-workhistory {
-			border: 0;
-		}
-	}
-}*/
-
-button.remove {
-  display: none;
+.applicant .accordion-group form > div {
+  border: 0;
+  padding: 0;
+  position: relative;
+}
+.applicant .accordion-group .controls {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 #resume-file,
 #coverletter-file {

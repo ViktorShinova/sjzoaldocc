@@ -24,7 +24,7 @@
 
 	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'applicant-account-form validate-form')); }}
 
-	<div class="span9 white-bg" id='profile-basic'>
+	<div class="span9 white-bg drop-shadow-butterfly" id='profile-basic'>
 
 		<h4>Basic Details</h4>
 
@@ -86,11 +86,11 @@
 
 		<div class="accordion" id="account-edit">
 
-			<div class="accordion-group">
+			<div class="accordion-group drop-shadow-butterfly">
 
 				<div class="accordion-heading">
 
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#account-edit" href="#qualifications">
+					<a class="accordion-toggle" data-toggle="collapse" href="#qualifications">
 						<h4>Qualifications</h4>
 					</a>
 
@@ -98,79 +98,84 @@
 				<div id="qualifications" class="accordion-body collapse">
 					<div class="accordion-inner">
 						{{ Form::open('applicant/account', 'POST', array('id' => 'applicant-qualifications', 'class' => 'applicant-account-form validate-form')); }}
-						
+							
 							@if (count($qualifications) > 0)	
-							<?php $i = 0; ?>
-							@foreach ($qualifications as $qualification)
-							<ol class="qualifications-field-child">
-								<li class="pull-right">
-									<button class="btn btn-mini remove" type="button" id="q{{ $qualification->id }}"><i class="icon-remove"></i></button>
-									<button class="btn btn-mini edit" type="button"><i class="icon-pencil"></i></button>
-								</li>
-								<li>
-									<label for="qualification_name">Program Title</label>
-									<input type="text" name="qualification[<?php echo $i; ?>][name]" value="{{ $qualification->name }}">
-								</li>
-								<li class="hide">
-									<label for="qualification_school">School</label>
-									<input type="text" name="qualification[<?php echo $i; ?>][school]" value="{{ $qualification->school }}">
-								</li>
-								<li class="hide">
-									<label for="qualification_field_of_study">Field of Study</label>
-									<input type="text" name="qualification[<?php echo $i; ?>][field_of_study]" value="{{ $qualification->field_of_study }}" placeholder="e.g. Biomedical Science Major">
-								</li>
-								<li class="hide">
-									<label for="qualification_description">Description</label>
-									<textarea name="qualification[<?php echo $i; ?>][description]">{{ $qualification->description }}</textarea>
-								</li>
-								<li class="hide">
-									<label for="qualification_started">Year Started</label>
-									<input class="span1 validate[custom[number]]" size="4" type="text" name="qualification[<?php echo $i; ?>][started]" maxlength="4" value="{{ $qualification->started }}">
-								</li>
-								<li class="hide">
-									<label for="qualification_ended">Year Ended <small>(or expected graduated year)</small></label>
-									<input class="span1 validate[custom[number]]" size="4" type="text" name="qualification[<?php echo $i; ?>][ended]" maxlength="4" value="{{ $qualification->ended }}">
-
-									<input type="hidden" name="qualification[<?php echo $i; ?>][id]" value="{{ $qualification->id }}">
-								</li>
-							</ol>
-							<?php $i++; ?>
-							@endforeach
-							@else
-							<ol class="qualifications-field-child">
-								<li class="pull-right">
-									<button class="btn btn-mini remove" type="button" id=""><i class="icon-remove"></i></button>
-									<button class="btn btn-mini edit" type="button"><i class="icon-pencil"></i></button>
-								</li>
-								<li>
-									<label for="qualification_name">Program Title</label>
-									<input type="text" name="qualification[0][name]" placeholder="e.g. Bachelor of Science">
-								</li>
-								<li class="hide">
-									<label for="qualification_school">School</label>
-									<input type="text" name="qualification[0][school]">
-								</li>
-								<li class="hide">
-									<label for="qualification_field_of_study">Field of Study</label>
-									<input type="text" name="qualification[0][field_of_study]" placeholder="e.g. Biomedical Science Major">
-								</li>
-								<li class="hide">
-									<label for="qualification_description">Description</label>
-									<textarea name="qualification[0][description]"></textarea>
-								</li>
-								<li class="hide">
-									<label for="qualification_started">Year Attended</label>
-									<input class="span1 validate[custom[number]" size="4" type="text" name="qualification[0][started]" maxlength="4">
-								</li>
-								<li class="hide">
-									<label for="qualification_ended">Year Ended <small>(or expected graduated year)</small></label>
-									<input class="span1 validate[custom[number]" size="4" type="text" name="qualification[0][ended]" maxlength="4">
-
-									<input type="hidden" name="qualification[0][id]">
-								</li>
-							</ol>
+								<ol>
+								@foreach ($qualifications as $qualification)
+									<li>Level: {{$qualification->level}}</li>
+									<li>Title: {{$qualification->title}}</li>
+									<li>Institude: {{$qualification->institude}}</li>
+									<li>Field of study: {{$qualification->field_of_study}}</li>
+									<li>Achievements: {{$qualification->achievements}}</li>
+									<li>Year Attend: {{$qualification->started}}</li>
+									<li>Year Ended: {{$qualification->ended}}</li>
+								@endforeach
+								</ol>
 							@endif
-						
+							<div class='qualification-wrapper hidden'>
+
+								<span class="controls">
+									<button class="btn btn-mini edit btn-primary" type="button"><i class="icon-pencil"></i></button>	
+									<button class="btn btn-mini btn-primary remove" type="button"><i class="icon-remove"></i></button>
+								</span>
+								<fieldset>
+									<ol class="qualifications-field-child">
+										<li>
+											<label for="qualification-level">Level</label>
+											<select id="qualification-level" type="text" name="qualification-level" class="input-xlarge">
+												<option value="Graduate">Graduate</option>
+												<option value="Post Graduate">Post Graduate</option>
+												<option value="PHD">PHD</option>
+											</select>
+										</li>
+										<li>
+											<label for="qualification-title">Program Title</label>
+											<input id="qualification-title" type="text" name="qualification-title" placeholder="e.g. Bachelor of Science" class="input-xlarge">
+										</li>
+										<li class="">
+											<label for="qualification-school">Institude</label>
+											<input id="qualification-school" type="text" name="qualification-school" class="input-xlarge">
+										</li>
+										<li class="">
+											<label for="qualification-field-of-study">Field of Study</label>
+											<input id="qualification-field-of-study" type="text" name="qualification-field-of-study" placeholder="e.g. Biomedical Science Major" class="input-xlarge">
+										</li>
+										<li class="">
+											<label for="qualification-achievement">Achievements</label>
+											<textarea id="qualification-achievement" name="qualification-achievement" class="input-xlarge"></textarea>
+										</li>
+										<li class="">
+											<label for="qualification-started">Year Attended</label>
+											<select name="qualification-started" id="qualification-started" class="input-xlarge">
+
+												@for($i = 1950; $i <= (int)date('Y'); $i++ )
+
+													<option value="{{$i}}">{{$i}}</option>
+
+												@endfor;
+
+											</select>
+							
+										</li>
+										<li class="">
+											<label for="qualification-ended">Year Ended <small>(or expected graduated year)</small></label>
+											<select name="qualification-ended" id="qualification-ended" class="input-xlarge">
+
+												@for($i = 1950; $i <= (int)date('Y'); $i++ )
+
+													<option value="{{$i}}">{{$i}}</option>
+
+												@endfor;
+
+											</select>
+										</li>
+									</ol>
+								</fieldset>
+							</div>
+
+								
+								
+							
 						{{ Form::submit("Save", array('class' => 'btn btn-primary pull-right')); }} 
 						<button class="add-qualification btn pull-right" type="button"><i class="icon-plus icon-white"></i> Additional Qualification</button>
 						<input type="hidden" name="form-type" value="qualification">
@@ -179,9 +184,9 @@
 				</div>
 
 			</div>
-			<div class="accordion-group">
+			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#account-edit" href="#employement">
+					<a class="accordion-toggle" data-toggle="collapse" href="#employement">
 						<h4>Employment History</h4>
 					</a>
 				</div>
@@ -325,9 +330,9 @@
 				</div>
 
 			</div>
-			<div class="accordion-group">
+			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#account-edit" href="#expertise">
+					<a class="accordion-toggle" data-toggle="collapse" href="#expertise">
 						<h4>Expertise</h4>	
 					</a>
 				</div>
@@ -350,9 +355,9 @@
 				</div>
 			</div>
 
-			<div class="accordion-group">
+			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#account-edit" href="#resume">
+					<a class="accordion-toggle" data-toggle="collapse" href="#resume">
 						<h4>Resume</h4>
 					</a>
 				</div>
@@ -382,9 +387,9 @@
 			</div>
 
 
-			<div class="accordion-group">
+			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#account-edit" href="#coverletter">
+					<a class="accordion-toggle" data-toggle="collapse" href="#coverletter">
 						<h4>Coverletters</h4>
 					</a>
 				</div>

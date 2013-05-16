@@ -8,7 +8,7 @@ var jSite = {
 		jSite.attachApplyJob();
 		jSite.attachToggleShortList();
 		jSite.attachValidation();
-		//jSite.attachApplicant();
+		jSite.attachApplicant();
 		jSite.attachJobPostSelectChange();
 		jSite.attachEasyTabs();
 		jSite.attachSearchFilterCheckbox();
@@ -293,27 +293,27 @@ var jSite = {
 //			jSite.tags('ajaxget_tag_handler', '/job/shortlist_tag', '/job/update_shortlist_tag');
 //		}
 //	},
-	attachGetExpertiseTags: function() {
-		jSite.tags('ajaxget_tag_expertise_handler', '/applicant/expertise_tag', '/applicant/update_expertise_tag');
-	},
-	tags: function(handler, getUrl, updateUrl) {
-		var tag;
-		$.ajax({
-			type: "GET",
-			url: getUrl,
-			success: function(data) {
-				tags = $.parseJSON(data);
-				if (tags == null) { tags = []; }
-				$("#"+handler).tagHandler({
-					assignedTags: tags,
-					updateURL: updateUrl,
-					autoUpdate: true,
-					autoComplete: true,
-					msgError: "test"
-				});
-			}
-		});
-	},
+	// attachGetExpertiseTags: function() {
+	// 	jSite.tags('ajaxget_tag_expertise_handler', '/applicant/expertise_tag', '/applicant/update_expertise_tag');
+	// },
+	// tags: function(handler, getUrl, updateUrl) {
+	// 	var tag;
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: getUrl,
+	// 		success: function(data) {
+	// 			tags = $.parseJSON(data);
+	// 			if (tags == null) { tags = []; }
+	// 			$("#"+handler).tagHandler({
+	// 				assignedTags: tags,
+	// 				updateURL: updateUrl,
+	// 				autoUpdate: true,
+	// 				autoComplete: true,
+	// 				msgError: "test"
+	// 			});
+	// 		}
+	// 	});
+	// },
 	attachValidation: function() {
 
 		if ($(".validate-form").length) {
@@ -359,152 +359,152 @@ var jSite = {
 			});
 		}
 	},
-//	attachApplicant: function() {
-//		if ($(".add-qualification").length) {	
-//
-//			jSite.attachGetExpertiseTags();
-//
-//			$(".add-qualification").click(function() {
-//				var qualifications = $("#qualifications-field").children();
-//
-//				var index = qualifications.length;
-//				if (qualifications.length == 1) {
-//					var index = 1;
-//				}
-//				var qualification_field = $(".qualifications-field-child").first();
-//				jSite.cloneFields(qualification_field, "#qualifications-field", index);
-//
-//			});
-//
-//			$("#qualifications-field").find(".qualifications-field-child").hover(
-//				function() {
-//					if ($("#qualifications-field").children().length > 1 || $(this).find(".remove").attr("id") != "") {
-//						$(this).find(".remove").show();
-//					}
-//				}, function() {
-//					$(this).find(".remove").hide();
-//				}
-//			);
-//
-//			$("#workhistory-field").find(".workhistory-field-child").hover(
-//				function() {
-//					if ($("#workhistory-field").children().length > 1 || $(this).find(".remove").attr("id") != "") {
-//						$(this).find(".remove").show();
-//					}
-//				}, function() {
-//					$(this).find(".remove").hide();
-//				}
-//			);
-//
-//
-//			$('.currenty_work_here').click(function() {
-//				if ($(this).prop('checked')) {
-//					$(this).closest('li').find('.workhistory_status').hide();
-//				} else {
-//					$(this).closest('li').find('.workhistory_status').show();
-//				}
-//			});
-//
-//			//This is to re-initialize the functions, so that new items added from ajax would work
-//			/***** NOTE TO SELF: this is causing looping problem ******/
-//			// $('#resume-listing').hover(function() {
-//			// 	jSite.attachRemoveItems();
-//			// });
-//
-//			// $('#qualifications-field ol, #workhistory-field ol').each(function(){
-//			// 	$(this).find('li:gt(1)').hide();
-//			// });
-//
-//			$('.edit').toggle(function() {
-//				$(this).closest('ol').find('li:gt(1)').slideDown(150);
-//				//$(this).closest('ol').find('.hide').removeClass('hide').addClass('open');
-//				$(this).find('i').removeClass('icon-pencil').addClass('icon-resize-small');
-//			}, function() {
-//				$(this).closest('ol').find('li:gt(1)').slideUp(150);
-//				//$(this).closest('ol').find('.open').removeClass('open').addClass('hide');
-//				$(this).find('i').removeClass('icon-resize-small').addClass('icon-pencil');
-//			});
-//	
-//		}
-//
-//		if ($(".add-workhistory").length) {
-//			$(".add-workhistory").click(function() {
-//				var workHistories = $("#workhistory-field").children();
-//				var index = workHistories.length;
-//				if (workHistories.length == 1) {
-//					var index = 1;
-//				}
-//				var workHistory_field = $(".workhistory-field-child").first();
-//				jSite.cloneFields(workHistory_field, "#workhistory-field", index);
-//			});
-//		}
-//
-//		if ($("#upload-profile-pic-link").length) {
-//
-//			$("#upload-profile-pic-link").click(function(e) {
-//				e.preventDefault();
-//				$("#upload-profile-pic:hidden").trigger('click');
-//			});
-//
-//			$("#upload-profile-pic:hidden").change(function() {
-//				jSite.uploadProfilePic();
-//				$("#edit-photo, #crop-profile-pic-btn").show();
-//			});
-//
-//			$("#crop-profile-pic-btn").click(function() {
-//				jSite.croppedProfilePic();
-//			});
-//		}
-//
-//		//upload resume
-//		if ($("#resume-file").length) {
-//			$("#add-resume").click(function(e) {
-//				e.preventDefault();
-//				$("#resume-file:hidden").trigger('click');
-//			});
-//			$("#resume-file:hidden").change(function() {
-//				jSite.uploadResumeCoverletter('resume');
-//			});
-//		}
-//
-//		//upload coverletter
-//		if ($("#coverletter-file").length) {
-//			$("#add-coverletter").click(function(e) {
-//				e.preventDefault();
-//				$("#coverletter-file:hidden").trigger('click');
-//			});
-//			$("#coverletter-file:hidden").change(function() {
-//				jSite.uploadResumeCoverletter('coverletter');
-//			});
-//		}
-//
-//		$("#save-slug").click(function() {
-//			$.ajax({
-//				type: "POST",
-//				url: "/applicant/slug",
-//				data: {
-//					'slug': $('input[name=slug]').val()
-//				},
-//				dataType: "json",
-//				beforeSend: function() {
-//					$("#save-slug").html('<img src="/img/loader.gif">');
-//				},
-//				complete: function() {
-//					$("#save-slug").html('Save');
-//				},
-//				success: function(data) {
-//					if(!data.error) {
-//						$("#slug-link").attr("href", '/applicant/profile/'+ data.slug);
-//						$("#save-slug").html('Save');
-//					} else {
-//						alert(data.error);
-//						$("#save-slug").html('Save');
-//					}
-//				}
-//			});
-//		});
-//
-//	},
+	attachApplicant: function() {
+		if ($(".add-qualification").length) {	
+
+			//jSite.attachGetExpertiseTags();
+
+			// $(".add-qualification").click(function() {
+				
+			// 	var qualification_field = $("#qualifications-field");
+			// 	var qualifications = qualification_field.children();
+
+			// 	var index = qualifications.length;
+			// 	if (qualifications.length == 1) {
+			// 		var index = 1;
+			// 	}
+			// 	var qualification_field = $(".qualifications-field-child").first();
+			// 	jSite.cloneFields(qualification_field, "#qualifications-field", index);
+
+			// 	console.log(qualification_field.length);
+
+			// 	if ( ualification_field.length > 1 ) {
+			// 		$(qualifications).find(".remove").show();
+			// 	}
+				
+
+			// });
+
+
+			// $("#workhistory-field").find(".workhistory-field-child").hover(
+			// 	function() {
+			// 		if ($("#workhistory-field").children().length > 1 ) {
+			// 			$(this).find(".remove").show();
+			// 		}
+			// 	}, function() {
+			// 		$(this).find(".remove").hide();
+			// 	}
+			// );
+
+
+			// $('.currenty_work_here').click(function() {
+			// 	if ($(this).prop('checked')) {
+			// 		$(this).closest('li').find('.workhistory_status').hide();
+			// 	} else {
+			// 		$(this).closest('li').find('.workhistory_status').show();
+			// 	}
+			// });
+
+			//This is to re-initialize the functions, so that new items added from ajax would work
+			/***** NOTE TO SELF: this is causing looping problem ******/
+			// $('#resume-listing').hover(function() {
+			// 	jSite.attachRemoveItems();
+			// });
+
+			// $('#qualifications-field ol, #workhistory-field ol').each(function(){
+			// 	$(this).find('li:gt(1)').hide();
+			// });
+
+			// $('.edit').toggle(function() {
+			// 	$(this).closest('ol').find('li:gt(1)').slideDown(150);
+			// 	//$(this).closest('ol').find('.hide').removeClass('hide').addClass('open');
+			// 	$(this).find('i').removeClass('icon-pencil').addClass('icon-resize-small');
+			// }, function() {
+			// 	$(this).closest('ol').find('li:gt(1)').slideUp(150);
+			// 	//$(this).closest('ol').find('.open').removeClass('open').addClass('hide');
+			// 	$(this).find('i').removeClass('icon-resize-small').addClass('icon-pencil');
+			// });
+	
+		}
+
+		// if ($(".add-workhistory").length) {
+		// 	$(".add-workhistory").click(function() {
+		// 		var workHistories = $("#workhistory-field").children();
+		// 		var index = workHistories.length;
+		// 		if (workHistories.length == 1) {
+		// 			var index = 1;
+		// 		}
+		// 		var workHistory_field = $(".workhistory-field-child").first();
+		// 		jSite.cloneFields(workHistory_field, "#workhistory-field", index);
+		// 	});
+		// }
+
+		if ($("#upload-profile-pic-link").length) {
+
+			$("#upload-profile-pic-link").click(function(e) {
+				e.preventDefault();
+				$("#upload-profile-pic:hidden").trigger('click');
+			});
+
+			$("#upload-profile-pic:hidden").change(function() {
+				jSite.uploadProfilePic();
+				$("#edit-photo, #crop-profile-pic-btn").show();
+			});
+
+			$("#crop-profile-pic-btn").click(function() {
+				jSite.croppedProfilePic();
+			});
+		}
+
+		//upload resume
+		if ($("#resume-file").length) {
+			$("#add-resume").click(function(e) {
+				e.preventDefault();
+				$("#resume-file:hidden").trigger('click');
+			});
+			$("#resume-file:hidden").change(function() {
+				jSite.uploadResumeCoverletter('resume');
+			});
+		}
+
+		//upload coverletter
+		if ($("#coverletter-file").length) {
+			$("#add-coverletter").click(function(e) {
+				e.preventDefault();
+				$("#coverletter-file:hidden").trigger('click');
+			});
+			$("#coverletter-file:hidden").change(function() {
+				jSite.uploadResumeCoverletter('coverletter');
+			});
+		}
+
+		$("#save-slug").click(function() {
+			$.ajax({
+				type: "POST",
+				url: "/applicant/slug",
+				data: {
+					'slug': $('input[name=slug]').val()
+				},
+				dataType: "json",
+				beforeSend: function() {
+					$("#save-slug").html('<img src="/img/loader.gif">');
+				},
+				complete: function() {
+					$("#save-slug").html('Save');
+				},
+				success: function(data) {
+					if(!data.error) {
+						$("#slug-link").attr("href", '/applicant/profile/'+ data.slug);
+						$("#save-slug").html('Save');
+					} else {
+						alert(data.error);
+						$("#save-slug").html('Save');
+					}
+				}
+			});
+		});
+
+	},
 //	attachRemoveItems: function() {
 //		$("#resume-listing").find(".item").hover(
 //			function() {
@@ -611,66 +611,66 @@ var jSite = {
 //			}
 //		});
 //	},
-//	uploadProfilePic: function() {
-//
-//		$("#applicant-account").ajaxSubmit({
-//			url: "/applicant/upload_profile_pic",
-//			type: "post",
-//			dataType: "json",
-//			enctype: 'multipart/form-data',
-//			timeout: 30000,
-//			beforeSubmit: function() {
-//
-//			},
-//			success: function(data) {
-//				if (!data.error) {
-//					$("#crop-profile-pic-btn").show();
-//					// #profilepic"
-//					$("#profilepic-preview").attr("src", data.filepath);
-//					startjcrop();
-//				} else {
-//					alert(data.error);
-//				}
-//
-//			}
-//		});
-//	},
-//	croppedProfilePic: function() {
-//		$("#applicant-account").ajaxSubmit({
-//			url: "/applicant/cropped_profile_pic",
-//			type: "post",
-//			dataType: "json",
-//			enctype: 'multipart/form-data',
-//			timeout: 30000,
-//			beforeSubmit: function() {
-//
-//			},
-//			success: function(data) {
-//				$("#edit-photo, #crop-profile-pic-btn").hide();
-//				location.reload();
-//			}
-//		});
-//	},
-//	cloneFields: function(cloneFrom, cloneTo, index) {
-//
-//		var clone = cloneFrom.clone(true).appendTo(cloneTo);
-//
-//		clone.find('input, textarea, select').each(function() {
-//			$(this).val('');
-//			this.name = this.name.replace('[0]', '[' + index + ']');
-//		});
-//
-//		clone.find('button.remove').each(function() {
-//			$(this).attr("id", "");
-//		});
-//
-//		// clone.find(".date").each(function() {
-//		// 	$(this).attr("id", "").removeData('datepicker').unbind();
-//		// 	$(this).val('');
-//		// 	$(this).datepicker();
-//		// });		
-//
-//	},
+	uploadProfilePic: function() {
+
+		$("#applicant-account").ajaxSubmit({
+			url: "/applicant/upload_profile_pic",
+			type: "post",
+			dataType: "json",
+			enctype: 'multipart/form-data',
+			timeout: 30000,
+			beforeSubmit: function() {
+
+			},
+			success: function(data) {
+				if (!data.error) {
+					$("#crop-profile-pic-btn").show();
+					// #profilepic"
+					$("#profilepic-preview").attr("src", data.filepath);
+					startjcrop();
+				} else {
+					alert(data.error);
+				}
+
+			}
+		});
+	},
+	croppedProfilePic: function() {
+		$("#applicant-account").ajaxSubmit({
+			url: "/applicant/cropped_profile_pic",
+			type: "post",
+			dataType: "json",
+			enctype: 'multipart/form-data',
+			timeout: 30000,
+			beforeSubmit: function() {
+
+			},
+			success: function(data) {
+				$("#edit-photo, #crop-profile-pic-btn").hide();
+				location.reload();
+			}
+		});
+	},
+	cloneFields: function(cloneFrom, cloneTo, index) {
+
+		var clone = cloneFrom.clone(true).appendTo(cloneTo);
+
+		clone.find('input, textarea, select').each(function() {
+			$(this).val('');
+			this.name = this.name.replace('[0]', '[' + index + ']');
+		});
+
+		clone.find('button.remove').each(function() {
+			$(this).attr("id", "");
+		});
+
+		// clone.find(".date").each(function() {
+		// 	$(this).attr("id", "").removeData('datepicker').unbind();
+		// 	$(this).val('');
+		// 	$(this).datepicker();
+		// });		
+
+	},
 	attachJobPostSelectChange: function() {
 		//Job Category
 		if ($("#job-category").length) {
