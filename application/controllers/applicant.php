@@ -3,9 +3,7 @@
 class Applicant_Controller extends Base_Controller {
 	
 	public function __construct() {
-        parent::__construct();
-        
-		
+        parent::__construct();	
 		$this->filter('before', 'auth')->only(
 				array('account',
 				)
@@ -13,6 +11,8 @@ class Applicant_Controller extends Base_Controller {
 		$this->filter('before', 'applicant')->only(
 				array('account')
 		);
+		
+		
     }
 
 	public function get_index() {
@@ -21,11 +21,7 @@ class Applicant_Controller extends Base_Controller {
     }
 
     public function get_account() {
-		
-		if( !Session::has('applicant_id')) {
-			return Redirect::to('home/logout');
-		}
-		
+				
 		$id = Session::get('applicant_id');
 		
 		$applicant = Applicant::find($id);
@@ -35,21 +31,7 @@ class Applicant_Controller extends Base_Controller {
 		$applicant_work_histories = $applicant->work_histories()->get();
 		$applicant_resumes = $applicant->resumes()->get();
         $applicant_coverletters = $applicant->coverletters()->get();
-		
-        $profile_percentage = 0;
-
-        if($applicant->profilepic != '/img/default-profile.png')
-            $profile_percentage += 15;
-        if(count($applicant_qualifications) > 0)
-            $profile_percentage += 25;
-        if(count($applicant_work_histories) > 0)
-            $profile_percentage += 25;
-        if(count($applicant_resumes) > 0)
-            $profile_percentage += 25;
-        if(count($applicant_coverletters) > 0)
-            $profile_percentage += 5;
-        if($applicant->skills != 'N;' || $applicant->skills != null)
-            $profile_percentage += 5;
+		       
 
         foreach($applicant_resumes as $applicant_resume) {
 
@@ -107,12 +89,12 @@ class Applicant_Controller extends Base_Controller {
                                                         'workhistories'     => $applicant_work_histories,
                                                         'resumes'           => $applicant_resumes,
                                                         'coverletters'      => $applicant_coverletters,
-                                                        'profile_percentage'=> $profile_percentage,
+                                                       
                                                         'save_status'       => $save_status,
 														'host'				=> $this->_host,
                                                     ));
     }
-
+		
     public function get_profile($slug) {
 
         if( !Auth::check()) {
@@ -183,21 +165,21 @@ class Applicant_Controller extends Base_Controller {
 
     }
 
-    public function get_settings() {
-
-        if( !Session::has('applicant_id')) {
-            return Redirect::to('home/logout');
-        }
-        
-        $applicant = Applicant::find(Session::get('applicant_id'));
-
-        $privacy_settings = unserialize($applicant->privacy_settings); 
-
-        return View::make("applicant.settings")->with(array(
-                                                    'viewable'                 => $applicant->viewable,
-                                                    'privacy_settings'         => $privacy_settings,
-                                                ));
-    }
+//    public function get_settings() {
+//
+//        if( !Session::has('applicant_id')) {
+//            return Redirect::to('home/logout');
+//        }
+//        
+//        $applicant = Applicant::find(Session::get('applicant_id'));
+//
+//        $privacy_settings = unserialize($applicant->privacy_settings); 
+//
+//        return View::make("applicant.settings")->with(array(
+//                                                    'viewable'                 => $applicant->viewable,
+//                                                    'privacy_settings'         => $privacy_settings,
+//                                                ));
+//    }
 
     public function post_settings() {
         //die(var_dump(serialize(Input::all())));
@@ -210,54 +192,6 @@ class Applicant_Controller extends Base_Controller {
         Session::flash('success', true);
 
         return Redirect::to('applicant/settings');
-    }
-
-    private function format_date($date) {
-
-        if($date != "") {
-            list($day, $month, $year) = explode("/", $date);
-            $formatted_date = $year.'-'.$month.'-'.$day;
-        } else {
-            $formatted_date = null;
-        }
-        
-        return $formatted_date;
-    }
-
-    public function date_check($dates, $have_month) {
-
-        foreach($dates as $date) {
-
-            if($have_month == false) {
-                if( !is_numeric($date['started']) || !is_numeric($date['ended']) ) {
-                    die('4');
-                    return false;
-                }  
-                if( $date['ended'] < $date['started'] ) {
-                    //die('3');
-                    return false;
-                }
-            } else {
-
-                //dates have month
-                if( !is_numeric($date['started_month']) || !is_numeric($date['ended_month']) ||
-                    !is_numeric($date['started_year']) || !is_numeric($date['ended_year']) ) {
-                    die('2');
-                    return false;
-                }
-
-                if(!isset($date['currently_work_here'])) {
-                $date_start = strtotime($date['started_month'].'/01/'.$date['started_year']);
-                $date_end = strtotime($date['ended_month'].'/01/'.$date['ended_year']);
-                    if( $date_end < $date_start ) {
-                        //die('1 '.($date['started_month']+$date['started_year']).' '.($date['ended_month']+$date['ended_year']));
-                        return false;
-                    }             
-                }
-            }
-        }
-
-        return true;
     }
 
     public function post_basic_profile() {
@@ -285,45 +219,54 @@ class Applicant_Controller extends Base_Controller {
             return true;
         }
     }
-
-    public function post_qualification() {
-        $register_input = Input::all();
-
-        $qualification_date_check = $this->date_check($register_input['qualification'], false);
-
-         if ($qualification_date_check) {
-
-            //Save User Qualifications
-            foreach( $register_input['qualification'] as $qualification ) {
-
-                //entry without a name? INVALID!
-                if($qualification['name'] != "") {
-
-                    if($qualification['id'] == "") {
-                        //new entry
-                        $applicant_qualifications = new ApplicantQualifications();
-                    } else {
-                        //update entry
-                        //$applicant_qualifications = ApplicantQualifications::find($qualification['id']);
-                        $applicant_qualifications = Applicant::find(Session::get('applicant_id'))->qualifications()->where('id', '=', $qualification['id'])->first();
-                    }
-
-                    $applicant_qualifications->applicant_id = Session::get('applicant_id');
-                    $applicant_qualifications->name = $qualification['name'];
-                    $applicant_qualifications->school = $qualification['school'];
-                    $applicant_qualifications->field_of_study = $qualification['field_of_study'];
-                    $applicant_qualifications->description = $qualification['description'];
-
-                    //need to serverside validate date
-                    $applicant_qualifications->started = $qualification['started'];
-                    $applicant_qualifications->ended = $qualification['ended'];
-
-                    $applicant_qualifications->save();
-                }
-            }
-
-            return true;
-         }
+	
+	public function get_qualification($id = null) {
+		if(!$id) {
+			return false;
+		}
+		$qualification = ApplicantQualifications::find($id)->original;
+		
+		if($qualification) {
+			return json_encode( array('success' => true, 'qualification' => $qualification ) );
+		} else {
+			return json_encode( array('success' => false));
+		}
+		
+		
+		
+	}
+	
+    public function post_qualification($id = null) {
+   
+       $qualification = null;
+		if(!$id) {
+			$qualification = new ApplicantQualifications();
+		} else {
+			$qualification = ApplicantQualifications::find($id); 
+		}
+		
+		$qualification->applicant_id = Session::get('applicant_id');
+		$qualification->level = Input::get('qualification-level');
+		$qualification->title = Input::get('qualification-title');
+		$qualification->institude = Input::get('qualification-school');
+		$qualification->field_of_study = Input::get('qualification-field-of-study');
+		$qualification->achievements = Input::get('qualification-achievement');
+		$qualification->started = Input::get('qualification-started');
+		$qualification->ended = Input::get('qualification-ended');
+		
+		if( $qualification->save() ) {
+			
+			
+			$applicant_id = Session::get('applicant_id');
+			$qualifications = ApplicantQualifications::where('applicant_id', '=', $applicant_id)->get();
+				
+			$view = View::make('applicant.qualification')->with( array ('qualifications' => $qualifications ))->render();
+			
+			return json_encode( array('success' => true, 'view' => $view ));
+			
+		} else {
+			return json_encode( array('success' => false ));
+		}
     }
 
     public function post_workhistory() {
@@ -614,7 +557,37 @@ class Applicant_Controller extends Base_Controller {
             }
     }
 
-    public function post_remove_item() {
+    public function get_remove_item($id = null, $type = null) {
+		
+		if( !$id && $type ) {
+			return false;
+		}
+		
+		
+		$applicant_id = Session::get('applicant_id');
+		
+		switch( $type ) {
+			
+			case 'q':
+				
+				$affected = DB::table('applicant_qualifications')
+					->where('id', '=', $id)
+					->where( 'applicant_id', '=', $applicant_id )
+					->delete();
+				
+				if($affected) {
+					
+					$qualifications = ApplicantQualifications::where('applicant_id', '=', $applicant_id)->get();
+				
+					$view = View::make('applicant.qualification')->with( array ('qualifications' => $qualifications, 'message' => 'Selected qualification has been deleted.' ))->render();
+					
+					return json_encode( array( 
+						'success' => true, 
+						'view' => $view ));
+				}
+			
+		}
+		
 		$user = Auth::user();
         //need to check Auth::user->id first before confirm delete
         switch($_POST['type']) {

@@ -74,16 +74,37 @@
 			border: 0;
 			padding: 0;
 			position: relative;
+
+			ol { margin-right: 0;}
 		}
 
-		.controls {
+	}
+	//buttons
+	.add { margin-right: 10px;}
+	
+	#qualification-list {
+		table { 
+			margin-bottom: 21px;
+			width: 100%;
+			th { 
+				background: @green;
+				
+				color: white;
+				font-weight: normal;
+				padding: 5px;
+				text-align: left;
+			}
 
-			position: absolute;
-			right: 0;
-			top: 0;
+			td { padding: 5px;}
+			.level { width: 20%; }
+			.title { width: 25%; }
+			.institude { width: 25%; }
+			.started { width: 10%; }
+			.ended { width: 10%; }
+			.controls { width: 10%;}
 		}
 	}
-
+	
 }
 
 #resume-file, #coverletter-file { display: none; }

@@ -6715,10 +6715,43 @@ h1.span12 {
   padding: 0;
   position: relative;
 }
-.applicant .accordion-group .controls {
-  position: absolute;
-  right: 0;
-  top: 0;
+.applicant .accordion-group form > div ol {
+  margin-right: 0;
+}
+.applicant .add {
+  margin-right: 10px;
+}
+.applicant #qualification-list table {
+  margin-bottom: 21px;
+  width: 100%;
+}
+.applicant #qualification-list table th {
+  background: #7dbe32;
+  color: white;
+  font-weight: normal;
+  padding: 5px;
+  text-align: left;
+}
+.applicant #qualification-list table td {
+  padding: 5px;
+}
+.applicant #qualification-list table .level {
+  width: 20%;
+}
+.applicant #qualification-list table .title {
+  width: 25%;
+}
+.applicant #qualification-list table .institude {
+  width: 25%;
+}
+.applicant #qualification-list table .started {
+  width: 10%;
+}
+.applicant #qualification-list table .ended {
+  width: 10%;
+}
+.applicant #qualification-list table .controls {
+  width: 10%;
 }
 #resume-file,
 #coverletter-file {

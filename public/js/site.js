@@ -1,8 +1,8 @@
 var jSite = {
 	start: function() {
-		
+
 		jSite.searchPullDown();
-		
+
 		jSite.attachPaymentChange();
 		jSite.attachPopup();
 		jSite.attachApplyJob();
@@ -17,16 +17,15 @@ var jSite = {
 		//jSite.attachPrivacySettings();
 		//jSite.attachResumeVisibility();
 		jSite.attachSalaryChange();
-		
+
 		//jSite.attachGetShortlistTags();
-		
-		if( $("[rel=popover]").length ) {
+
+		if ($("[rel=popover]").length) {
 			$("[rel=popover]").popover();
 		}
-		
-		
+
+
 	},
-			
 	attachPopup: function() {
 		if ($('[rel=popup]').length) {
 			$('[rel=popup]').click(function(e) {
@@ -35,50 +34,49 @@ var jSite = {
 				window.open(url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
 			});
 		}
-		
+
 	},
-	
 	attachApplyJob: function() {
 
 
 //		//Select coverletter
 
-		$("#cover-write").click( function (e) {
+		$("#cover-write").click(function(e) {
 			e.preventDefault();
 			$('#write-coverletter').show();
 			$("#drop-coverletter").html($(this).html() + ' <b class="caret"></b>');
-			
+
 		});
-		
-		$(".cover-btn").click( function (e) {
+
+		$(".cover-btn").click(function(e) {
 			e.preventDefault();
 			$('#write-coverletter').hide();
 			$("#drop-coverletter").html($(this).html() + ' <b class="caret"></b>');
-			
+
 			$("#select-coverletter").val($(this).data('value'));
-			
+
 		});
-		
+
 		$("#upload-coverletter-link").click(function(e) {
 			e.preventDefault();
-			
+
 			$("#upload-coverletter:hidden").trigger('click');
 			$("#upload-coverletter:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();
 				$('#drop-coverletter').html(filename + ' <b class="caret"></b>');
-			});	
+			});
 		});
-		
+
 		//Select Coverletter
-		
-		$(".resume-btn").click( function (e) {
+
+		$(".resume-btn").click(function(e) {
 			e.preventDefault();
 			$("#add-to-account").hide();
 			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
 			$("#select-resume").val($(this).data('value'));
-			
+
 		});
-		
+
 		$("#upload-resume-link").click(function(e) {
 			e.preventDefault();
 			$("#add-to-account").show();
@@ -86,38 +84,38 @@ var jSite = {
 			$("#upload-resume:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();
 				$('#drop-resume').html(filename + ' <b class="caret"></b>');
-			});			
+			});
 		});
 
 	},
 	attachToggleShortList: function() {
 
-		$(".shortlist-btn").click( function( e ) {
+		$(".shortlist-btn").click(function(e) {
 			//var t = this;
 			e.preventDefault();
-			
+
 			is_active = false;
-			if( $(this).hasClass('active') ) {
+			if ($(this).hasClass('active')) {
 				is_active = true;
 			}
 			var btn = $(this),
-			shortlist_tag = $(this).parent().siblings('.shortlist-tag'),
-			article_id = $(this).data('job-id');
+					shortlist_tag = $(this).parent().siblings('.shortlist-tag'),
+					article_id = $(this).data('job-id');
 
-			if ( !is_active ) {
+			if (!is_active) {
 				$.ajax({
 					type: "POST",
 					url: "/job/shortlist/" + article_id + "/" + "insert",
 					success: function(data) {
 
 						_data = $.parseJSON(data);
-						if(_data.success) {
+						if (_data.success) {
 							btn.addClass('active');
 							shortlist_tag.addClass('active');
 
 						} else {
 							console.log(data);
-							alert( data.message ) ;
+							alert(data.message);
 						}
 
 					}
@@ -128,17 +126,17 @@ var jSite = {
 					url: "/job/shortlist/" + article_id + "/" + "delete",
 					success: function(data) {
 						_data = $.parseJSON(data);
-						if(_data.success) {
+						if (_data.success) {
 							btn.removeClass('active');
 							shortlist_tag.removeClass('active');
 						} else {
 							console.log(data);
-							alert( data.message ) ;
+							alert(data.message);
 						}
 					}
 				});
 			}
-			
+
 		});
 	},
 //	attachInsertJobtoShortlist: function() {
@@ -359,73 +357,192 @@ var jSite = {
 			});
 		}
 	},
-	attachApplicant: function() {
-		if ($(".add-qualification").length) {	
+	attachRemoveQualification: function() {
+		if ($('.qremove').length) {
 
-			//jSite.attachGetExpertiseTags();
+			var remove_btn = $('.qremove');
 
-			// $(".add-qualification").click(function() {
-				
-			// 	var qualification_field = $("#qualifications-field");
-			// 	var qualifications = qualification_field.children();
+			remove_btn.click(function() {
+				var id = $(this).data('qid');
 
-			// 	var index = qualifications.length;
-			// 	if (qualifications.length == 1) {
-			// 		var index = 1;
-			// 	}
-			// 	var qualification_field = $(".qualifications-field-child").first();
-			// 	jSite.cloneFields(qualification_field, "#qualifications-field", index);
+				$.ajax({
+					type: 'GET',
+					url: '/applicant/remove_item/' + id + '/' + 'q',
+					dataType: 'json',
+					success: function(data) {
 
-			// 	console.log(qualification_field.length);
+						if (data.success) {
+							$("#qualification-list").html(data.view);
+							//We need to attach remove after every refresh of the list because the new list will unlink the click event
+							jSite.resetApplicantOnAjaxChange();
+							
+							setTimeout( function() { $(".validation.success").fadeOut(); }, 3000 );
+						}
+					}
+				});
 
-			// 	if ( ualification_field.length > 1 ) {
-			// 		$(qualifications).find(".remove").show();
-			// 	}
-				
-
-			// });
-
-
-			// $("#workhistory-field").find(".workhistory-field-child").hover(
-			// 	function() {
-			// 		if ($("#workhistory-field").children().length > 1 ) {
-			// 			$(this).find(".remove").show();
-			// 		}
-			// 	}, function() {
-			// 		$(this).find(".remove").hide();
-			// 	}
-			// );
-
-
-			// $('.currenty_work_here').click(function() {
-			// 	if ($(this).prop('checked')) {
-			// 		$(this).closest('li').find('.workhistory_status').hide();
-			// 	} else {
-			// 		$(this).closest('li').find('.workhistory_status').show();
-			// 	}
-			// });
-
-			//This is to re-initialize the functions, so that new items added from ajax would work
-			/***** NOTE TO SELF: this is causing looping problem ******/
-			// $('#resume-listing').hover(function() {
-			// 	jSite.attachRemoveItems();
-			// });
-
-			// $('#qualifications-field ol, #workhistory-field ol').each(function(){
-			// 	$(this).find('li:gt(1)').hide();
-			// });
-
-			// $('.edit').toggle(function() {
-			// 	$(this).closest('ol').find('li:gt(1)').slideDown(150);
-			// 	//$(this).closest('ol').find('.hide').removeClass('hide').addClass('open');
-			// 	$(this).find('i').removeClass('icon-pencil').addClass('icon-resize-small');
-			// }, function() {
-			// 	$(this).closest('ol').find('li:gt(1)').slideUp(150);
-			// 	//$(this).closest('ol').find('.open').removeClass('open').addClass('hide');
-			// 	$(this).find('i').removeClass('icon-resize-small').addClass('icon-pencil');
-			// });
-	
+			});
 		}
+	},
+	attachQualificationEdit: function() {
+
+		if ($('.qedit').length) {
+
+			var edit_btn = $('.qedit');
+			var form = edit_btn.closest('form');
+
+			edit_btn.click(function() {
+				var id = $(this).data('qid');
+
+				$.ajax({
+					type: 'GET',
+					url: '/applicant/qualification/' + id + '/',
+					dataType: 'json',
+					success: function(data) {
+
+						if (data.success) {
+							
+							$('#qualification-form #qualification-level').val(data.qualification.level);
+							$('#qualification-form #qualification-title').val(data.qualification.title);
+							$('#qualification-form #qualification-school').val(data.qualification.institude);
+							$('#qualification-form #qualification-field-of-study').val(data.qualification.field_of_study);
+							$('#qualification-form #qualification-achievement').val(data.qualification.achievements);
+							$('#qualification-form #qualification-started').val(data.qualification.started);
+							$('#qualification-form #qualification-ended').val(data.qualification.ended);
+							$('#qualification-form #qualification-id').val(id);
+							$('#qualification-form').modal('show');
+
+						}
+					}
+				});
+
+			});
+
+		}
+
+	},
+	attachAddQualification: function() {
+		
+		$('#add-qualification').click( function (e) {
+			$('#qualification-form #qualification-level').val('');
+			$('#qualification-form #qualification-title').val('');
+			$('#qualification-form #qualification-school').val('');
+			$('#qualification-form #qualification-field-of-study').val('');
+			$('#qualification-form #qualification-achievement').val('');
+			$('#qualification-form #qualification-started').val('');
+			$('#qualification-form #qualification-ended').val('');
+		});
+		
+		$('#btn-qualification-save').click(function(e) {
+			e.preventDefault();
+			var form = $(this).closest('form');
+			var formData = form.serialize();
+			var url = form.attr('action');
+			
+			if ( $('#qualification-form #qualification-id').val() != '') {
+				url = url + '/' + $('#qualification-form #qualification-id').val();
+				console.log(url);
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				dataType: 'json',
+				data: formData,
+				success: function(data) {
+					if (data.success) {
+						$("#qualification-list").html(data.view);
+						$('#qualification-form').modal('hide');
+						//We need to attach remove after every refresh of the list because the new list will unlink the click event
+						jSite.resetApplicantOnAjaxChange();
+					}
+				}
+			});
+		});
+	},
+	
+	resetApplicantOnAjaxChange: function () {
+		jSite.attachRemoveQualification();
+		jSite.attachQualificationEdit();
+		$('#qualification-form #qualification-id').val('');
+	},
+	
+	attachApplicant: function() {
+		
+		jSite.attachAddQualification();
+		//attach all the other events belonging to applicant
+		jSite.attachQualificationEdit();
+		//Attach the remove click event for initial startup
+		jSite.attachRemoveQualification();
+
+
+
+		// if ($("#add-qualification").length) {	
+
+		//jSite.attachGetExpertiseTags();
+
+		// $(".add-qualification").click(function() {
+
+		// 	var qualification_field = $("#qualifications-field");
+		// 	var qualifications = qualification_field.children();
+
+		// 	var index = qualifications.length;
+		// 	if (qualifications.length == 1) {
+		// 		var index = 1;
+		// 	}
+		// 	var qualification_field = $(".qualifications-field-child").first();
+		// 	jSite.cloneFields(qualification_field, "#qualifications-field", index);
+
+		// 	console.log(qualification_field.length);
+
+		// 	if ( ualification_field.length > 1 ) {
+		// 		$(qualifications).find(".remove").show();
+		// 	}
+
+
+		// });
+
+
+		// $("#workhistory-field").find(".workhistory-field-child").hover(
+		// 	function() {
+		// 		if ($("#workhistory-field").children().length > 1 ) {
+		// 			$(this).find(".remove").show();
+		// 		}
+		// 	}, function() {
+		// 		$(this).find(".remove").hide();
+		// 	}
+		// );
+
+
+		// $('.currenty_work_here').click(function() {
+		// 	if ($(this).prop('checked')) {
+		// 		$(this).closest('li').find('.workhistory_status').hide();
+		// 	} else {
+		// 		$(this).closest('li').find('.workhistory_status').show();
+		// 	}
+		// });
+
+		//This is to re-initialize the functions, so that new items added from ajax would work
+		/***** NOTE TO SELF: this is causing looping problem ******/
+		// $('#resume-listing').hover(function() {
+		// 	jSite.attachRemoveItems();
+		// });
+
+		// $('#qualifications-field ol, #workhistory-field ol').each(function(){
+		// 	$(this).find('li:gt(1)').hide();
+		// });
+
+		// $('.edit').toggle(function() {
+		// 	$(this).closest('ol').find('li:gt(1)').slideDown(150);
+		// 	//$(this).closest('ol').find('.hide').removeClass('hide').addClass('open');
+		// 	$(this).find('i').removeClass('icon-pencil').addClass('icon-resize-small');
+		// }, function() {
+		// 	$(this).closest('ol').find('li:gt(1)').slideUp(150);
+		// 	//$(this).closest('ol').find('.open').removeClass('open').addClass('hide');
+		// 	$(this).find('i').removeClass('icon-resize-small').addClass('icon-pencil');
+		// });
+
+
 
 		// if ($(".add-workhistory").length) {
 		// 	$(".add-workhistory").click(function() {
@@ -493,8 +610,8 @@ var jSite = {
 					$("#save-slug").html('Save');
 				},
 				success: function(data) {
-					if(!data.error) {
-						$("#slug-link").attr("href", '/applicant/profile/'+ data.slug);
+					if (!data.error) {
+						$("#slug-link").attr("href", '/applicant/profile/' + data.slug);
 						$("#save-slug").html('Save');
 					} else {
 						alert(data.error);
@@ -558,7 +675,7 @@ var jSite = {
 	// 				$(this).find('i').removeClass('icon-eye-close').addClass('icon-eye-open');
 	// 			break;
 	// 		}
-			
+
 	// 	});
 	// },
 	// setVisibility: function(iid, type, t, setting) {
@@ -724,7 +841,7 @@ var jSite = {
 							$("#job-sub-location").prop('disabled', false);
 							$("#job-sub-location").html(data);
 						} else {
-							
+
 							var option = "<option value=''>Choose a sub location</option>";
 							$("#job-sub-location").html(option);
 							$("#job-sub-location").prop('disabled', 'disabled');
@@ -747,17 +864,17 @@ var jSite = {
 				var multiply = 10000;
 				var min_value = $(this).val();
 				var factor = 2;
-				
-				if(min_value !== '0') {
+
+				if (min_value !== '0') {
 					factor = min_value / multiply;
 				}
-				
+
 				//do max value select box
 				var options = "";
 				for (i = factor + 1; i <= 20; i++) {
 					if (i === 20) {
 						if (min_value === 0) {
-							
+
 							options += "<option selected='selected' value='" + i * multiply + "'>" + i * 10 + "k+</option>";
 
 						} else {
@@ -796,14 +913,14 @@ var jSite = {
 					if (type == "q") {
 						$(t).closest('ol.qualifications-field-child').fadeOut(500, function() {
 							$(this).remove();
-							if($('ol.qualifications-field-child').length == 0) {
+							if ($('ol.qualifications-field-child').length == 0) {
 								location.reload();
 							}
 						});
 					} else if (type == "w") {
 						$(t).closest('ol.workhistory-field-child').fadeOut(500, function() {
 							$(this).remove();
-							if($('ol.workhistory-field-child').length == 0) {
+							if ($('ol.workhistory-field-child').length == 0) {
 								location.reload();
 							}
 						});
@@ -812,7 +929,7 @@ var jSite = {
 					} else {
 						$(t).closest('li.item').fadeOut(500, function() {
 							$(this).remove();
-							if($('li.item').length == 0) {
+							if ($('li.item').length == 0) {
 								location.reload();
 							}
 						});
@@ -842,31 +959,31 @@ var jSite = {
 		}
 	},
 	attachPaymentChange: function() {
-		if( $('#pay-hourly').length ) {
-			
+		if ($('#pay-hourly').length) {
+
 		}
 	},
 	searchPullDown: function() {
-		if( $("#pull-down").length ) {
-			
+		if ($("#pull-down").length) {
+
 			var openState = "-100px";
 			var closeState = "-404px";
 			var container = $("#search-wrapper");
-			$("#pull-down").click( function () {
-				
-				
-				if( container.css('top') == openState) {
-					
+			$("#pull-down").click(function() {
+
+
+				if (container.css('top') == openState) {
+
 					container.animate({'top': closeState});
-					
+
 				}
 				else {
-					
+
 					container.animate({'top': openState});
 				}
-				
+
 			});
-			
+
 		}
 	}
 }
