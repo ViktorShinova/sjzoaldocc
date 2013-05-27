@@ -4,5 +4,5 @@
 <script src="/js/plugins.js"></script>
 <script src="/js/site.js"></script>
 <script>
-@yield('page-scripts');
+@yield('page-scripts')
 </script>

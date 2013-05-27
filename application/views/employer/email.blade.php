@@ -15,15 +15,9 @@
 		</em>
 	</p>
 	<br/>
-	<form action="/employer/email/update" method="post" class="employer-form validate-form email-form">
+	<form action="/employer/email/update" method="post" class="employer-form  validate-form form  email-form">
 		
 		<ul>
-		<!--			<li>
-				<label>
-					Subject:
-				</label>
-				<input class='email-text' type='text' name='email-subject' id='email-subject' />
-			</li>-->
 			<li>
 				<label for='email-success'>
 					To Successful Applicant: 

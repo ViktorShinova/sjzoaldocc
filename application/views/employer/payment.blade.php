@@ -45,7 +45,7 @@
 		<div class="panel-container">
 
 			<div id="credit-card">
-				<form class="employer-form validate-form" method="post" action="/employer/payment/submit">
+				<form class="employer-form  validate-form form " method="post" action="/employer/payment/submit">
 					<h4>Billing information</h4>
 					<ul>
 						<li>
@@ -170,7 +170,7 @@
 
 			<div id="paypal">
 				<h6>Paypal option</h6>
-				{{ Form::open('employer/payment/submit', 'POST', array('class' => 'employer-payment-form validate-form')); }}
+				{{ Form::open('employer/payment/submit', 'POST', array('class' => 'employer-payment-form  validate-form form ')); }}
 				<input type='image' name='paypal_submit' id='paypal_submit'  src='https://www.paypal.com/en_US/i/btn/btn_dg_pay_w_paypal.gif' border='0' align='top' alt='Pay with PayPal'/>
 				<input type="hidden" name="success_url" value="/employer/complete" /> 
 				<input type="hidden" name="cancel_url" value="/employer/cancel">				

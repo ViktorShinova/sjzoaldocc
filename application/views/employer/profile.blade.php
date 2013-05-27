@@ -24,7 +24,7 @@
         <p>Hohoho something is wrong .....</p>
     </div>
     @endif
-    {{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form validate-form', 'id' => 'employer-profile')); }}
+    {{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form  validate-form form ', 'id' => 'employer-profile')); }}
     <h4>Login Information</h4>
     <ul>
         <li>{{ Form::label('username', 'Username'); echo Form::label('username', $user->username) }}</li>

@@ -92,7 +92,11 @@
 @section('page-scripts')
 
 setTimeout( function() {
+
+$("#job-sub-category option").removeAttr('selected');
 $("#job-sub-category option").eq({{$selected_sub_category}}).attr('selected', 'selected');
+
+$("#job-sub-location option").removeAttr('selected');
 $("#job-sub-location option").eq({{$selected_sub_location}}).attr('selected', 'selected');
 }, 500);
 

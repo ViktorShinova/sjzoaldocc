@@ -58,7 +58,7 @@
 								<div class="control-group">
 									<label class="control-label">Sub Classification</label>
 									<div class="controls">
-
+										
 										{{ Form::select('job-sub-category', array("" => "Choose a sub category"), $selected_sub_category, array('class' => 'input-xlarge', 'id' =>'job-sub-category')); }}
 
 									</div>
@@ -174,7 +174,7 @@
 			
 		</div>
 		@else 
-		<form  class="modal-body form-horizontal validate-form" action="/login" method="post">
+		<form  class="modal-body form-horizontal  validate-form form " action="/login" method="post">
 			<div class="control-group">
 				<label class="control-label" for="username">Email</label>
 				<div class="controls">

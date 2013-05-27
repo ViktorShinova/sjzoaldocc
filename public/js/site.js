@@ -317,7 +317,7 @@ var jSite = {
 		if ($(".validate-form").length) {
 
 			var form = $(".validate-form");
-			form.validationEngine();
+			form.validationEngine('attach', {scroll: false});
 			//check for password field only meant for employer or applicant when they need to change password
 			var password_changing = false;
 			var attach_password_validation = false;
@@ -374,9 +374,11 @@ var jSite = {
 						if (data.success) {
 							$("#qualification-list").html(data.view);
 							//We need to attach remove after every refresh of the list because the new list will unlink the click event
-							jSite.resetApplicantOnAjaxChange();
-							
-							setTimeout( function() { $(".validation.success").fadeOut(); }, 3000 );
+							jSite.resetQualificationOnAjaxChange();
+
+							setTimeout(function() {
+								$("#qualifications .validation.success").fadeOut();
+							}, 3000);
 						}
 					}
 				});
@@ -392,6 +394,7 @@ var jSite = {
 			var form = edit_btn.closest('form');
 
 			edit_btn.click(function() {
+				form.validationEngine('hideAll');
 				var id = $(this).data('qid');
 
 				$.ajax({
@@ -401,7 +404,7 @@ var jSite = {
 					success: function(data) {
 
 						if (data.success) {
-							
+
 							$('#qualification-form #qualification-level').val(data.qualification.level);
 							$('#qualification-form #qualification-title').val(data.qualification.title);
 							$('#qualification-form #qualification-school').val(data.qualification.institude);
@@ -422,8 +425,8 @@ var jSite = {
 
 	},
 	attachAddQualification: function() {
-		
-		$('#add-qualification').click( function (e) {
+
+		$('#add-qualification').click(function(e) {
 			$('#qualification-form #qualification-level').val('');
 			$('#qualification-form #qualification-title').val('');
 			$('#qualification-form #qualification-school').val('');
@@ -432,14 +435,18 @@ var jSite = {
 			$('#qualification-form #qualification-started').val('');
 			$('#qualification-form #qualification-ended').val('');
 		});
-		
+
 		$('#btn-qualification-save').click(function(e) {
+
+			if (!$('#applicant-qualifications').validationEngine('validate')) {
+				return false;
+			}
 			e.preventDefault();
 			var form = $(this).closest('form');
 			var formData = form.serialize();
 			var url = form.attr('action');
-			
-			if ( $('#qualification-form #qualification-id').val() != '') {
+
+			if ($('#qualification-form #qualification-id').val() != '') {
 				url = url + '/' + $('#qualification-form #qualification-id').val();
 				console.log(url);
 			}
@@ -454,29 +461,228 @@ var jSite = {
 						$("#qualification-list").html(data.view);
 						$('#qualification-form').modal('hide');
 						//We need to attach remove after every refresh of the list because the new list will unlink the click event
-						jSite.resetApplicantOnAjaxChange();
+						jSite.resetQualificationOnAjaxChange();
+					}
+				}
+			});
+		});
+	},
+	attachRemoveExperience: function() {
+		if ($('.eremove').length) {
+
+			var remove_btn = $('.eremove');
+
+			remove_btn.click(function() {
+				var id = $(this).data('eid');
+
+				$.ajax({
+					type: 'GET',
+					url: '/applicant/remove_item/' + id + '/' + 'e',
+					dataType: 'json',
+					success: function(data) {
+
+						if (data.success) {
+							$("#employment-list").html(data.view);
+							//We need to attach remove after every refresh of the list because the new list will unlink the click event
+							jSite.resetExperienceOnAjaxChange();
+
+							setTimeout(function() {
+								$("#employement .validation.success").fadeOut();
+							}, 3000);
+						}
+					}
+				});
+
+			});
+		}
+	},
+	attachExperienceEdit: function() {
+
+		if ($('.eedit').length) {
+
+			var edit_btn = $('.eedit');
+			var form = edit_btn.closest('form');
+
+			edit_btn.click(function() {
+				var id = $(this).data('eid');
+				form.validationEngine('hideAll');
+				$.ajax({
+					type: 'GET',
+					url: '/applicant/experience/' + id + '/',
+					dataType: 'json',
+					success: function(data) {
+
+						if (data.success) {
+
+							$('#employment-form #employment-name').val(data.experience.company_name);
+							$('#employment-form #employment-industry').val(data.experience.industry);
+							$('#employment-form #employment-started-month').val(data.experience.started_month);
+							$('#employment-form #employment-started-year').val(data.experience.started_year);
+							$('#employment-form #employment-ended-month').val(data.experience.ended_month);
+							$('#employment-form #employment-ended-year').val(data.experience.ended_year);
+							$('#employment-form #employment-scope').val(data.experience.description);
+							$('#employment-form #employment-position').val(data.experience.position);
+							$('#employment-form #employment-id').val(id);
+							$('#employment-form').modal('show');
+
+						}
+					}
+				});
+
+			});
+
+		}
+
+	},
+	attachAddExperience: function() {
+		$('#add-employment').click(function(e) {
+			$('#employment-form #employment-name').val('');
+			$('#employment-form #employment-industry').val('');
+			$('#employment-form #employment-started').val('');
+			$('#employment-form #employment-ended').val('');
+			$('#employment-form #employment-scope').val('');
+			$('#employment-form #employment-position').val('');
+
+		});
+
+		$('#btn-employment-save').click(function(e) {
+
+			e.preventDefault();
+
+			if (!$('#applicant-experience').validationEngine('validate')) {
+				return false;
+			}
+			var form = $(this).closest('form');
+			var formData = form.serialize();
+			var url = form.attr('action');
+
+			if ($('#employment-form #employment-id').val() != '') {
+				url = url + '/' + $('#employment-form #employment-id').val();
+				console.log(url);
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				dataType: 'json',
+				data: formData,
+				success: function(data) {
+					if (data.success) {
+						$("#employment-list").html(data.view);
+						$('#employment-form').modal('hide');
+						//We need to attach remove after every refresh of the list because the new list will unlink the click event
+						jSite.resetExperienceOnAjaxChange();
 					}
 				}
 			});
 		});
 	},
 	
-	resetApplicantOnAjaxChange: function () {
+	attachAddExpertise: function() {
+		
+		if( $('#add-expertise').length ) {
+			$('#add-expertise').click( function(e) {
+				
+				
+				e.preventDefault();
+				if( !$('#expertise-add-form').validationEngine('validate'))  {
+					return false;
+				}
+				var form = $('#expertise-add-form');
+				var formData = form.serialize();
+				console.log(formData);
+				$.ajax({
+					
+					url: form.attr('action'),
+					data: formData,
+					dataType: 'json',
+					type: 'POST',
+					success: function(data) {
+						if(data.success) {
+							
+							$('#expertise-list').html(data.view);
+								jSite.resetExpertiseOnAjaxChange();
+							
+						}
+					}
+					
+				});
+				
+			});
+		}
+	},
+	
+	attachEditExpertise: function() {
+		
+		$('.exp-edit').click( function(e) {
+			e.preventDefault();
+			
+			var value = $(this).data('value');
+			
+			$('#expertise-value').val(value);
+			$('#prev-expertise-value').val(value);
+			$('#expertise-form').modal('show');
+			
+			
+			$('#btn-expertise-save').click( function(e) {
+				e.preventDefault();
+				var url = '/applicant/edit_expertise/';
+				
+				var formData = $("#applicant-expertise").serialize();
+				console.log(formData);
+				$.ajax({
+					url: url,
+					data: formData,
+					type: 'POST',
+					dataType: 'json',
+					success: function(data) {
+						if(data.success) {
+							$('#expertise-list').html(data.view);
+							$('#expertise-form').modal('hide');
+							jSite.resetExpertiseOnAjaxChange();
+						}
+					}
+				});
+				
+			});			
+		});
+		
+	},
+	resetQualificationOnAjaxChange: function() {
 		jSite.attachRemoveQualification();
 		jSite.attachQualificationEdit();
 		$('#qualification-form #qualification-id').val('');
 	},
-	
-	attachApplicant: function() {
+	resetExperienceOnAjaxChange: function() {
+		jSite.attachRemoveExperience();
+		jSite.attachExperienceEdit();
+		$('#employment-form #employment-id').val('');
+
+	},
+			
+	resetExpertiseOnAjaxChange: function() {
 		
+		jSite.attachEditExpertise();
+		
+
+	},
+	attachApplicant: function() {
+
 		jSite.attachAddQualification();
 		//attach all the other events belonging to applicant
 		jSite.attachQualificationEdit();
 		//Attach the remove click event for initial startup
 		jSite.attachRemoveQualification();
 
+		jSite.attachAddExperience();
 
+		jSite.attachExperienceEdit();
 
+		jSite.attachRemoveExperience();
+		
+		jSite.attachAddExpertise();
+		
+		jSite.attachEditExpertise();
 		// if ($("#add-qualification").length) {	
 
 		//jSite.attachGetExpertiseTags();

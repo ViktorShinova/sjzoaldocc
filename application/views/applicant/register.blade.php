@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{ Form::open_for_files('applicant/register', 'POST', array('class' => 'applicant-register-form validate-form row')); }}
+{{ Form::open_for_files('applicant/register', 'POST', array('class' => 'applicant-register-form  validate-form form  row')); }}
 
 @if ( $errors->all(':message') )
 <div class="validation error span12">

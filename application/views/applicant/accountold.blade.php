@@ -29,7 +29,7 @@
 		</div>
 	</span>
 
-	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'applicant-account-form validate-form')); }}
+	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'applicant-account-form  validate-form form ')); }}
 	<div class="span7 white-bg drop-shadow">
 
 		<h4>Basic Details</h4>
@@ -110,7 +110,7 @@
 		</div>
 	</section>
 
-	{{ Form::open('applicant/account', 'POST', array('id' => 'applicant-qualifications', 'class' => 'applicant-account-form validate-form')); }}
+	{{ Form::open('applicant/account', 'POST', array('id' => 'applicant-qualifications', 'class' => 'applicant-account-form  validate-form form ')); }}
 	<div class="span6 white-bg drop-shadow">
 		<h4>Qualifications</h4>
 		<div id="qualifications-field">
@@ -192,7 +192,7 @@
 	</div>
 	{{ Form::close(); }}
 
-	{{ Form::open('applicant/account', 'POST', array('id' => 'applicant-workhistory', 'class' => 'applicant-account-form validate-form')); }}
+	{{ Form::open('applicant/account', 'POST', array('id' => 'applicant-workhistory', 'class' => 'applicant-account-form  validate-form form ')); }}
 	<div class="span6 white-bg drop-shadow">
 		<h4>Employment History</h4>
 		<div id="workhistory-field">
@@ -346,7 +346,7 @@
 		</div>
 	</section>
 
-	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-resume', 'class' => 'applicant-account-form validate-form')); }}
+	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-resume', 'class' => 'applicant-account-form  validate-form form ')); }}
 	<div class="span6 white-bg drop-shadow">
 
 		<!--span class="label label-info pull-right" data-toggle="popover" data-placement="top" rel="popover" data-html="true" data-content="The <i class='icon-eye-open'></i> button toggles your resume visability for employers when they look at your profile. Click to hide or show." title="" data-original-title=""><i class="icon-info-sign"></i></span-->
@@ -373,7 +373,7 @@
 	{{ Form::close(); }}
 	
 
-	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-coverletter', 'class' => 'applicant-account-form validate-form')); }}
+	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-coverletter', 'class' => 'applicant-account-form  validate-form form ')); }}
 	<div class="span6 white-bg drop-shadow">
 
 		<h4>Coverletters</h4>

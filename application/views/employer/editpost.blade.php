@@ -24,7 +24,7 @@
         <p>Hohoho something is wrong .....</p>
     </div>
     @endif
-	<form action="/employer/post/edit/{{$job->id}}" method="post" class="employer-form validate-form">
+	<form action="/employer/post/edit/{{$job->id}}" method="post" class="employer-form  validate-form form ">
 
 		<ul class="post-desc">
 			<li> {{ Form::label('title', 'Title'); echo Form::text('title', $job->title, array('class' => 'validate[required]')); }} </li>

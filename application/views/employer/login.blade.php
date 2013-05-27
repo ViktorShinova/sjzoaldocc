@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{ Form::open('employer/login', 'POST', array('class' => 'employer-login-form validate-form')); }}
+{{ Form::open('employer/login', 'POST', array('class' => 'employer-login-form  validate-form form ')); }}
 <div class="form-field span9">
 	<h1 class="container-header">Login</h1>
 	<ol>

@@ -26,9 +26,9 @@
 				<div class="overview">
 
 					@if(isset($template))
-					{{ Form::open_for_files("/employer/template/create/$template->id", 'POST', array('id' => 'custom-templating', 'class' => 'validate-form')); }}
+					{{ Form::open_for_files("/employer/template/create/$template->id", 'POST', array('id' => 'custom-templating', 'class' => ' validate-form form ')); }}
 					@else
-					{{ Form::open_for_files("/employer/template/create/", 'POST', array('id' => 'custom-templating', 'class' => 'validate-form')); }}
+					{{ Form::open_for_files("/employer/template/create/", 'POST', array('id' => 'custom-templating', 'class' => ' validate-form form ')); }}
 					@endif
 
 					<div id="tab-container" class="tab-container">

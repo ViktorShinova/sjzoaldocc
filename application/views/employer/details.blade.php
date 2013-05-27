@@ -15,7 +15,7 @@
 		</ul>
 	</div>
 	@endif
-	<form action="/employer/post/details/{{$job->id}}" method="post" class="employer-form validate-form email-form">
+	<form action="/employer/post/details/{{$job->id}}" method="post" class="employer-form  validate-form form  email-form">
 	@if(count($applicants->results) != 0 )
 	<div class="table-container">
         <div class="table-header-wrapper">

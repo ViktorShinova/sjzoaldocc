@@ -32,7 +32,7 @@
 		
 		
 
-			{{ Form::open_for_files('job/apply/'.$job->id, 'POST', array('id' => 'job-apply', 'class' => 'validate-form')); }}
+			{{ Form::open_for_files('job/apply/'.$job->id, 'POST', array('id' => 'job-apply', 'class' => ' validate-form form ')); }}
 			<h2 class="container-header">Application Form</h2>
 			<div>
 

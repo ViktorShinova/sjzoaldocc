@@ -10,7 +10,7 @@
 	<div class="form-signin white-bg drop-shadow-butterfly">
 		<h1 class="container-header">Login</h1>
 
-		{{ Form::open('login', 'POST', array('class' => 'validate-form')); }}
+		{{ Form::open('login', 'POST', array('class' => ' validate-form form ')); }}
 		<ol>
 			<li>{{ Form::label('username', 'Username'); echo Form::text('username', Input::old('username') , array('class' => 'validate[required]')); }}</li>
 			<li>{{ Form::label('password', 'Password'); echo Form::password('password' ,  array('class' => 'validate[required]')); }}</li>
