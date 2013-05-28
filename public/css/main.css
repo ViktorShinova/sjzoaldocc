@@ -7602,7 +7602,6 @@ form input {
 #content #coverletter-listing {
   margin-top: 25px;
   margin-right: 0;
-  width: 90%;
 }
 #content #document-listing > .item,
 #content #resume-listing > .item,
@@ -7617,19 +7616,19 @@ form input {
 #content #document-listing > .item > .title,
 #content #resume-listing > .item > .title,
 #content #coverletter-listing > .item > .title {
-  width: 40%;
+  width: 60%;
   float: left;
   margin: 0px;
 }
 #content #document-listing > .item > .date-upload,
 #content #resume-listing > .item > .date-upload,
 #content #coverletter-listing > .item > .date-upload {
-  width: 25%;
+  width: 15%;
 }
 #content #document-listing > .item > .filesize,
 #content #resume-listing > .item > .filesize,
 #content #coverletter-listing > .item > .filesize {
-  width: 25%;
+  width: 15%;
 }
 #content #document-listing > .item a > .icon,
 #content #resume-listing > .item a > .icon,
@@ -7638,6 +7637,7 @@ form input {
   display: block;
   width: 22px;
   height: 22px;
+  margin-right: 5px;
 }
 #content #document-listing > .item a > .doc,
 #content #resume-listing > .item a > .doc,

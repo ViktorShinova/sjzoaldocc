@@ -577,57 +577,61 @@ var jSite = {
 			});
 		});
 	},
-	
 	attachAddExpertise: function() {
-		
-		if( $('#add-expertise').length ) {
-			$('#add-expertise').click( function(e) {
-				
-				
+
+		if ($('#add-expertise').length) {
+			$('#add-expertise').click(function(e) {
+
+
 				e.preventDefault();
-				if( !$('#expertise-add-form').validationEngine('validate'))  {
+				if (!$('#expertise-add-form').validationEngine('validate')) {
 					return false;
 				}
 				var form = $('#expertise-add-form');
 				var formData = form.serialize();
-				console.log(formData);
+
 				$.ajax({
-					
 					url: form.attr('action'),
 					data: formData,
 					dataType: 'json',
 					type: 'POST',
 					success: function(data) {
-						if(data.success) {
-							
+						if (data.success) {
+
 							$('#expertise-list').html(data.view);
-								jSite.resetExpertiseOnAjaxChange();
-							
+							jSite.resetExpertiseOnAjaxChange();
+
+						} else {
+							$("#expertise-list").html(data.view);
+							jSite.resetExpertiseOnAjaxChange();
+
+							setTimeout(function() {
+								$("#expertise .validation.error").fadeOut();
+							}, 3000);
 						}
 					}
-					
+
 				});
-				
+
 			});
 		}
 	},
-	
 	attachEditExpertise: function() {
-		
-		$('.exp-edit').click( function(e) {
+
+		$('.exp-edit').click(function(e) {
 			e.preventDefault();
-			
+
 			var value = $(this).data('value');
-			
+
 			$('#expertise-value').val(value);
 			$('#prev-expertise-value').val(value);
 			$('#expertise-form').modal('show');
-			
-			
-			$('#btn-expertise-save').click( function(e) {
+
+
+			$('#btn-expertise-save').click(function(e) {
 				e.preventDefault();
 				var url = '/applicant/edit_expertise/';
-				
+
 				var formData = $("#applicant-expertise").serialize();
 				console.log(formData);
 				$.ajax({
@@ -636,17 +640,56 @@ var jSite = {
 					type: 'POST',
 					dataType: 'json',
 					success: function(data) {
-						if(data.success) {
+						if (data.success) {
 							$('#expertise-list').html(data.view);
 							$('#expertise-form').modal('hide');
 							jSite.resetExpertiseOnAjaxChange();
+
+							setTimeout(function() {
+								$("#expertise .validation.success").fadeOut();
+							}, 3000);
 						}
 					}
 				});
-				
-			});			
+
+			});
 		});
-		
+
+	},
+	attachRemoveExpertise: function() {
+
+		$('.exp-remove').click(function(e) {
+			e.preventDefault();
+
+			var value = $(this).data('value');
+
+			var url = '/applicant/delete_expertise/';
+
+			var formData = 'expertise=' + value;
+
+			$.ajax({
+				url: url,
+				data: formData,
+				type: 'POST',
+				dataType: 'json',
+				success: function(data) {
+					if (data.success) {
+
+						console.log(data.view);
+						$('#expertise-list').html(data.view);
+
+						setTimeout(function() {
+							$("#expertise .validation.success").fadeOut();
+						}, 3000);
+
+						jSite.resetExpertiseOnAjaxChange();
+					}
+				}
+			});
+
+
+		});
+
 	},
 	resetQualificationOnAjaxChange: function() {
 		jSite.attachRemoveQualification();
@@ -659,11 +702,10 @@ var jSite = {
 		$('#employment-form #employment-id').val('');
 
 	},
-			
 	resetExpertiseOnAjaxChange: function() {
-		
+
 		jSite.attachEditExpertise();
-		
+		jSite.attachRemoveExpertise();
 
 	},
 	attachApplicant: function() {
@@ -679,89 +721,13 @@ var jSite = {
 		jSite.attachExperienceEdit();
 
 		jSite.attachRemoveExperience();
-		
+
 		jSite.attachAddExpertise();
-		
+
 		jSite.attachEditExpertise();
-		// if ($("#add-qualification").length) {	
 
-		//jSite.attachGetExpertiseTags();
-
-		// $(".add-qualification").click(function() {
-
-		// 	var qualification_field = $("#qualifications-field");
-		// 	var qualifications = qualification_field.children();
-
-		// 	var index = qualifications.length;
-		// 	if (qualifications.length == 1) {
-		// 		var index = 1;
-		// 	}
-		// 	var qualification_field = $(".qualifications-field-child").first();
-		// 	jSite.cloneFields(qualification_field, "#qualifications-field", index);
-
-		// 	console.log(qualification_field.length);
-
-		// 	if ( ualification_field.length > 1 ) {
-		// 		$(qualifications).find(".remove").show();
-		// 	}
-
-
-		// });
-
-
-		// $("#workhistory-field").find(".workhistory-field-child").hover(
-		// 	function() {
-		// 		if ($("#workhistory-field").children().length > 1 ) {
-		// 			$(this).find(".remove").show();
-		// 		}
-		// 	}, function() {
-		// 		$(this).find(".remove").hide();
-		// 	}
-		// );
-
-
-		// $('.currenty_work_here').click(function() {
-		// 	if ($(this).prop('checked')) {
-		// 		$(this).closest('li').find('.workhistory_status').hide();
-		// 	} else {
-		// 		$(this).closest('li').find('.workhistory_status').show();
-		// 	}
-		// });
-
-		//This is to re-initialize the functions, so that new items added from ajax would work
-		/***** NOTE TO SELF: this is causing looping problem ******/
-		// $('#resume-listing').hover(function() {
-		// 	jSite.attachRemoveItems();
-		// });
-
-		// $('#qualifications-field ol, #workhistory-field ol').each(function(){
-		// 	$(this).find('li:gt(1)').hide();
-		// });
-
-		// $('.edit').toggle(function() {
-		// 	$(this).closest('ol').find('li:gt(1)').slideDown(150);
-		// 	//$(this).closest('ol').find('.hide').removeClass('hide').addClass('open');
-		// 	$(this).find('i').removeClass('icon-pencil').addClass('icon-resize-small');
-		// }, function() {
-		// 	$(this).closest('ol').find('li:gt(1)').slideUp(150);
-		// 	//$(this).closest('ol').find('.open').removeClass('open').addClass('hide');
-		// 	$(this).find('i').removeClass('icon-resize-small').addClass('icon-pencil');
-		// });
-
-
-
-		// if ($(".add-workhistory").length) {
-		// 	$(".add-workhistory").click(function() {
-		// 		var workHistories = $("#workhistory-field").children();
-		// 		var index = workHistories.length;
-		// 		if (workHistories.length == 1) {
-		// 			var index = 1;
-		// 		}
-		// 		var workHistory_field = $(".workhistory-field-child").first();
-		// 		jSite.cloneFields(workHistory_field, "#workhistory-field", index);
-		// 	});
-		// }
-
+		jSite.attachRemoveExpertise();
+		
 		if ($("#upload-profile-pic-link").length) {
 
 			$("#upload-profile-pic-link").click(function(e) {
@@ -800,63 +766,29 @@ var jSite = {
 				jSite.uploadResumeCoverletter('coverletter');
 			});
 		}
-
-		$("#save-slug").click(function() {
-			$.ajax({
-				type: "POST",
-				url: "/applicant/slug",
-				data: {
-					'slug': $('input[name=slug]').val()
-				},
-				dataType: "json",
-				beforeSend: function() {
-					$("#save-slug").html('<img src="/img/loader.gif">');
-				},
-				complete: function() {
-					$("#save-slug").html('Save');
-				},
-				success: function(data) {
-					if (!data.error) {
-						$("#slug-link").attr("href", '/applicant/profile/' + data.slug);
-						$("#save-slug").html('Save');
-					} else {
-						alert(data.error);
-						$("#save-slug").html('Save');
-					}
-				}
-			});
-		});
+		
+		jSite.attachRemoveResumeCoverletter();
 
 	},
-//	attachRemoveItems: function() {
-//		$("#resume-listing").find(".item").hover(
-//			function() {
-//				$(this).find(".remove").show();
-//			}, function() {
-//				$(this).find(".remove").hide();
-//			}
-//		);
-//
-//		$("#coverletter-listing").find(".item").hover(
-//			function() {
-//				$(this).find(".remove").show();
-//			}, function() {
-//				$(this).find(".remove").hide();
-//			}
-//		);
-//
-//		$(".remove").click(function() {
-//			if ($(this).attr("id").length) {
-//				var v = $(this).attr("id").substring(1);
-//				var t = $(this).attr("id").charAt(0);
-//				jSite.removeItem(v, t, this);
-//			} else {
-//				$(this).closest('ol, li.item').fadeOut(500, function() {
-//					$(this).remove();
-//				});
-//			}
-//		});
-//	},
+	
+	attachRemoveResumeCoverletter: function() {
+		if( $('#resume .remove').length ) {
+			
+			$('#resume .remove').click( function() {
+				
+				var value = $(this).attr('id');
+				
+			});
+			
+		}
+		
+		if ( $('#coverletter .remove').length ) {
+			$('#coverletter .remove').click( function() {
+				var value = $(this).attr('id');
+				
+			});
+		}
+	},
 //	attachPrivacySettings: function() {
 //		$('div.btn-group button').click(function(){
 //			//alert($(this).children('input[type="radio"]').val());
@@ -904,36 +836,34 @@ var jSite = {
 			$(".tool-tip").tooltip();
 		}
 	},
-//	uploadResumeCoverletter: function(type) {
-//
-//		$("#applicant-" + type).ajaxSubmit({
-//			url: "/applicant/upload_resumecoverletter",
-//			type: "post",
-//			data: { 'type': type },
-//			dataType: "json",
-//			enctype: 'multipart/form-data',
-//			timeout: 30000,
-//			beforeSubmit: function() {
-//
-//			},
-//			success: function(data) {
-//				if (!data.error) {
-//					var list = '<li class="item">' +
-//							'<button class="btn btn-mini remove pull-right" type="button" id="r' + data.id + '"><i class="icon-remove"></i></button>' +
-//							'<a href="' + data.path + '" target="_blank">' +
-//							'<span class="icon ' + data.type + '"></span>' +
-//							'</a>' +
-//							'<span class="title"><a href="' + data.path + '" target="_blank">' + data.filename + '</a></span>' +
-//							'<span class="filesize">' + data.size + '</span>' +
-//							'<span class="date-upload">' + data.created_at + '</span>' +
-//							'</li>';
-//					$('#' + type + '-listing').append(list);
-//				} else {
-//					alert(data.error);
-//				}
-//			}
-//		});
-//	},
+	uploadResumeCoverletter: function(type) {
+
+		$("#applicant-" + type).ajaxSubmit({
+			url: "/applicant/upload_resumecoverletter",
+			type: "post",
+			data: { 'type': type },
+			dataType: "json",
+			enctype: 'multipart/form-data',
+			timeout: 30000,
+			success: function(data) {
+				if (data.success) {
+					
+					$('.' + type + '-listing').html(data.view);
+					
+					setTimeout(function() {
+						$('#'+ type +' .validation.success').fadeOut();
+					}, 3000);
+					
+				} else {
+					$('.' + type + '-listing').html(data.view);
+					
+					setTimeout(function() {
+						$('#'+ type + ' .validation.error').fadeOut();
+					}, 3000);
+				}
+			}
+		});
+	},
 	uploadProfilePic: function() {
 
 		$("#applicant-account").ajaxSubmit({
@@ -942,9 +872,6 @@ var jSite = {
 			dataType: "json",
 			enctype: 'multipart/form-data',
 			timeout: 30000,
-			beforeSubmit: function() {
-
-			},
 			success: function(data) {
 				if (!data.error) {
 					$("#crop-profile-pic-btn").show();
@@ -965,35 +892,13 @@ var jSite = {
 			dataType: "json",
 			enctype: 'multipart/form-data',
 			timeout: 30000,
-			beforeSubmit: function() {
-
-			},
 			success: function(data) {
 				$("#edit-photo, #crop-profile-pic-btn").hide();
 				location.reload();
 			}
 		});
 	},
-	cloneFields: function(cloneFrom, cloneTo, index) {
 
-		var clone = cloneFrom.clone(true).appendTo(cloneTo);
-
-		clone.find('input, textarea, select').each(function() {
-			$(this).val('');
-			this.name = this.name.replace('[0]', '[' + index + ']');
-		});
-
-		clone.find('button.remove').each(function() {
-			$(this).attr("id", "");
-		});
-
-		// clone.find(".date").each(function() {
-		// 	$(this).attr("id", "").removeData('datepicker').unbind();
-		// 	$(this).val('');
-		// 	$(this).datepicker();
-		// });		
-
-	},
 	attachJobPostSelectChange: function() {
 		//Job Category
 		if ($("#job-category").length) {
@@ -1098,52 +1003,7 @@ var jSite = {
 
 		}
 	},
-	removeItem: function(iid, type, t) {
-		if (!confirm('Confirm remove?')) {
-			return false;
-		}
-		else {
-			$.ajax({
-				type: "POST",
-				url: "/applicant/remove_item",
-				data: {
-					'iid': iid,
-					'type': type
-				},
-				dataType: "json",
-				beforeSend: function() {
-				},
-				complete: function() {
-				},
-				success: function(data) {
-					if (type == "q") {
-						$(t).closest('ol.qualifications-field-child').fadeOut(500, function() {
-							$(this).remove();
-							if ($('ol.qualifications-field-child').length == 0) {
-								location.reload();
-							}
-						});
-					} else if (type == "w") {
-						$(t).closest('ol.workhistory-field-child').fadeOut(500, function() {
-							$(this).remove();
-							if ($('ol.workhistory-field-child').length == 0) {
-								location.reload();
-							}
-						});
-					} else if (type == "p") {
-						$("#profilepic").attr("src", "/img/default-profile.png");
-					} else {
-						$(t).closest('li.item').fadeOut(500, function() {
-							$(this).remove();
-							if ($('li.item').length == 0) {
-								location.reload();
-							}
-						});
-					}
-				}
-			});
-		}
-	},
+	
 	attachEasyTabs: function() {
 
 		if ($(".tab-container").length) {

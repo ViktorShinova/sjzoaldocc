@@ -28,33 +28,9 @@ class Applicant_Controller extends Base_Controller {
 		$applicant_work_histories = $applicant->work_histories()->get();
 		$applicant_resumes = $applicant->resumes()->get();
 		$applicant_coverletters = $applicant->coverletters()->get();
-		
-		$applicant_expertises = explode(';', $applicant->skills);
-		
-
-
-		foreach ($applicant_resumes as $applicant_resume) {
-
-			//format file type
-			$applicant_resume->type = Formatter::format_filetype($applicant_resume->type);
-
-			//format date
-			$applicant_resume->created_at = date("d/m/Y", strtotime($applicant_resume->created_at));
-
-			//format filesize
-			$applicant_resume->filesize = Formatter::format_bytes($applicant_resume->filesize, 0);
-		}
-
-		foreach ($applicant_coverletters as $applicant_coverletter) {
-
-			//format file type
-			$applicant_coverletter->type = Formatter::format_filetype($applicant_coverletter->type);
-
-			//format date
-			$applicant_coverletter->created_at = date("d/m/Y", strtotime($applicant_coverletter->created_at));
-
-			//format filesize
-			$applicant_coverletter->filesize = Formatter::format_bytes($applicant_coverletter->filesize, 0);
+		$applicant_expertises = null;
+		if ($applicant->skills || $applicant->skills != '') {
+			$applicant_expertises = array_filter(explode(';', $applicant->skills));
 		}
 
 		$locations = Location::lists('name', 'id');
@@ -117,25 +93,6 @@ class Applicant_Controller extends Base_Controller {
 			$user_resumes = $user->resumes()->get();
 			$user_coverletters = $user->coverletters()->get();
 
-			foreach ($user_resumes as $user_resume) {
-				//format file type
-				$user_resume->type = Formatter::format_filetype($user_resume->type);
-				//format date
-				$user_resume->created_at = date("d/m/Y", strtotime($user_resume->created_at));
-				//format filesize
-				$user_resume->filesize = Formatter::format_bytes($user_resume->filesize, 0);
-			}
-
-			foreach ($user_coverletters as $user_coverletter) {
-				//format file type
-				$user_coverletter->type = Formatter::format_filetype($user_coverletter->type);
-				//format date
-				$user_coverletter->created_at = date("d/m/Y", strtotime($user_coverletter->created_at));
-				//format filesize
-				$user_coverletter->filesize = Formatter::format_bytes($user_coverletter->filesize, 0);
-			}
-
-
 			$user_privacy_settings = unserialize($user->privacy_settings);
 
 			$preferred_location = Location::find($user->preferred_location);
@@ -145,7 +102,7 @@ class Applicant_Controller extends Base_Controller {
 			$user->preferred_job = $preferred_job->name;
 
 
-			$user->skills = explode(',', $user->skills);
+			$user->skills = array_filter(explode(';', $user->skills));
 
 			return View::make("applicant.profile")->with(array(
 						'user' => $user,
@@ -163,7 +120,6 @@ class Applicant_Controller extends Base_Controller {
 			));
 		}
 	}
-
 
 	public function post_settings() {
 		//die(var_dump(serialize(Input::all())));
@@ -248,7 +204,7 @@ class Applicant_Controller extends Base_Controller {
 			return json_encode(array('success' => false));
 		}
 	}
-	
+
 	public function get_experience($id = null) {
 		if (!$id) {
 			return false;
@@ -261,7 +217,7 @@ class Applicant_Controller extends Base_Controller {
 			return json_encode(array('success' => false));
 		}
 	}
-	
+
 	public function post_experience($id = null) {
 		$experience = null;
 		if (!$id) {
@@ -294,74 +250,116 @@ class Applicant_Controller extends Base_Controller {
 			return json_encode(array('success' => false));
 		}
 	}
-	
+
 	public function post_expertise() {
-		
-		if( trim(Input::get('expertise')) == '') {
+
+		if (trim(Input::get('expertise')) == '') {
 			return false;
 		}
-		
+
 		//semi colon separate
-		
+
 		$applicant_id = Session::get('applicant_id');
-		
+
 		$applicant = Applicant::find($applicant_id);
-		
+
 		//add the expertise into existing skill
-		
-		$expertises = explode( ';', $applicant->skills);
-		
-		$expertises[] = Input::get('expertise');
-		
-		$applicant->skills = implode(';', $expertises);
-		
-		if ( $applicant->save() ) {
-			
-			//return the list of expertise;
-			
-			$view = View::make('applicant.expertise')->with( array('expertises' => $expertises ) )->render();
-			
-			return json_encode( array('success' => true, 'view' => $view ) );
-			
-		}		
-	}
-	
-	public function post_edit_expertise() {
-		
-		if( !Input::get('expertise') ) {
-			
+
+		$expertises = array_filter(explode(';', $applicant->skills));
+
+		$similar = false;
+
+		foreach ($expertises as $expertise) {
+			if ($expertise == Input::get('expertise')) {
+				$similar = true;
+			}
 		}
-		
+
+		if ($similar) {
+			$view = View::make('applicant.expertise')->with(array('expertises' => array_filter($expertises), 'error' => 'An existing record of "' . Input::get('expertise') . '" has been found in your expertise'))->render();
+			return json_encode(array('success' => false, 'view' => $view));
+		}
+
+
+		$expertises[] = Input::get('expertise');
+		$applicant->skills = implode(';', $expertises);
+
+		if ($applicant->save()) {
+
+			//return the list of expertise;
+
+			$view = View::make('applicant.expertise')->with(array('expertises' => array_filter($expertises)))->render();
+
+			return json_encode(array('success' => true, 'view' => $view));
+		}
+	}
+
+	public function post_edit_expertise() {
+
+		if (!Input::get('expertise-value')) {
+			return false;
+		}
+
 		$new_expertise = Input::get('expertise-value');
 		$prev_expertise = Input::get('prev-expertise-value');
-		
+
 		$applicant_id = Session::get('applicant_id');
 		$applicant = Applicant::find($applicant_id);
-		$expertises = explode( ';', $applicant->skills);
-		
-		foreach($expertises as &$expertise) {
-			
-			if ( $expertise == $prev_expertise ) {
-				
+		$expertises = array_filter(explode(';', $applicant->skills));
+
+		foreach ($expertises as &$expertise) {
+
+			if ($expertise == $prev_expertise) {
+
 				$expertise = $new_expertise;
-				
 			}
-			
 		}
 		$applicant->skills = implode(';', $expertises);
-		
-		if ( $applicant->save() ) {
-			
+
+		if ($applicant->save()) {
+
 			//return the list of expertise;
-			
-			$view = View::make('applicant.expertise')->with( array('expertises' => $expertises ) )->render();
-			
-			return json_encode( array('success' => true, 'view' => $view ) );
-			
-		}		
+
+			$view = View::make('applicant.expertise')->with(array('expertises' => array_filter($expertises), 'message' => 'Expertise has been successfully edited.'))->render();
+
+			return json_encode(array('success' => true, 'view' => $view));
+		}
 	}
-	
-	
+
+	public function post_delete_expertise() {
+
+		if (!Input::get('expertise')) {
+			return false;
+		}
+
+		$expertise = Input::get('expertise');
+
+
+		$applicant_id = Session::get('applicant_id');
+		$applicant = Applicant::find($applicant_id);
+		$expertises = array_filter(explode(';', $applicant->skills));
+
+		$to_remove = null;
+		foreach ($expertises as $key => $_exp) {
+			if ($_exp == $expertise) {
+				$expertises[$key] = null;
+			}
+		}
+
+
+
+
+		$applicant->skills = implode(';', array_filter($expertises));
+
+		if ($applicant->save()) {
+
+			//return the list of expertise;
+
+			$view = View::make('applicant.expertise')->with(array('expertises' => array_filter($expertises), 'message' => 'Expertise has been successfully removed.'))->render();
+
+			return json_encode(array('success' => true, 'view' => $view));
+		}
+	}
 
 	public function post_account() {
 
@@ -461,127 +459,136 @@ class Applicant_Controller extends Base_Controller {
 
 	public function post_upload_resumecoverletter() {
 		//check if this is ajax call
-		$applicant = Applicant::find(Session::get('applicant_id'));
+		$applicant_id = Session::get('applicant_id');
 		$type = Input::get('type');
 		$xhr = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 
+		//if not ajax
 		if (!$xhr) {
 			return false;
-		} else {
+		}
 
+		$username = md5(Auth::user()->username);
 
-			$username = md5(Auth::user()->username);
-
-			Validator::register('resume_count_check', function($attribute, $value, $parameters) {
-						$resume_count_check = count(ApplicantResumes::where('applicant_id', '=', Session::get('applicant_id'))->get());
-						if ($resume_count_check < 4) {
-							return true;
-						} else {
-							return false;
-						}
-					});
-
-			Validator::register('coverletter_count_check', function($attribute, $value, $parameters) {
-						$coverletter_count_check = count(ApplicantCoverletters::where('applicant_id', '=', Session::get('applicant_id'))->get());
-						if ($coverletter_count_check < 4) {
-							return true;
-						} else {
-							return false;
-						}
-					});
-
-			$rules = array(
-				'resume-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check',
-				'coverletter-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check'
-			);
-			$messages = array(
-				'max' => 'The maximum file size is 2MB',
-				'mimes' => 'Your file must be .pdf, .doc or .docx only',
-				'resume_count_check' => 'You can upload up to a maximum of 4 files only. Please delete some.',
-				'coverletter_count_check' => 'You can upload up to a maximum of 4 files only. Please delete some.'
-			);
-
-			$validation = Validator::make(Input::file(), $rules, $messages);
-
-			$file = Input::file($type . '-file');
-
-			if (!$validation->fails()) {
-
-				$file['name'] = preg_replace('/\s+/', '-', $file['name']);
-
-				$folder = APP_UPLOAD_DIR . $username . '/' . $type . '/';
-
-				if (!is_dir($folder)) {
-					mkdir($folder, 777);
-				}
-
-				if (!file_exists($folder . $file['name'])) {
-					Input::upload($type . '-file', $folder, $file['name']);
-
-					$path = str_replace('public', '', $folder) . $file['name'];
-
-					//insert into database 
-					if ($type == 'resume') {
-						$applicant_resume = new ApplicantResumes();
-						$applicant_resume->applicant_id = $applicant->id;
-						$applicant_resume->resume = $file['name'];
-						$applicant_resume->path = $path;
-						$applicant_resume->filesize = $file['size'];
-						$applicant_resume->type = $file['type'];
-						$applicant_resume->disabled = 0;
-						$applicant_resume->save();
-
-						$file_id = $applicant_resume->id;
+		Validator::register('resume_count_check', function($attribute, $value, $parameters) {
+					$resume_count_check = count(ApplicantResumes::where('applicant_id', '=', Session::get('applicant_id'))->get());
+					if ($resume_count_check < 4) {
+						return true;
 					} else {
-						$applicant_covereletter = new ApplicantCoverletters();
-						$applicant_covereletter->applicant_id = $applicant->id;
-						$applicant_covereletter->coverletter = $file['name'];
-						$applicant_covereletter->path = $path;
-						$applicant_covereletter->filesize = $file['size'];
-						$applicant_covereletter->type = $file['type'];
-						$applicant_covereletter->disabled = 0;
-						$applicant_covereletter->save();
-
-						$file_id = $applicant_covereletter->id;
+						return false;
 					}
-				} else {
-					return json_encode(array('error' => 'File already exists. Please rename or remove your file.'));
-				}
+				});
 
-				//format file type
-				$file['type'] = Formatter::format_filetype($file['type']);
+		Validator::register('coverletter_count_check', function($attribute, $value, $parameters) {
+					$coverletter_count_check = count(ApplicantCoverletters::where('applicant_id', '=', Session::get('applicant_id'))->get());
+					if ($coverletter_count_check < 4) {
+						return true;
+					} else {
+						return false;
+					}
+				});
 
-				//format date
-				$created_at = date("d/m/Y");
+		$rules = array(
+			'resume-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check',
+			'coverletter-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check'
+		);
+		$messages = array(
+			'max' => 'The maximum file size is 2MB',
+			'mimes' => 'Only .pdf, .doc or .docx are allowed',
+			'resume_count_check' => 'You can upload up to a maximum of 4 files only.',
+			'coverletter_count_check' => 'You can upload up to a maximum of 4 files only.'
+		);
 
-				//format filesize
-				$file['size'] = Formatter::format_bytes($file['size'], 0);
+		$validation = Validator::make(Input::file(), $rules, $messages);
 
-				return json_encode(array('filename' => $file['name'],
-					'path' => $path,
-					'type' => $file['type'],
-					'size' => $file['size'],
-					'id' => $file_id,
-					'created_at' => $created_at));
-			} else {
-				if ($type == 'resume') {
+		$file = Input::file($type . '-file');
+
+		if ($validation->fails()) {
+			$items = null;
+			switch($type) {
+				
+				case 'resume':
 					$error_message = $validation->errors->first('resume-file');
-				} else {
+					$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+					break;
+				case 'coverletter':
 					$error_message = $validation->errors->first('coverletter-file');
-				}
-				return json_encode(array('error' => $error_message));
+					$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
+					break;
 			}
+			
+		
+
+			$view = View::make('applicant.' .$type)->with(array($type .'s' => $items, 'error' =>  $error_message ))->render();;
+
+			return json_encode(array('success' => false, 'view' => $view));
+			
+		}
+		
+		
+		$file['name'] = preg_replace('/\s+/', '-', $file['name']);
+
+		$folder = APP_UPLOAD_DIR . $username . '/' . $type . '/';
+
+		if (!is_dir($folder)) {
+			mkdir($folder, 777);
+		}
+
+		if (!file_exists($folder . $file['name'])) {
+			Input::upload($type . '-file', $folder, $file['name']);
+
+			$path = str_replace('public', '', $folder) . $file['name'];
+
+			//insert into database 
+			if ($type == 'resume') {
+				$applicant_resume = new ApplicantResumes();
+				$applicant_resume->applicant_id = $applicant_id;
+				$applicant_resume->resume = $file['name'];
+				$applicant_resume->path = $path;
+				$applicant_resume->filesize = Formatter::format_bytes($file['size'], 0);
+				$applicant_resume->type = Formatter::format_filetype($file['type']);
+				$applicant_resume->disabled = 0;
+				if ($applicant_resume->save()) {
+					$resumes = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+
+					$view = View::make('applicant.resume')->with(array('resumes' => $resumes))->render();;
+
+					return json_encode(array('success' => true, 'view' => $view));
+				}
+			} else {
+				$applicant_covereletter = new ApplicantCoverletters();
+				$applicant_covereletter->applicant_id = $applicant_id;
+				$applicant_covereletter->coverletter = $file['name'];
+				$applicant_covereletter->path = $path;
+				$applicant_covereletter->filesize = Formatter::format_bytes($file['size'], 0);
+				$applicant_covereletter->type = Formatter::format_filetype($file['type']);
+				$applicant_covereletter->disabled = 0;
+				$applicant_covereletter->save();
+
+				if ($applicant_covereletter->save()) {
+					$coverletters = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+
+					$view = View::make('applicant.resume')->with(array('coverletters' => $coverletters))->render();
+
+					return json_encode(array('success' => true, 'view' => $view));
+				}
+			}
+		} else {
+			switch($type) {
+				
+				case 'resume':
+					$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+					break;
+				case 'coverletter':
+					
+					$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
+					break;
+			}
+			$view = View::make('applicant.' .$type)->with(array($type .'s' => $items, 'error' =>  'File already exists. Please rename or remove your file.' ))->render();;
+			return json_encode(array('success' => false, 'view' => $view));
+			
 		}
 	}
-
-	// public function post_resume_visibility() {
-	//     $settings = Input::get('setting');
-	//     $id = Input::get('iid');
-	//     $applicant_resume = ApplicantResumes::where('applicant_id', '=', Session::get('applicant_id'))
-	//                                                                 ->where('id', '=', $id )->first();
-	//     $applicant_resume->disabled = $settings;
-	//     $applicant_resume->save();
-	// }
 
 	public function post_slug() {
 		$applicant = Applicant::find(Session::get('applicant_id'));
@@ -626,8 +633,8 @@ class Applicant_Controller extends Base_Controller {
 						'success' => true,
 						'view' => $view));
 				}
-				
-				case 'e':
+
+			case 'e':
 
 				$affected = DB::table('applicant_work_history')
 						->where('id', '=', $id)
@@ -646,8 +653,6 @@ class Applicant_Controller extends Base_Controller {
 				}
 		}
 	}
-
-	
 
 	/* ===========================================================================================================
 	  Applicant Resgistration

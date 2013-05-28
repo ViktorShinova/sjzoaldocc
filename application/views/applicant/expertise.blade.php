@@ -1,4 +1,26 @@
+@if ( isset ( $message ) ) 
+
+<div class="validation success">
+	<p>
+		{{ $message }}
+	</p>
+</div>
+
+@endif
+
+@if ( isset ( $error ) ) 
+
+<div class="validation error">
+	<p>
+		{{ $error }}
+	</p>
+</div>
+
+@endif
+
+
 <table>
+	@if( count($expertises) != 0 ) 
 	<tr>
 		<th>Expertise</th>
 		<th class="controls"></th>
@@ -14,4 +36,5 @@
 		</td>
 	</tr>
 	@endforeach
+	@endif
 </table>

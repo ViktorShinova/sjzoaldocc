@@ -190,11 +190,12 @@
 						</form>
 						<div id="expertise-list">
 							<table>
+								@if( count($expertises) != 0 ) 
 								<tr>
 									<th>Expertise</th>
 									<th class="controls"></th>
 								</tr>
-								@if( count($expertises) != 0 ) 
+
 								@foreach($expertises as $expertise)
 								<tr>
 									<td>
@@ -224,38 +225,39 @@
 				<div id="resume" class="accordion-body collapse">
 					<div class="accordion-inner">
 						{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-resume', 'class' => 'applicant-account-form  validate-form form ')); }}
-						<ul class="listing" id="resume-listing">
-							@foreach ($resumes as $resume)
-							<li class="item">
-								<!--button class="btn btn-mini visibility pull-right" type="button" id="v{{ $resume->id }}"><i class="<?php echo ($resume->disabled == 0) ? 'icon-eye-open' : 'icon-eye-close'; ?>"></i></button-->
-								<button class="btn btn-mini remove pull-right" type="button" id="r{{ $resume->id }}"><i class="icon-remove"></i></button>
-																								<a href="{{ $resume->path }}" target="_blank">
-																									<span class="icon {{ $resume->type }}"></span>
-																								</a>
-																								<span class="title"><a href="{{ $resume->path }}" target="_blank">{{ $resume->resume }}</a></span>
-																								<span class="filesize">{{ $resume->filesize }}</span>
-																								<span class="date-upload">{{ $resume->created_at }}</span>
+						<div class="resume-listing">
+							<ul class="listing" id="resume-listing">
+								@foreach ($resumes as $resume)
+								<li class="item">
+									<button class="btn btn-mini btn-danger remove pull-right" type="button" id="r{{ $resume->id }}"><i class="icon-remove"></i></button>
+									<a href="{{ $resume->path }}" target="_blank">
+										<span class="icon {{$resume->type}}"></span>
+									</a>
+									<span class="title"><a href="{{ $resume->path }}" target="_blank">{{ $resume->resume }}</a></span>
+									<span class="filesize">{{ Formatter::format_bytes($resume->filesize, 0) }}</span>
+									<span class="date-upload">{{ Formatter::format_date($resume->created_at, Formatter::DATE_SHORT) }}</span>
 								</li>
 								@endforeach
 							</ul>
-
-							<button id="add-resume" class="btn pull-right add" type="button"><i class="icon-plus icon-white"></i> Resume</button>
-							<input type="file" id="resume-file" name="resume-file"/>
-							{{ Form::close(); }}
 						</div>
+						<button id="add-resume" class="btn pull-right add" type="button"><i class="icon-plus icon-white"></i> Resume</button>
+						<input type="file" id="resume-file" name="resume-file"/>
+						{{ Form::close(); }}
 					</div>
 				</div>
+			</div>
 
 
-				<div class="accordion-group drop-shadow-butterfly">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" href="#coverletter">
-							<h4>Coverletters</h4>
-						</a>
-					</div>
-					<div id="coverletter" class="accordion-body collapse">
-						<div class="accordion-inner">
-							{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-coverletter', 'class' => 'applicant-account-form  validate-form form ')); }}
+			<div class="accordion-group drop-shadow-butterfly">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" href="#coverletter">
+						<h4>Coverletters</h4>
+					</a>
+				</div>
+				<div id="coverletter" class="accordion-body collapse">
+					<div class="accordion-inner">
+						{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-coverletter', 'class' => 'applicant-account-form  validate-form form ')); }}
+						<div class="coverletter-listing">
 							<ul class="listing" id="coverletter-listing">
 								@foreach ($coverletters as $coverletter)
 								<li class="item">
@@ -264,199 +266,199 @@
 										<span class="icon {{ $coverletter->type }}"></span>
 									</a>
 									<span class="title"><a href="{{ $coverletter->path }}" target="_blank">{{ $coverletter->coverletter }}</a></span>
-									<span class="filesize">{{ $coverletter->filesize }}</span>
-									<span class="date-upload">{{ $coverletter->created_at }}</span>
+									<span class="filesize">{{ Formatter::format_bytes($coverletter->filesize, 0) }}</span>
+									<span class="date-upload">{{ Formatter::format_date($coverletter->created_at, Formatter::DATE_SHORT) }}</span>
 								</li>
 								@endforeach
 							</ul>
-
-							<button id="add-coverletter" class="btn btn-primary pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
-							<input type="file" id="coverletter-file" name="coverletter-file"/>
-							{{ Form::close(); }}
 						</div>
+						<button id="add-coverletter" class="btn btn-primary pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
+						<input type="file" id="coverletter-file" name="coverletter-file"/>
+						{{ Form::close(); }}
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-	<!-- /.row -->
+
+</div>
+<!-- /.row -->
 
 
-	<!--MODAL -->
+<!--MODAL -->
 
-	{{ Form::open('applicant/qualification', 'POST', array('id' => 'applicant-qualifications', 'class' => 'applicant-account-form  validate-form')); }}
-	<div id='qualification-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+{{ Form::open('applicant/qualification', 'POST', array('id' => 'applicant-qualifications', 'class' => 'applicant-account-form  validate-form')); }}
+<div id='qualification-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Qualification Details</h3>
-		</div>
-		<div class="modal-body">
-			<fieldset>
-				<ol class="qualifications-field-child">
-					<li>
-						<label for="qualification-level">Level</label>
-						<select id="qualification-level" name="qualification-level" class="input-large validate[required]" data-prompt-position="centerLeft">
-							<option value="Graduate">Graduate</option>
-							<option value="Post Graduate">Post Graduate</option>
-							<option value="PHD">PHD</option>
-						</select>
-					</li>
-					<li>
-						<label for="qualification-title">Program Title</label>
-						<input id="qualification-title" type="text" name="qualification-title" placeholder="e.g. Bachelor of Science" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-					<li>
-						<label for="qualification-school">Institude</label>
-						<input id="qualification-school" type="text" name="qualification-school" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-					<li>
-						<label for="qualification-field-of-study">Field of Study</label>
-						<input id="qualification-field-of-study" type="text" name="qualification-field-of-study" placeholder="e.g. Biomedical Science Major" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-					<li>
-						<label for="qualification-achievement">Achievements</label>
-						<textarea id="qualification-achievement" name="qualification-achievement" class="input-large"></textarea>
-					</li>
-					<li>
-						<label for="qualification-started">Year Attended</label>
-						<select name="qualification-started" id="qualification-started" class="input-large validate[required]" data-prompt-position="centerLeft">
-							@for($i = (int)date('Y'); $i >= 1950; $i-- )
-							<option value="{{$i}}">{{$i}}</option>
-							@endfor
-						</select>
-
-					</li>
-					<li>
-						<label for="qualification-ended">Year Ended <small>(or expected graduated year)</small></label>
-						<select name="qualification-ended" id="qualification-ended" class="input-large validate[required]">
-							@for($i = (int)date('Y'); $i >= 1950; $i-- )
-							<option value="{{$i}}">{{$i}}</option>
-							@endfor
-						</select>
-					</li>
-				</ol>
-			</fieldset>
-		</div>
-		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary" type="submit" id="btn-qualification-save">Save changes</button>
-			<input type="hidden" value="" id="qualification-id" />
-		</div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Qualification Details</h3>
 	</div>
-	<input type="hidden" name="form-type" value="qualification">
-	{{ Form::close(); }}
+	<div class="modal-body">
+		<fieldset>
+			<ol class="qualifications-field-child">
+				<li>
+					<label for="qualification-level">Level</label>
+					<select id="qualification-level" name="qualification-level" class="input-large validate[required]" data-prompt-position="centerLeft">
+						<option value="Graduate">Graduate</option>
+						<option value="Post Graduate">Post Graduate</option>
+						<option value="PHD">PHD</option>
+					</select>
+				</li>
+				<li>
+					<label for="qualification-title">Program Title</label>
+					<input id="qualification-title" type="text" name="qualification-title" placeholder="e.g. Bachelor of Science" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+				<li>
+					<label for="qualification-school">Institude</label>
+					<input id="qualification-school" type="text" name="qualification-school" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+				<li>
+					<label for="qualification-field-of-study">Field of Study</label>
+					<input id="qualification-field-of-study" type="text" name="qualification-field-of-study" placeholder="e.g. Biomedical Science Major" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+				<li>
+					<label for="qualification-achievement">Achievements</label>
+					<textarea id="qualification-achievement" name="qualification-achievement" class="input-large"></textarea>
+				</li>
+				<li>
+					<label for="qualification-started">Year Attended</label>
+					<select name="qualification-started" id="qualification-started" class="input-large validate[required]" data-prompt-position="centerLeft">
+						@for($i = (int)date('Y'); $i >= 1950; $i-- )
+						<option value="{{$i}}">{{$i}}</option>
+						@endfor
+					</select>
 
-
-	{{ Form::open('applicant/experience', 'POST', array('id' => 'applicant-experience', 'class' => 'applicant-account-form  validate-form ')); }}
-	<div id='employment-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Employment Details</h3>
-		</div>
-		<div class="modal-body">
-			<fieldset>
-				<ol class="employment-field-child">
-					<li>
-						<label for="employment-name">Company Name</label>
-						<input id="employment-name" type="text" name="employment-name" class="input-large validate[required]" data-prompt-position="centerLeft">
-
-					</li>
-					<li>
-						<label for="employment-industry">Industry</label>
-						<input id="employment-industry" type="text" name="employment-industry" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-					<li>
-						<label for="employment-position">Position</label>
-						<input id="employment-position" type="text" name="employment-position" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-					<li>
-						<label for="employment-started-month">From</label>
-						<select name="employment-started-month" id="employment-started-month" class="input-small validate[required]" data-prompt-position="centerLeft">
-							<option value="January">January</option>
-							<option value="February">February</option>
-							<option value="March">March</option>
-							<option value="April">April</option>
-							<option value="May">May</option>
-							<option value="June">June</option>
-							<option value="July">July</option>
-							<option value="August">August</option>
-							<option value="September">September</option>
-							<option value="October">October</option>
-							<option value="November">November</option>
-							<option value="December">December</option>
-						</select>
-						<select name="employment-started-year" id="employment-started-year" class="input-small validate[required]" data-prompt-position="centerLeft">
-							@for($i = (int)date('Y'); $i >= 1950; $i-- )
-							<option value="{{$i}}">{{$i}}</option>
-							@endfor
-						</select>
-					</li>
-					<li>
-						<label for="employment-ended-month">To</label>
-						<select name="employment-ended-month" id="employment-ended-month" class="input-small validate[required]" data-prompt-position="centerLeft">
-							<option value="January">January</option>
-							<option value="February">February</option>
-							<option value="March">March</option>
-							<option value="April">April</option>
-							<option value="May">May</option>
-							<option value="June">June</option>
-							<option value="July">July</option>
-							<option value="August">August</option>
-							<option value="September">September</option>
-							<option value="October">October</option>
-							<option value="November">November</option>
-							<option value="December">December</option>
-						</select>
-						<select name="employment-ended-year" id="employment-ended-year" class="input-small validate[required]" data-prompt-position="centerLeft">
-							<option value="1">Current Work here</option>
-							@for($i = (int)date('Y'); $i >= 1950; $i-- )
-							<option value="{{$i}}">{{$i}}</option>
-							@endfor
-						</select>
-
-					</li>
-					<li>
-						<label for="employment-scope">Job Scope</label>
-						<textarea id="employment-scope" name="employment-scope" class="input-large validate[required]" data-prompt-position="centerLeft"></textarea>
-					</li>
-				</ol>
-			</fieldset>
-		</div>
-		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary" type="submit" id="btn-employment-save">Save changes</button>
-			<input type="hidden" value="" id="employment-id" />
-		</div>
+				</li>
+				<li>
+					<label for="qualification-ended">Year Ended <small>(or expected graduated year)</small></label>
+					<select name="qualification-ended" id="qualification-ended" class="input-large validate[required]">
+						@for($i = (int)date('Y'); $i >= 1950; $i-- )
+						<option value="{{$i}}">{{$i}}</option>
+						@endfor
+					</select>
+				</li>
+			</ol>
+		</fieldset>
 	</div>
-	<input type="hidden" name="form-type" value="employment">
-	{{ Form::close(); }}
-
-
-	{{ Form::open('applicant/expertise', 'POST', array('id' => 'applicant-expertise', 'class' => 'applicant-account-form  validate-form ')); }}
-	<div id='expertise-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Edit Expertise</h3>
-		</div>
-		<div class="modal-body">
-			<fieldset>
-				<ol class="expertise-field-child">
-					<li>
-						<label for="expertise">Expertise</label>
-						<input id="expertise-value" type="text" name="expertise-value" class="input-large validate[required]" data-prompt-position="centerLeft">
-					</li>
-				</ol>
-			</fieldset>
-		</div>
-		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary" type="submit" id="btn-expertise-save">Save changes</button>
-			<input type="hidden" value="" id="prev-expertise-value" name="prev-expertise-value" />
-		</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary" type="submit" id="btn-qualification-save">Save changes</button>
+		<input type="hidden" value="" id="qualification-id" />
 	</div>
-	{{ Form::close(); }}
-	@endsection
+</div>
+<input type="hidden" name="form-type" value="qualification">
+{{ Form::close(); }}
+
+
+{{ Form::open('applicant/experience', 'POST', array('id' => 'applicant-experience', 'class' => 'applicant-account-form  validate-form ')); }}
+<div id='employment-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Employment Details</h3>
+	</div>
+	<div class="modal-body">
+		<fieldset>
+			<ol class="employment-field-child">
+				<li>
+					<label for="employment-name">Company Name</label>
+					<input id="employment-name" type="text" name="employment-name" class="input-large validate[required]" data-prompt-position="centerLeft">
+
+				</li>
+				<li>
+					<label for="employment-industry">Industry</label>
+					<input id="employment-industry" type="text" name="employment-industry" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+				<li>
+					<label for="employment-position">Position</label>
+					<input id="employment-position" type="text" name="employment-position" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+				<li>
+					<label for="employment-started-month">From</label>
+					<select name="employment-started-month" id="employment-started-month" class="input-small validate[required]" data-prompt-position="centerLeft">
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
+					</select>
+					<select name="employment-started-year" id="employment-started-year" class="input-small validate[required]" data-prompt-position="centerLeft">
+						@for($i = (int)date('Y'); $i >= 1950; $i-- )
+						<option value="{{$i}}">{{$i}}</option>
+						@endfor
+					</select>
+				</li>
+				<li>
+					<label for="employment-ended-month">To</label>
+					<select name="employment-ended-month" id="employment-ended-month" class="input-small validate[required]" data-prompt-position="centerLeft">
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
+					</select>
+					<select name="employment-ended-year" id="employment-ended-year" class="input-small validate[required]" data-prompt-position="centerLeft">
+						<option value="1">Current Work here</option>
+						@for($i = (int)date('Y'); $i >= 1950; $i-- )
+						<option value="{{$i}}">{{$i}}</option>
+						@endfor
+					</select>
+
+				</li>
+				<li>
+					<label for="employment-scope">Job Scope</label>
+					<textarea id="employment-scope" name="employment-scope" class="input-large validate[required]" data-prompt-position="centerLeft"></textarea>
+				</li>
+			</ol>
+		</fieldset>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary" type="submit" id="btn-employment-save">Save changes</button>
+		<input type="hidden" value="" id="employment-id" />
+	</div>
+</div>
+<input type="hidden" name="form-type" value="employment">
+{{ Form::close(); }}
+
+
+{{ Form::open('applicant/expertise', 'POST', array('id' => 'applicant-expertise', 'class' => 'applicant-account-form  validate-form ')); }}
+<div id='expertise-form' class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Edit Expertise</h3>
+	</div>
+	<div class="modal-body">
+		<fieldset>
+			<ol class="expertise-field-child">
+				<li>
+					<label for="expertise">Expertise</label>
+					<input id="expertise-value" type="text" name="expertise-value" class="input-large validate[required]" data-prompt-position="centerLeft">
+				</li>
+			</ol>
+		</fieldset>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary" type="submit" id="btn-expertise-save">Save changes</button>
+		<input type="hidden" value="" id="prev-expertise-value" name="prev-expertise-value" />
+	</div>
+</div>
+{{ Form::close(); }}
+@endsection
