@@ -121,6 +121,25 @@ class Applicant_Controller extends Base_Controller {
 		}
 	}
 
+	public function post_privacy() {
+		
+		if( !Input::get('privacy') && !in_array( Input::get('privacy'), array( 'true', 'false') ) ) {
+			return json_encode( array('success' =>  false, 'message' => 'Please fill in the correct value.'));
+		} 
+		
+		$applicant = Applicant::find(Session::get('applicant_id'));
+		
+		$applicant->viewable = (Input::get('privacy') == 'true' ) ? 1 : 0;
+		
+		
+		
+		if ( $applicant->save() ) {
+			
+			return json_encode( array('success' =>  true, 'message' => 'Privacy setting has been updated.'));
+			
+		}
+	}
+	
 	public function post_settings() {
 		//die(var_dump(serialize(Input::all())));
 		$applicant = Applicant::find(Session::get('applicant_id'));
@@ -132,32 +151,6 @@ class Applicant_Controller extends Base_Controller {
 		Session::flash('success', true);
 
 		return Redirect::to('applicant/settings');
-	}
-
-	public function post_basic_profile() {
-		$register_input = Input::all();
-
-		$rules = array(
-			'firstname' => 'required',
-			'lastname' => 'required'
-		);
-
-		$validation = Validator::make(Input::all(), $rules);
-
-		if ($validation->fails()) {
-			return false;
-			//return Redirect::to('applicant/account')->with_errors($validation)->with_input();
-		} else {
-
-			//Save User Basic Profile
-			$applicant = Applicant::find(Session::get('applicant_id'));
-			$applicant->first_name = $register_input['firstname'];
-			$applicant->last_name = $register_input['lastname'];
-			$applicant->preferred_location = $register_input['location'];
-			$applicant->preferred_job = $register_input['category'];
-			$applicant->save();
-			return true;
-		}
 	}
 
 	public function get_qualification($id = null) {
@@ -363,24 +356,30 @@ class Applicant_Controller extends Base_Controller {
 
 	public function post_account() {
 
-		switch (Input::get('form-type')) {
-			case 'basic-profile':
-				if ($this->post_basic_profile())
-					Session::flash('success', true);
-				return Redirect::to('applicant/account');
-				//return Redirect::to('applicant/account')->with_errors($validation)->with_input();
-				break;
-			case 'qualification':
-				if ($this->post_qualification())
-					Session::flash('success', true);
-				return Redirect::to('applicant/account');
-				break;
-			case 'workhistory':
-				if ($this->post_workhistory())
-					Session::flash('success', true);
-				return Redirect::to('applicant/account');
-				break;
+		$rules = array(
+			'firstname' => 'required',
+			'lastname' => 'required',
+			'slug' => 'unique:applicants,slug',
+		);
+
+		$validation = Validator::make(Input::all(), $rules);
+
+		if ($validation->fails()) {
+			
+			return Redirect::to('applicant/account')->with_errors($validation);
+		} else {
+
+			//Save User Basic Profile
+			$applicant = Applicant::find(Session::get('applicant_id'));
+			$applicant->first_name = Input::get('firstname');
+			$applicant->last_name = Input::get('lastname');
+			$applicant->preferred_location = Input::get('location');
+			$applicant->preferred_job = Input::get('category');
+			$applicant->slug = Input::get('slug');
+			$applicant->save();
+			Session::flash('success', true);
 		}
+				
 	}
 
 	public function post_upload_profile_pic() {
@@ -505,8 +504,8 @@ class Applicant_Controller extends Base_Controller {
 
 		if ($validation->fails()) {
 			$items = null;
-			switch($type) {
-				
+			switch ($type) {
+
 				case 'resume':
 					$error_message = $validation->errors->first('resume-file');
 					$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
@@ -516,16 +515,16 @@ class Applicant_Controller extends Base_Controller {
 					$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
 					break;
 			}
-			
-		
 
-			$view = View::make('applicant.' .$type)->with(array($type .'s' => $items, 'error' =>  $error_message ))->render();;
+
+
+			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items, 'error' => $error_message))->render();
+			;
 
 			return json_encode(array('success' => false, 'view' => $view));
-			
 		}
-		
-		
+
+
 		$file['name'] = preg_replace('/\s+/', '-', $file['name']);
 
 		$folder = APP_UPLOAD_DIR . $username . '/' . $type . '/';
@@ -551,58 +550,88 @@ class Applicant_Controller extends Base_Controller {
 				if ($applicant_resume->save()) {
 					$resumes = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
 
-					$view = View::make('applicant.resume')->with(array('resumes' => $resumes))->render();;
+					$view = View::make('applicant.resume')->with(array('resumes' => $resumes))->render();
+					;
 
 					return json_encode(array('success' => true, 'view' => $view));
 				}
 			} else {
-				$applicant_covereletter = new ApplicantCoverletters();
-				$applicant_covereletter->applicant_id = $applicant_id;
-				$applicant_covereletter->coverletter = $file['name'];
-				$applicant_covereletter->path = $path;
-				$applicant_covereletter->filesize = Formatter::format_bytes($file['size'], 0);
-				$applicant_covereletter->type = Formatter::format_filetype($file['type']);
-				$applicant_covereletter->disabled = 0;
-				$applicant_covereletter->save();
+				$applicant_coverletter = new ApplicantCoverletters();
+				$applicant_coverletter->applicant_id = $applicant_id;
+				$applicant_coverletter->coverletter = $file['name'];
+				$applicant_coverletter->path = $path;
+				$applicant_coverletter->filesize = Formatter::format_bytes($file['size'], 0);
+				$applicant_coverletter->type = Formatter::format_filetype($file['type']);
+				$applicant_coverletter->disabled = 0;
+				$applicant_coverletter->save();
 
-				if ($applicant_covereletter->save()) {
-					$coverletters = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+				if ($applicant_coverletter->save()) {
+					$coverletters = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
 
-					$view = View::make('applicant.resume')->with(array('coverletters' => $coverletters))->render();
+					$view = View::make('applicant.coverletter')->with(array('coverletters' => $coverletters))->render();
 
 					return json_encode(array('success' => true, 'view' => $view));
 				}
 			}
 		} else {
-			switch($type) {
-				
+			switch ($type) {
+
 				case 'resume':
 					$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
 					break;
 				case 'coverletter':
-					
+
 					$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
 					break;
 			}
-			$view = View::make('applicant.' .$type)->with(array($type .'s' => $items, 'error' =>  'File already exists. Please rename or remove your file.' ))->render();;
-			return json_encode(array('success' => false, 'view' => $view));
+			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items, 'error' => 'File already exists. Please rename or remove your file.'))->render();
 			
+			return json_encode(array('success' => false, 'view' => $view));
 		}
 	}
 
-	public function post_slug() {
-		$applicant = Applicant::find(Session::get('applicant_id'));
-		$applicant->slug = Input::get('slug');
-
-		try {
-			$applicant->save();
-			//return true;
-			return json_encode(array('slug' => Input::get('slug')));
-		} catch (Exception $e) {
-			if ($e->getMessage()) {
-				return json_encode(array('error' => 'Slug already been used. Please choose another slug.'));
-			}
+	public function get_remove($type = null, $id = null) {
+		if (!$type || !$id) {
+			return false;
 		}
+		$applicant_id = Session::get('applicant_id');
+		$item = null;
+		$class = '';
+		switch ($type) {
+			case 'resume':
+				$item = ApplicantResumes::find($id);
+				$class = 'ApplicantResumes';
+				break;
+			case 'coverletter':
+				$item = ApplicantCoverletters::find($id);
+				$class = 'ApplicantCoverletters';
+				break;
+			default: 
+				break;
+		}
+		
+		if (!$item) {
+			return false;
+		}
+		
+		//get the path of the file and unlink it, then remove from database and repopulate the list
+		$path = $item->path;
+		
+		if ( unlink( 'public/' . $path )) {
+			
+			if ( $item->delete() ) {
+				
+				$items = $class::where('applicant_id', '=', $applicant_id)->get();
+				
+				$view = View::make('applicant.' . $type)->with(array($type.'s' => $items, 'message' => ucfirst($type) . ' has been successfully removed.'))->render();
+				
+				return json_encode(array('success' => true, 'view' => $view));
+			}
+			
+		}
+		
+		
+		
 	}
 
 	public function get_remove_item($id = null, $type = null) {

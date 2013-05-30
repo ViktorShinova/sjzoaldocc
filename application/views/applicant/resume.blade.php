@@ -22,7 +22,7 @@
 <ul class="listing" id="resume-listing">
 	@foreach ($resumes as $resume)
 	<li class="item">
-		<button class="btn btn-mini btn-danger remove pull-right" type="button" id="r{{ $resume->id }}"><i class="icon-remove"></i></button>
+		<button class="btn btn-mini btn-danger remove pull-right" type="button" id="{{ $resume->id }}"><i class="icon-remove"></i></button>
 		<a href="{{ $resume->path }}" target="_blank">
 			<span class="icon {{ $resume->type }}"></span>
 		</a>

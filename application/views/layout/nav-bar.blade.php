@@ -21,18 +21,19 @@
 								<a href="/register">Register</a>
 							</li>
 							@endif
-							<li class="divider-vertical"></li>
+							
 							<li class="dropdown">
 								@if ( Auth::check() ) 
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ Auth::user()->username }}<b class="caret"></b></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ Auth::user()->username }} <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 
 									@if( Auth::user()->role_id == 1 )
 										<li><a href="/employer/post/list"><i class="icon-book"></i> My Dashboard</a></li>
 									@else
 										<li><a href="/applicant/account"><i class="icon-book"></i> My Profile</a></li>
+										<li><a href="/applicant/inbox"><i class="icon-envelope"></i> My Inbox</a></li>
 									@endif
-									<li><a href="/applicant/settings"><i class="icon-cog"></i> Settings</a></li>
+									
 
 									<li class="divider"></li>
 									<li><a href="/logout"><i class="icon-off"></i> Sign Out</a></li>

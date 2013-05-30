@@ -10,13 +10,6 @@
 @endif
 
 <div class="row applicant">
-	@if ( $errors->all(':message') )
-	<div class="validation error">
-		@foreach($errors->all(':message') as $message)
-		<p>{{ $message }}</p>
-		@endforeach
-	</div>
-	@endif
 
 	<h1 class='span12'>My Profile</h1>
 
@@ -27,7 +20,13 @@
 	<div class="span9 white-bg drop-shadow-butterfly" id='profile-basic'>
 
 		<h4>Basic Details</h4>
-
+		@if ( $errors->all(':message') )
+		<div class="validation error">
+			@foreach($errors->all('<p>:message</p>') as $message)
+			{{ $message }}
+			@endforeach
+		</div>
+		@endif
 		<div id="profile-photo">
 			<div id="current-photo">
 				<div id="photo">
@@ -80,8 +79,24 @@
 	</div>
 	{{ Form::close(); }}
 
+	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'validate-form form ')); }}
 
+	<div class="span3 white-bg drop-shadow-butterfly" id="profile-switch">
+		<h4>Set your profile privacy</h4>
+		<p>Do you want potential employers to view your profile?</p>
+		
+		<div class="alert alert-info" style="{{ ($applicant->viewable == 0 )? 'display: none' : '' }}">
+			
+			By enabling this, you have allowed employers to view your profile. Employers may contact you via email.
+			
+		</div>
+		
+		<div id="privacy-switch" class="switch switch-large">
+			<input type="checkbox" {{ ($applicant->viewable == 0 )? '' : 'checked' }} />
+		</div>	
+	</div>
 
+	{{ Form::close(); }}
 	<div class="span9">
 
 		<div class="accordion" id="account-edit">
@@ -229,7 +244,7 @@
 							<ul class="listing" id="resume-listing">
 								@foreach ($resumes as $resume)
 								<li class="item">
-									<button class="btn btn-mini btn-danger remove pull-right" type="button" id="r{{ $resume->id }}"><i class="icon-remove"></i></button>
+									<button class="btn btn-mini btn-danger remove pull-right" type="button" id="{{ $resume->id }}"><i class="icon-remove"></i></button>
 									<a href="{{ $resume->path }}" target="_blank">
 										<span class="icon {{$resume->type}}"></span>
 									</a>
@@ -240,7 +255,7 @@
 								@endforeach
 							</ul>
 						</div>
-						<button id="add-resume" class="btn pull-right add" type="button"><i class="icon-plus icon-white"></i> Resume</button>
+						<button id="add-resume" class="btn pull-right add btn-primary" type="button"><i class="icon-plus icon-white"></i> Resume</button>
 						<input type="file" id="resume-file" name="resume-file"/>
 						{{ Form::close(); }}
 					</div>
@@ -261,7 +276,7 @@
 							<ul class="listing" id="coverletter-listing">
 								@foreach ($coverletters as $coverletter)
 								<li class="item">
-									<button class="btn btn-mini remove pull-right" type="button" id="c{{ $coverletter->id }}"><i class="icon-remove"></i></button>
+									<button class="btn btn-danger btn-mini remove pull-right" type="button" id="{{ $coverletter->id }}"><i class="icon-remove"></i></button>
 									<a href="{{ $coverletter->path }}" target="_blank">
 										<span class="icon {{ $coverletter->type }}"></span>
 									</a>

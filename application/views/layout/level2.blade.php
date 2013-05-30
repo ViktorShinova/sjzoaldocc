@@ -19,8 +19,9 @@
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->
-		{{ HTML::style('/css/font-awesome.min.css') }}
+		
 		{{ HTML::style('/css/main.css') }}
+		{{ HTML::style('/css/font-awesome.min.css') }}
 		@yield('custom_styles')
 		
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>

@@ -17,6 +17,7 @@ var jSite = {
 		//jSite.attachPrivacySettings();
 		//jSite.attachResumeVisibility();
 		jSite.attachSalaryChange();
+		jSite.attachSwitchToggle();
 
 		//jSite.attachGetShortlistTags();
 
@@ -26,6 +27,36 @@ var jSite = {
 
 
 	},
+			
+	attachSwitchToggle: function() {
+		if ($('#privacy-switch').length) {
+			$('#privacy-switch').on('switch-change', function (e, data) {
+				var value = data.value;
+				var formData = 'privacy=' + value;
+				$.ajax({
+					url: '/applicant/privacy/',
+					type: 'post',
+					dataType: 'json',
+					data: formData,
+					success: function( data ) {
+						
+						if( data.success ) {
+							console.log( value );
+							if( value ) {
+								
+								$("#profile-switch .alert").fadeIn();
+								
+							} else {
+								$("#profile-switch .alert").fadeOut();
+							}
+						}
+						
+					}
+				});
+				
+			});
+		}
+	},	
 	attachPopup: function() {
 		if ($('[rel=popup]').length) {
 			$('[rel=popup]').click(function(e) {
@@ -772,22 +803,44 @@ var jSite = {
 	},
 	
 	attachRemoveResumeCoverletter: function() {
-		if( $('#resume .remove').length ) {
+		
+		var removeFile = function( type ) {
 			
-			$('#resume .remove').click( function() {
-				
+			$('#' + type + ' .remove').click( function() {
 				var value = $(this).attr('id');
+				
+				$.ajax( {
+					
+					type: 'get',
+					url: '/applicant/remove/' + type + '/' + value,
+					dataType: 'json',
+					success: function(data) {
+						if(data.success) {
+							
+							$('.' + type + '-listing').html(data.view);
+							
+							setTimeout(function() {
+								$("#" + type + " .validation.success").fadeOut();
+							}, 3000);
+						}
+					}
+					
+				});
 				
 			});
 			
+		};
+				
+		if( $('#resume .remove').length ) {
+			removeFile('resume');
 		}
 		
 		if ( $('#coverletter .remove').length ) {
-			$('#coverletter .remove').click( function() {
-				var value = $(this).attr('id');
-				
-			});
+			removeFile('coverletter');
 		}
+		
+		
+		
 	},
 //	attachPrivacySettings: function() {
 //		$('div.btn-group button').click(function(){
@@ -861,6 +914,8 @@ var jSite = {
 						$('#'+ type + ' .validation.error').fadeOut();
 					}, 3000);
 				}
+				
+				jSite.attachRemoveResumeCoverletter();
 			}
 		});
 	},

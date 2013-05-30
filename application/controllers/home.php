@@ -71,12 +71,16 @@ class Home_Controller extends Base_Controller {
 				$applicant_id = Applicant::where('user_id', '=', $user->id)->first()->id;
 				Session::put('applicant_id', $applicant_id);
 	
-				$referer = "/";
+				$referer = "/applicant/account";
 			}
 			
 			if (Session::has('referer')) {
-				$referer = Session::get('referer');
+				
+				if( !strpos(Session::get('referer'), "login") ) {
+					$referer = Session::get('referer');
+				} 				
 			} 
+			
 			
 			return Redirect::to( $this->_cleanReturnUrl($referer) );
 		}
