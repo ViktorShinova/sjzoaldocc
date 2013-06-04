@@ -1,21 +1,22 @@
 @layout('layout.employer')
-@section('page-id')page-post@endsection
+@section('page-id')page-employer-adverts@endsection
 @section('content')
 
-<h1 class="container-header">Post a new advertisement</h1>
-<div class="content">
-	@if ( $errors->all(':message') )
-	<div class="validation error">
-		<p>Please correct the following errors</p>
-		<ul>
-			@foreach($errors->all(':message') as $message)
-			<li>{{ $message }}</li>
-			@endforeach
-		</ul>
-	</div>
-	@endif
-	<form action="/employer/post/create" method="post" class="employer-form validate-form">
-
+<h2>Post a new advertisement</h2>
+<br />
+@if ( $errors->all(':message') )
+<div class="validation error">
+	<p>Please correct the following errors</p>
+	<ul>
+		@foreach($errors->all(':message') as $message)
+		<li>{{ $message }}</li>
+		@endforeach
+	</ul>
+</div>
+@endif
+<form action="/employer/post/create" method="post" class="employer-form validate-form">
+	<div class="white-bg drop-shadow-butterfly">
+		<h4 style="clear: both">Job Details</h4>
 		<ul class="post-desc">
 			<li> {{ Form::label('title', 'Title'); echo Form::text('title', Input::old('title') , array('class' => 'validate[required]')); }} </li>
 			<li> {{ Form::label('summary', 'Summary'); echo Form::textarea('summary', Input::old('summary'), array('class' => 'validate[required]')); }} </li>
@@ -41,6 +42,9 @@
 			<li> {{ Form::label('salary-range', 'Salary Description'); echo Form::text('salary-range', Input::old('salary-range'), array('maxlength' => 70, 'class' => 'validate[required]') ) }} <a href="#" rel="tooltip" data-toggle="tooltip" title="You can enter an interesting note for your salary description. E.g (Good $$$ with super). Only a maximum of 70 characters allowed."><i class="icon-question-sign"></i></a></li>
 
 		</ul>
+		<div class="clearfix"></div>
+	</div>
+	<div class="white-bg drop-shadow-butterfly">
 		<h4 style="clear: both">Custom "Apply Now" Button</h4>
 		<ul>
 
@@ -63,6 +67,8 @@
 			</li>
 
 		</ul>
+	</div>
+	<div class="white-bg drop-shadow-butterfly">
 		<h4 style="clear: both">Please select a template</h4>
 		<p><em>If no template is selected, the default template will be automatically assigned.</em></p>
 		<input type="hidden" id="post-selected-template" value="" name="post-selected-template" />
@@ -76,12 +82,10 @@
 			</li>
 			@endforeach
 		</ul>
+	</div>
 
-		{{ Form::submit("Next" , array('class' => 'btn btn-primary clearfix')); }} 
-	</form>
-
-
-</div>	
+	{{ Form::submit("Next" , array('class' => 'btn btn-primary clearfix pull-right')); }} 
+</form>
 
 @endsection
 

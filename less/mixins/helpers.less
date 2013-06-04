@@ -226,3 +226,14 @@
 .nudge-t( @pos ) when not ( @pos = 0 ) { top: @pos; }
 .nudge-b( @pos ) when ( @pos = 0 ) {}
 .nudge-b( @pos ) when not ( @pos = 0 ) { bottom: @pos; }
+
+
+.button-background() {
+	background-color: #0079c1;
+	background: -moz-linear-gradient(center bottom,#0079c1 0,#0079c1 20%,#00a1ff 100%);
+	background: -webkit-gradient(linear,left bottom,left top,color-stop(0%,#0079c1),color-stop(20%,#0079c1),color-stop(100%,#00a1ff));
+	background: -webkit-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#00a1ff 100%);
+	background: -ms-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#00a1ff 100%);
+	background: -o-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#00a1ff 100%);
+	background: linear-gradient(bottom,#0079c1 0,#0079c1 20%,#00a1ff 100%);
+}

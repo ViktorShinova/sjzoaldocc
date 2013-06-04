@@ -1,5 +1,5 @@
 @layout('layout.employer')
-@section('page-id')page-archived@endsection
+@section('page-id')page-employer-adverts@endsection
 @section('content')
 <h1 class="container-header">Jobs List</h1>
 <div class="content">

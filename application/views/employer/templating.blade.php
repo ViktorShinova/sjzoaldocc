@@ -11,16 +11,16 @@
 @endsection
 @section('content')
 
-<h1 class="container-header">Custom Templating</h1>
-<div class='content'>
-	<div class="form-field span7" id="template-container">
+<h2>Custom Templating</h2>
+	<div class="row">
+		<div class="form-field span7" id="template-container">
 
-		@include('employer.template')	
+			@include('employer.template')	
 
-	</div>
-
-	<div id="toolbar">
-		<div id="custom-template" class="form-field span5">
+		</div>
+	
+	<div id="toolbar" class="span5">
+		<div id="custom-template" class="">
 			<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
 			<div class="viewport">
 				<div class="overview">

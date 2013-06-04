@@ -1,5 +1,5 @@
 @layout('layout.employer')
-@section('page-id')page-post@endsection
+@section('page-id')page-employer-adverts@endsection
 @section('content')
 
 <h1 class="container-header">Job Post Details</h1>
