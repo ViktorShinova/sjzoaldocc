@@ -81,7 +81,8 @@
 		<div class="clearfix"></div>
 	</li>
 	@endforeach
-<?php echo $jobs->appends(array('keywords' => Input::get('keywords'), 'work-type' => Input::get('work-type'), 'location' => Input::get('location'), 'job-category' => Input::get('job-category')))->links(); ?>                                  
+	
+		<?php echo $jobs->appends(array('keywords' => Input::get('keywords'), 'work-type' => Input::get('work-type'), 'location' => Input::get('location'), 'job-category' => Input::get('job-category')))->links(); ?>                                  
 	<!-- #pagination -->
 
 </ul>

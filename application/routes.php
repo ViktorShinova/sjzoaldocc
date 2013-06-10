@@ -39,6 +39,9 @@ Route::get('home/login', function() {
 //register /login to point to home/login for get 
 Route::get('login', array('as' => 'login',  'uses'=> 'home@login'));
 
+Route::get('resetpassword', array('as' => 'resetpassword',  'uses'=> 'home@resetpassword'));
+
+
 Route::get('home/register', function() {
 	return Redirect::to_route('register');
 });
@@ -47,7 +50,8 @@ Route::get('register', array('as' => 'register', 'uses' => 'applicant@register')
 
 //register post to post_login in home controller
 Route::post('login', 'home@login');
-Route::post('register', 'applicant@login');
+Route::post('resetpassword', 'home@resetpassword');
+Route::post('register', 'applicant@register');
 Route::get('logout', 'home@logout');
 Route::get('job/search', 'job@search');
 Route::get('job/shortlist_tag', 'job@shortlist_tag');

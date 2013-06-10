@@ -1,19 +1,12 @@
 <?php
 
 class Job_Controller extends Base_Controller {
-	
-	
+
 	const NO_FILE_UPLOAD = 4;
-	const JOB_APPLY_TPL = 'job-apply-email';
+	const JOB_APPLY_TPL = 'job-apply';
 	const APPLIED = 1;
-	
-	
+
 	//private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
-	
-	
-	
-	
-	
 //	private function tokenizer($keywords) {
 //		//first we check for quotes. If they are present, we must put them together as a phrase. If not, separate them.
 //		//var_dump($keywords);
@@ -30,7 +23,6 @@ class Job_Controller extends Base_Controller {
 //
 //		return $keywords;
 //	}
-
 //	private function advance_tokenizer($token, $test = true) {
 //		//this will return an array of token phrase
 //		//
@@ -163,7 +155,7 @@ class Job_Controller extends Base_Controller {
 				->where('end_at', '>', date('Y:m:d H:i:s'))
 				->order_by($column, $direction)
 				//->raw_where("CONTAINS (jobs.title,")
-				->paginate(10, $select);
+				->paginate(20, $select);
 
 
 		$is_applicant = false;
@@ -443,7 +435,6 @@ class Job_Controller extends Base_Controller {
 			if ($applicant_job != null && $applicant_job->status == 1) {
 				$is_applied = true;
 			}
-
 		} else if (Auth::check() && Auth::user()->role_id == '1') {
 			$is_employer = true;
 //				$applicant = new Applicant();
@@ -462,7 +453,6 @@ class Job_Controller extends Base_Controller {
 					'is_applied' => $is_applied,
 					'is_employer' => $is_employer,
 		));
-		
 	}
 
 	public function post_apply($id = null) {
@@ -471,76 +461,78 @@ class Job_Controller extends Base_Controller {
 		}
 
 		$input = Input::all();
-
-
-
 		$job = Job::find($id);
-		
+
 		$employer = $job->employer;
-		
+
 		//email employer
+		$mail = new PHPMailer();
 		
-		$mail = new SendEmail();
-		$mail->email_subject = 'You\'ve received a new job application! - Careerhire';
 		
-		//email => name
-		$mail->email_recipients = array(
-			$employer->application_email => $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name
-		);
+		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+			$mail->SMTPAuth = true;  // authentication enabled
+			$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+			$mail->Host = SMTP;
+			$mail->Port = 465;
+			$mail->Username = SMTP_USERNAME;
+			$mail->Password = SMTP_PASSWORD;
+		}
 		
-		//set email template
-		$mail->email_template = self::JOB_APPLY_TPL;
+		$mail->Subject = 'You\'ve received a new job application! - Careerhire';
+
+		$mail->AddAddress($employer->application_email, $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name);
+		$mail->AddReplyTo(Input::get('email'));
+
+		$mail->_template = self::JOB_APPLY_TPL;
 
 		//gather all the this job and employer details
 		$data['job'] = $job->original;
 		$data['employer'] = $employer->original;
 
 		//pass applicant email
-		$mail->email_from_applicant = $input['email'];
-
 		//if user logged-in
 		if (Session::has('applicant_id')) {
 			$applicant_id = Session::get('applicant_id');
 			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
 							->where('job_id', '=', $id)->first();
 
-			
+
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
 			$apply_job->applicant_id = $applicant_id;
 			$apply_job->applicant_resume_id = $input['selected-resume'];
-			
+
 			$apply_job->applicant_coverletter_id = $input['selected-coverletter'];
-			
+
 			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
 			$apply_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
-			
+
 			$apply_job->status = self::APPLIED;
-			
+
 			$apply_job->save();
 
 			//gather data of applicant
 			$data['applicant'] = array_merge((array) $apply_job->original, (array) Applicant::find($apply_job->applicant_id)->original);
-			
-			
-			
+
+
+
 			//gather data of attachments
 			if ($input['selected-resume'] != 0) {
 				$resume_file = ApplicantResumes::find($input['selected-resume'])->original;
 				$resume_file['name'] = $resume_file['resume'];
 				unset($resume_file['resume']);
-				
-				
+
+
 				$resume_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $resume_file['path'];
-				
-				
+
+
 				unset($resume_file['path']);
 				$resume_file['error'] = 0;
 				$applicant_resume_file = $resume_file;
-				
 			} else {
 				$applicant_resume_file = Input::file('upload-resume');
-				
 			}
 
 			if ($input['selected-coverletter'] != 0) {
@@ -562,8 +554,7 @@ class Job_Controller extends Base_Controller {
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
 			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
-			$apply_job->non_registered_users = serialize(array($input['first_name'], $input['last_name'],
-				$input['email'], $input['contact']));
+			$apply_job->non_registered_users = serialize($input);
 			$apply_job->status = APPLIED;
 			$apply_job->save();
 
@@ -575,12 +566,19 @@ class Job_Controller extends Base_Controller {
 		}
 
 		//pass all attachments
-		$mail->email_attachments = $data['applicant']['attachments'];
 
-		//pass all gathered data
-		$mail->email_data = $data;
+		$attachment = $data['applicant']['attachments'];
 
-		//die(var_dump($data));	
+		if ($attachment['error'] == 0) {
+			$mail->AddAttachment($attachment['tmp_name'], $attachment['name']);
+		}
+
+
+		$mail->Body = View::make('email.' . $this->_template)
+				->with(array(
+					'data' => $data
+				)
+		);
 
 		if ($mail->send()) {
 			Session::flash('success', true);

@@ -1,5 +1,10 @@
 .employer {
-	
+	.wrapper {
+		.border-radius(6px);
+		border: 1px solid #ccc;
+		padding: 10px 20px;
+		
+	}
 	.secondary-nav {
 		margin-bottom: 21px;
 		ul { 
@@ -81,7 +86,7 @@
 				td {
 					font-size: 12px;
 					font-family: tahoma, san-serif;
-					padding: 4px;
+					padding: 6px 10px;
 					border: 1px solid #ddd;
 					a { 
 						color: @button-blue; 
@@ -98,10 +103,7 @@
 
 	//Post 
 	.employer-form {
-		h4{
-			font-size: 18px;
-			margin-bottom: 21px;
-		}
+		
 		ul {
 			input, textarea, select { margin-bottom: 0;}
 			
@@ -192,7 +194,7 @@
 				width: 714px;
 				float: left;
 			}
-			#cke_email-success, #cke_email-unsuccess { width: 784px;}
+			#cke_email-success, #cke_email-unsuccess { width: 98%;}
 			label {
 				width: 160px;
 				float: none;
@@ -337,7 +339,8 @@
 		   &:first-child { a { .border-radius(4px 0 0 4px); } }
 			> ul {
 				background: #f3f3f4;
-				
+				border: 1px solid #d4d4d4;
+				border-bottom: 0;
 				left: -9999px;
 				margin: 0;
 				
@@ -350,7 +353,7 @@
 					border-bottom: 1px solid #e9e9eb;
 					border-top: 1px solid #fbfbfb;
 					list-style: none;
-					padding: 10px 20px;
+					
 					position: relative;
 					text-align: left;
 					
@@ -359,10 +362,10 @@
 						font-size: 12px;
 						line-height: 24px;
 						left: -9999px;
-						
+						padding: 10px 20px;
 						position: static;
 						text-indent: 25px;
-						
+						display: block;
 
 						
 					}
@@ -384,6 +387,17 @@
 	   
    }
 	
+	.notice-container {
+		border: 0 !important;
+	}
+	#employer-profile {
+		form {
+			> ul {
+				margin-right: 0 !important;
+			}
+		}
+		
+	}
 }
 
 #page-employer-adverts .navbar ul li.page-employer-adverts,
@@ -426,6 +440,7 @@
 			}
 		}
 	}
+
 }
  
 /* Portrait tablet to landscape and desktop */

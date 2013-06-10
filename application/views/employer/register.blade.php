@@ -17,21 +17,22 @@
 
 <section id="emp-register">
 	{{ Form::open('employer/register', 'POST', array('class' => 'employer-register-form  validate-form form  row')); }}
-	<h1 class="container-header span12 ">Start Recruiting on Careershire</h1>
-	<div class="span12 white-bg drop-shadow">
-		<h3>Account Information</h3>
-		<ol>
-			<!--<li>{{ Form::label('username', 'Username'); echo Form::text('username', Input::old('username'), array('class' => 'validate[required]')) }}</li>-->
-			<li>{{ Form::label('email', 'Email'); echo Form::text('email', Input::old('email'), array('class' => 'validate[required, custom[email]]')) }}</li>
-			<li>{{ Form::label('password', 'Password'); echo Form::password('password', array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array('class' => 'validate[required]')) }}</li>
-		</ol>
+	<h2 class="span12" >Start Recruiting on Careershire</h2>
+	<div class="span12 white-bg drop-shadow-butterfly">
+		<h4>Account Information</h4>
+		<div class='pad'>
+			<ol>
+				<!--<li>{{ Form::label('username', 'Username'); echo Form::text('username', Input::old('username'), array('class' => 'validate[required]')) }}</li>-->
+				<li>{{ Form::label('email', 'Email'); echo Form::text('email', Input::old('email'), array('class' => 'validate[required, custom[email]]')) }}</li>
+				<li>{{ Form::label('password', 'Password'); echo Form::password('password', array('class' => 'validate[required]')) }}</li>
+				<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array('class' => 'validate[required]')) }}</li>
+			</ol>
+		</div>
+	</div>
+	<div class="span12 white-bg drop-shadow-butterfly">
+		<h4>Company and Contact Information</h4>
 
-
-
-		<h3>Company and Contact Information</h3>
-
-
+		<div class='pad'>
 		<ol>
 			<li>{{ Form::label('company', 'Company'); echo Form::text('company', Input::old('company'), array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('industry', 'Industry'); echo Form::text('industry', Input::old('industry'), array('class' => 'validate[required]')) }}</li>
@@ -49,7 +50,7 @@
 			<li>{{ Form::label('company-size', 'Number of employees'); echo Form::select('company-size', array('1 - 10', '10 - 20', '20 - 30', '30 - 40', '50 - 100', '100 - 200', '> 200') ,Input::old('company-size'), array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::submit("Register", array('class' => 'btn btn-primary pull-right')); }} </li>		
 		</ol>
-
+		</div>
 	</div>
 	{{ Form::close(); }}
 </section>

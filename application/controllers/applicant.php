@@ -140,6 +140,54 @@ class Applicant_Controller extends Base_Controller {
 		}
 	}
 	
+	
+	public function post_password() {
+		
+		if( !Input::get('current_password')) {
+			return false;
+		}
+		
+		
+		
+		Validator::register('currentpassword', function($attribute, $value, $parameters) {
+					$same_password = Hash::check($value, Auth::user()->password);
+					if ($same_password) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+		
+		$message = array(
+			'currentpassword' => 'The current password entered was incorrect.',
+			'different' => 'The new password entered must be different from the current one.'
+		);
+		
+		$rules = array(
+			'current_password' => 'required|currentpassword',
+			'password' => 'required|confirmed|different:current_password',
+			'password_confirmation' => 'required',
+		);
+		
+		$validation = Validator::make(Input::all(), $rules, $message);
+		
+		if ($validation->fails()) {
+			return Redirect::to('applicant/account')->with_errors($validation)->with('password', true);
+		} else {
+			
+			$user = Auth::user();
+			$user->password = Hash::make(Input::get('password'));
+			
+			if( $user->save()) {
+				return Redirect::to('applicant/account')->with('success', true)->with('password', true);
+			}
+			
+		}
+		
+		
+		
+	}
+	
 	public function post_settings() {
 		//die(var_dump(serialize(Input::all())));
 		$applicant = Applicant::find(Session::get('applicant_id'));
@@ -366,7 +414,7 @@ class Applicant_Controller extends Base_Controller {
 
 		if ($validation->fails()) {
 			
-			return Redirect::to('applicant/account')->with_errors($validation);
+			return Redirect::to('applicant/account')->with_errors($validation)->with('profile', true);
 		} else {
 
 			//Save User Basic Profile
@@ -377,7 +425,8 @@ class Applicant_Controller extends Base_Controller {
 			$applicant->preferred_job = Input::get('category');
 			$applicant->slug = Input::get('slug');
 			$applicant->save();
-			Session::flash('success', true);
+			return Redirect::to('applicant/account')->with('success', true)->with('profile', true);
+			
 		}
 				
 	}

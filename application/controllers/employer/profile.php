@@ -135,10 +135,10 @@ class Employer_Profile_Controller extends Base_Controller {
 				Session::flash('success', true);
 				//send mail to inform the user that his account has change
 
-				$mail = new Phpmailer();
+				$mail = new PHPMailer();
 				$mail->IsHTML(true);
 				$mail->FromName = COMPANY_NAME;
-				$mail->From = COMPANY_EMAIL;
+				$mail->From = ACCOUNT_EMAIL;
 				$mail->Subject = "Account information changed";
 				$mail->Body = View::make('email.emp_account_change')->with(array('user' => $user, 'employer' => $employer, 'uuid' => $uuid));
 

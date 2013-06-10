@@ -18,6 +18,7 @@ var jSite = {
 		//jSite.attachResumeVisibility();
 		jSite.attachSalaryChange();
 		jSite.attachSwitchToggle();
+		jSite.attachAccordion();
 
 		//jSite.attachGetShortlistTags();
 
@@ -1106,6 +1107,15 @@ var jSite = {
 			});
 
 		}
+	},
+	attachAccordion: function() {
+		$('#account-edit').collapse({
+			toggle: false
+		}).on('show',function (e) {
+			$(e.target).parent().find(".icon-chevron-down").removeClass("icon-chevron-down").addClass("icon-chevron-up");
+		}).on('hide', function (e) {
+			$(e.target).parent().find(".icon-chevron-up").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+		});
 	}
 }
 

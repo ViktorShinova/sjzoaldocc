@@ -63,14 +63,7 @@
 						</ul>
 					</div>
 				</div>
-				
-				<nav class="secondary-nav span12">
-<ul class="">
-						
 
-					</ul>
-					
-				</nav>
 				<div class="clearfix"></div>
 				<div class="span12">
 					@yield('content')

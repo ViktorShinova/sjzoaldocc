@@ -12,6 +12,7 @@ class Employer_Post_Controller extends Base_Controller {
 					'list',
 					'create',
 					'edit',
+					'details'
 				)
 		);
 
@@ -21,6 +22,7 @@ class Employer_Post_Controller extends Base_Controller {
 					'list',
 					'create',
 					'edit',
+					'details',
 				)
 		);
 	}
@@ -232,12 +234,12 @@ class Employer_Post_Controller extends Base_Controller {
 		
 		$job = Job::find($id);
 		
-		$applicants = DB::table('applicants')
-		->join('applicant_job', 'applicants.id', '=', 'applicant_job.applicant_id')
+		$applicants = DB::table('applicant_job')
+		->join('applicants', 'applicants.id', '=', 'applicant_job.applicant_id', 'LEFT OUTER')
 		->join('applicant_resumes', 'applicant_job.applicant_resume_id', '=', 'applicant_resumes.id', 'LEFT OUTER')
-		->join('users','users.id', '=', 'applicants.user_id')
+		->join('users','users.id', '=', 'applicants.user_id', 'LEFT OUTER')
 		->where('applicant_job.job_id', '=', $id)
-		->paginate(10,
+		->paginate(20,
 				array(
 					'applicants.id',
 					'applicant_resumes.path',
@@ -248,7 +250,26 @@ class Employer_Post_Controller extends Base_Controller {
 					'applicant_job.sent as sent',
 				)
 		);
-
+		
+		
+		
+		
+		foreach( $applicants->results as $applicant) {
+			
+			if( !$applicant->applicant_id) {
+				//non-registered users
+				
+				$data = unserialize($applicant->non_registered_users);
+				
+				$applicant->first_name = $data['first_name'];
+				$applicant->last_name = $data['last_name'];
+				$applicant->email = $data['email'];
+				
+			}
+			
+		}
+		
+		
 		return View::make('employer.details')->with(array('applicants' => $applicants, 'job' => $job));
 
 		//Get the number of applicant who apply and also get who applied

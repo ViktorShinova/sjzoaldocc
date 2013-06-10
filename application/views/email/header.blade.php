@@ -92,8 +92,8 @@
 		.footer-content-left a { color: #ffffff; font-weight: bold; text-decoration: none; }
 		.footer-content-right { font-size: 11px; line-height: 16px; color: #ededed; margin-top: 0px; margin-bottom: 15px; }
 		.footer-content-right a { color: #ffffff; font-weight: bold; text-decoration: none; }
-		#footer { background-color: #c7c7c7; color: #ededed; }
-		#footer a { color: #ffffff; text-decoration: none; font-weight: bold; }
+		.email #footer { background-color: #c7c7c7; color: #ededed; }
+		.email #footer a { color: #ffffff; text-decoration: none; font-weight: bold; }
 		#permission-reminder { white-space: normal; }
 		#street-address { color: #b0b0b0; white-space: normal; }
 		.fineprint { font-size: 9px; text-align:justify; }
@@ -108,7 +108,7 @@
 		</style>
 		<![endif]-->
 	</head>
-		<body>
+		<body class="email">
 			<table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table">
 				<tbody>
 					<tr>
@@ -158,7 +158,13 @@
 													<td class="w30"></td>
 												  </tr>
 												  <tr><td class="w30" width="30"></td>
-												<td class="w580" width="490" height="30"><img src="http://www.couturefurniture.sg/test/logo-print.png" width="79" height="79" /></td>
+												<td class="w580" width="490" height="30">
+													@if ( isset( $logo) ) 
+													<img src="http://{{$host}}/{{$logo}}" height="79" />
+													@else
+													<img src="http://www.couturefurniture.sg/test/logo-print.png" width="79" height="79" />
+													@endif
+												</td>
 												<td class="w580" width="200" valign="bottom"> <span class="article-content"><?php echo date('l, jS F Y'); ?></span></td>
 												<td class="w30" width="30"></td></tr>
 												</tbody>
@@ -177,122 +183,3 @@
 																<tbody>
 																	<tr>
 																	  <td class="w580" width="580">
-																		<p align="center" class="article-title">Application for {{ $data['job']['title'] }}</p>
-																			<table class="w580 article-content" width="580" cellpadding="0" cellspacing="0" border="0">
-																				<tr>
-																					<td><strong>Job URL</strong></td>
-																					<td><a href="careershire.localhost/job/article/3" target="_blank">http://careershire.localhost/job/article/{{ $data['job']['id'] }}</a></td>
-																				</tr>
-																				<tr>
-																					<td>&nbsp;</td>
-																					<td>&nbsp;</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2"><hr/></td>
-																				</tr>
-																				<tr>
-																					<td>&nbsp;</td>
-																					<td>&nbsp;</td>
-																				</tr>
-																				<?php
-																					//non-registered users
-																					if(isset($data['applicant']['non_registered_users'])) {
-																						list($first_name, $last_name, $email, $contact_number) = unserialize($data['applicant']['non_registered_users']);
-																					}
-
-																					//registered users
-																					if(isset($data['applicant']['alternate_contact_details'])) {
-																						list($email, $contact_number) = unserialize($data['applicant']['alternate_contact_details']);
-																						$first_name = $data['applicant']['first_name'];
-																						$last_name = $data['applicant']['last_name'];
-																					}
-
-																				?>
-																				<tr>
-																					<td><strong>First Name</strong></td>
-																					<td>{{ $first_name }}</td>
-																				</tr>
-																				<tr>
-																					<td><strong>Last Name</strong></td>
-																					<td>{{ $last_name }}</td>
-																				</tr>
-																				<tr>
-																					<td><strong>Email</strong></td>
-																					<td>{{ $email }}</td>
-																				</tr>
-																				<tr>
-																					<td><strong>Contact Number</strong></td>
-																					<td>{{ $contact_number }}</td>
-																				</tr>
-																				@if( isset($data['applicant']['slug']) )
-																				<tr>
-																					<td><strong>Public Profile</strong></td>
-																					<td><a href="#">http://www.careershire.com.au/applicant/public/{{ $data['applicant']['slug'] }}</a></td>
-																				</tr>
-																				@endif
-																				<tr>
-																					<td>&nbsp;</td>
-																					<td>&nbsp;</td>
-																				</tr>
-																				
-																				@if( $data['applicant']['attachments']['resume']['error'] == 0 )
-																				<tr valign="top">
-																					<td><strong>Attached Resume</strong></td>
-																					<td>{{ $data['applicant']['attachments']['resume']['name'] }}</td>
-																				</tr>
-																				@endif
-																				<tr>
-																					<td>&nbsp;</td>
-																					<td>&nbsp;</td>
-																				</tr>
-																				@if( $data['applicant']['write_coverletter'] != "" )
-																				<tr valign="top">
-																					<td width="142"><strong>Coverletter</strong></td>
-																					<td width="438">{{ $data['applicant']['write_coverletter'] }}</td>
-																				</tr>
-																				@endif
-																				@if( $data['applicant']['attachments']['coverletter']['error'] == 0 )
-																				<tr valign="top">
-																					<td><strong>Attached Coverletter</strong></td>
-																					<td>{{ $data['applicant']['attachments']['coverletter']['name'] }}</td>
-																				</tr>
-																				@endif
-																			</table>
-																	  	</td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-														<td class="w30" width="30"></td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-									<tr>
-										<td class="w640" width="640" height="15" bgcolor="#ffffff"></td>
-									</tr>
-									<tr>
-										<td class="w640" width="640">
-											<table id="footer" class="w640" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#c7c7c7">
-												<tbody>
-													<tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="15"></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
-													<tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="30"><span class="article-content">&copy; 2013 Careershire. ABN 96 992 870 684.</span></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
-													<tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="15"></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-									<tr>
-										<td class="w640" width="640" height="60">
-											<p class="fineprint">The content of this e-mail is the view of the sender or stated author and does not necessarily reflect the view of Careershire. The content, including attachments, is a confidential communication between Careershire and the intended recipient. If you are not the intended recipient, any use, interference with, disclosure or copying of this e-mail, including attachments, is unauthorised and expressly prohibited. If you have received this e-mail in error please contact the sender immediately and delete the e-mail and any attachments from your system.</p>          
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-	</body>
-</html>

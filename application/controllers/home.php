@@ -105,5 +105,50 @@ class Home_Controller extends Base_Controller {
 		
 		return Redirect::to('/');
 	}
+	
+	public function get_resetpassword() {
+		return View::make('home.resetpassword');
+	}
+	
+	public function post_resetpassword() {
+		
+		
+		if( !Input::get('email')) {
+			return false;			
+		}
+		//will only have one
+		$user = User::where('email', '=', Input::get('email'))->first();
+			
+		
+		if( $user ) {
+			$password = Generator::generatePassword();
+			$user->password = Hash::make($password);
+			$user->save();
+		}
+		
+		
+		$mail = new PHPMailer();
+		$mail->IsHTML(true);
+		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+			$mail->SMTPAuth = true;  // authentication enabled
+			$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+			$mail->Host = SMTP;
+			$mail->Port = 465;
+			$mail->Username = SMTP_USERNAME;
+			$mail->Password = SMTP_PASSWORD;
+		}
+		
+		$mail->Subject = "Password Reset Request.";
+		$mail->Body = View::make('email.master')->with('email_body', "Your password has been reset. Your new password is " . $password . '.')->render();
+	    $mail->AddAddress($user->email);
+		$mail->From = ACCOUNT_EMAIL;
+		$mail->FromName = COMPANY_NAME;
+		$mail->send();
+		
+		return Redirect::to('resetpassword')->with('success', true);
+		
+	}
 
 }

@@ -2,101 +2,134 @@
 
 @section('content')
 
-@if ( Session::get('success') )
-<div class="alert fade in alert-success">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	Your profile has been saved!
-</div>
-@endif
-
 <div class="row applicant">
 
 	<h1 class='span12'>My Profile</h1>
 
 
 
-	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'applicant-account-form  validate-form form ')); }}
+	{{ Form::open_for_files('applicant/account', 'POST', array('class' => 'applicant-account-form  validate-form form ')); }}
 
 	<div class="span9 white-bg drop-shadow-butterfly" id='profile-basic'>
 
 		<h4>Basic Details</h4>
-		@if ( $errors->all(':message') )
-		<div class="validation error">
-			@foreach($errors->all('<p>:message</p>') as $message)
-			{{ $message }}
-			@endforeach
-		</div>
-		@endif
-		<div id="profile-photo">
-			<div id="current-photo">
-				<div id="photo">
+		<div class="pad">
+			@if ( $errors->all(':message') && Session::get('profile'))
+			<div class="validation error">
+				@foreach($errors->all('<p>:message</p>') as $message)
+				{{ $message }}
+				@endforeach
+			</div>
+			@elseif ( Session::get('success') && Session::get('profile'))
+			<div class="alert fade in alert-success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				Your profile has been saved!
+			</div>
+			@endif
+			<div id="profile-photo">
+				<div id="current-photo">
+					<div id="photo">
 
-					<img id="profilepic" src="{{ $applicant->profilepic }}" alt="{{$applicant->name}}"><!-- class="preview" factor=1 -->
+						<img id="profilepic" src="{{ $applicant->profilepic }}" alt="{{$applicant->name}}"><!-- class="preview" factor=1 -->
 
-					<input type="hidden" id="x" name="x" />
-					<input type="hidden" id="y" name="y" />
-					<input type="hidden" id="w" name="w" />
-					<input type="hidden" id="h" name="h" />
+						<input type="hidden" id="x" name="x" />
+						<input type="hidden" id="y" name="y" />
+						<input type="hidden" id="w" name="w" />
+						<input type="hidden" id="h" name="h" />
 
-					<div id="photo-edit-btn">
-						<a href="#edit-photo" role="button" data-toggle="modal" id="upload-profile-pic-link">Change</a> | <a id="p1" href="javascript:void(0);" class="remove">Remove</a>
+						<div id="photo-edit-btn">
+							<a href="#edit-photo" role="button" data-toggle="modal" id="upload-profile-pic-link">Change</a> | <a id="p1" href="javascript:void(0);" class="remove">Remove</a>
+						</div>
+					</div>
+					<small>(MAX. 2MB | JPG, PNG, GIF only)</small>
+					<input type="file" id="upload-profile-pic" name="upload-profile-pic"/>
+
+
+				</div>
+
+				<!-- Modal Edit Photo -->
+				<div id="edit-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-body">
+						<img id="profilepic-preview" src="#"  alt="Crop"/>
+						<button class="btn btn-primary pull-right" id="crop-profile-pic-btn" type="button" data-dismiss="modal" aria-hidden="true">Crop</button>
+						<button class="btn pull-right" data-dismiss="modal" aria-hidden="true" data-controls-modal="create-group">Cancle</button>
 					</div>
 				</div>
-				<small>(MAX. 2MB | JPG, PNG, GIF only)</small>
-				<input type="file" id="upload-profile-pic" name="upload-profile-pic"/>
-
-
 			</div>
 
-			<!-- Modal Edit Photo -->
-			<div id="edit-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-body">
-					<img id="profilepic-preview" src="#"  alt="Crop"/>
-					<button class="btn btn-primary pull-right" id="crop-profile-pic-btn" type="button" data-dismiss="modal" aria-hidden="true">Crop</button>
-					<button class="btn pull-right" data-dismiss="modal" aria-hidden="true" data-controls-modal="create-group">Cancle</button>
-				</div>
-			</div>
+			<ol>
+				<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', $applicant->first_name, array('class' => 'validate[required]')) }}</li>
+				<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', $applicant->last_name, array('class' => 'validate[required]')) }}</li>
+				<li>{{ Form::label('location', 'Preferred Location'); echo Form::select('location', $locations, $applicant->preferred_location) }}</li>
+				<li>{{ Form::label('category', 'Preferred Job'); echo Form::select('category', $job_categories, $applicant->preferred_job) }}</li>
+				<li>
+					{{ Form::label('profile-url', 'Profile Url')}}
+					<div id='profile-slug' class="input-prepend">
+						<span class="add-on"><a id="slug-link" href="/{{$applicant->slug}}" target="_blank">{{$host}}</a></span>
+						<input id='profile-url' type="text"	 name="slug" value="{{$applicant->slug}}">
+					</div>
+
+
+				</li>
+				<li>{{ Form::submit("Save", array('class' => 'btn btn-primary pull-right')); }} </li>	
+			</ol>
+			<input type="hidden" name="form-type" value="basic-profile">
+			<div class='clearfix'></div>
 		</div>
-
-		<ol>
-			<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', $applicant->first_name, array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', $applicant->last_name, array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('location', 'Preferred Location'); echo Form::select('location', $locations, $applicant->preferred_location) }}</li>
-			<li>{{ Form::label('category', 'Preferred Job'); echo Form::select('category', $job_categories, $applicant->preferred_job) }}</li>
-			<li>
-				{{ Form::label('profile-url', 'Profile Url')}}
-				<div id='profile-slug' class="input-prepend">
-					<span class="add-on"><a id="slug-link" href="/{{$applicant->slug}}" target="_blank">{{$host}}</a></span>
-					<input id='profile-url' type="text"	 name="slug" value="{{$applicant->slug}}">
-				</div>
-
-
-			</li>
-			<li>{{ Form::submit("Save", array('class' => 'btn btn-primary')); }} </li>	
-		</ol>
-		<input type="hidden" name="form-type" value="basic-profile">
-
 	</div>
 	{{ Form::close(); }}
 
-	{{ Form::open_for_files('applicant/account', 'POST', array('id' => 'applicant-account', 'class' => 'validate-form form ')); }}
+	{{ Form::open_for_files('applicant/privacy', 'POST', array('class' => 'validate-form form ')); }}
 
 	<div class="span3 white-bg drop-shadow-butterfly" id="profile-switch">
 		<h4>Set your profile privacy</h4>
-		<p>Do you want potential employers to view your profile?</p>
-		
-		<div class="alert alert-info" style="{{ ($applicant->viewable == 0 )? 'display: none' : '' }}">
+		<div class="pad">
+			<p>Do you want potential employers to view your profile?</p>
+
+			<div class="alert alert-info" style="{{ ($applicant->viewable == 0 )? 'display: none' : '' }}">
+
+				By enabling this, you have allowed employers to view your profile. Employers may contact you via email.
+
+			</div>
+
+			<div id="privacy-switch" class="switch switch-large">
+				<input type="checkbox" {{ ($applicant->viewable == 0 )? '' : 'checked' }} />
+			</div>
+		</div>
+	</div>
+	{{ Form::close(); }}
+	
+	{{ Form::open('applicant/password', 'POST', array('class' => 'validate-form form ')); }}
+	<div class="span9 white-bg drop-shadow-butterfly" id='profile-password'>
+		<h4>Change password</h4>
+		<div class="pad">
+			@if ( $errors->all(':message') && Session::get('password'))
+			<div class="validation error">
+				@foreach($errors->all('<p>:message</p>') as $message)
+				{{ $message }}
+				@endforeach
+			</div>
+			@elseif ( Session::get('success') && Session::get('password'))
+			<div class="alert validation success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				Your password has been updated. You can now login with your new password.
+			</div>
+			@endif
 			
-			By enabling this, you have allowed employers to view your profile. Employers may contact you via email.
-			
+			<ol>
+				<li>{{ Form::label('current_password', 'Current Password'); echo Form::password('current_password', array('class' => 'validate[required]')) }}</li>
+				<li>{{ Form::label('password', 'New Password'); echo Form::password('password', array('class' => 'validate[required]')) }}</li>
+				<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array('class' => 'validate[required]')) }}</li>
+				
+				<li>{{ Form::submit("Save", array('class' => 'btn btn-primary pull-right')); }} </li>	
+
+			</ol>
+			<div class='clearfix'></div>
 		</div>
 		
-		<div id="privacy-switch" class="switch switch-large">
-			<input type="checkbox" {{ ($applicant->viewable == 0 )? '' : 'checked' }} />
-		</div>	
 	</div>
-
 	{{ Form::close(); }}
+	
 	<div class="span9">
 
 		<div class="accordion" id="account-edit">
@@ -106,7 +139,7 @@
 				<div class="accordion-heading">
 
 					<a class="accordion-toggle" data-toggle="collapse" href="#qualifications">
-						<h4>Qualifications</h4>
+						<h4>Qualifications <i class="icon-chevron-up pull-right"></i></h4>
 					</a>
 
 				</div>
@@ -149,7 +182,7 @@
 			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" href="#employement">
-						<h4>Employment History</h4>
+						<h4>Employment History<i class="icon-chevron-up pull-right"></i></h4>
 					</a>
 				</div>
 				<div id="employement" class="accordion-body collapse in">
@@ -193,7 +226,7 @@
 			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" href="#expertise">
-						<h4>Expertise</h4>	
+						<h4>Expertise<i class="icon-chevron-up pull-right"></i></h4>	
 					</a>
 				</div>
 				<div id="expertise" class="accordion-body collapse in">
@@ -234,7 +267,7 @@
 			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" href="#resume">
-						<h4>Resume</h4>
+						<h4>Resume<i class="icon-chevron-down pull-right"></i></h4>
 					</a>
 				</div>
 				<div id="resume" class="accordion-body collapse">
@@ -266,7 +299,7 @@
 			<div class="accordion-group drop-shadow-butterfly">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" href="#coverletter">
-						<h4>Coverletters</h4>
+						<h4>Coverletters<i class="icon-chevron-down pull-right"></i></h4>
 					</a>
 				</div>
 				<div id="coverletter" class="accordion-body collapse">
@@ -463,7 +496,7 @@
 		<fieldset>
 			<ol class="expertise-field-child">
 				<li>
-					<label for="expertise">Expertise</label>
+					<label for="expertise-value">Expertise</label>
 					<input id="expertise-value" type="text" name="expertise-value" class="input-large validate[required]" data-prompt-position="centerLeft">
 				</li>
 			</ol>
