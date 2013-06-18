@@ -103,25 +103,47 @@ class Employer_Controller extends Base_Controller {
 		}
 	}
 
+	protected function _validate_image($name) {
+		
+		
+		$rules = array(
+			$name => 'image|max:2048|mimes:jpg,gif,png',
+		);
+		$messages = array(
+			'image' => 'The uploaded file is not an image.',
+			'max' => 'The maximum file size is 2MB.',
+			'mimes' => 'Your image must be either .jpg, .gif, or .png.'
+		);
 
+		$validation = Validator::make(Input::file(), $rules, $messages);
+
+		if ($validation->fails()) {
+			
+			return  $validation->errors->first($name);
+		} 
+		
+		return null;
+	}
 	public function post_upload_image($type = null) {
 		//check if this is ajax call
-
-
 
 		$employer = Employer::find(Session::get("employer_id"));
 
 		$_background_temp_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/backgrounds/' . $type;
-		$_logo_temp_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/company-logo/';
-
+		//$_logo_temp_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/company-logo/';
+		$logo_folder = EMP_UPLOAD_DIR . $employer->unique_folder . '/company-logo/';
 
 		$xhr = $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
 		if (!$type && !$xhr) {
 			return false;
 		} else {
 			//$username = Auth::user()->username;
-
+			
 			if ($type != 'logo') {
+				if ( ($message = $this->_validate_image("$type-background")) ) {
+					return json_encode(array("success" => false, 'message' => $message));
+				}
+				
 				$bg = Input::file("$type-background");
 
 				if ($bg['error'] != 1) {
@@ -130,27 +152,32 @@ class Employer_Controller extends Base_Controller {
 					
 					$_src = str_replace('public/', '', $_background_temp_folder ) . '/'.  $bg['name'];
 					
-					return json_encode(array('filename' => $bg['name'], 'src' => $_src));
+					return json_encode(array('success' => true, 'filename' => $bg['name'], 'src' => $_src));
+					
 				} else {
 					return json_encode(array("message" => $bg));
 				}
 			} else {
-
+				
+				if ( ($message = $this->_validate_image("company-logo")) ) {
+					return json_encode(array("success" => false, 'message' => $message));
+				}
+				
 				$logo = Input::file('company-logo');
-
+				
 				if ($logo['error'] != 1) {
 
-					$imgHandler = new ImageHandler($_logo_temp_folder);
+					$imgHandler = new ImageHandler($logo_folder);
 					
 					$imgHandler->setImage($logo['tmp_name'], $logo['name']);
 					$imgHandler->resize(500, 150, true, false);
 
 					$imgHandler->close();
-				
 
-					//$_src = str_replace('public/', '', $_logo_temp_folder ) . $logo['name'];
-					
-					return json_encode(array('filename' => $logo['name'], 'src' => $imgHandler->getFrontEndImagePath()));
+					$employer->logo_path = $imgHandler->getFrontEndImagePath();
+					$employer->save();
+			
+					return json_encode(array('success'=> true, 'filename' => $logo['name'], 'src' => $imgHandler->getFrontEndImagePath()));
 				} else {
 					return json_encode(array("message" => 'Please try again'));
 				}

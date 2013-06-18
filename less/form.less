@@ -121,18 +121,21 @@
 		li {
 			width: 100%;
 			label {
-				width: 120px;
+				width: 129px;
 			}
 			input[type=text], input[type=email] { 
-				width: 285px;
+				width: 274px;
 			}
 			textarea {
 				display: none;
 				margin-top: 21px;
 				.size(285px, 150px);
 			}
-			#upload-resume, #upload-coverletter, #add-to-account {
+			#upload-resume, #upload-coverletter, #add-resume-to-account, #add-coverletter-to-account {
 				display: none;
+			}
+			.date{
+				width: 34%;
 			}
 		}
 	}
@@ -210,8 +213,9 @@
 
 	#job-apply {
 		ol li {
-			input[type=text], input[type=email], textarea {
-				width: 385px;
+			
+			input[type=text], input[type=email] { 
+				width: 349px;
 			}
 		}
 	}
@@ -230,6 +234,16 @@
 				input[type=text],input[type=password], select {
 					width: 55%;
 				}
+			}
+		}
+	}
+
+	#job-apply {
+		ol li {
+			
+			label { display: block; width: 100% ;}
+			.date{
+				width: 48%;
 			}
 		}
 	}
@@ -252,8 +266,12 @@
 	}
 	#job-apply {
 		ol li {
+			label { display: block; width: 100%;}
 			input[type=text], input[type=email], textarea {
-				width: 80%;
+				width: 94%;
+			}
+			.date{
+				width: 48%;
 			}
 		}
 	}

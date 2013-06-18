@@ -26,6 +26,41 @@
 @endif
 {{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form  validate-form form ', 'id' => 'employer-profile')); }}
 <div class="white-bg drop-shadow-butterfly">
+	 <h4>Company Logo</h4>
+	 <div class="pad">
+		 <div class="validation error" id='logo-validation'>
+			
+		 </div>
+		 <ul>
+			<li>
+				{{ Form::label('company-logo', 'Current Company Logo'); }}
+				<span class="btn btn-success fileinput-button">
+					<i class="icon-plus icon-white"></i>
+					<span>Upload / Change Logo</span>
+					<!-- The file input field used as target for the file upload widget -->
+					<input id="company-logo" type="file" name="company-logo" multiple>
+
+				</span>
+				<div id="progress" class="progress progress-success progress-striped">
+					<div class="bar"></div>
+				</div>
+				<table id='files' class='files'>
+					@if ( !empty($employer->logo_path) )
+					<tr>
+						<td><img height='30px' id='logo' src="{{$employer->logo_path}}" /></td>
+						<td>{{ substr( strrchr( $employer->logo_path, '/' ), 1 )}}</td>
+						<td><a class="btn logo" href="{{$employer->logo_path}}">Preview full size</a></td>
+
+					</tr>
+					@endif
+				</table>				
+
+
+			</li>
+		 </ul>
+	 </div>
+</div>
+<div class="white-bg drop-shadow-butterfly">
 	<h4>Login Information</h4>
     <div class="pad">
 		<ul>
@@ -38,22 +73,11 @@
 	</div>
     <div class="clearfix"></div>	
 </div>
+
 <div class="white-bg drop-shadow-butterfly">
     <h4>Company and Contact Information</h4>
 	<div class="pad">
 		<ul>
-			<li>
-				{{ Form::label('company-logo', 'Current Company Logo'); echo Form::file('company-logo') }}
-
-				@if ( !empty($employer->logo_path) )
-				<img id='logo' src="{{$employer->logo_path}}" />
-				@else
-				<img id='logo' src="http://placehold.it/500x150/ff4d6d" />
-				@endif
-				<a href="#" data-toggle="tooltip" title="The reason for us to get a larger image from you is due to our responsive design and our support for retina display on iPads and iPhones. You can of course choose a smaller image. However, in some cases, such image may appear to be a little 'pixelated'." class="tool-tip clearfix">Why do you need such a big image?</a>
-
-
-			</li>
 			<li>{{ Form::label('company', 'Company'); echo Form::text('company', $employer->company, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('industry', 'Industry'); echo Form::text('industry', $employer->industry, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('title', 'Title'); echo Form::select('title', array('Mr' => 'Mr', 'Ms' => 'Ms', 'Miss' => 'Miss', 'Dr' => 'Dr'), $employer->title) }}</li>
@@ -68,12 +92,34 @@
 			<li>{{ Form::label('postal', 'Postal'); echo Form::text('postal', $employer->postal, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('country', 'Country'); echo Form::select('country', $countries, $employer->country ) }}</li>
 			<li>{{ Form::label('company-size', 'Number of employees'); echo Form::select('company-size', array('1-10' => '1 - 10', '10-20' => '10 - 20', '20-30' => '20 - 30', '30-50' => '30 - 50', '50-100' => '50 - 100', '100-200' => '100 - 200', '>200' => '> 200') ,$employer->company_size, array('class' => 'validate[required]')) }}</li>
-			<li></li>		
+			<li>{{ Form::submit("Update", array('class' => 'btn btn-primary pull-right')); }} </li>		
 		</ul>
 	</div>
     <div class="clearfix"></div>
 </div>
-{{ Form::submit("Update", array('class' => 'btn btn-primary pull-right')); }} 
-{{ Form::close(); }}
 
+{{ Form::close(); }}
+<div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3 class="modal-title">Company Logo</h3>
+    </div>
+    <div class="modal-body">
+		
+		<div class="modal-image">
+			<img id="modal-image-target" />
+		</div>
+		
+	</div>
+    
+</div>
+@endsection
+
+
+@section('scripts')
+<script src="/js/vendor/jquery.ui.widget.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/js/jquery.fileupload.js"></script>
 @endsection

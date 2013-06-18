@@ -403,12 +403,19 @@ class Applicant_Controller extends Base_Controller {
 	}
 
 	public function post_account() {
-
+		
+		$applicant = Applicant::find(Session::get('applicant_id'));
+		
+		$slug_change = ($applicant->slug != Input::get('slug'));
+		
 		$rules = array(
 			'firstname' => 'required',
 			'lastname' => 'required',
-			'slug' => 'unique:applicants,slug',
 		);
+		
+		if( $slug_change ) {
+			$rules['slug'] = 'unique:applicants,slug';
+		}
 
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -418,7 +425,7 @@ class Applicant_Controller extends Base_Controller {
 		} else {
 
 			//Save User Basic Profile
-			$applicant = Applicant::find(Session::get('applicant_id'));
+			
 			$applicant->first_name = Input::get('firstname');
 			$applicant->last_name = Input::get('lastname');
 			$applicant->preferred_location = Input::get('location');
@@ -505,6 +512,8 @@ class Applicant_Controller extends Base_Controller {
 		}
 	}
 
+	
+	
 	public function post_upload_resumecoverletter() {
 		//check if this is ajax call
 		$applicant_id = Session::get('applicant_id');
@@ -516,7 +525,7 @@ class Applicant_Controller extends Base_Controller {
 			return false;
 		}
 
-		$username = md5(Auth::user()->username);
+		//$username = md5(Auth::user()->username);
 
 		Validator::register('resume_count_check', function($attribute, $value, $parameters) {
 					$resume_count_check = count(ApplicantResumes::where('applicant_id', '=', Session::get('applicant_id'))->get());
@@ -565,78 +574,46 @@ class Applicant_Controller extends Base_Controller {
 					break;
 			}
 
-
-
 			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items, 'error' => $error_message))->render();
-			;
 
 			return json_encode(array('success' => false, 'view' => $view));
 		}
 
-
-		$file['name'] = preg_replace('/\s+/', '-', $file['name']);
-
-		$folder = APP_UPLOAD_DIR . $username . '/' . $type . '/';
-
-		if (!is_dir($folder)) {
-			mkdir($folder, 777);
-		}
-
-		if (!file_exists($folder . $file['name'])) {
-			Input::upload($type . '-file', $folder, $file['name']);
-
-			$path = str_replace('public', '', $folder) . $file['name'];
-
-			//insert into database 
-			if ($type == 'resume') {
-				$applicant_resume = new ApplicantResumes();
-				$applicant_resume->applicant_id = $applicant_id;
-				$applicant_resume->resume = $file['name'];
-				$applicant_resume->path = $path;
-				$applicant_resume->filesize = Formatter::format_bytes($file['size'], 0);
-				$applicant_resume->type = Formatter::format_filetype($file['type']);
-				$applicant_resume->disabled = 0;
-				if ($applicant_resume->save()) {
-					$resumes = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
-
-					$view = View::make('applicant.resume')->with(array('resumes' => $resumes))->render();
-					;
-
-					return json_encode(array('success' => true, 'view' => $view));
-				}
-			} else {
-				$applicant_coverletter = new ApplicantCoverletters();
-				$applicant_coverletter->applicant_id = $applicant_id;
-				$applicant_coverletter->coverletter = $file['name'];
-				$applicant_coverletter->path = $path;
-				$applicant_coverletter->filesize = Formatter::format_bytes($file['size'], 0);
-				$applicant_coverletter->type = Formatter::format_filetype($file['type']);
-				$applicant_coverletter->disabled = 0;
-				$applicant_coverletter->save();
-
-				if ($applicant_coverletter->save()) {
-					$coverletters = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
-
-					$view = View::make('applicant.coverletter')->with(array('coverletters' => $coverletters))->render();
-
-					return json_encode(array('success' => true, 'view' => $view));
-				}
-			}
-		} else {
-			switch ($type) {
-
-				case 'resume':
-					$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
-					break;
-				case 'coverletter':
-
-					$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
-					break;
-			}
-			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items, 'error' => 'File already exists. Please rename or remove your file.'))->render();
+		$filename = preg_replace('/\s+/', '-', $file['name']);
+		//	$folder = APP_UPLOAD_DIR . $username . '/' . $type . '/';
+		$code = 0;
+		if ($type == 'resume') {
+			$code = ApplicantResumes::uploadResume($filename, $file['size'], $file['type'], 'resume-file');
 			
-			return json_encode(array('success' => false, 'view' => $view));
+		} else if ($type == 'coverletter') {
+			
+			$code = ApplicantCoverletters::uploadCoverletter($filename, $file['size'], $file['type'], 'coverletter-file');
 		}
+		
+		
+		$items = null;
+		switch ($type) {
+
+			case 'resume':
+				$items = ApplicantResumes::where('applicant_id', '=', $applicant_id)->get();
+				break;
+			case 'coverletter':
+
+				$items = ApplicantCoverletters::where('applicant_id', '=', $applicant_id)->get();
+				break;
+		}
+		
+		
+		$success = false;
+		if ($code == ApplicantResumes::FILE_EXISTS) {
+			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items, 'error' => 'File already exists. Please rename or remove your file.'))->render();
+		} else if ( $code == ApplicantResumes::FILE_SUCCESS) {
+			$view = View::make('applicant.' . $type)->with(array($type . 's' => $items))->render();
+			$success = true;
+		}
+
+		return json_encode(array('success' => $success, 'view' => $view));
+		
 	}
 
 	public function get_remove($type = null, $id = null) {
@@ -776,7 +753,8 @@ class Applicant_Controller extends Base_Controller {
 				$applicant->preferred_location = $register_input['location'];
 				$applicant->preferred_job = $register_input['category'];
 				$applicant->viewable = 1;
-
+				$applicant->slug = md5($user->username);
+				$applicant->create_base_directory();
 				if ($applicant->save()) {
 					//send an email and then redirects them to the confirmation page.
 					return Redirect::to('/login/');

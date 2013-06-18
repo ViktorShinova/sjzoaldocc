@@ -7381,11 +7381,11 @@ form input {
   width: 100%;
 }
 #job-apply ol li label {
-  width: 120px;
+  width: 129px;
 }
 #job-apply ol li input[type=text],
 #job-apply ol li input[type=email] {
-  width: 285px;
+  width: 274px;
 }
 #job-apply ol li textarea {
   display: none;
@@ -7395,8 +7395,12 @@ form input {
 }
 #job-apply ol li #upload-resume,
 #job-apply ol li #upload-coverletter,
-#job-apply ol li #add-to-account {
+#job-apply ol li #add-resume-to-account,
+#job-apply ol li #add-coverletter-to-account {
   display: none;
+}
+#job-apply ol li .date {
+  width: 34%;
 }
 #job-apply #apply-job-btn {
   height: 45px;
@@ -7462,9 +7466,8 @@ form input {
     width: 400px;
   }
   #job-apply ol li input[type=text],
-  #job-apply ol li input[type=email],
-  #job-apply ol li textarea {
-    width: 385px;
+  #job-apply ol li input[type=email] {
+    width: 349px;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
@@ -7479,6 +7482,13 @@ form input {
   .employer-register-form ol li select {
     width: 55%;
   }
+  #job-apply ol li label {
+    display: block;
+    width: 100% ;
+  }
+  #job-apply ol li .date {
+    width: 48%;
+  }
 }
 @media (max-width: 767px) {
   .employer-register-form h3 {
@@ -7492,10 +7502,17 @@ form input {
   .employer-register-form ol li select {
     width: 45%;
   }
+  #job-apply ol li label {
+    display: block;
+    width: 100%;
+  }
   #job-apply ol li input[type=text],
   #job-apply ol li input[type=email],
   #job-apply ol li textarea {
-    width: 80%;
+    width: 94%;
+  }
+  #job-apply ol li .date {
+    width: 48%;
   }
 }
 @media (max-width: 480px) {
@@ -7555,6 +7572,9 @@ form input {
   border: 0;
   margin-bottom: 0;
 }
+#content #job-listing img {
+  height: 40px;
+}
 #content #job-listing .shortlist-tag {
   display: none;
   background: #0079c1;
@@ -7595,7 +7615,7 @@ form input {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
-  width: 78%;
+  width: 73%;
   padding-right: 15px;
 }
 #content #job-listing .main-info h2 a:hover {
@@ -7605,7 +7625,7 @@ form input {
   color: #333333;
 }
 #content #job-listing .additional-info {
-  width: 22%;
+  width: 27%;
   float: right;
 }
 #content #job-listing .additional-info h4 {
@@ -7634,6 +7654,9 @@ form input {
 }
 #content #job-listing .dropdown-menu .radio {
   padding-left: 40px;
+}
+#content #job-listing #job-controls {
+  width: 27%;
 }
 #content #document-listing,
 #content #resume-listing,
@@ -8447,7 +8470,10 @@ img.jcrop-preview {
 }
 .employer .employer-form ul img#logo {
   display: block;
+}
+.employer .employer-form ul .files {
   margin-left: 150px;
+  margin-bottom: 12px;
 }
 .employer .employer-form ul .tool-tip {
   display: inline-block;
@@ -8727,6 +8753,12 @@ img.jcrop-preview {
 }
 .employer #employer-profile form > ul {
   margin-right: 0 !important;
+}
+.employer #employer-profile #logo-validation {
+  display: none;
+}
+.employer .modal-image {
+  text-align: center;
 }
 #page-employer-adverts .navbar ul li.page-employer-adverts > a,
 #page-template .navbar ul li.page-employer-template > a,
@@ -9824,4 +9856,76 @@ body.rtl .formError .formErrorArrow {
 .lt-ie8 .has-switch span.switch-danger:active,
 .lt-ie8 .has-switch span.switch-danger.active {
   background-color: #e9322d;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+.fileupload-buttonbar .btn,
+.fileupload-buttonbar .toggle {
+  margin-bottom: 5px;
+}
+.progress-animated .bar {
+  background: url(img/progressbar.gif) !important;
+  filter: none;
+}
+.fileupload-loading {
+  float: right;
+  width: 32px;
+  height: 32px;
+  background: url(img/loading.gif) center no-repeat;
+  background-size: contain;
+  display: none;
+}
+.fileupload-processing .fileupload-loading {
+  display: block;
+}
+.files {
+  clear: both;
+}
+.files img {
+  height: 30px !important;
+}
+.files td {
+  padding: 10px 20px;
+  border: 1px solid #cccccc;
+  vertical-align: top;
+}
+.files audio,
+.files video {
+  max-width: 300px;
+}
+#progress {
+  float: left;
+  height: 30px;
+  width: 330px;
+  margin-left: 20px;
+}
+@media (max-width: 767px) {
+  .fileupload-buttonbar .toggle,
+  .files .toggle,
+  .files .btn span {
+    display: none;
+  }
+  .files .name {
+    width: 80px;
+    word-wrap: break-word;
+  }
+  .files audio,
+  .files video {
+    max-width: 80px;
+  }
 }

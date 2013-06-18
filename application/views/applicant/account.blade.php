@@ -65,7 +65,7 @@
 				<li>
 					{{ Form::label('profile-url', 'Profile Url')}}
 					<div id='profile-slug' class="input-prepend">
-						<span class="add-on"><a id="slug-link" href="/{{$applicant->slug}}" target="_blank">{{$host}}</a></span>
+						<span class="add-on"><a id="slug-link" href="/applicant/profile/{{$applicant->slug}}" target="_blank">{{$host}}</a></span>
 						<input id='profile-url' type="text"	 name="slug" value="{{$applicant->slug}}">
 					</div>
 

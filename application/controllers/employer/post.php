@@ -260,10 +260,11 @@ class Employer_Post_Controller extends Base_Controller {
 				//non-registered users
 				
 				$data = unserialize($applicant->non_registered_users);
-				
-				$applicant->first_name = $data['first_name'];
-				$applicant->last_name = $data['last_name'];
-				$applicant->email = $data['email'];
+				var_dump($data);
+
+				// $applicant->first_name = $data['first_name'];
+				// $applicant->last_name = $data['last_name'];
+				// $applicant->email = $data['email'];
 				
 			}
 			

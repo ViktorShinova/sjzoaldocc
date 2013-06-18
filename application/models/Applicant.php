@@ -47,4 +47,14 @@ class Applicant extends Eloquent {
 	public function user() {
 		return $this->belongs_to('User');
 	}
+	
+	public function create_base_directory() {
+		
+		$folder = APP_UPLOAD_DIR . md5($this->user->username);
+		
+		if (!is_dir($folder)) {
+			mkdir($folder, 777, true);
+		}
+		
+	}
 }

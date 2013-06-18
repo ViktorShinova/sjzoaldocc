@@ -74,26 +74,26 @@ class Employer_Profile_Controller extends Base_Controller {
 		if ($validation->fails()) {
 			return Redirect::to('employer/profile')->with_errors($validation)->with_input();
 		} else {
-
-			//Company logo
-			if (Input::has_file('company-logo')) {
-				$company_logo = Input::file('company-logo');
-
-				//We might need to strink the size of the logo
-				//Upload the file to employer's unique folder.
-				$logo_folder = EMP_UPLOAD_DIR . $employer->unique_folder . '/company-logo';
-				var_dump($logo_folder);
-				//resize the image first
-
-				$imgHandler = new ImageHandler($logo_folder);
-				$imgHandler->setImage($company_logo['tmp_name'], $company_logo['name']);
-				$imgHandler->resize(500, 150, true, false);
-				$imgHandler->close();
-				//Input::upload("company-logo",  PUBLIC_DIR . $logo_folder , $company_logo['name']);
-				//Once we upload the file, we need to remove it from the temp folder
-
-				$this->_remove_tmp_files('company-logo', $employer->unique_folder, 'employer');
-			}
+			
+//			//Company logo
+//			if (Input::has_file('company-logo')) {
+//				$company_logo = Input::file('company-logo');
+//				
+//				//We might need to strink the size of the logo
+//				//Upload the file to employer's unique folder.
+//				$logo_folder = EMP_UPLOAD_DIR . $employer->unique_folder . '/company-logo';
+//				
+//				//resize the image first
+//
+//				$imgHandler = new ImageHandler($logo_folder);
+//				$imgHandler->setImage($company_logo['tmp_name'], $company_logo['name']);
+//				$imgHandler->resize(500, 150, true, false);
+//				$imgHandler->close();
+//				//Input::upload("company-logo",  PUBLIC_DIR . $logo_folder , $company_logo['name']);
+//				//Once we upload the file, we need to remove it from the temp folder
+//
+//				$this->_remove_tmp_files('company-logo', $employer->unique_folder, 'employer');
+//			}
 			$user = Auth::user();
 			//backup the user before change
 			$user_backup = new UserBackup();
@@ -126,10 +126,10 @@ class Employer_Profile_Controller extends Base_Controller {
 			$employer->country = $_post_data['country'];
 			$employer->company_size = $_post_data['company-size'];
 
-			if (Input::has_file('company-logo')) {
-
-				$employer->logo_path = $imgHandler->getFrontEndImagePath();
-			}
+//			if (Input::has_file('company-logo')) {
+//
+//				$employer->logo_path = $imgHandler->getFrontEndImagePath();
+//			}
 
 			if ($user->save() && $employer->save() && $user_backup->save()) {
 				Session::flash('success', true);
@@ -157,12 +157,12 @@ class Employer_Profile_Controller extends Base_Controller {
 				}
 
 				try {
-					if ($mail->Send()) {
-						
-					} else {
-						var_dump($mail);
-						die();
-					}
+//					if ($mail->Send()) {
+//						
+//					} else {
+//						var_dump($mail);
+//						die();
+//					}
 				} catch (phpmailerException $e) {
 					var_dump($e->errorMessage()); //Pretty error messages from PHPMailer
 					die();

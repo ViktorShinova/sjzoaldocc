@@ -104,24 +104,63 @@ var empSite = {
 		}
 	},
 	uploadEmployerLogo: function() {
-
-		$("#company-logo").change(function() {
-
-			var type = 'logo';
-			$("#employer-profile").ajaxSubmit({
-				url: "/employer/upload_image/" + type,
-				type: "post",
-				dataType: "json",
-				enctype: 'multipart/form-data',
-				timeout: 30000,
-				success: function(data) {
+		if( $('#company-logo').length ) {
+			
+			var attach_event = function() {
+				$('.logo').on('click', function(e) {
+					e.preventDefault();
+					$("#modal-image-target").attr("src", this);
+					$('#modal-gallery').modal('show');
+				});
+			};
+			var url = '/employer/upload_image/logo';
+			
+			$('#company-logo').fileupload({
+				url: url,
+				dataType: 'json',
+				acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+				maxFileSize: 5000000, // 5 MB	
+				done: function (e, data) {
 					console.log(data);
-					$('#logo').attr('src', data.src);
+					if( !data.result.success ) {
+						$('#logo-validation').html('<p>'+ data.result.message +'</p>')
+						$('#logo-validation').show();
+					} else {
+						$('#logo-validation').hide();
+						var string = "<td><img height='30px' id='logo' src='"+ data.result.src +"' /></td><td>"+ data.result.filename +"</td><td><a class='btn logo' href='"+data.result.src+"'>Preview full size</a></td>";
+						var record = $('<tr/>').html(string);
+
+						$('#files').html(record);
+						attach_event();
+					}
+				},
+				progressall: function (e, data) {
+					var progress = parseInt(data.loaded / data.total * 100, 10);
+					$('#progress .bar').css(
+						'width',
+						progress + '%'
+					);
 				}
 			});
-		});
+			
+			attach_event();
 
-
+		}
+//		$("#company-logo").change(function() {
+//
+//			var type = 'logo';
+//			$("#employer-profile").ajaxSubmit({
+//				url: "/employer/upload_image/" + type,
+//				type: "post",
+//				dataType: "json",
+//				enctype: 'multipart/form-data',
+//				timeout: 30000,
+//				success: function(data) {
+//					console.log(data);
+//					$('#logo').attr('src', data.src);
+//				}
+//			});
+//		});
 	},
 	
 	

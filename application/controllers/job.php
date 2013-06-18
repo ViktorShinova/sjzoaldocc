@@ -6,6 +6,54 @@ class Job_Controller extends Base_Controller {
 	const JOB_APPLY_TPL = 'job-apply';
 	const APPLIED = 1;
 
+	protected $_months = array(
+		'0' => '0 month',
+		'1' => '1 month',
+		'2' => '2 months',
+		'3' => '3 months',
+		'4' => '4 months',
+		'5' => '5 months',
+		'6' => '6 months',
+		'7' => '7 months',
+		'8' => '8 months',
+		'9' => '9 months',
+		'10' => '10 months',
+		'11' => '11 months',
+		'12' => '12 months',
+		'13' => '13 months',
+		'14' => '14 months',
+		'15' => '15 months',
+		'16' => '16 months',
+		'17' => '17 months',
+		'18' => '18 months',
+		'19' => '19 months',
+		'20' => '20 months',
+	);
+	
+	protected $_years = array(
+		'0' => '0 year',
+		'1' => '1 year',
+		'2' => '2 years',
+		'3' => '3 years',
+		'4' => '4 years',
+		'5' => '5 years',
+		'6' => '6 years',
+		'7' => '7 years',
+		'8' => '8 years',
+		'9' => '9 years',
+		'10' => '10 years',
+		'11' => '11 years',
+		'12' => '12 years',
+		'13' => '13 years',
+		'14' => '14 years',
+		'15' => '15 years',
+		'16' => '16 years',
+		'17' => '17 years',
+		'18' => '18 years',
+		'19' => '19 years',
+		'20' => '20 years',
+	);
+
 	//private $words = array("the", "and", "is", "are", "or", "an", "a", "as");
 //	private function tokenizer($keywords) {
 //		//first we check for quotes. If they are present, we must put them together as a phrase. If not, separate them.
@@ -452,6 +500,8 @@ class Job_Controller extends Base_Controller {
 					'is_applicant' => $is_applicant,
 					'is_applied' => $is_applied,
 					'is_employer' => $is_employer,
+					'years' => $this->_years,
+					'months' => $this->_months
 		));
 	}
 
@@ -460,6 +510,24 @@ class Job_Controller extends Base_Controller {
 			return false;
 		}
 
+		
+		$rules = array(
+			'upload-resume' => 'max:2048|mimes:pdf,doc,docx',
+			'upload-coverletter' => 'max:2048|mimes:pdf,doc,docx'
+		);
+		$messages = array(
+			'max' => 'The maximum file size is 2MB',
+			'mimes' => 'Only .pdf, .doc or .docx are allowed',
+		);
+
+		$validation = Validator::make(Input::file(), $rules, $messages);
+
+		if ($validation->fails()) {
+
+			return Redirect::to('/job/apply/' . $id )->with_errors($validation)->with_input();
+
+		}
+		
 		$input = Input::all();
 		$job = Job::find($id);
 
@@ -467,8 +535,9 @@ class Job_Controller extends Base_Controller {
 
 		//email employer
 		$mail = new PHPMailer();
-		
-		
+		$data['submissionData'] = Input::all();
+
+
 		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
 			$mail->isSMTP();
 			$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
@@ -479,13 +548,13 @@ class Job_Controller extends Base_Controller {
 			$mail->Username = SMTP_USERNAME;
 			$mail->Password = SMTP_PASSWORD;
 		}
-		
-		$mail->Subject = 'You\'ve received a new job application! - Careerhire';
 
+		$mail->Subject = 'You\'ve received a new job application! - Careerhire';
+		$mail->isHtml();
 		$mail->AddAddress($employer->application_email, $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name);
 		$mail->AddReplyTo(Input::get('email'));
 
-		$mail->_template = self::JOB_APPLY_TPL;
+
 
 		//gather all the this job and employer details
 		$data['job'] = $job->original;
@@ -495,10 +564,6 @@ class Job_Controller extends Base_Controller {
 		//if user logged-in
 		if (Session::has('applicant_id')) {
 			$applicant_id = Session::get('applicant_id');
-			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
-							->where('job_id', '=', $id)->first();
-
-
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
 			$apply_job->applicant_id = $applicant_id;
@@ -532,7 +597,20 @@ class Job_Controller extends Base_Controller {
 				$resume_file['error'] = 0;
 				$applicant_resume_file = $resume_file;
 			} else {
+				
 				$applicant_resume_file = Input::file('upload-resume');
+				
+		
+		
+				//validate
+				if( Input::get('add-resume-to-account')  == 1) {
+					
+					$filename = preg_replace('/\s+/', '-', $applicant_resume_file['name']);
+					
+					ApplicantResumes::uploadResume($filename, $applicant_resume_file['size'], $applicant_resume_file['type'], 'upload-resume');
+					
+				}
+				
 			}
 
 			if ($input['selected-coverletter'] != 0) {
@@ -545,6 +623,14 @@ class Job_Controller extends Base_Controller {
 				$applicant_coverletter_file = $coverletter_file;
 			} else {
 				$applicant_coverletter_file = Input::file('upload-coverletter');
+				
+				if( Input::get('add-coverletter-to-account')  == 1) {
+					
+					$filename = preg_replace('/\s+/', '-', $applicant_coverletter_file['name']);
+					
+					ApplicantCoverletters::uploadCoverletter($filename, $applicant_coverletter_file['size'], $applicant_coverletter_file['type'], 'upload-coverletter');
+					
+				}
 			}
 
 			$data['applicant']['attachments'] = array('resume' => $applicant_resume_file, 'coverletter' => $applicant_coverletter_file);
@@ -567,14 +653,14 @@ class Job_Controller extends Base_Controller {
 
 		//pass all attachments
 
+
 		$attachment = $data['applicant']['attachments'];
 
-		if ($attachment['error'] == 0) {
+		if (isset($attachment['error']) && $attachment['error'] == 0) {
 			$mail->AddAttachment($attachment['tmp_name'], $attachment['name']);
 		}
 
-
-		$mail->Body = View::make('email.' . $this->_template)
+		$mail->Body = View::make('email.' . self::JOB_APPLY_TPL)
 				->with(array(
 					'data' => $data
 				)

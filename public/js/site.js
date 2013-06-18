@@ -82,6 +82,7 @@ var jSite = {
 
 		$(".cover-btn").click(function(e) {
 			e.preventDefault();
+			$("#add-coverletter-to-account").hide();
 			$('#write-coverletter').hide();
 			$("#drop-coverletter").html($(this).html() + ' <b class="caret"></b>');
 
@@ -91,7 +92,7 @@ var jSite = {
 
 		$("#upload-coverletter-link").click(function(e) {
 			e.preventDefault();
-
+			$("#add-coverletter-to-account").show();
 			$("#upload-coverletter:hidden").trigger('click');
 			$("#upload-coverletter:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();
@@ -103,7 +104,7 @@ var jSite = {
 
 		$(".resume-btn").click(function(e) {
 			e.preventDefault();
-			$("#add-to-account").hide();
+			$("#add-resume-to-account").hide();
 			$("#drop-resume").html($(this).html() + ' <b class="caret"></b>');
 			$("#select-resume").val($(this).data('value'));
 
@@ -111,7 +112,7 @@ var jSite = {
 
 		$("#upload-resume-link").click(function(e) {
 			e.preventDefault();
-			$("#add-to-account").show();
+			$("#add-resume-to-account").show();
 			$("#upload-resume:hidden").trigger('click');
 			$("#upload-resume:hidden").change(function() {
 				var filename = $(this).val().split('\\').pop();

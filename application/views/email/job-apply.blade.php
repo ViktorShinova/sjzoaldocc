@@ -16,42 +16,50 @@
 																					<td>&nbsp;</td>
 																					<td>&nbsp;</td>
 																				</tr>
-																				<?php
-																					//non-registered users
-																					if(isset($data['applicant']['non_registered_users'])) {
-																						$applicant = unserialize( $data['applicant']['non_registered_users'] );
-																						
-																						
-																						$first_name = $applicant['first_name'];
-																						$last_name = $applicant['last_name'];
-																						$email = $applicant['email'];
-																						$contact_number = $applicant['contact'];
-																						//list($first_name, $last_name, $email, $contact_number) = unserialize($data['applicant']['non_registered_users']);
-																					}
-
-																					//registered users
-																					if(isset($data['applicant']['alternate_contact_details'])) {
-																						list($email, $contact_number) = unserialize($data['applicant']['alternate_contact_details']);
-																						$first_name = $data['applicant']['first_name'];
-																						$last_name = $data['applicant']['last_name'];
-																					}
-
-																				?>
+																				//<?php
+//																					//non-registered users
+//																					if(isset($data['applicant']['non_registered_users'])) {
+//																						$applicant = unserialize( $data['applicant']['non_registered_users'] );
+//																						
+//																						
+//																						$first_name = $applicant['first_name'];
+//																						$last_name = $applicant['last_name'];
+//																						$email = $applicant['email'];
+//																						$contact_number = $applicant['contact'];
+//																						//list($first_name, $last_name, $email, $contact_number) = unserialize($data['applicant']['non_registered_users']);
+//																					}
+//
+//																					//registered users
+//																					if(isset($data['applicant']['alternate_contact_details'])) {
+//																						list($email, $contact_number) = unserialize($data['applicant']['alternate_contact_details']);
+//																						$first_name = $data['applicant']['first_name'];
+//																						$last_name = $data['applicant']['last_name'];
+//																					}
+//
+//																				?>
 																				<tr>
 																					<td><strong>First Name</strong></td>
-																					<td>{{ $first_name }}</td>
+																					<td>{{ $data['submissionData']['first_name'] }}</td>
 																				</tr>
 																				<tr>
 																					<td><strong>Last Name</strong></td>
-																					<td>{{ $last_name }}</td>
+																					<td>{{ $data['submissionData']['last_name'] }}</td>
 																				</tr>
 																				<tr>
 																					<td><strong>Email</strong></td>
-																					<td>{{ $email }}</td>
+																					<td>{{ $data['submissionData']['email'] }}</td>
 																				</tr>
 																				<tr>
 																					<td><strong>Contact Number</strong></td>
-																					<td>{{ $contact_number }}</td>
+																					<td>{{ $data['submissionData']['contact'] }}</td>
+																				</tr>
+																				<tr>
+																					<td><strong>Current Employment</strong></td>
+																					<td>{{ $data['submissionData']['current_employment'] }}</td>
+																				</tr>
+																				<tr>
+																					<td><strong>Duration</strong></td>
+																					<td>{{ $data['submissionData']['duration_year']}} year(s), {{$data['submissionData']['duration_month']}} month(s)</td>
 																				</tr>
 																				@if( isset($data['applicant']['slug']) )
 																				<tr>

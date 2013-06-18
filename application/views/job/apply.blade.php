@@ -28,12 +28,15 @@
 @endif
 <div class="row">
 
-
-
-
 	<h2 class="span12">Application Form</h2>
 	<div class="span6">
-	
+		@if ( $errors->all(':message') )
+			<div class="validation error">
+				@foreach($errors->all('<p>:message</p>') as $message)
+				{{ $message }}
+				@endforeach
+			</div>
+		@endif
 		{{ Form::open_for_files('job/apply/'.$job->id, 'POST', array('id' => 'job-apply', 'class' => ' validate-form form ')); }}
 		<h4>Your Details</h4>
 		<div class="pad">
@@ -52,20 +55,19 @@
 				</li>
 				<li>
 					<label for="contact">Contact Number *</label>
-					<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ Input::old('contact') }}">
 				</li>
 				<li>
-					<label for="contact">Current Employment *</label>
-					<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					<label for="current_employment">Current Employment *</label>
+					<input type="text" class="validate[required]" type="text" name="current_employment" id="current_employment" value="{{ Input::old('current_employment') }}">
 				</li>
 				<li>
 					<label for="contact">Duration *</label>
-					<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
+					{{Form::select('duration_year', $years ,Input::old('duration_year'), array('class' => 'date'))}}
+					{{Form::select('duration_month', $months, Input::old('duration_month'), array('class' => 'date')) }}
+					
 				</li>
-				<li>
-					<label for="contact">Contact Number *</label>
-					<input type="text" class="validate[required,custom[number]]" type="text" name="contact" id="contact" value="{{ ($applicant) ? $applicant->contact_number : '' }}">
-				</li>
+				
 				<li><hr></li>
 				<li>
 					<label for="resume">Resume</label>
@@ -90,7 +92,7 @@
 						</ul>
 					</div>
 					@if( $is_applicant )
-					<label id="add-to-account" class="checkbox"><input type="checkbox" name="add-to-account" value="1" />Add to my account</label>
+					<label id="add-resume-to-account" class="checkbox"><input type="checkbox" name="add-resume-to-account" value="1" />Add to my account</label>
 					@endif
 					<input id="select-resume" name="selected-resume" type="hidden" value="0" />
 
@@ -126,7 +128,9 @@
 							</li>
 						</ul>
 					</div>
-
+					@if( $is_applicant )
+					<label id="add-coverletter-to-account" class="checkbox"><input type="checkbox" name="add-coverletter-to-account" value="1" />Add to my account</label>
+					@endif
 					<input id="select-coverletter" name="selected-coverletter" type="hidden" value="0" />
 				</li>
 				<li>
