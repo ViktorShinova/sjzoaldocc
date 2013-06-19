@@ -79,7 +79,7 @@
 	<div class="pad">
 		<ul>
 			<li>{{ Form::label('company', 'Company'); echo Form::text('company', $employer->company, array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('industry', 'Industry'); echo Form::text('industry', $employer->industry, array('class' => 'validate[required]')) }}</li>
+			<li>{{ Form::label('industry', 'Industry'); echo Form::select('industry', $categories ,$employer->industry, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('title', 'Title'); echo Form::select('title', array('Mr' => 'Mr', 'Ms' => 'Ms', 'Miss' => 'Miss', 'Dr' => 'Dr'), $employer->title) }}</li>
 			<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', $employer->first_name, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', $employer->last_name, array('class' => 'validate[required]')) }}</li>

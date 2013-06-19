@@ -8,5 +8,9 @@ class Employer extends Eloquent {
 	{
 		return $this->belongs_to('Employer');
 	}
+
+	public function industry() {
+		return $this->belongs_to('Category');
+	}
 	
 }

@@ -20,7 +20,16 @@ class Employer_Profile_Controller extends Base_Controller {
 		$employer = Employer::find(Session::get('employer_id'));
 		$user = Auth::user();
 		$countries = Country::where('code', '=', 'AUS')->or_where('code', '=', 'NZL')->order_by('name')->lists('name', 'code');
-		return View::make('employer.profile')->with(array('countries' => $countries, 'employer' => $employer, 'user' => $user));
+		$categories = Category::lists('name', 'id');
+		return View::make('employer.profile')
+				->with(
+					array(
+						'countries' => $countries, 
+						'employer' => $employer, 
+						'user' => $user,
+						'categories' => $categories
+						)
+					);
 	}
 
 	public function post_index() {
