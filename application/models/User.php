@@ -35,4 +35,22 @@ class User extends Eloquent {
 			return null;
 		}
 	}
+	
+	public static function is_applicant() {
+		
+		if( Auth::check() && Auth::user()->role_id == '2' ) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	public static function is_employer() {
+		
+		if( Auth::check() && Auth::user()->role_id == '1' ) {
+			return true;
+		}
+		return false;
+		
+	}
 }

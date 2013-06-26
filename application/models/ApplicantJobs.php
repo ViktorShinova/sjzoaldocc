@@ -9,4 +9,12 @@ class ApplicantJobs extends Eloquent {
 		return $this->belongs_to('Applicant');
 	}
 	
+	public function coverletter() {
+		
+		return $this->belongs_to('ApplicantCoverletters', 'applicant_coverletter_id');
+	}
+	public function resume() {
+		
+		return $this->belongs_to('ApplicantResumes', 'applicant_resume_id');
+	}
 }

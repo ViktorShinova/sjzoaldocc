@@ -1,5 +1,5 @@
 @include('email.header')
 
-{{$email_body}}
+{{Formatter::strip_tags($email_body)}}
 
 @include('email.footer')

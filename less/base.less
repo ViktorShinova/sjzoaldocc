@@ -11,6 +11,7 @@
 //@import 'partial/colour-code.less';
 
 body {
+	background: #f6f5f1;
 	//#gradient .vertical (#ddd, #fff);
 	
 	// // background: -moz-linear-gradient(top,  rgba(11,103,205,0) 0%, rgba(11,103,205,0.28) 49%, rgba(13,105,206,0.29) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
@@ -181,6 +182,7 @@ h1.span12 { margin-bottom: 21px;}
 
 
 	#btn-apply {
+		//.open-sans-light();
 		width: 86%;
 		display: block;
 		margin: 0 auto;
@@ -197,6 +199,10 @@ h1.span12 { margin-bottom: 21px;}
 	.notice-container {
 		border: 1px solid #dadada;
 		.box-sizing(border-box);
+		
+		&.expired {
+			padding: 32px;
+		}
 	}
 
 	.alert-info {

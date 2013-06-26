@@ -46,7 +46,7 @@
 		.ExternalClass { width: 100%; display:block !important; } /* Force Hotmail to display emails at full width */
 		/* Reset Styles */
 		/* Add 100px so mobile switch bar doesn't cover street address. */
-		body { background-color: #dedede; margin: 0; padding: 0; }
+		body { background-color: #f6f5f1; margin: 0; padding: 0; }
 		img { outline: none; text-decoration: none; display: block;}
 		br, strong br, b br, em br, i br { line-height:100%; }
 		h1, h2, h3, h4, h5, h6 { line-height: 100% !important; -webkit-font-smoothing: antialiased; }
@@ -64,9 +64,9 @@
 		  white-space: normal;
 		  word-break: break-all;
 		}
-		#background-table { background-color: #dedede; }
+		#background-table { background-color: #f6f5f1; }
 		/* Webkit Elements */
-		#top-bar { border-radius:6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; -webkit-border-radius:6px 6px 0px 0px; -webkit-font-smoothing: antialiased; background-color: #c7c7c7; color: #ededed; }
+		#top-bar { border-radius:6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; -webkit-border-radius:6px 6px 0px 0px; -webkit-font-smoothing: antialiased; background-color: #0079c1; color: #ededed; }
 		#top-bar a { font-weight: bold; color: #ffffff; text-decoration: none;}
 		#footer { border-radius:0px 0px 6px 6px; -moz-border-radius: 0px 0px 6px 6px; -webkit-border-radius:0px 0px 6px 6px; -webkit-font-smoothing: antialiased; }
 		/* Fonts and Content */
@@ -81,7 +81,7 @@
 		.article-title a { color: #b0b0b0; text-decoration: none; }
 		.article-title.with-meta {margin-bottom: 0;}
 		.article-meta { font-size: 13px; line-height: 20px; color: #ccc; font-weight: bold; margin-top: 0;}
-		.article-content { font-size: 13px; line-height: 18px; color: #444444; margin-top: 0px; margin-bottom: 18px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; }
+		.article-content { font-size: 13px; line-height: 18px; color: #ccc; margin-top: 0px; margin-bottom: 18px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; }
 		.article-content a { color: #2f82de; font-weight:bold; text-decoration:none; }
 		.article-content img { max-width: 100% }
 		.article-content ol, .article-content ul { margin-top:0px; margin-bottom:18px; margin-left:19px; padding:0; }
@@ -92,11 +92,11 @@
 		.footer-content-left a { color: #ffffff; font-weight: bold; text-decoration: none; }
 		.footer-content-right { font-size: 11px; line-height: 16px; color: #ededed; margin-top: 0px; margin-bottom: 15px; }
 		.footer-content-right a { color: #ffffff; font-weight: bold; text-decoration: none; }
-		.email #footer { background-color: #c7c7c7; color: #ededed; }
-		.email #footer a { color: #ffffff; text-decoration: none; font-weight: bold; }
+		#table-footer { background-color: #333; color: #ededed; }
+		#table-footer a { color: #ffffff; text-decoration: none; font-weight: bold; }
 		#permission-reminder { white-space: normal; }
 		#street-address { color: #b0b0b0; white-space: normal; }
-		.fineprint { font-size: 9px; text-align:justify; }
+		.fineprint { font-size: 9px !important; text-align:justify; }
 		</style>
 		<!--[if gte mso 9]>
 		<style _tmplitem="154" >
@@ -112,7 +112,7 @@
 			<table width="100%" cellpadding="0" cellspacing="0" border="0" id="background-table">
 				<tbody>
 					<tr>
-						<td align="center" bgcolor="#dedede">
+						<td align="center" bgcolor="#f6f5f1">
 							<table class="w640" style="margin:0 10px;" width="640" cellpadding="0" cellspacing="0" border="0">
 								<tbody>
 									<tr><td class="w640" width="640" height="20"></td></tr>

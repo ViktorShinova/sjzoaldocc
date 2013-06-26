@@ -1,42 +1,73 @@
 <?php
 
 class Employer_Post_Controller extends Base_Controller {
-
+	protected $_secure_pages = array(
+		'post',
+		'index',
+		'list',
+		'create',
+		'edit',
+		'details',
+		'resume',
+		'coverletter',
+	);
+	
+	public static $_per_page = 25;
+			
+			
 	public function __construct() {
 
 		parent::__construct();
 
 		$this->filter('before', 'auth')->only(
-				array('post',
-					'index',
-					'list',
-					'create',
-					'edit',
-					'details'
-				)
+				$this->_secure_pages
 		);
 
 		$this->filter('before', 'employer')->only(
-				array('post',
-					'index',
-					'list',
-					'create',
-					'edit',
-					'details',
-				)
+				$this->_secure_pages
 		);
 	}
 
 	public function get_list() {
-		$jobs = Job::where('end_at', '>', date('Y:m:d H:i:s'))
-				->where('employer_id', '=', Session::get('employer_id'))
-				->order_by('created_at', 'desc')->paginate(30);
-
-		return View::make('employer.post_list')->with(array('jobs' => $jobs));
+		$page = Input::get('page', 1);
+		$offset = ($page - 1) * static::$_per_page;
+		// validate page value
+		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;
+		$jobs = DB::query( 'select
+				(SELECT 
+					COUNT(id) from `applicant_job` where `job_id` = `jobs`.`id` ) as `num_of_applicants`, 
+					jobs.*
+				FROM 
+					`jobs` jobs 
+				WHERE 
+					`employer_id` = ' . Session::get('employer_id') . ' 
+				AND 
+					`end_at` > \'' . date('Y:m:d H:i:s') .'\' 
+				ORDER BY
+					(created_at) desc 
+				LIMIT ' . $offset .','.static::$_per_page
+					
+					
+		);
+		
+		$rows = DB::query('SELECT FOUND_ROWS() as total');
+		$row = $rows[0];
+		$total = $row->total;
+		
+		$page = Paginator::page($total, static::$_per_page);
+		
+//		$jobs = Job::where('end_at', '>', date('Y:m:d H:i:s'))
+//				->where('employer_id', '=', Session::get('employer_id'))
+//				->order_by('created_at', 'desc')
+//				->paginate( 30, array(
+//					
+//				));
+		$results = Paginator::make($jobs, $total, static::$_per_page);
+		return View::make('employer.post_list')
+				->with('jobs', $results);
 	}
 
 	public function get_create($id = null) {
-
 
 		$job_categories = Category::lists('name', 'id');
 		$locations = Location::lists('name', 'id');
@@ -74,8 +105,9 @@ class Employer_Post_Controller extends Base_Controller {
 	}
 
 	public function post_create() {
+		
 		$rules = array(
-			'title' => 'required|max:255',
+			'title' => 'required',
 			'summary' => 'required|max:255',
 			'desc' => 'required',
 			'more-info' => 'required',
@@ -83,17 +115,26 @@ class Employer_Post_Controller extends Base_Controller {
 			'min-salary' => 'required|numeric',
 			'max-salary' => 'required|numeric'
 		);
-		$validation = Validator::make(Input::all(), $rules);
+		$messages = array (
+			'summary' => 'The summary must be less than 255 characters'
+		);
+		
+		$title = Input::get('title');
+		
+		$slug = Job::slugify($title);
+		
+		
+		$validation = Validator::make(Input::all(), $rules, $messages);
 
 		if ($validation->fails()) {
 			Session::put("old-sub-category", Input::get('sub-category'));
 			Session::put("old-sub-location", Input::get('sub-location'));
-			return Redirect::to('employer/post/create')->with_errors($validation)->with_input();
+			return Redirect::to('employer/post/create/')->with_errors($validation)->with_input();
 		} else {
+			$inputs = Input::all();
+			$inputs['slug'] = $slug;
 			Session::forget('notice');
-			Session::put('notice', Input::all());
-
-
+			Session::put('notice', $inputs);
 
 			return Redirect::to('employer/payment');
 		}
@@ -124,9 +165,10 @@ class Employer_Post_Controller extends Base_Controller {
 
 		//This has to change. Might need to write my own database connector
 		$job = Job::find($id);
+		
 		$job->delete();
-
-		return Redirect::to('employer/post/list');
+		
+		return Redirect::back();
 	}
 
 	public function get_edit($id = null) {
@@ -141,8 +183,14 @@ class Employer_Post_Controller extends Base_Controller {
 		$templates = Template::all();
 		$min_salary = $this->_min_salary;
 		$max_salary = $this->_calculate_max_salary(0);
-		
 		$post = Job::find($id);
+		
+		$sub_categories = SubCategory::where('category_id', "=", $post->category_id)->lists("name", "id");
+		$sub_categories = array('' => 'Choose a sub category') + $sub_categories;
+		
+		$sub_locations = SubLocation::where('location_id', "=", $post->location_id)->lists("name", "id");
+		$sub_locations = array('' => 'Choose a sub location') + $sub_locations;
+		
 		return View::make("employer.editpost")->with(
 						array(
 							'categories' => $job_categories,
@@ -152,6 +200,8 @@ class Employer_Post_Controller extends Base_Controller {
 							'job' => $post,
 							'min_salary' => $min_salary,
 							'max_salary' => $max_salary,
+							'sub_categories' => $sub_categories,
+							'sub_locations' => $sub_locations
 						)
 		);
 	}
@@ -180,6 +230,7 @@ class Employer_Post_Controller extends Base_Controller {
 		if ($validation->fails()) {
 			Session::put("old-sub-category", Input::get('sub-category'));
 			Session::put("old-sub-location", Input::get('sub-location'));
+			
 			return Redirect::to('employer/post/edit/' . $id)->with_errors($validation)->with_input();
 		} else {
 
@@ -189,9 +240,8 @@ class Employer_Post_Controller extends Base_Controller {
 
 			$job->title = $job_ads['title'];
 			$job->summary = $job_ads['summary'];
-			$job->description = $job_ads['desc'];
+			$job->description = Formatter::strip_tags($job_ads['desc']);
 			$job->more_info = $job_ads['more-info'];
-			$job->video = $job_ads['video'];
 			$job->contact = $job_ads['contact'];
 			$job->category_id = $job_ads['job-category'];
 			$job->sub_category_id = $job_ads['sub-category'];
@@ -202,15 +252,14 @@ class Employer_Post_Controller extends Base_Controller {
 			$job->work_type = $job_ads['work-type'];
 			$job->location_id = $job_ads['job-location'];
 			$job->sub_location_id = $job_ads['sub-location'];
-			if($job_ads['custom-apply-select'] === 'N') {
+			if( isset($job_ads['custom-apply-select']) && $job_ads['custom-apply-select'] === 'N') {
 				$job->apply = null;
 			}
 			else {
 				$job->apply = $job_ads['custom-apply'];
 			}
 		
-			
-			
+					
 			$job->template_id = ( (!empty($job_ads['post-selected-template']) ? $job_ads['post-selected-template'] : 1 ) );
 
 			if ($job->save()) {
@@ -256,15 +305,16 @@ class Employer_Post_Controller extends Base_Controller {
 		
 		foreach( $applicants->results as $applicant) {
 			
+			$applicant->is_non_registered = false;
 			if( !$applicant->applicant_id) {
 				//non-registered users
 				
 				$data = unserialize($applicant->non_registered_users);
-				var_dump($data);
-
-				// $applicant->first_name = $data['first_name'];
-				// $applicant->last_name = $data['last_name'];
-				// $applicant->email = $data['email'];
+				
+				$applicant->first_name = $data['first_name'];
+				$applicant->last_name = $data['last_name'];
+				$applicant->email = $data['email'];
+				$applicant->is_non_registered = true;
 				
 			}
 			
@@ -285,9 +335,6 @@ class Employer_Post_Controller extends Base_Controller {
 		if( !$id ) {
 			return Redirect::to('employer/post/list');
 		}
-		var_dump($_POST);
-		
-		//Session::put('data', $_POST);
 		
 		$rules = array(
 			'email-success' => 'required',
@@ -316,9 +363,10 @@ class Employer_Post_Controller extends Base_Controller {
 	public function get_archived() {
 		$jobs = Job::where('end_at', '<', date('Y:m:d H:i:s'))
 				->where('employer_id', '=', Session::get('employer_id'))
-				->paginate(10);
+				->paginate(static::$_per_page);
 
 		return View::make('employer.archived')->with(array('jobs' => $jobs));
 	}
-
+	
+	
 }

@@ -4,6 +4,7 @@
 
 <h3>Post a new advertisement</h3>
 <br />
+
 @if ( $errors->all(':message') )
 <div class="validation error">
 	<p>Please correct the following errors</p>
@@ -15,18 +16,20 @@
 </div>
 @endif
 <form action="/employer/post/create" method="post" class="employer-form validate-form">
-	<div class="white-bg drop-shadow-butterfly">
+	<div class="white-bg drop-shadow">
 		<h4 style="clear: both">Job Details</h4>
 		<div class="pad">
 			<ul class="post-desc">
 				<li> {{ Form::label('title', 'Title'); echo Form::text('title', Input::old('title') , array('class' => 'validate[required]')); }} </li>
 				<li> {{ Form::label('summary', 'Summary'); echo Form::textarea('summary', Input::old('summary'), array('class' => 'validate[required]')); }} </li>
-				<li> {{ Form::label('desc', 'Description'); echo Form::textarea('desc', Input::old('desc'), array('class' => 'validate[required]', 'maxLength' => '255')); }} </li>
+				<li> {{ Form::label('desc', 'Description'); echo Form::textarea('desc', Input::old('desc'), array('class' => 'validate[required]')); }} </li>
+				<li> {{ Form::label('contact', 'Contact Information'); echo Form::textarea('contact', Input::old('contact'), array('class' => 'validate[required] contact')); }}
+					<a href="#" rel="tooltip" data-toggle="tooltip" title="This will appear at the end of the advertisement. Please only include ways of submitting the application or contact information."><i class="icon-question-sign"></i></a></li>
+
 			</ul>
 			<ul class="post-info">
 				<li> {{ Form::label('more-info', 'More Infomation'); echo Form::text('more-info', Input::old('more-info'), array('class' => 'test')); }} </li>
 				<!--<li> {{ Form::label('video', 'Video'); echo Form::text('video', Input::old('video'),  array('class' => 'validate[custom[url]]', 'placeholder'=>'http://www.youtube.com/')); }} </li>-->				
-				<li> {{ Form::label('contact', 'Contact Details'); echo Form::text('contact', Input::old('contact'), array('class' => 'validate[required]')); }}</li>
 				<li> {{ Form::label('job-category', 'Job Category'); echo Form::select('job-category', $categories, Input::old('job-category'), array('class' => 'validate[required]')); }}</li>
 				<li> {{ Form::label('sub-category', 'Sub Category'); echo Form::select('sub-category', array('' => 'Choose a sub category'), Input::old('sub-category'), array('class'=>'validate[required]')); }}</li>		
 				<li> {{ Form::label('job-location', "Location"); echo Form::select('job-location', $locations, Input::old('job-location'), array('class'=>'validate[required]')) }}</li>
@@ -38,7 +41,7 @@
 				<li> {{ Form::label('sal-type', 'Salary Type'); echo  Form::select('sal-type', array('annual' => 'Annually Rates', 'hour' => 'Hourly Rates') , array('class' => 'validate[required]', 'id'=>'sal-type')); }}</li>
 				<li> {{ Form::label('min-salary', 'Minimum Salary'); echo  Form::text('min-salary', Input::old('min-salary'), array('class' => 'validate[required,custom[money], funcCall[salaryMinCheck]]', 'id'=>'min-salary')); }}</li>
 				<li> {{ Form::label('max-salary', 'Maximum Salary'); echo Form::text('max-salary', Input::old('max-salary'), array('class' => 'validate[required,custom[money], funcCall[salaryMaxCheck]]', 'id'=>'max-salary')); }}</li>
-				<!--			<li> {{ Form::label('min-salary', 'Minimum Salary'); echo  Form::select('min-salary', $min_salary , Input::old('min-salary'), array('class' => 'span1', 'id'=>'min-salary')); }}</li>
+				<!--		<li> {{ Form::label('min-salary', 'Minimum Salary'); echo  Form::select('min-salary', $min_salary , Input::old('min-salary'), array('class' => 'span1', 'id'=>'min-salary')); }}</li>
 							<li> {{ Form::label('max-salary', 'Maximum Salary'); echo Form::select('max-salary', $max_salary , Input::old('max-salary'), array('class' => 'span1', 'id'=>'max-salary')); }}</li>-->
 				<li> {{ Form::label('salary-range', 'Salary Description'); echo Form::text('salary-range', Input::old('salary-range'), array('maxlength' => 70, 'class' => 'validate[required]') ) }} <a href="#" rel="tooltip" data-toggle="tooltip" title="You can enter an interesting note for your salary description. E.g (Good $$$ with super). Only a maximum of 70 characters allowed."><i class="icon-question-sign"></i></a></li>
 
@@ -47,7 +50,7 @@
 		</div>
 
 	</div>
-	<div class="white-bg drop-shadow-butterfly">
+	<div class="white-bg drop-shadow">
 		<h4 style="clear: both">Custom "Apply Now" Button</h4>
 		<div class="pad">
 			<ul>
@@ -73,21 +76,31 @@
 			</ul>
 		</div>
 	</div>
-	<div class="white-bg drop-shadow-butterfly">
+	<div class="white-bg drop-shadow">
 		<h4 style="clear: both">Please select a template</h4>
 		<div class="pad">
 			<p><em>If no template is selected, the default template will be automatically assigned.</em></p>
 			<input type="hidden" id="post-selected-template" value="" name="post-selected-template" />
-			<ul class="post-templates" style="clear:both">
+			
+			<table class="post-templates">
+				<tr>
+					<th width="20%">Name</th>
+					<th>Preview</th>
+					<th>Created At</th>
+					<th width="10%"></th>
+				</tr>
 				@foreach ($templates as $template)
-				<li class="template-item" data-id="{{ $template->id }}">
-					<h5>{{ $template->name }}</h5>
-					<figure>
-						<img src="http://www.placehold.it/100x100/" alt="{{  $template->name }}" />
-					</figure>
-				</li>
+				<tr data-id="{{ $template->id }}" class="template-item">
+					<td>{{ $template->name }}</td>
+					<td><a href="/employer/template/preview/{{$template->id}}" rel="popup" class="template-preview">Preview</a></td>
+					<td>{{ Formatter::format_date($template->created_at, Formatter::DATE_LONG_W_TIME) }}</td>
+					<td class="icon"><i class="icon-check"></i></td>
+				</tr>
 				@endforeach
-			</ul>
+				
+			</table>
+			
+
 		</div>
 	</div>
 

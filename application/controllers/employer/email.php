@@ -164,22 +164,20 @@ class Employer_Email_Controller extends Base_Controller {
 			$mail->Password = SMTP_PASSWORD;
 		}
 
+		
+
 		$sent = false;
-
-		for ($i = 0; $i < 2; $i++) {
-
-			$sent = false;
-			//successful
-			if ($i == 0) {
-				$sent = $this->_sendBulkMail($successful_candidates, $success_body, $mail);
-			}
-			//unsuccessful
-			else if ($i == 1) {
-				
-				$sent = $this->_sendBulkMail($unsuccessful_candidates, $unsuccess_body, $mail);
-				
-			}
+		//successful
+		if (!empty($successful_candidates)) {
+			$sent = $this->_sendBulkMail($successful_candidates, $success_body, $mail);
 		}
+		//unsuccessful
+		else if (!empty($unsuccessful_candidates)) {
+
+			$sent = $this->_sendBulkMail($unsuccessful_candidates, $unsuccess_body, $mail);
+
+		}
+		
 
 		if ($sent) {
 			$candidates = array_merge( $success_send_mail, $unsuccess_send_mail);
@@ -209,7 +207,8 @@ class Employer_Email_Controller extends Base_Controller {
 			}
 		}
 		
-
+		$mail->Body = $body;
+		
 		if (!empty($candidates)) {
 			if ($mail->send()) {
 				$mail->ClearBCCs();

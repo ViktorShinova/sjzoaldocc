@@ -48,6 +48,7 @@ CKEDITOR.editorConfig = function( config ) {
 		['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
 	];
 	
+	config.removeFormatTags = 'scripts, styles';
 	
 	
 };

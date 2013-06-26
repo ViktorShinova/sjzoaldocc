@@ -35,7 +35,7 @@
 		<div class='pad'>
 		<ol>
 			<li>{{ Form::label('company', 'Company'); echo Form::text('company', Input::old('company'), array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('industry', 'Industry'); echo Form::text('industry', Input::old('industry'), array('class' => 'validate[required]')) }}</li>
+			<li>{{ Form::label('industry', 'Industry'); echo Form::select('industry', $industries,Input::old('industry')) }}</li>
 			<li>{{ Form::label('title', 'Title'); echo Form::select('title', array('Mr' => 'Mr', 'Ms' => 'Ms', 'Miss' => 'Miss', 'Dr' => 'Dr'), Input::old('title')) }}</li>
 			<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', Input::old('firstname'), array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', Input::old('lastname'), array('class' => 'validate[required]')) }}</li>

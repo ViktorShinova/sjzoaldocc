@@ -141,7 +141,7 @@ class Employer_Payment_Controller extends Base_Controller {
 		$_job = array(
 			'title' => $job_ads['title'],
 			'summary' => $job_ads['summary'],
-			'description' => $job_ads['desc'],
+			'description' => Formatter::strip_tags($job_ads['desc']),
 			'more_info' => $job_ads['more-info'],
 			'contact' => $job_ads['contact'],
 			'category_id' => $job_ads['job-category'],
@@ -156,6 +156,7 @@ class Employer_Payment_Controller extends Base_Controller {
 			'employer_id' => Session::get('employer_id'),
 			'template_id' => ( (!empty($job_ads['post-selected-template']) ? $job_ads['post-selected-template'] : 1 ) ),
 			'end_at' => date("Y-m-d H:i:s", strtotime("+1 month", strtotime(date('Y-m-d H:i:s')))),
+			'slug' => $job_ads['slug'],
 			'status' => 1,
 		);
 		
@@ -177,9 +178,9 @@ class Employer_Payment_Controller extends Base_Controller {
 	
 	public function get_complete() {
 
-		if (!Session::has('notice')) {
-			return Redirect::to('employer/post/create');
-		}
+//		if (!Session::has('notice')) {
+//			return Redirect::to('employer/post/create');
+//		}
 
 		$post = Session::get('notice');
 		$price = Session::get('price');

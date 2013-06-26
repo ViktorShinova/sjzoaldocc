@@ -51,22 +51,20 @@
 						</ul>" data-original-title="Skill sets">View Skills</a>
 					
 					
+					@elseif ($applicant->is_non_registered)
+					Unregistered applicant
 					@else
 					No skill set entered
 					@endif
 				</td>	
 				<td style="width: 150px;">
-					@if (!$applicant->cover_letter)
-						No cover letter
-					@else
-					<a href="#" rel="popup">Cover Letter</a>
-					@endif
+					
+					<a rel="popup" href="/employer/coverletter/{{$applicant->applied_id}}" rel="popup">Cover Letter</a>
+					
 					/
-					@if (!$applicant->path)
-						No resume attached
-					@else
-					<a href="{{$applicant->path}}" rel="popup">Resume</a>
-					@endif
+					
+					<a rel="popup" href="/employer/resume/{{$applicant->applied_id}}" rel="popup">Resume</a>
+					
 				</td>
 				<td style="text-align:center; width: 50px">
 					@if($applicant->sent != 1)

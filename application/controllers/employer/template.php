@@ -149,9 +149,9 @@ class Employer_Template_Controller extends Base_Controller {
 
 		$custom_css = str_replace($search, $replace, $default_css);
 
-		var_dump($custom_css);
+		//var_dump($custom_css);
 		//die();
-
+		$template = null;
 		if (!$id) {
 			$template = new Template;
 			$template->css = $custom_css;
@@ -161,6 +161,9 @@ class Employer_Template_Controller extends Base_Controller {
 			$template->body = ((!isset($temp['body_background'])) ? "" : $temp['body_background']);
 			$template->footer = ((!isset($temp['footer_background'])) ? "" : $temp['footer_background']);
 			$template->save();
+			
+			
+			
 		} else {
 
 			$template = Template::find($id);
@@ -173,9 +176,11 @@ class Employer_Template_Controller extends Base_Controller {
 			$template->save();
 		}
 
+		//$this->generate_image($template);
 		//Remove all files in the tmp folder
 		$this->_remove_tmp_files('backgrounds', $employer->unique_folder, 'employer');
 
+		
 		return Redirect::to('/employer/template/list');
 	}
 
@@ -204,7 +209,24 @@ class Employer_Template_Controller extends Base_Controller {
 
 		$template = Template::find($id);
 
+//		$this->generate_image($template);
+//		die();
 		return View::make('employer.preview')->with(array('template' => $template));
+	}
+	
+	protected function generate_image($template) {
+		
+//		$html_code =  View::make('employer.preview')->with(array('template' => $template))->render();
+//		
+//		shell_exec("C:\wamp\www\careershire\wkhtmltoall\wkhtmltoimage --version 2>> http://google.com 1>> test.png");
+//		var_dump('test');
+		//
+//		# Display the image 
+//		header("Content-type: image/jpeg"); 
+//		imagejpeg($img); 
+
+		die();
+		
 	}
 
 }

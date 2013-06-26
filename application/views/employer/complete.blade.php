@@ -2,21 +2,14 @@
 @section('page-id')page-post@endsection
 @section('content')
 
-<div class="show-on-print header">
-	<img class="print-logo" src="/img/logo-print.png" />
-	<h1 class="print-header">Payment Successful</h1>
-</div>
+<h2>Payment Successful</h2>
 
-<h1 class="container-header">Payment Successful</h1>
-<div class="content">
 	<p>Your payment has been successfully processed.</p>
 	<section role="contentinfo" class="receipt">
 		
-		<p>Thank you for purchasing an advertisement block on Careershire.</p>
-		
+		<p>A copy of the receipt below has been sent to your nominated email address. Please keep it safe for future reference.</p>
 		<br/>
-		<p>Below is a copy of your receipt. Please keep it safe for future reference.</p>
-		<br/>
+			
 		<div class="table-container">
 		<div class="table-header-wrapper">
 			<h2 class="table-header">Payment Summary</h2>
@@ -45,7 +38,7 @@
 	</div>
 	</section>
 
-	<a class="btn btn-primary print-button" href="#" id="print" ><i class="icon-print icon-white"></i> Print</a>	
+	<a class="btn btn-primary print-button pull-right" href="#" id="print" ><i class="icon-print icon-white"></i> Print</a>	
 	
 </div>
 

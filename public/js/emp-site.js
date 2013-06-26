@@ -18,14 +18,15 @@ var empSite = {
 		empSite.attachCKEditor();
 		empSite.attachPrint();
 		empSite.attachBackButton();
+		empSite.attachJobDelete();
 	},
 			
 	attachCKEditor: function() {
 		console.log($("input[name='summary']"));
 		if( $("#summary").length) {
-			CKEDITOR.replace('summary', {
-				toolbar: 'Basic'
-			});
+//			CKEDITOR.replace('summary', {
+//				toolbar: 'Basic'
+//			});
 		}
 		
 		if( $("#desc").length) {
@@ -172,6 +173,7 @@ var empSite = {
 			job_cat = $('#job-category');
 
 			job_cat.on("change", function() {
+				
 				url = "/employer/sub_category/" + $("#job-category").val();
 
 				$.ajax({
@@ -190,7 +192,7 @@ var empSite = {
 				});
 			});
 
-			job_cat.trigger('change');
+			//job_cat.trigger('change');
 
 		}
 		if ($("#job-location").length) {
@@ -216,7 +218,7 @@ var empSite = {
 				});
 			});
 
-			job_loc.trigger('change');
+			
 		}
 
 
@@ -574,6 +576,26 @@ var empSite = {
 				e.preventDefault();
 				window.history.back();
 			});
+		}
+
+	},
+			
+	attachJobDelete: function() {
+	
+		if( $('.job-delete').length ) {
+			
+			$('.job-delete').click( function(e) {
+
+				e.preventDefault();
+				
+				var url = $(this).attr('href');
+
+				$('#btn-job-delete').attr('href', '');
+				$('#btn-job-delete').attr('href', url);
+				$('#job-delete-modal').modal('show');
+				
+			});
+			
 		}
 
 	}

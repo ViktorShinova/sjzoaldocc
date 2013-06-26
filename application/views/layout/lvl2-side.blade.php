@@ -16,7 +16,7 @@
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
 		<link rel="shortcut icon" href="favicon.ico" />
-		
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->	

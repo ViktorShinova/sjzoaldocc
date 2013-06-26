@@ -15,8 +15,7 @@
 	<button type="button" class="close" data-dismiss="alert">×</button>
 	You have successfully applied for this job!
 </div>
-@endif
-@if ($is_applied )
+@elseif ($is_applied )
 <div class="alert fade in alert-danger">
 	You have already applied for this job!
 </div>
@@ -43,15 +42,16 @@
 			<ol>
 				<li>
 					<label for="email">First Name *</label>
-					<input type="text" class="validate[required]" type="text" name="first_name" id="first_name"  value="{{ ($applicant) ? $applicant->first_name : '' }}">
+					
+					<input type="text" class="validate[required]" type="text" name="first_name" id="first_name"  value="{{ ($applicant) ? $applicant->first_name : Input::old('first_name') }}">
 				</li>
 				<li>
 					<label for="contact">Last Name *</label>
-					<input type="text" class="validate[required]" type="text" name="last_name" id="last_name"  value="{{ ($applicant) ? $applicant->last_name : '' }}">
+					<input type="text" class="validate[required]" type="text" name="last_name" id="last_name"  value="{{ ($applicant) ? $applicant->last_name : Input::old('last_name')  }}">
 				</li>
 				<li>
 					<label for="email">Email *</label>
-					<input type="email" class="validate[required,custom[email]]" type="text" name="email" id="email" value="{{ ($applicant) ? $applicant->email : ''}}">
+					<input type="email" class="validate[required,custom[email]]" type="text" name="email" id="email" value="{{ ($applicant) ? $applicant->email : Input::old('email') }}">
 				</li>
 				<li>
 					<label for="contact">Contact Number *</label>

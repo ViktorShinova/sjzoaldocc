@@ -14,7 +14,7 @@
 									</tr>
 									<tr>
 										<td class="w640" width="640">
-											<table id="footer" class="w640" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#c7c7c7">
+											<table id="table-footer" class="w640" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#c7c7c7">
 												<tbody>
 													<tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="15"></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>
 													<tr><td class="w30" width="30"></td><td class="w580 h0" width="360" height="30"><span class="article-content">&copy; 2013 Careershire. ABN 96 992 870 684.</span></td><td class="w0" width="60"></td><td class="w0" width="160"></td><td class="w30" width="30"></td></tr>

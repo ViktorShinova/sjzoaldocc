@@ -147,6 +147,8 @@
 				margin-left: 150px;
 			}
 			
+			
+			
 			&.post-desc {
 				overflow: hidden;
 				width: 100%;
@@ -158,7 +160,7 @@
 					float: left; 
 					width: 768px; 
 				}
-				textarea[name="summary"] { 
+				textarea[name="summary"], textarea[name="contact"] { 
 					height: 100px;
 					float: left;
 					width: 768px;  
@@ -209,17 +211,31 @@
 	}
 
 	.post-templates {
-		overflow: hidden;
-		li {
+		width: 100%;
+		tr {
 			cursor: pointer;
-			display: block;
-			float: left;
 			margin-right: 20px;
-			padding: 10px;
-
+			td, th {
+				border: 1px solid #ccc;
+				text-align: left;
+				padding: 10px;
+			}
+			.icon { text-align:center;}
+			th {
+				#gradient > .vertical ( #fafafa, #eaeaea );
+			}
+			i { display: none;}
 			&.selected {
-				h5 { color: white; }
+				td { color: white; }
 				#gradient > .vertical ( #258DC8, #30a9d3 );
+				i { display: block;}
+				a { color: white; }
+			}
+			
+			&:hover{
+				td { color: #333;}
+				#gradient > .vertical ( #ffffff, #cccccc );
+				a { color: @blue; }
 			}
 		}
 	}//post-templates
@@ -258,6 +274,7 @@
 				.button-background();
 				border: 1px solid  @button-blue;
 				border-bottom: 0;
+				a { color: white; }
 			}
 
 			&.active {
@@ -272,26 +289,63 @@
 
 		.panel-container {
 
-			background: #fff; border: solid #ccc 1px; 
 			padding: 10px 20px;
-			
 
+		}
+		
+		&.payment-tab {
+			.etabs{
+				overflow: hidden;
+				margin-bottom: 21px;
+			}
+			.tab {
+				.border-radius(5px);
+				border: solid 1px #ccc;
+				display: block;
+				float: left;
+				height: 70px;
+				width: 47%;
+				text-align: center;
+				h4 { 
+					font-weight: normal;
+					margin-bottom: 0;
+				}
+				
+				a { 
+					margin-top: 13px;
+					display: block;
+				}
+				
+				&.active {
+					background: #e68733;
+					padding: 0;
+				}
+				
+				&#paypal-tab { float: right; }
+			}
+			
+			
 		}
 	}
 	#credit-card {
-		h4 { text-align: center; }
+		h3 { 
+			.open-sans-light();
+		}
+		p { margin-bottom:21px;}
 		ul {
-			width: 50%;
+			overflow: hidden;
 			margin: 0 auto;
 			li {
 				list-style: none;
 				overflow: hidden;
+				float:left;
 
 				label, input, select, abbr {
 					float: left;
 				}
 
 				select {
+					margin-right: 50px; 
 					width: 264px;
 				}
 				label { 
@@ -304,7 +358,7 @@
 					}
 				}
 				input { 
-					margin-right: 10px; 
+					margin-right: 50px; 
 					width: 250px;
 				}
 				abbr { 
@@ -316,17 +370,12 @@
 					width: 127px;
 					margin-right: 10px;
 				}
-
-				.cards {
-					margin-left: 16px;
-				}
+				
+				
 			}
+			
 		}
-
-		#eway {
-			position: absolute;
-			margin-top: -10px;
-		}
+		.btn { float: right; }
 	}
 	
 	

@@ -47,7 +47,7 @@
 				</figure>
 
 				@endif
-				<h2><a href="/job/article/{{$job->id}}"><?php //echo preg_replace($tokens, $replacePattern, $job->title)  ?>{{$job->title}}</a></h2>
+				<h2><a href="/job/article/{{$job->slug}}"><?php //echo preg_replace($tokens, $replacePattern, $job->title)  ?>{{$job->title}}</a></h2>
 				<p><a href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></p>
 				<p>
 					{{$job->summary}}
@@ -64,7 +64,7 @@
 			</aside>
 		</div>
 		<div id="job-controls" class="pull-right">
-			<a href="/job/article/{{$job->id}}" class="btn btn-primary"><i class="icon-eye-open"></i> View</a>
+			<a href="/job/article/{{$job->slug}}" class="btn btn-primary"><i class="icon-eye-open"></i> View</a>
 			@if($is_applicant)
 
 				@if ( in_array ($job->id, $applicant_shortlists )  )

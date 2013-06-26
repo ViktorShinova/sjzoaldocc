@@ -33,5 +33,21 @@ class Job extends Eloquent {
 	public function invoice() {
 		return $this->has_one('Transaction');
 	}
-
+	
+	public static function slugify($title) {
+		$title = strtolower($title);
+		$slug =  preg_replace("/[^a-zA-Z 0-9]+/", "", $title);
+		$slug =  str_replace(' ', '_', $slug);
+		
+		$count = Job::where('slug', 'LIKE' , "%$slug%")->count();
+		
+		if( $count != 0) {
+			$count = $count + 1;
+			
+			$slug = $slug . '_' . $count;
+			return $slug;
+		}
+		
+		return $slug;
+	}
 }

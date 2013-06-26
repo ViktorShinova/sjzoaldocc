@@ -140,6 +140,7 @@ class Job_Controller extends Base_Controller {
 			'jobs.title',
 			'jobs.salary_range',
 			'jobs.summary',
+			'jobs.slug',
 			'employers.company',
 			'employers.logo_path as logo',
 			'jobs.created_at',
@@ -210,7 +211,7 @@ class Job_Controller extends Base_Controller {
 		$is_employer = false;
 		$applicant_shortlists = null;
 		//check if the user is login and if he is employer or applicant
-		if (Auth::check() && Auth::user()->role_id == '2') {
+		if (User::is_applicant()) {
 
 			$applicant_id = Session::get('applicant_id');
 
@@ -219,7 +220,7 @@ class Job_Controller extends Base_Controller {
 
 			//Get shortlist	
 			$applicant_shortlists = Shortlists::where('applicant_id', '=', $applicant_id)->lists('job_id');
-		} else if (Auth::check() && Auth::user()->role_id == '1') {
+		} else if (User::is_employer()) {
 			$is_employer = true;
 		}
 
@@ -260,59 +261,74 @@ class Job_Controller extends Base_Controller {
 		);
 	}
 
-	public function get_article($id = null) {
+	public function get_article($slug = null) {
 
-		if (!$id) {
-			//return the job listing page. or return a 404 page not found or tell the user the job has expired
+		if (!$slug) {
+			return Response::error('404');
 		}
-
-		$job = Job::find($id);
-
+		
+		if( is_numeric($slug)) {
+			$job = Job::find($slug);
+		} else {
+			$job = Job::where('slug', '=', $slug)->first();
+		}
+		
+		
+		
+		if( !$job || $job->end_at > date('Y:m:d H:i:s')) {
+			return View::make('job.expired');
+		}
+		
 		//Relevant Jobs
-//		$related_jobs = DB::table('jobs')->order_by(DB::raw('RAND()'))
-//						->join('employers', 'jobs.employer_id', '=', 'employers.id')
-//						->join('job_category', 'jobs.category_id', '=', 'job_category.id')
-//						->join('locations', 'jobs.location_id', '=', 'locations.id')
-//						->join('sub_locations', 'jobs.sub_location_id', '=', 'sub_locations.id')
-//						->where('jobs.category_id', '=', $job->category_id)
-//						->where('jobs.location_id', '=', $job->location_id)
-//						->where('jobs.sub_category_id', '=', $job->sub_category_id)
-//						->where('jobs.work_type', '=', $job->work_type)
-//						->where('jobs.id', '!=', $job->id)
-//						->where('jobs.status', '=', '1')
-//						->where('jobs.end_at', '>', date('Y:m:d H:i:s'))
-//						->take(3)->get(array(
-//			'jobs.id',
-//			'jobs.title',
-//			'jobs.summary',
-//			'employers.company as company',
-//			'locations.name as location_name',
-//		));
+		$related_jobs = DB::table('jobs')->order_by(DB::raw('RAND()'))
+						->join('employers', 'jobs.employer_id', '=', 'employers.id')
+						->join('job_category', 'jobs.category_id', '=', 'job_category.id')
+						->join('locations', 'jobs.location_id', '=', 'locations.id')
+						->join('sub_locations', 'jobs.sub_location_id', '=', 'sub_locations.id')
+						->where('jobs.category_id', '=', $job->category_id)
+						->where('jobs.location_id', '=', $job->location_id)
+						->where('jobs.sub_category_id', '=', $job->sub_category_id)
+						->where('jobs.work_type', '=', $job->work_type)
+						->where('jobs.id', '!=', $job->id)
+						->where('jobs.status', '=', '1')
+						->where('jobs.end_at', '>', date('Y:m:d H:i:s'))
+						->take(3)->get(array(
+			'jobs.id',
+			'jobs.title',
+			'jobs.summary',
+			'employers.company as company',
+			'locations.name as location_name',
+		));
 
 		$is_applicant = false;
 		$is_employer = false;
-		//check if the user is login and if he is employer or applicant
-		if (Auth::check() && Auth::user()->role_id == '2') {
+		$applicant_shortlists = null;
+		
+		if (User::is_applicant()) {
+			$applicant_id = Session::get('applicant_id');
+
 			$is_applicant = true;
-		} else if (Auth::check() && Auth::user()->role_id == '1') {
+			$applicant_shortlists = Shortlists::where('applicant_id', '=', $applicant_id)->lists('job_id');
+		} else if (User::is_employer()) {
 			$is_employer = true;
 		}
 
 		$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
-						->where('job_id', '=', $id)->first();
-		$is_applied = false;
+						->where('job_id', '=', $job->id)->first();
+		$has_applied = false;
 		if ($applicant_job) {
 			if (Auth::check() && $applicant_job->status == 1) {
-				$is_applied = true;
+				$has_applied = true;
 			}
 		}
 
 		return View::make('job.article')->with(array(
 					'job1' => $job,
-					//'related_jobs' =>			$related_jobs,
+					'related_jobs' =>			$related_jobs,
 					'is_applicant' => $is_applicant,
-					'is_applied' => $is_applied,
+					'is_applied' => $has_applied,
 					'is_employer' => $is_employer,
+					'applicant_shortlists' => $applicant_shortlists,
 		));
 	}
 
@@ -459,18 +475,25 @@ class Job_Controller extends Base_Controller {
 		}
 	}
 
-	public function get_apply($id = null) {
-		if (!$id) {
+	public function get_apply($slug = null) {
+		if (!$slug) {
 			return false;
 		}
+		
+		
+		
 
 		$applicant = $applicant_resumes = $applicant_coverletters = null;
 		$is_employer = $is_applied = $is_applicant = false;
 
-		$job = Job::find($id);
+		if( is_numeric($slug)) {
+			$job = Job::find($slug);
+		} else {
+			$job = Job::where('slug', '=', $slug)->first();
+		}
 
 
-		if (Auth::check() && Auth::user()->role_id == '2') {
+		if (User::is_applicant()) {
 			$applicant = Applicant::find(Session::get('applicant_id'));
 			$is_applicant = true;
 			$applicant->email = Auth::user()->email;
@@ -478,12 +501,12 @@ class Job_Controller extends Base_Controller {
 			$applicant_coverletters = $applicant->coverletters()->get();
 
 			$applicant_job = ApplicantJobs::where('applicant_id', '=', Session::get('applicant_id'))
-							->where('job_id', '=', $id)->first();
+							->where('job_id', '=', $job->id)->first();
 
 			if ($applicant_job != null && $applicant_job->status == 1) {
 				$is_applied = true;
 			}
-		} else if (Auth::check() && Auth::user()->role_id == '1') {
+		} else if (User::is_employer()) {
 			$is_employer = true;
 //				$applicant = new Applicant();
 //				$applicant->email = null;
@@ -536,8 +559,6 @@ class Job_Controller extends Base_Controller {
 		//email employer
 		$mail = new PHPMailer();
 		$data['submissionData'] = Input::all();
-
-
 		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
 			$mail->isSMTP();
 			$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
@@ -554,12 +575,12 @@ class Job_Controller extends Base_Controller {
 		$mail->AddAddress($employer->application_email, $employer->title . ' ' . $employer->first_name . ' ' . $employer->last_name);
 		$mail->AddReplyTo(Input::get('email'));
 
-
-
 		//gather all the this job and employer details
 		$data['job'] = $job->original;
 		$data['employer'] = $employer->original;
-
+		
+		
+		
 		//pass applicant email
 		//if user logged-in
 		if (Session::has('applicant_id')) {
@@ -567,47 +588,36 @@ class Job_Controller extends Base_Controller {
 			$apply_job = new ApplicantJobs();
 			$apply_job->job_id = $id;
 			$apply_job->applicant_id = $applicant_id;
-			$apply_job->applicant_resume_id = $input['selected-resume'];
-
-			$apply_job->applicant_coverletter_id = $input['selected-coverletter'];
+			$apply_job->applicant_resume_id = ($input['selected-resume'] == 0 ? null : $input['selected-resume']);
+			$apply_job->applicant_coverletter_id = ($input['selected-coverletter'] == 0 ? null : $input['selected-coverletter']);
 
 			$apply_job->write_coverletter = strip_tags(nl2br($input['write-coverletter']));
-			$apply_job->alternate_contact_details = serialize(array($input['email'], $input['contact']));
 
 			$apply_job->status = self::APPLIED;
-
-			$apply_job->save();
-
 			//gather data of applicant
-			$data['applicant'] = array_merge((array) $apply_job->original, (array) Applicant::find($apply_job->applicant_id)->original);
-
-
-
+			
 			//gather data of attachments
 			if ($input['selected-resume'] != 0) {
 				$resume_file = ApplicantResumes::find($input['selected-resume'])->original;
 				$resume_file['name'] = $resume_file['resume'];
 				unset($resume_file['resume']);
-
-
 				$resume_file['tmp_name'] = $_SERVER["DOCUMENT_ROOT"] . $resume_file['path'];
-
-
 				unset($resume_file['path']);
 				$resume_file['error'] = 0;
 				$applicant_resume_file = $resume_file;
+				
 			} else {
 				
 				$applicant_resume_file = Input::file('upload-resume');
-				
-		
 		
 				//validate
 				if( Input::get('add-resume-to-account')  == 1) {
 					
 					$filename = preg_replace('/\s+/', '-', $applicant_resume_file['name']);
-					
-					ApplicantResumes::uploadResume($filename, $applicant_resume_file['size'], $applicant_resume_file['type'], 'upload-resume');
+					$rid = ApplicantResumes::uploadResume($filename, $applicant_resume_file['size'], $applicant_resume_file['type'], 'upload-resume');
+					if( $rid > 0 ) {
+						$apply_job->applicant_resume_id = $rid;
+					}
 					
 				}
 				
@@ -627,13 +637,20 @@ class Job_Controller extends Base_Controller {
 				if( Input::get('add-coverletter-to-account')  == 1) {
 					
 					$filename = preg_replace('/\s+/', '-', $applicant_coverletter_file['name']);
-					
-					ApplicantCoverletters::uploadCoverletter($filename, $applicant_coverletter_file['size'], $applicant_coverletter_file['type'], 'upload-coverletter');
-					
+					$cid = ApplicantCoverletters::uploadCoverletter($filename, $applicant_coverletter_file['size'], $applicant_coverletter_file['type'], 'upload-coverletter');
+					if( $cid > 0 ) {
+						$apply_job->applicant_coverletter_id = $cid;
+					}
 				}
 			}
 
+			
+			
+			
+			$apply_job->save();
+			$data['applicant'] = array_merge((array) $apply_job->original, (array) Applicant::find($apply_job->applicant_id)->original);
 			$data['applicant']['attachments'] = array('resume' => $applicant_resume_file, 'coverletter' => $applicant_coverletter_file);
+			
 		} else {
 
 			//non-registered users
@@ -671,5 +688,46 @@ class Job_Controller extends Base_Controller {
 			return Redirect::to('job/apply/' . $id);
 		}
 	}
-
+	
+	public function get_mail($id) {
+		
+		return View::make('job.mail')
+				->with('id', $id);
+		
+	}
+	
+	public function post_mail($id = null) {
+		
+		if( !$id) {
+			return false;
+		}
+		
+		$inputs = Input::all();
+		
+		$job = Job::find($id);
+		
+		$mail = new PHPMailer();
+		$mail->IsHTML();
+		$mail->Subject = 'Your friend has recommended a new job for you.';
+		
+		$friends_email = $inputs['friends_email'];
+		
+		$friends_email = explode('\n', $friends_email);
+		
+		foreach( $friends_email as $email ) {
+			
+			$mail->AddAddress($email);			
+		}
+		
+		$mail->From = 'jobmailer@careershire.com';
+		$mail->FromName = COMPANY_NAME;
+		
+		$mail->Body = View::make('email.jobmail')->with($job)->render();
+		
+	
+		
+		
+		
+		
+	}
 }

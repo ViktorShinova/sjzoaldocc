@@ -14,13 +14,13 @@
 <h3>Create your own template!</h3>
 <br/>
 <div class="row">
-	<div class="form-field span7" id="template-container">
+	<div class="form-field span8" id="template-container">
 
 		@include('employer.template')	
 
 	</div>
 
-	<div id="toolbar" class="span5">
+	<div id="toolbar" class="span4">
 		<div id="custom-template">
 
 			@if(isset($template))

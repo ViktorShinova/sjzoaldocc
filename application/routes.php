@@ -53,6 +53,8 @@ Route::post('login', 'home@login');
 Route::post('resetpassword', 'home@resetpassword');
 Route::post('register', 'applicant@register');
 Route::get('logout', 'home@logout');
+Route::get('page/(:any)', 'home@page');
+
 Route::get('job/search', 'job@search');
 Route::get('job/shortlist_tag', 'job@shortlist_tag');
 Route::get('job/shortlist_category', 'job@shortlist_category');
@@ -131,8 +133,7 @@ Route::filter('before', function()
 	if( isset ( $_SERVER['HTTP_REFERER'] ) ) {
 		$referer = $_SERVER['HTTP_REFERER'];
 		Session::put('referer', $referer);
-	}
-		
+	}		
 	//return Redirect::to('/employer/register');
 });
 

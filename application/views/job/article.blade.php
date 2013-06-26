@@ -20,7 +20,7 @@
 			{{ $job1->description }}
 		</article>
 		<footer class="notice-footer">
-			{{ $job1->contact }}
+			<p>{{ $job1->contact }}</p>
 		</footer>
 	</section>
 
@@ -46,7 +46,7 @@
 
 				<a id="btn-apply" href="{{$job1->apply}}" class="btn btn-primary btn-large" rel="popup">Apply for this job</a>
 				@else 
-				<a id="btn-apply" href="/job/apply/{{$job1->id}}" class="btn btn-primary btn-large">Apply for this job</a>
+				<a id="btn-apply" href="/job/apply/{{$job1->slug}}" class="btn btn-primary btn-large">Apply for this job</a>
 				@endif
 				@endif
 
@@ -56,26 +56,31 @@
 		<div id="side-feature">
 			<ul id="feature-listing">
 				<li>
-					@if($is_applicant)				
-					<a href="#"><i class="icon-star"></i>Shortlist it!</a>
+					@if($is_applicant)
+					@if ( in_array ($job1->id, $applicant_shortlists )  )
+					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn active"><i class="icon-star"></i> Shortlist it!</a>
 					@else 
-					<a href="#"><i class="icon-star"></i>Shortlist it!</a>
+					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn"><i class="icon-star"></i> Shortlist it!</a>
 					@endif
+					@else
+					<a data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-star"></i>Shortlist it!</a>
+					@endif
+					
 				</li>
 				<li>
-					<a href="#"><i class="icon-envelope"></i>Email this job</a>
+					<a href="/job/mail/{{$job1->id}}" rel="popup"><i class="icon-envelope"></i>Email this job</a>
 				</li>
 				<li>
 					<a href="#"><i class="icon-print"></i>Print this job</a>
 				</li>
 				<li>
-					<a href="#">Share it on Facebook</a>
+					<a href="#"><i class="icon-facebook-sign"></i>Share it on Facebook</a>
 				</li>
 				<li>
-					<a href="#">Share it on Twitter</a>
+					<a href="#"><i class="icon-twitter"></i>Share it on Twitter</a>
 				</li>
 				<li>
-					<a href="/applicant/shortlists">View all shortlist</a>
+					<a href="/applicant/shortlists"><i class="icon-star"></i>View all shortlist</a>
 				</li>
 			</ul>
 		</div>
@@ -97,5 +102,47 @@
 		</div>
 		@endif
 	</aside>
+</div>
+
+<div id="login-modal" class="modal hide fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="create-group-label" aria-hidden="true">
+	<div class="modal-header">
+
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Please Login to Shortlist</h3>
+	</div>
+	@if ( $is_employer ) 
+	<div class="modal-body">
+
+		You are currently logged in as an employer. The shortlist function is only to available to applicants.
+
+	</div>
+	@else 
+	<form  class="modal-body form-horizontal  validate-form form " action="/login" method="post">
+		<div class="control-group">
+			<label class="control-label" for="username">Email</label>
+			<div class="controls">
+				<input class="validate[required]" type="text" id="username" placeholder="Email" name="username">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="password">Password</label>
+			<div class="controls">
+				<input  class="validate[required]" type="password" id="password" placeholder="Password"  name="password">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn btn-primary">Sign in</button>
+			</div>
+		</div>
+	</form>
+	@endif
+
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+
+
+
 </div>
 @endsection

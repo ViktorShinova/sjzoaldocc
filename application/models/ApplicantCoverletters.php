@@ -3,9 +3,9 @@
 class ApplicantCoverletters extends Eloquent {
 
 	public static $table = "applicant_coverletters";
-	const FILE_EXISTS = -1;
-	const FILE_SUCCESS = 1;
-	const FILE_FAILURE = 0;
+	const FILE_EXISTS =  -1;
+	const FILE_SUCCESS = -2;
+	const FILE_FAILURE = -3;
 	public function applicant() {
 		return $this->belongs_to('Applicant');
 	}
@@ -31,7 +31,7 @@ class ApplicantCoverletters extends Eloquent {
 
 
 			if ( $applicant_coverletter->save() ) {
-				return self::FILE_SUCCESS;
+				return $applicant_coverletter->id;
 			}
 			return self::FILE_FAILURE;
 		} else {

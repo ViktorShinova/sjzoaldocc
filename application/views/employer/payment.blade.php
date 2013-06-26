@@ -36,18 +36,29 @@
 	</table>
 
 </div>
-<h4>Please choose a following payment option</h4>
+<h4>Payment Methods</h4>
 
-<div id="tab-container" class="tab-container drop-shadow-butterfly">
+<div id="tab-container" class="tab-container payment-tab">
 	<ul class='etabs'>
-		<li class='tab'><a href="#credit-card"><i class="icon-credit-card"></i> Credit Card</a></li>
-		<li class='tab'><a href="#paypal">Paypal</a></li>
+		<li class='tab' id="credit-card-tab">
+			<a href="#credit-card"> 
+				<h4>Credit Card</h4>
+				<p>We accept Visa and Mastercard</p>
+			</a>
+		</li>
+		<li class='tab' id="paypal-tab">
+			<a href="#paypal">
+				<h4>Paypal</h4>
+				<p>We will be directed to PayPal to complete donation</p>
+			</a>
+		</li>
 	</ul>
 	<div class="panel-container">
 
 		<div id="credit-card">
 			<form class="employer-form  validate-form form " method="post" action="/employer/payment/submit">
-				<h4>Billing information</h4>
+				<h3>Billing Details</h3>
+				<p>Please complete all details below.</p>
 				<ul>
 					<li>
 						<label>First Name</label>
@@ -60,26 +71,28 @@
 						<input class="validate[required]" type="text" name="bill_lname"/>
 					</li>
 					<li>
-						<label>Contact</label>
+						<label>Email Address</label>
 						<abbr title="required">*</abbr>
 						<input class="validate[required]" type="text" name="bill_contact"/>
 					</li>
 					<li>
-						<label>Billing Address</label>
+						<label>Confirm Email</label>
+						<abbr title="required">*</abbr>
+						<input class="validate[required]" type="text" name="bill_contact"/>
+					</li>
+					<li>
+						<label>Street Address</label>
 						<abbr title="required">*</abbr>
 						<input class="validate[required]" type="text" name="bill_address"/>
 					</li>
+					
 					<li>
-						<label class="not-required">Billing Address 2</label>
-						<input type="text" name="bill_address2"/>
-					</li>
-					<li>
-						<label>Billing Suburb</label>
+						<label>Town / City / Suburb</label>
 						<abbr title="required">*</abbr>
 						<input class="validate[required]" type="text" name="bill_suburb"/>
 					</li>
 					<li>
-						<label>Billing State</label>
+						<label>State / Territory</label>
 						<abbr title="required">*</abbr>
 						<input class="validate[required]" type="text" name="bill_state"/>
 					</li>
@@ -90,19 +103,14 @@
 
 					</li>
 				</ul>
-				<h4>Credit Card Payment Option</h4>
+				<div class="clearfix"></div>
+				<h3>Payment Details</h3>
+				<p>Please complete all details below.</p>
 				<ul>
 					<li class="online-payment">
 						<label>Name</label>
 						<abbr title="required">*</abbr>
 						<input class="validate[required]" type="text" name="cc_name"/>
-					</li>
-					<li>
-						<label>Card Types</label>
-						
-						<img class="cards" src="/img/icons/mastercard.png" alt="Mastercard"/>
-						<img class="cards" src="/img/icons/visa.png" alt="Visa"/>
-						
 					</li>
 					<li class="online-payment">
 						<label>Card Number</label>
@@ -116,7 +124,7 @@
 						<label>CVN</label>
 						<abbr title="required">*</abbr>
 						<input autocomplete="off" class="validate[required]" type="text" name="cc_cvn" />
-						<img id="eway" src="/img/icons/eway.png" alt="EWay" />
+						
 					</li>
 					<li class="online-payment">
 						<label>Expiry Date</label>

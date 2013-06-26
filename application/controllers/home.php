@@ -150,5 +150,18 @@ class Home_Controller extends Base_Controller {
 		return Redirect::to('resetpassword')->with('success', true);
 		
 	}
+	
+	protected function get_page($title = null) {
+		
+		if (!$title) {
+			return;
+		}
+		
+		//get the page from database and display.
+		//together with template;
+		//
+		echo 'content';
+		//page title
+	}
 
 }

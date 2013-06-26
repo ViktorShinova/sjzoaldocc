@@ -6444,6 +6444,9 @@ a.badge:focus {
 	© 2013 CareersHire. All Rights Reserved.
 	...................................................................... */
 
+body {
+  background: #f6f5f1;
+}
 .drop-shadow-black,
 .drop-shadow {
   -webkit-box-shadow: 0px 5px 15px -4px #222222;
@@ -6637,6 +6640,9 @@ h1.span12 {
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+}
+#content .notice-container.expired {
+  padding: 32px;
 }
 #content .alert-info {
   font-family: tahoma, san-serif;
@@ -7030,8 +7036,6 @@ body #side-info > div .data-list li {
 body #side-info > div .data-list li label {
   float: left;
   width: 80px;
-}
-body #side-info > div .data-list li span {
   font-weight: bold;
 }
 body #side-info > div .controls {
@@ -7767,6 +7771,21 @@ form input {
   line-height: 21px;
   position: relative;
 }
+#content #feature-listing li a.active,
+#content #feature-listing-mobile li a.active {
+  color: white;
+  background-color: #0079c1;
+  background: -moz-linear-gradient(center bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #0079c1), color-stop(20%, #0079c1), color-stop(100%, #00a1ff));
+  background: -webkit-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
+  background: -ms-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
+  background: -o-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
+  background: linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
+}
+#content #feature-listing li a.active i,
+#content #feature-listing-mobile li a.active i {
+  color: yellow;
+}
 @media (min-width: 768px) and (max-width: 979px) {
   #content #job-listing .additional-info {
     width: 100%;
@@ -8496,7 +8515,8 @@ img.jcrop-preview {
   float: left;
   width: 768px;
 }
-.employer .employer-form ul.post-desc textarea[name="summary"] {
+.employer .employer-form ul.post-desc textarea[name="summary"],
+.employer .employer-form ul.post-desc textarea[name="contact"] {
   height: 100px;
   float: left;
   width: 768px;
@@ -8553,16 +8573,50 @@ img.jcrop-preview {
   float: none;
 }
 .employer .post-templates {
-  overflow: hidden;
+  width: 100%;
 }
-.employer .post-templates li {
+.employer .post-templates tr {
   cursor: pointer;
-  display: block;
-  float: left;
   margin-right: 20px;
+}
+.employer .post-templates tr td,
+.employer .post-templates tr th {
+  border: 1px solid #cccccc;
+  text-align: left;
   padding: 10px;
 }
-.employer .post-templates li.selected {
+.employer .post-templates tr .icon {
+  text-align: center;
+}
+.employer .post-templates tr th {
+  background-color: #eaeaea;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fafafa), to(#eaeaea));
+  /* Konqueror */
+  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+  /* FF 3.6+ */
+  background-image: -ms-linear-gradient(#fafafa, #eaeaea);
+  /* IE10 */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #eaeaea));
+  /* Safari 4+, Chrome 2+ */
+  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -o-linear-gradient(#fafafa, #eaeaea);
+  /* Opera 11.10 */
+  background-image: -ms-linear-gradient(top, #fafafa 0%, #eaeaea 100%);
+  /* IE10+ */
+  background-image: linear-gradient(#fafafa, #eaeaea);
+  /* the standard */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea', GradientType=0);
+  /* IE6 & IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea', GradientType=0)";
+  /* IE8+ */
+
+}
+.employer .post-templates tr i {
+  display: none;
+}
+.employer .post-templates tr.selected {
   background-color: #30a9d3;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#258dc8), to(#30a9d3));
@@ -8587,8 +8641,45 @@ img.jcrop-preview {
   /* IE8+ */
 
 }
-.employer .post-templates li.selected h5 {
+.employer .post-templates tr.selected td {
   color: white;
+}
+.employer .post-templates tr.selected i {
+  display: block;
+}
+.employer .post-templates tr.selected a {
+  color: white;
+}
+.employer .post-templates tr:hover {
+  background-color: #cccccc;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(white), to(#cccccc));
+  /* Konqueror */
+  background-image: -moz-linear-gradient(white, #cccccc);
+  /* FF 3.6+ */
+  background-image: -ms-linear-gradient(white, #cccccc);
+  /* IE10 */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #cccccc));
+  /* Safari 4+, Chrome 2+ */
+  background-image: -webkit-linear-gradient(white, #cccccc);
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -o-linear-gradient(white, #cccccc);
+  /* Opera 11.10 */
+  background-image: -ms-linear-gradient(top, white 0%, #cccccc 100%);
+  /* IE10+ */
+  background-image: linear-gradient(white, #cccccc);
+  /* the standard */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#cccccc', GradientType=0);
+  /* IE6 & IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#cccccc', GradientType=0)";
+  /* IE8+ */
+
+}
+.employer .post-templates tr:hover td {
+  color: #333333;
+}
+.employer .post-templates tr:hover a {
+  color: #00aeef;
 }
 .employer .tab-container {
   width: 100%;
@@ -8628,6 +8719,9 @@ img.jcrop-preview {
   border: 1px solid #0079c1;
   border-bottom: 0;
 }
+.employer .tab-container .tab:hover a {
+  color: white;
+}
 .employer .tab-container .tab.active {
   background-color: #0079c1;
   background: -moz-linear-gradient(center bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
@@ -8644,20 +8738,53 @@ img.jcrop-preview {
   color: white;
 }
 .employer .tab-container .panel-container {
-  background: white;
-  border: solid #cccccc 1px;
   padding: 10px 20px;
 }
-.employer #credit-card h4 {
+.employer .tab-container.payment-tab .etabs {
+  overflow: hidden;
+  margin-bottom: 21px;
+}
+.employer .tab-container.payment-tab .tab {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: solid 1px #cccccc;
+  display: block;
+  float: left;
+  height: 70px;
+  width: 47%;
   text-align: center;
 }
+.employer .tab-container.payment-tab .tab h4 {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.employer .tab-container.payment-tab .tab a {
+  margin-top: 13px;
+  display: block;
+}
+.employer .tab-container.payment-tab .tab.active {
+  background: #e68733;
+  padding: 0;
+}
+.employer .tab-container.payment-tab .tab#paypal-tab {
+  float: right;
+}
+.employer #credit-card h3 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+.employer #credit-card p {
+  margin-bottom: 21px;
+}
 .employer #credit-card ul {
-  width: 50%;
+  overflow: hidden;
   margin: 0 auto;
 }
 .employer #credit-card ul li {
   list-style: none;
   overflow: hidden;
+  float: left;
 }
 .employer #credit-card ul li label,
 .employer #credit-card ul li input,
@@ -8666,6 +8793,7 @@ img.jcrop-preview {
   float: left;
 }
 .employer #credit-card ul li select {
+  margin-right: 50px;
   width: 264px;
 }
 .employer #credit-card ul li label {
@@ -8677,7 +8805,7 @@ img.jcrop-preview {
   margin-right: 18px;
 }
 .employer #credit-card ul li input {
-  margin-right: 10px;
+  margin-right: 50px;
   width: 250px;
 }
 .employer #credit-card ul li abbr {
@@ -8688,12 +8816,8 @@ img.jcrop-preview {
   width: 127px;
   margin-right: 10px;
 }
-.employer #credit-card ul li .cards {
-  margin-left: 16px;
-}
-.employer #credit-card #eway {
-  position: absolute;
-  margin-top: -10px;
+.employer #credit-card .btn {
+  float: right;
 }
 .employer #secondary-nav .navbar-inner {
   padding-left: 0;
@@ -8921,7 +9045,7 @@ img.jcrop-preview {
 .notice-container > header {
   background: white;
   background-repeat: repeat;
-  height: 100px;
+  height: auto;
   text-align: center;
   margin-bottom: 5px;
   overflow: hidden;

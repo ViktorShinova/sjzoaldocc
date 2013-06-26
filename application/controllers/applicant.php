@@ -547,11 +547,11 @@ class Applicant_Controller extends Base_Controller {
 
 		$rules = array(
 			'resume-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check',
-			'coverletter-file' => 'max:2048|mimes:pdf,doc,docx|resume_count_check'
+			'coverletter-file' => 'max:2048|mimes:pdf,doc,docx,txt|resume_count_check'
 		);
 		$messages = array(
 			'max' => 'The maximum file size is 2MB',
-			'mimes' => 'Only .pdf, .doc or .docx are allowed',
+			'mimes' => 'Only .pdf, .doc , .docx or .txt are allowed',
 			'resume_count_check' => 'You can upload up to a maximum of 4 files only.',
 			'coverletter_count_check' => 'You can upload up to a maximum of 4 files only.'
 		);
@@ -766,5 +766,4 @@ class Applicant_Controller extends Base_Controller {
 	public function get_shortlists() {
 		return View::make('applicant.shortlist');
 	}
-
 }

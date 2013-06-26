@@ -91,5 +91,7 @@ class Base_Controller extends Controller {
 
 		return $max_salary;
 	}
+	
+	
 
 }

@@ -4,9 +4,9 @@ class ApplicantResumes extends Eloquent {
 	
 	public static $table = "applicant_resumes";
 
-	const FILE_EXISTS = -1;
-	const FILE_SUCCESS = 1;
-	const FILE_FAILURE = 0;
+	const FILE_EXISTS =  -1;
+	const FILE_SUCCESS = -2;
+	const FILE_FAILURE = -3;
 	public function applicant()
 	{
 		return $this->belongs_to('Applicant');
@@ -34,7 +34,7 @@ class ApplicantResumes extends Eloquent {
 			
 			
 			if ( $applicant_resume->save() ) {
-				return self::FILE_SUCCESS;
+				return $applicant_resume->id;
 			}
 			return self::FILE_FAILURE;
 		} else {
