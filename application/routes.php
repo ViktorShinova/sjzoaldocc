@@ -72,7 +72,8 @@ Route::controller('employer.candidate');
 Route::controller('employer');
 //APPLICANT//
 Route::controller('applicant');
-
+//ADMIN
+Route::controller('admin.dashboard');
 
 Route::controller(Controller::detect());
 /*

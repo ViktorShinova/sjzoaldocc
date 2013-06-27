@@ -28,7 +28,7 @@
 <div class="row">
 
 	<h2 class="span12">Application Form</h2>
-	<div class="span6">
+	<div class="span4 white-bg drop-shadow-butterfly">
 		@if ( $errors->all(':message') )
 			<div class="validation error">
 				@foreach($errors->all('<p>:message</p>') as $message)
@@ -145,7 +145,7 @@
 		{{ Form::close(); }}
 	</div>
 
-	<section class="notice-container span6 white-bg drop-shadow">
+	<section class="notice-container span8 white-bg drop-shadow-butterfly">
 		<header class="notice-header">
 			<h1>{{ $job->title }}</h1>
 		</header>

@@ -6,7 +6,7 @@
 
 <section id="job-search" class="span12 white-bg drop-shadow-black">
 
-	<h2 class="container-header">Search for Jobs<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i></a></h2>
+	<h2 class="container-header">Start searching now!<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i></a></h2>
 
 	<form class="row form-horizontal" method="get" action="/job/search">
 		<div class="span6">
@@ -19,7 +19,7 @@
 			</div>
 			<div class="control-group">
 
-				<label for="job-category" class="control-label">Classification</label>
+				<label for="job-category" class="control-label">Industry</label>
 				<div class="controls">
 
 					{{ Form::select('job-category', $categories, array(), array('class' => 'input-xlarge', 'id' =>'job-category')); }}
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="job-sub-category" class="control-label">Sub Classification</label>
+				<label for="job-sub-category" class="control-label">Position</label>
 				<div class="controls">
 
 					{{ Form::select('job-sub-category', $categories, array(), array('class' => 'input-xlarge', 'id' =>'job-sub-category')); }}
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="job-sub-location" class="control-label">Sub Location</label>
+				<label for="job-sub-location" class="control-label">Refined Location</label>
 				<div class="controls">
 					{{ Form::select('job-sub-location', $locations, array(), array('class' => 'input-xlarge', 'id'=>'job-sub-location')); }}
 				</div>

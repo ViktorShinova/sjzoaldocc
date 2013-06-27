@@ -4,21 +4,19 @@
 
 .validate-form , .form {
 	h4 {
-		.font-normal();
+		.lato-normal();
 		font-size: 16px;
 		line-height: 20px;
-		font-weight: bold;
+		
 		padding: 10px 10px;
-		color: #555;
-		text-shadow: 0 1px 0 #fff;
+		color: white;
+		
 		display: block;
 		border: 1px solid #CACACA;
 		border-bottom: 0 none;
-		background-color: #eaeaea;
-		background-image: -moz-linear-gradient(#fafafa, #eaeaea);
-		background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
-		background-image: linear-gradient(#fafafa, #eaeaea);
-		background-repeat: repeat-x;
+		
+		#gradient .vertical( @light-orange, @dark-orange);
+		
 		margin: 0;
 		
 	}
@@ -124,18 +122,19 @@
 				width: 129px;
 			}
 			input[type=text], input[type=email] { 
-				width: 274px;
+				width: 240px;
 			}
 			textarea {
 				display: none;
 				margin-top: 21px;
 				.size(285px, 150px);
 			}
+			
 			#upload-resume, #upload-coverletter, #add-resume-to-account, #add-coverletter-to-account {
 				display: none;
 			}
 			.date{
-				width: 34%;
+				width: 100%;
 			}
 		}
 	}
@@ -170,14 +169,11 @@
 		text-align: center;
 	}
 	ol {
-		width: 50%;
 		margin: 20px auto;
 		li {
 			overflow: hidden;
 			label { width: 150px; }
-			input[type=text],input[type=password], select {
-				width: 285px;
-			}
+			
 		}
 
 	}
@@ -205,7 +201,7 @@
 			li {
 				
 				input[type=text],input[type=password], select {
-					width: 400px;
+					width: 364px;
 				}
 			}
 		}
@@ -215,7 +211,7 @@
 		ol li {
 			
 			input[type=text], input[type=email] { 
-				width: 349px;
+				width: 313px;
 			}
 		}
 	}
@@ -228,11 +224,10 @@
 
 		h3 { text-align: center; }
 		ol {
-			width: 75%;
 			li {
 				
 				input[type=text],input[type=password], select {
-					width: 55%;
+					width: 95%;
 				}
 			}
 		}
@@ -244,6 +239,9 @@
 			label { display: block; width: 100% ;}
 			.date{
 				width: 48%;
+			}
+			input[type=text], input[type=email] { 
+				width: 170px;
 			}
 		}
 	}

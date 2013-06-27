@@ -1,8 +1,11 @@
 @layout('layout.employer')
 @section('page-id')page-profile@endsection
 @section('content')
+<div class='row'>
+	
+	
 
-<h3>My Account</h3>
+<h2 class='span12'>My Account</h2>
 <br/>
 @if ( $errors->all(':message') )
 <div class="validation error">
@@ -24,8 +27,8 @@
 	<p>Hohoho something is wrong .....</p>
 </div>
 @endif
-{{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form  validate-form form ', 'id' => 'employer-profile')); }}
-<div class="white-bg drop-shadow-butterfly">
+{{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form  validate-form form span8', 'id' => 'employer-profile')); }}
+<div class="white-bg drop-shadow-butterfly ">
 	 <h4>Company Logo</h4>
 	 <div class="pad">
 		 <div class="validation error" id='logo-validation'>
@@ -112,6 +115,7 @@
 		
 	</div>
     
+</div>
 </div>
 @endsection
 

@@ -5,7 +5,7 @@
 @section('page-id')page-payment@endsection
 
 @section('content')
-<h3>Review your purchase</h3>
+<h2>Review your purchase</h2>
 <p>You are about to make payment for the following Advertisement.</p>
 <br/>
 <div class="table-container drop-shadow-butterfly">

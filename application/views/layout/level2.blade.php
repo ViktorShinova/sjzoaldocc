@@ -16,7 +16,7 @@
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
 		<link rel="shortcut icon" href="favicon.ico" />
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->
@@ -26,12 +26,6 @@
 		@yield('custom_styles')
 
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-		<script type="text/javascript" src="//use.typekit.net/ypy5trg.js"></script>
-		<script type="text/javascript">try {
-				Typekit.load();
-			} catch (e) {
-			}</script>
-
 	</head>
 
 	<body>

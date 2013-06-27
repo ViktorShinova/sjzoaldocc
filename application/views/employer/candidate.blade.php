@@ -1,7 +1,7 @@
 @layout('layout.employer')
 @section('page-id')page-details@endsection
 @section('content')
-<h1 class="container-header">Candidate search</h1>
+<h2>Candidate search</h2>
 
 <div class="content">
 	<p>The candidate search feature allows you to search for your desired candidates without the need for them to apply for the job.  </p>

@@ -2,7 +2,7 @@
 @section('page-id')page-template@endsection
 @section('content')
 
-<h3>Custom Templates</h3>
+<h2>Custom Templates</h2>
 
 <p class="intro">Careershire offer you the ability to create your own template at no extra cost! Please take a couple of minutes to read through the following instruction before creating a template.
 </p>

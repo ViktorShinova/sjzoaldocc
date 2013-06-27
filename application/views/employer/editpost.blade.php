@@ -2,7 +2,7 @@
 @section('page-id')page-employer-adverts@endsection
 @section('content')
 
-<h3>Job Post Details</h3>
+<h2>Job Post Details</h2>
 <br/>
 
 @if ( $errors->all(':message') )

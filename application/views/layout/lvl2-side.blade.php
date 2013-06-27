@@ -16,17 +16,14 @@
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
 		<link rel="shortcut icon" href="favicon.ico" />
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
 		<![endif]-->	
 		
 		{{ HTML::style('/css/main.css') }}
 		{{ HTML::style('/css/font-awesome.min.css') }}
-		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-		<script type="text/javascript" src="//use.typekit.net/ypy5trg.js"></script>
-		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-					
+		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>		
 	</head>
 
 	<body id="search-page">
@@ -37,7 +34,7 @@
 				<div class="row">
 
 					<div id="search-wrapper" class="span12 white-bg drop-shadow-black" data-spy="affix" data-offset-top="440">
-						<h2 class="container-header">Refine this search</h2>
+						<h2 class="container-header">Can't find what you are searching for?</h2>
 						<form class="row form-horizontal" method="get" action="/job/search">
 							<div class="span6">
 

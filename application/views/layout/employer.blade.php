@@ -21,7 +21,7 @@
 		{{ HTML::style('/css/font-awesome.min.css') }}
 		@yield('custom_styles')
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
 	</head>
 	<body id="@yield('page-id')" class="employer">

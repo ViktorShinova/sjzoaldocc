@@ -1,7 +1,7 @@
 @layout('layout.employer')
 @section('page-id')page-invoice@endsection
 @section('content')
-<h3>Payment Transactions</h3>
+<h2>Payment Transactions</h2>
 
 
 <div class="table-container">

@@ -15,34 +15,40 @@
 
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
-		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="favicon.ico" />
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 		<!--[if lt IE 9]>
 		{{ HTML::style('/css/font-awesome-ie7.min.css') }}
-		<![endif]-->	
-		
+		<![endif]-->
+
 		{{ HTML::style('/css/main.css') }}
-		{{ HTML::style('/css/home.css') }}
 		{{ HTML::style('/css/font-awesome.min.css') }}
+		@yield('custom_styles')
+
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
 
-	<body id="home">
+	<body>
 
 		@include ('layout.nav-bar')
 
-		<div id="top-feature" class="container">
-			<h1>Welcome to <strong>Careershire</strong></h1>
-			<span>Worry about your future? Carreershire can help!</span>
-		</div>
-		<!-- BRAND LOGO -->
-
 		<div id="content" class="container">
+			<div class="row">
+			<div class="span2">
+				<ul>
+					<li><a href='/admin/page/'>Pages</a></li>
+					<li><a href='/admin/blurb/'>Blurbs</a></li>
+					<li><a href='/admin/price/'>Price</a></li>
+				</ul>
+			</div>
 			@yield('content')
+			</div>
 		</div>
-        <!-- /#wrapper -->
+		<!-- /#content -->
+		
 		@include('layout.footer')
-        @include ('layout.footer-scripts')
-    </body>
+
+		@include ('layout.footer-scripts')
+	</body>
 
 </html>

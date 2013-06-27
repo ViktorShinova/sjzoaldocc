@@ -18,7 +18,7 @@
 <section id="emp-register">
 	{{ Form::open('employer/register', 'POST', array('class' => 'employer-register-form  validate-form form  row')); }}
 	<h2 class="span12" >Start Recruiting on Careershire</h2>
-	<div class="span12 white-bg drop-shadow-butterfly">
+	<div class="span6 white-bg drop-shadow-butterfly">
 		<h4>Account Information</h4>
 		<div class='pad'>
 			<ol>
@@ -29,7 +29,7 @@
 			</ol>
 		</div>
 	</div>
-	<div class="span12 white-bg drop-shadow-butterfly">
+	<div class="span6 white-bg drop-shadow-butterfly">
 		<h4>Company and Contact Information</h4>
 
 		<div class='pad'>

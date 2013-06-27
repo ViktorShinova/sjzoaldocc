@@ -8,28 +8,32 @@
 	...................................................................... */
 
 #home {
-  background: white url('/img/backgrounds/home-bg.png') no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/backgrounds/home-bg.jpeg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/img/backgrounds/home-bg.jpeg', sizingMethod='scale')";
-  zoom: 1;
+  background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
 }
 #home #top-feature {
   margin-top: 64px;
   text-align: center;
 }
-#home #top-feature #brand {
-  width: 370px;
+#home #top-feature h1 {
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+#home #top-feature h1 strong {
+  color: #fbc544;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+#home #top-feature span {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
 }
 #home #top-feature #ads {
   float: right;
   margin-top: 10px;
 }
 #home #job-search {
-  border: 5px solid #0079c1;
+  border: 5px solid #01a5e3;
   border-top: 0;
   padding-bottom: 10px;
 }

@@ -1,7 +1,7 @@
 @layout('layout.employer')
 @section('page-id')page-email@endsection
 @section('content')
-<h1 class="container-header">Email Templates</h1>
+<h2>Email Templates</h2>
 <div class="content">
 	<p>
 		This email feature allows you to quickly send mail(s) to your applicant to notify them of the result. Please update your success and unsuccessful messages.
