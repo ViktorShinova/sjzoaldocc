@@ -23,6 +23,9 @@
 
 		{{ HTML::style('/css/main.css') }}
 		{{ HTML::style('/css/font-awesome.min.css') }}
+		{{ HTML::style('/js/vendor/markitup/skins/markitup/style.css') }}
+		{{ HTML::style('/js/vendor/markitup/sets/default/style.css') }}
+		
 		@yield('custom_styles')
 
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>

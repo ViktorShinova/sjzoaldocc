@@ -2,6 +2,7 @@
 
 @section('custom_styles')
 @if(isset($job->template)) 
+<?php $data = unserialize($job->template->data);  ?>
 <style>
 	{{ $job->template->css }}
 </style>
@@ -147,13 +148,17 @@
 
 	<section class="notice-container span8 white-bg drop-shadow-butterfly">
 		<header class="notice-header">
+			@if( isset($data['header-image']) && $data['title-type'] == 'image' ) 
+			<img src="{{$data['header-image']}}" />
+			@else
 			<h1>{{ $job->title }}</h1>
+			@endif
 		</header>
 		<article class="notice-body">
 			{{ $job->description }}
 		</article>
 		<footer class="notice-footer">
-			{{ $job->contact }}
+			<p>{{ $job->contact }}</p>
 		</footer>
 	</section>
 

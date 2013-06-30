@@ -53,7 +53,7 @@ Route::post('login', 'home@login');
 Route::post('resetpassword', 'home@resetpassword');
 Route::post('register', 'applicant@register');
 Route::get('logout', 'home@logout');
-Route::get('page/(:any)', 'home@page');
+Route::get('page/(:any)', 'page@page');
 
 Route::get('job/search', 'job@search');
 Route::get('job/shortlist_tag', 'job@shortlist_tag');

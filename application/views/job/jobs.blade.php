@@ -48,7 +48,7 @@
 
 				@endif
 				<h2><a href="/job/article/{{$job->slug}}"><?php //echo preg_replace($tokens, $replacePattern, $job->title)  ?>{{$job->title}}</a></h2>
-				<p><a href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></p>
+				<p><a class="category" href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></p>
 				<p>
 					{{$job->summary}}
 				</p>
@@ -59,7 +59,7 @@
 				<span class="location">{{ $job->location_name }}, {{ $job->sub_location_name }}</span>
 				<span class="salary">{{ $job->salary_range }}</span>
 				<span class="date">
-					{{	Formatter::format_date($job->created_at, Formatter::DATE_SHORT); }}
+					{{	Formatter::format_date($job->created_at, Formatter::DATE_LONG_W_TIME); }}
 				</span>
 			</aside>
 		</div>

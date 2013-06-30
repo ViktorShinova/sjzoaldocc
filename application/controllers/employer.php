@@ -139,6 +139,7 @@ class Employer_Controller extends Base_Controller {
 		$employer = Employer::find(Session::get("employer_id"));
 
 		$_background_temp_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/backgrounds/' . $type;
+		$_image_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/templates/header';
 		//$_logo_temp_folder = EMP_TMP_FOLDER . $employer->unique_folder . '/company-logo/';
 		$logo_folder = EMP_UPLOAD_DIR . $employer->unique_folder . '/company-logo/';
 
@@ -147,8 +148,30 @@ class Employer_Controller extends Base_Controller {
 			return false;
 		} else {
 			//$username = Auth::user()->username;
-			
-			if ($type != 'logo') {
+			if( $type == 'header-image') {
+				//resize image to 768 x 120
+				if ( ($message = $this->_validate_image('header-image')) ) {
+					return json_encode(array("success" => false, 'message' => $message));
+				}
+				
+				$image = Input::file('header-image');
+				
+				if ($image['error'] != 1) {
+					
+					$imgHandler = new ImageHandler($_image_folder);
+					
+					$imgHandler->setImage($image['tmp_name'], $image['name']);
+					$imgHandler->resize(768, 120, true, false);
+					$imgHandler->close();
+					
+					return json_encode(array('success' => true, 'filename' => $image['name'], 'src' => $imgHandler->getFrontEndImagePath()));
+					
+				} else {
+					return json_encode(array("message" => $image));
+				}
+				
+			}
+			elseif ($type != 'logo') {
 				if ( ($message = $this->_validate_image("$type-background")) ) {
 					return json_encode(array("success" => false, 'message' => $message));
 				}

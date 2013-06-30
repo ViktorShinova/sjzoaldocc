@@ -16,7 +16,7 @@
 
 		<meta name="robots" content="index,follow" />
 		<meta name="revisit-after" content="7 days" />
-		
+		{{ HTML::style('/css/main.css') }}
 		<link rel="shortcut icon" href="/favicon.ico" />
 		
 		<!--[if lt IE 9]>
@@ -28,9 +28,9 @@
 	</head>
 
 	<body>
-
-		@yield('content')
-
+		<div id="content">
+			@yield('content')
+		</div>
 	</body>
 	
 </html>

@@ -7539,12 +7539,15 @@ form input {
   position: relative;
 }
 #content .listings > li h2 {
+  color: #055285;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
   font-size: 18px;
   line-height: 24px;
   margin: 0 ;
 }
 #content .listings > li h2 a {
-  color: #333333;
+  color: #055285;
 }
 #content .listings > li li {
   list-style: disc;
@@ -7611,14 +7614,18 @@ form input {
   color: #fbc544;
 }
 #content #job-listing .main-info p > a {
-  color: #333333;
+  color: #01a5e3;
+}
+#content #job-listing .main-info p > a:hover {
+  color: #fbc544;
 }
 #content #job-listing .additional-info {
   width: 27%;
   float: right;
 }
 #content #job-listing .additional-info h4 {
-  font-family: 'Arial', sans-serif;
+  color: #055285;
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
   margin-top: 0;
 }
@@ -8835,7 +8842,7 @@ img.jcrop-preview {
   left: auto;
 }
 .employer .notice-container {
-  border: 0 !important;
+  border: 1px solid #01a5e3 !important;
 }
 .employer #employer-profile form > ul {
   margin-right: 0 !important;
@@ -9004,81 +9011,145 @@ img.jcrop-preview {
     width: 100%;
   }
 }
-.notice-container > header {
-  background: white;
-  background-repeat: repeat;
-  height: auto;
-  text-align: center;
-  margin-bottom: 5px;
-  overflow: hidden;
-  height: 110px;
+/*#content .notice-container {
+	//margin-top: 15px;
 }
-.notice-container > header > h1 {
-  display: inline;
-  position: relative;
-  line-height: 21px;
-  font-size: 21px;
-  color: #6c6c6c;
-  text-shadow: 0px 1px 0 rgba(255, 255, 255, 0.6);
-  /* this is adjustable */
 
+#content .notice-container > header {
+	background: #fff;
+	background-repeat: repeat;
+	height: auto;
+	text-align: center;
+	margin-bottom: 5px;
+	overflow: hidden;
+	height: 118px;
 }
-.notice-container > article {
-  height: auto;
-  margin-bottom: 5px;
+
+#content .notice-container > header > h1 {
+	.lato-semibold();
+	display: inline;
+	position: relative;
+	line-height: 21px;
+	font-size: 21px;
+	color: #333;
+	text-shadow: 0px 1px 0 rgba(255, 255, 255, 0.6);
+	 this is adjustable 
 }
-.notice-container > article p {
-  line-height: 18px;
+
+#content .notice-container > article {
+	height: auto;
+	margin-bottom: 5px;
+
+	p {
+		line-height: 18px;
+	}
+
+	h2 {
+		font-size: 18px;
+		line-height: 32px;
+		color: #6C6C6C;
+		text-shadow: 0px 1px 0 rgba(255, 255, 255, 0.6);		
+	}
+}*/
+
+#content .notice-container {
+  max-width: 768px;
 }
-.notice-container > article h2 {
-  font-size: 18px;
-  line-height: 32px;
-  color: #6c6c6c;
-  text-shadow: 0px 1px 0 rgba(255, 255, 255, 0.6);
+#content .notice-container > header {
+  background: white;
+  height: 120px;
 }
-.employer .notice-container > footer {
-  background-repeat: repeat;
-  height: 50px;
-  margin-bottom: 5px;
+#content .notice-container > header h1 {
+  color: #333333;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0;
+  margin: 0 20px 0 20px;
+  padding-top: 46px;
 }
-.employer .notice-container > header,
-.employer .notice-container > article,
-.employer .notice-container > footer {
-  padding: 40px;
+#content .notice-container > header img {
+  height: 120px;
+  width: 768px;
+}
+#content .notice-container > article,
+#content .notice-container > footer {
+  background: white;
+  padding: 0 20px;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.employer .notice-container > header {
-  padding-bottom: 10px;
+#content .notice-container > article {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
-.employer .notice-container > article {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.employer .notice-footer > footer {
-  padding-top: 0;
+#content .notice-container > footer {
+  padding-top: 20px;
+  min-height: 100px;
 }
 #custom-template {
   color: #333333;
   height: 100%;
   text-indent: #444444 0 -1px 0;
 }
-#custom-template .container-header {
-  background-color: #0079c1;
-  background: -moz-linear-gradient(center bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #0079c1), color-stop(20%, #0079c1), color-stop(100%, #00a1ff));
-  background: -webkit-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
-  background: -ms-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
-  background: -o-linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
-  background: linear-gradient(bottom, #0079c1 0, #0079c1 20%, #00a1ff 100%);
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
+#custom-template ol li {
+  clear: both;
+  position: relative;
+}
+#custom-template #title-colorpicker,
+#custom-template #hbg-colorpicker,
+#custom-template #bbg-colorpicker,
+#custom-template #fbg-colorpicker,
+#custom-template #body-colorpicker,
+#custom-template #footer-colorpicker {
+  display: none;
+  position: absolute;
+  right: 9px;
+  z-index: 999;
+  background: white;
+  border: 1px solid #cccccc;
+  top: 29px;
+}
+#custom-template .image-title {
+  display: none;
+}
+#custom-template .image-title .tooltip-a {
+  display: inline-block;
+  margin-left: 10px;
+}
+.ie7 #custom-template .image-title .tooltip-a {
+  display: inline;
+  zoom: 1;
+}
+#custom-template .help-block {
+  clear: both;
+  font-style: italic;
+}
+#custom-template .loading {
+  display: none;
+  position: absolute;
+  right: -4px;
+}
+#custom-template .color-picker {
+  cursor: pointer;
+  margin-bottom: 0;
+  width: 9px;
+  height: 12px;
+}
+#custom-template .color-wrapper {
+  margin-right: 13px;
+  margin-top: 2px;
 }
 #custom-template .btn-primary {
   float: none;
+}
+#custom-template label {
+  width: 100px;
+}
+#custom-template label.long {
+  width: 100%;
 }
 #custom-template h5 {
   color: #4c4c4c;
@@ -9174,6 +9245,12 @@ img.jcrop-preview {
   background-image: url('/img/icons/template-icons.png');
   background-repeat: no-repeat;
   background-position: -76px -175px;
+}
+@media (min-width: 1200px) {
+  #custom-template #colorpicker {
+    right: 9px;
+    top: 29px;
+  }
 }
 @media (min-width: 768px) and (max-width: 979px) {
   #page-template.employer #toolbar {
@@ -10024,4 +10101,57 @@ body.rtl .formError .formErrorArrow {
   .files video {
     max-width: 80px;
   }
+}
+/**
+ * Farbtastic Color Picker 1.2
+ * Â© 2008 Steven Wittens
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
+.farbtastic {
+  position: relative;
+}
+.farbtastic * {
+  position: absolute;
+  cursor: crosshair;
+}
+.farbtastic,
+.farbtastic .wheel {
+  width: 195px;
+  height: 195px;
+}
+.farbtastic .color,
+.farbtastic .overlay {
+  top: 47px;
+  left: 47px;
+  width: 101px;
+  height: 101px;
+}
+.farbtastic .wheel {
+  background: url(/img/farbtastic/wheel.png) no-repeat;
+  width: 195px;
+  height: 195px;
+}
+.farbtastic .overlay {
+  background: url(/img/farbtastic/mask.png) no-repeat;
+}
+.farbtastic .marker {
+  width: 17px;
+  height: 17px;
+  margin: -8px 0 0 -8px;
+  overflow: hidden;
+  background: url(/img/farbtastic/marker.png) no-repeat;
 }

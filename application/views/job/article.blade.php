@@ -1,7 +1,9 @@
 @layout('layout.level2')
 
 @section('custom_styles')
+
 @if(isset($job1->template)) 
+<?php $data = unserialize($job1->template->data);  ?>
 <style>
 	{{ $job1->template->css }}
 </style>
@@ -14,7 +16,13 @@
 
 	<section class="notice-container span8 white-bg drop-shadow-black">
 		<header class="notice-header">
+			
+			@if( isset($data['header-image']) && $data['title-type'] == 'image' ) 
+			<img src="{{$data['header-image']}}" />
+			@else
 			<h1>{{ $job1->title }}</h1>
+			@endif
+			
 		</header>
 		<article class="notice-body">
 			{{ $job1->description }}

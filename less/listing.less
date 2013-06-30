@@ -18,14 +18,18 @@
 			//min-height: 202px;
 
 			h2 {
+				color: @dark-blue;
+				.lato-semibold();
 				font-size: 18px;
 				line-height: 24px;
 				
 				margin: 0 ;
 				a {
-					color: #333;
+					color: @dark-blue;
 				}
 			}
+			
+			
 			li {
 				list-style: disc;
 			}		
@@ -105,7 +109,10 @@
 				}
 			}
 			p > a {
-				color: #333;
+				color: @blue;
+				&:hover { 
+					color: @light-orange;
+				}
 			}
 		}
 
@@ -113,7 +120,8 @@
 			width: 27%;
 			float: right;
 			h4 {
-				.font-normal();
+				color: @dark-blue;
+				.lato-normal();
 				margin-top: 0;
 			}
 			> span { 

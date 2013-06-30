@@ -1,6 +1,10 @@
+var header_image;
+var header_background_image;
+
 var empSite = {
 	start: function() {
 		$('[rel=external]').attr('target','_blank');
+		empSite.attachColorpicker();
 		empSite.attachValidation();
 		empSite.attachEmployerPostSelectChange();
 		empSite.attachCustomTemplate();
@@ -226,7 +230,8 @@ var empSite = {
 	attachCustomTemplate: function() {
 
 		if ($("#custom-template").length) {
-
+			
+			
 			$("#btn-align-right, #btn-align-center, #btn-align-left").click(function() {
 
 				var alignment = $(this).data('value');
@@ -236,14 +241,18 @@ var empSite = {
 
 			});
 
-			$("#head-bg a.btn").click(function() {
+			$("#head-bg a.btn").click( function() {
 				$("#header-background").trigger('click');
 			});
-			$("#body-bg a.btn").click(function() {
+			$("#body-bg a.btn").click( function() {
 				$("#body-background").trigger('click');
 			});
-			$("#footer-bg a.btn").click(function() {
+			$("#footer-bg a.btn").click( function() {
 				$("#footer-background").trigger('click');
+			});
+			
+			$('#head-image a.btn').click( function() {
+				$('#header-image').trigger('click');
 			});
 
 			$('#submit-template').click(function(e) {
@@ -255,8 +264,7 @@ var empSite = {
 					if ( $('.template-nameformError').length === 0 ) {
 						$('#template-name').before(msg);
 					}
-					
-				}
+				};
 				
 				if ($('#template-name').val().trim() === '') {
 					
@@ -264,39 +272,62 @@ var empSite = {
 					trigger_error();
 					return false;
 				}
-				
-				
-				
 			});
 
 			var types = ['header', 'body', 'footer'];
-
-			$("#header-background").change(function() {
-				empSite.upload("header");
+			
+			$('#header-image').change( function() {
+				empSite.upload('header-image');
 			});
-
-			$("#body-background").change(function() {
-				empSite.upload("body");
-			});
-
-			$("#footer-background").change(function() {
-				empSite.upload("footer");
-			});
-
 
 			$.each(types, function(index, item) {
 				empSite.backgroundPosition(item);
 				empSite.backgroundRepeat(item);
+				
+				$('#' + item + '-background').change(function() {
+					empSite.upload(item);
+				});
 			});
-
-
-			//$("#toolbar").animate({width: "75px"}, {queue: false, duration: 50});
-
-//            $("#toolbar").mouseenter(function(){
-//                $(this).animate({width: "375px"}, {queue: false, duration: 50});
-//            }).mouseleave(function(){
-//                $(this).animate({width: "75px"}, {queue: false, duration: 50});
-//            });                       
+			
+			var type = $('input[name=title-type]');
+			
+			$('#text-title').click( function () {
+				$('.title').show();
+				$('.image-title').hide();
+				$(".notice-header").html('<h1>Sample Heading</h1>');
+				if( header_background_image ) {
+					$(".notice-header").css({
+						"background-image": "url(/" + header_background_image + ")",
+					});
+				}
+				type.val('title');
+			});
+			
+			$('#title-image-header').click( function() {
+				$('.title').hide();
+				$(".notice-header").remove('h1');
+				
+				$(".notice-header").css({
+					"background-image": "none"
+				});
+				
+				$('.image-title').show();
+				if( $(".notice-header img").length ) {
+					header_image = $(".notice-header img");
+				}
+				else if( header_image ) {
+					$(".notice-header").html('');
+					$(".notice-header").append(header_image);
+				}
+				type.val('image');
+			});  
+			
+			if( $('#title-image-header').hasClass('active') ) {
+				$('#title-image-header').trigger('click');
+			}
+			if( $('#text-title').hasClass('active') ) {
+				$('#text-title').trigger('click');
+			}
 		}
 	},
 	upload: function(type) {
@@ -307,17 +338,39 @@ var empSite = {
 			enctype: 'multipart/form-data',
 			timeout: 30000,
 			beforeSubmit: function() {
-				//console.log($(this).next());
-				$("#" + type + "-background").next("img").fadeIn();
+				$("#template-" + type + " .loading").fadeIn();
 			},
 			success: function(data) {
-				//console.log(data);
-				$("#" + type + "-background").next().fadeOut();
+				
+				$("#template-" + type + " .loading").fadeOut();
+				if(type != 'header-image') {
+					
+					$(".notice-header").html('<h1>Sample Heading</h1>');
+					
+					$(".notice-" + type).css({
+						"background-image": "url(/" + data.src + ")",
+						"background-repeat": "repeat"
+					});
+					
+					if( type == 'header') {
+						header_background_image = data.src;
+					}
+					$('#'+ type + '-background-file').val(data.filename);
 
-				$(".notice-" + type).css({
-					"background-image": "url(/" + data.src + ")",
-					"background-repeat": "repeat"
-				});
+				} else {
+					
+					var img = $('<img/>');
+					img.attr('src', data.src);
+					img.attr('alt', 'header image');
+					
+					header_image = img;
+					
+					$(".notice-header").html('');
+					$(".notice-header").append(img);
+					
+					$('#header-image-file').val(data.filename);
+				}
+				
 
 			}
 
@@ -364,70 +417,109 @@ var empSite = {
 	},
 	backgroundPosition: function(type) {
 		//can only do this for no repeat
-
-		$("#" + type + "-position-tl").click(function() {
+		$('#' + type + '-position').change( function () {
 			$('.notice-' + type).css({
-				"background-position": "top left"
+				"background-position": $(this).val()
 			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-tr").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "top right"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-tc").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "top center"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-bl").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "bottom left"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-br").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "bottom right"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-bc").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "bottom center"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-l").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "left"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-r").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "right"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
-		});
-
-		$("#" + type + "-position-c").click(function() {
-			$('.notice-' + type).css({
-				"background-position": "center"
-			});
-			$('#' + type + '-position-hidden-field').val($(this).data('value'));
 		});
 	},
+			
+	attachColorpicker: function() {
+		//header
+		
+		if( $('#title-colorpicker').length ) {
+		
+			$('#title-colorpicker').farbtastic(function(color) {
+				$('#title-color').css('background-color', color);
+				$('#title-color').val(color);
+				$("#content .notice-header h1").css('color', color);
+			});
+
+			$('#hbg-colorpicker').farbtastic(function(color) {
+				$('#hbg-color').css('background-color', color);
+				$('#hbg-color').val(color);
+				$("#content .notice-header").css('background-color', color);
+			});
+
+			$('#title-color').focusin(function() {
+				$('#title-colorpicker').show();
+			});
+			$('#title-color').focusout(function() {
+				$('#title-colorpicker').hide();
+			});
+
+			$('#hbg-color').focusin(function() {
+				$('#hbg-colorpicker').show();
+			});
+			$('#hbg-color').focusout(function() {
+				$('#hbg-colorpicker').hide();
+			});
+
+
+			//body
+
+			$('#bbg-colorpicker').farbtastic(function(color) {
+				$('#bbg-color').css('background-color', color);
+				$('#bbg-color').val(color);
+				$("#content .notice-body").css('background-color', color);
+			});
+
+			$('#bbg-color').focusin(function() {
+				$('#bbg-colorpicker').show();
+			});
+			$('#bbg-color').focusout(function() {
+				$('#bbg-colorpicker').hide();
+			});
+
+			$('#body-colorpicker').farbtastic(function(color) {
+				$('#body-color').css('background-color', color);
+				$('#body-color').val(color);
+				$("#content .notice-body p").css('color', color);
+			});
+
+			$('#bbg-color').focusin(function() {
+				$('#bbg-colorpicker').show();
+			});
+			$('#bbg-color').focusout(function() {
+				$('#bbg-colorpicker').hide();
+			});
+
+			$('#body-color').focusin(function() {
+				$('#body-colorpicker').show();
+			});
+			$('#body-color').focusout(function() {
+				$('#body-colorpicker').hide();
+			});
+
+			//footer
+			$('#fbg-colorpicker').farbtastic(function(color) {
+				$('#fbg-color').css('background-color', color);
+				$('#fbg-color').val(color);
+				$("#content .notice-footer").css('background-color', color);
+			});
+
+			$('#fbg-color').focusin(function() {
+				$('#fbg-colorpicker').show();
+			});
+			$('#fbg-color').focusout(function() {
+				$('#fbg-colorpicker').hide();
+			});
+
+			$('#footer-colorpicker').farbtastic(function(color) {
+				$('#footer-color').css('background-color', color);
+				$('#footer-color').val(color);
+				$("#content .notice-footer p").css('color', color);
+			});
+
+			$('#footer-color').focusin(function() {
+				$('#footer-colorpicker').show();
+			});
+			$('#footer-color').focusout(function() {
+				$('#footer-colorpicker').hide();
+			});
+		}
+	},		
+	
 	attachDeleteTemplate: function() {
 		if ($('.template-delete').length) {
 
@@ -598,7 +690,13 @@ var empSite = {
 			
 		}
 
+	},
+	
+			
+	attachImageHeader: function() {
+		
 	}
+	
 }
 
 function salaryMinCheck(field, rules, i, options) {
