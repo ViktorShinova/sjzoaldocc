@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 16, 2013 at 09:31 PM
+-- Generation Time: Jun 30, 2013 at 01:19 PM
 -- Server version: 5.6.11-log
 -- PHP Version: 5.3.13
 
@@ -43,18 +43,20 @@ CREATE TABLE IF NOT EXISTS `applicants` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `applicants`
 --
 
 INSERT INTO `applicants` (`id`, `user_id`, `first_name`, `last_name`, `slug`, `preferred_location`, `preferred_job`, `contact_number`, `viewable`, `profilepic`, `skills`, `summary`, `created_at`, `updated_at`) VALUES
-(1, 17, 'Damien', 'koh', 'damienkoh', 1, 1, NULL, 1, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/082.png', '', '', '2013-03-20 11:53:23', '2013-05-13 13:05:48'),
-(2, 18, 'Victor', 'Lim', 'victorlimys', 2, 15, '0432719204', 1, '/uploads/applicant/917631549598b525ca7bfc1447a19174/image.png', 'CSS3,HTML5,Laravel,PHP,C#,Visual Studo,Perl,CGI,Shell Script,Photoshop,Illustrator,Agile,Graphic Design', 'Dedicated administrative support professional with 10+ years providing outstanding support to senior executives', '2013-03-23 07:54:43', '2013-04-23 12:26:28'),
+(1, 17, 'Damien', 'koh', 'damienkoh1', 1, 4, NULL, 1, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/IMG_0314.png', 'PHP Development;ASP.NET Development', '', '2013-03-20 11:53:23', '2013-06-18 11:05:02'),
+(2, 18, 'Victor', 'Lim', 'victorlimys', 2, 15, '0432719204', 1, '/uploads/applicant/917631549598b525ca7bfc1447a19174/image.png', 'CSS3;HTML5;Laravel;PHP;C#;Visual Studo;Perl;CGI;Shell Script;Photoshop;Illustrator;Agile;Graphic Design', 'Dedicated administrative support professional with 10+ years providing outstanding support to senior executives', '2013-03-23 07:54:43', '2013-04-23 12:26:28'),
 (3, 20, 'Damien', 'Koh', NULL, 1, 15, NULL, 1, '/uploads/applicant/dfc29e9b01a54f5bd25df8ca42e8b92a/IMG_0009.png', '', '', '2013-03-28 06:26:33', '2013-03-28 06:26:53'),
 (4, 22, 'Jesslyn', 'Lim', NULL, 3, 4, NULL, 1, '/uploads/applicant/ff6ae2cda9741c0f0c03bce2b6d93af9/for tweet.png', '', '', '2013-03-30 13:18:55', '2013-03-31 05:17:28'),
-(5, 23, 'test', 'etst', NULL, 3, 2, NULL, 1, '/img/default-profile.png', '', '', '2013-03-30 22:35:30', '2013-03-30 22:35:30');
+(5, 23, 'test', 'etst', NULL, 3, 2, NULL, 1, '/img/default-profile.png', '', '', '2013-03-30 22:35:30', '2013-03-30 22:35:30'),
+(6, 24, 'Damien', 'Koh', 'b5e13efac272', 2, 15, NULL, 1, '/img/default-profile.png', '', NULL, '2013-06-18 11:07:08', '2013-06-18 11:09:11'),
+(7, 25, 'Damien', 'Koh', '334cb7e6af5e', 1, 1, NULL, 1, '/img/default-profile.png', '', NULL, '2013-06-18 11:35:09', '2013-06-18 11:58:10');
 
 -- --------------------------------------------------------
 
@@ -73,15 +75,16 @@ CREATE TABLE IF NOT EXISTS `applicant_coverletters` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `applicant_coverletters`
 --
 
 INSERT INTO `applicant_coverletters` (`id`, `applicant_id`, `coverletter`, `filesize`, `type`, `disabled`, `path`, `created_at`, `updated_at`) VALUES
-(9, 2, 'doc-file-2.doc', 26112, 'application/msword', 0, '/uploads/applicant/917631549598b525ca7bfc1447a19174/coverletter/doc-file-2.doc', '2013-04-20 14:14:32', '2013-04-20 14:14:32'),
-(10, 2, 'pdf-file-2.pdf', 80047, 'application/pdf', 0, '/uploads/applicant/917631549598b525ca7bfc1447a19174/coverletter/pdf-file-2.pdf', '2013-04-20 14:14:41', '2013-04-20 14:14:41');
+(20, 7, 'cover_letter_2.docx', 11, 'doc', 0, '/uploads/applicant/334cb7e6af5e0f5aec9f65fd8a56601e/coverletter/cover_letter_2.docx', '2013-06-18 11:55:10', '2013-06-18 11:55:10'),
+(24, 1, 'resume.pdf', 67, 'pdf', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/coverletter/resume.pdf', '2013-06-20 14:04:12', '2013-06-20 14:04:12'),
+(25, 1, 'cover_letter.docx', 11, 'doc', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/coverletter/cover_letter.docx', '2013-06-20 14:07:09', '2013-06-20 14:07:09');
 
 -- --------------------------------------------------------
 
@@ -93,10 +96,10 @@ CREATE TABLE IF NOT EXISTS `applicant_job` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `job_id` int(11) NOT NULL,
   `applicant_id` int(11) DEFAULT NULL,
-  `status` int(1) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `cover_letter` text,
-  `applicant_resume_id` int(255) DEFAULT NULL,
-  `applicant_coverletter_id` int(255) DEFAULT NULL,
+  `applicant_resume_id` int(11) DEFAULT NULL,
+  `applicant_coverletter_id` int(11) DEFAULT NULL,
   `write_resume` text,
   `write_coverletter` text,
   `alternate_contact_details` text,
@@ -105,31 +108,18 @@ CREATE TABLE IF NOT EXISTS `applicant_job` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`,`job_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
 
 --
 -- Dumping data for table `applicant_job`
 --
 
 INSERT INTO `applicant_job` (`id`, `job_id`, `applicant_id`, `status`, `cover_letter`, `applicant_resume_id`, `applicant_coverletter_id`, `write_resume`, `write_coverletter`, `alternate_contact_details`, `non_registered_users`, `sent`, `created_at`, `updated_at`) VALUES
-(9, 23, 2, 1, NULL, 34, 10, '', '', 'a:2:{i:0;s:21:"victorlim86@gmail.com";i:1;s:10:"0432719204";}', NULL, NULL, '2013-04-22 13:21:13', '2013-04-22 13:21:13'),
-(10, 23, NULL, 1, NULL, NULL, NULL, 'asdasd', 'asdasd', NULL, 'a:4:{i:0;s:6:"Victor";i:1;s:3:"Lim";i:2;s:21:"victorlim86@gmail.com";i:3;s:11:"61432719204";}', NULL, '2013-04-22 13:35:42', '2013-04-22 13:35:42'),
-(11, 23, NULL, 1, NULL, NULL, NULL, 'asdasd', 'asasda', NULL, 'a:4:{i:0;s:6:"Victor";i:1;s:3:"Lim";i:2;s:21:"victorlim86@gmail.com";i:3;s:11:"61432719204";}', NULL, '2013-04-22 13:37:19', '2013-04-22 13:37:19'),
-(12, 23, NULL, 1, NULL, NULL, NULL, 'adasdad', '123141asdasd', NULL, 'a:4:{i:0;s:6:"Victor";i:1;s:3:"Lim";i:2;s:21:"victorlim86@gmail.com";i:3;s:11:"61432719204";}', NULL, '2013-04-22 13:38:20', '2013-04-22 13:38:20'),
-(16, 23, 1, 1, NULL, 37, 0, NULL, 'tet', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 08:12:05', '2013-05-12 08:12:05'),
-(17, 23, 1, 1, NULL, 37, 0, NULL, 'tet', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 08:12:47', '2013-05-12 08:12:47'),
-(18, 23, 1, 1, NULL, 37, 0, NULL, 'tet', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 08:13:14', '2013-05-12 08:13:14'),
-(19, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 10:31:49', '2013-05-12 10:31:49'),
-(20, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 10:59:45', '2013-05-12 10:59:45'),
-(21, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:00:22', '2013-05-12 11:00:22'),
-(22, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:00:42', '2013-05-12 11:00:42'),
-(23, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:01:00', '2013-05-12 11:01:00'),
-(24, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:01:54', '2013-05-12 11:01:54'),
-(25, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:02:50', '2013-05-12 11:02:50'),
-(26, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:03:01', '2013-05-12 11:03:01'),
-(27, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:03:22', '2013-05-12 11:03:22'),
-(28, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:04:20', '2013-05-12 11:04:20'),
-(29, 23, 1, 1, NULL, 37, 0, NULL, '', 'a:2:{i:0;s:22:"zlkoh.damien@gmail.com";i:1;s:10:"0430131395";}', NULL, NULL, '2013-05-12 11:04:35', '2013-05-12 11:04:35');
+(82, 23, 7, 1, NULL, NULL, 0, NULL, '', 'a:2:{i:0;s:19:"jesslyn21@gmail.com";i:1;s:10:"1312321321";}', NULL, NULL, '2013-06-18 11:55:10', '2013-06-18 11:55:10'),
+(83, 23, NULL, 1, NULL, NULL, NULL, NULL, '', NULL, 'a:12:{s:10:"first_name";s:6:"Damien";s:9:"last_name";s:6:"tester";s:5:"email";s:13:"test@test.com";s:7:"contact";s:10:"2131321321";s:18:"current_employment";s:6:"tester";s:13:"duration_year";s:1:"1";s:14:"duration_month";s:1:"2";s:15:"selected-resume";s:1:"0";s:20:"selected-coverletter";s:1:"0";s:17:"write-coverletter";s:0:"";s:13:"upload-resume";a:5:{s:4:"name";s:0:"";s:4:"type";s:0:"";s:8:"tmp_name";s:0:"";s:5:"error";i:4;s:4:"size";i:0;}s:18:"upload-coverletter";a:5:{s:4:"name";s:0:"";s:4:"type";s:0:"";s:8:"tmp_name";s:0:"";s:5:"error";i:4;s:4:"size";i:0;}}', NULL, '2013-06-20 12:37:23', '2013-06-20 12:37:23'),
+(88, 23, 1, 1, NULL, 55, 24, NULL, '', NULL, NULL, NULL, '2013-06-20 14:04:12', '2013-06-20 14:04:12'),
+(90, 5, 1, 1, NULL, 56, 25, NULL, '', NULL, NULL, NULL, '2013-06-20 14:07:09', '2013-06-20 14:07:09'),
+(91, 28, NULL, 1, NULL, NULL, NULL, NULL, 'I would like to apply for...', NULL, 'a:12:{s:10:"first_name";s:6:"tester";s:9:"last_name";s:6:"tester";s:5:"email";s:22:"zlkoh.damien@gmail.com";s:7:"contact";s:6:"123123";s:18:"current_employment";s:5:"12323";s:13:"duration_year";s:1:"1";s:14:"duration_month";s:1:"2";s:15:"selected-resume";s:1:"0";s:20:"selected-coverletter";s:1:"0";s:17:"write-coverletter";s:28:"I would like to apply for...";s:13:"upload-resume";a:5:{s:4:"name";s:0:"";s:4:"type";s:0:"";s:8:"tmp_name";s:0:"";s:5:"error";i:4;s:4:"size";i:0;}s:18:"upload-coverletter";a:5:{s:4:"name";s:0:"";s:4:"type";s:0:"";s:8:"tmp_name";s:0:"";s:5:"error";i:4;s:4:"size";i:0;}}', 1, '2013-06-26 13:27:43', '2013-06-26 13:27:43');
 
 -- --------------------------------------------------------
 
@@ -151,15 +141,7 @@ CREATE TABLE IF NOT EXISTS `applicant_qualifications` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_applicant_idx` (`applicant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
-
---
--- Dumping data for table `applicant_qualifications`
---
-
-INSERT INTO `applicant_qualifications` (`id`, `applicant_id`, `level`, `title`, `institude`, `field_of_study`, `achievements`, `started`, `ended`, `created_at`, `updated_at`) VALUES
-(18, 2, NULL, 'Bachelor of IT', 'University of Queensland', 'Software Information Systems Major', 'the quick brown fox', 2011, 2012, '2013-04-01 01:27:28', '2013-04-01 01:32:12'),
-(20, 2, NULL, 'Diploma in Info-communications Engineering', 'Temasek Poly', '', '', 2004, 2007, '2013-04-01 01:57:05', '2013-04-01 01:57:05');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -179,17 +161,16 @@ CREATE TABLE IF NOT EXISTS `applicant_resumes` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_applicant_idx` (`applicant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `applicant_resumes`
 --
 
 INSERT INTO `applicant_resumes` (`id`, `applicant_id`, `resume`, `filesize`, `type`, `disabled`, `path`, `created_at`, `updated_at`) VALUES
-(34, 2, 'doc-file.doc', 26112, 'application/msword', 0, '/uploads/applicant/917631549598b525ca7bfc1447a19174/resume/doc-file.doc', '2013-04-14 13:19:25', '2013-04-14 13:19:25'),
-(36, 2, 'pdf-file-2.pdf', 80047, 'application/pdf', 0, '/uploads/applicant/917631549598b525ca7bfc1447a19174/resume/pdf-file-2.pdf', '2013-04-14 13:19:34', '2013-04-14 13:19:34'),
-(37, 1, 'resume.pdf', 78459, 'application/pdf', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/resume/resume.pdf', '2013-05-12 01:04:37', '2013-05-12 01:04:37'),
-(38, 1, 'Sunsuper-Rollover-form.pdf', 197863, 'application/pdf', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/resume/Sunsuper-Rollover-form.pdf', '2013-05-14 11:26:29', '2013-05-14 11:26:29');
+(51, 7, 'resume.pdf', 67, 'pdf', 0, '/uploads/applicant/334cb7e6af5e0f5aec9f65fd8a56601e/resume/resume.pdf', '2013-06-18 11:55:10', '2013-06-18 11:55:10'),
+(55, 1, 'resume.pdf', 67, 'pdf', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/resume/resume.pdf', '2013-06-20 14:04:12', '2013-06-20 14:04:12'),
+(56, 1, 'resume2.docx', 19, 'doc', 0, '/uploads/applicant/9e54cad4694ee004fe704f2d6f14a7cd/resume/resume2.docx', '2013-06-20 14:07:09', '2013-06-20 14:07:09');
 
 -- --------------------------------------------------------
 
@@ -200,23 +181,30 @@ INSERT INTO `applicant_resumes` (`id`, `applicant_id`, `resume`, `filesize`, `ty
 CREATE TABLE IF NOT EXISTS `applicant_work_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `applicant_id` int(11) NOT NULL,
-  `started` date NOT NULL,
-  `ended` date DEFAULT NULL,
-  `employer_name` varchar(255) NOT NULL,
+  `started_month` varchar(50) DEFAULT NULL,
+  `started_year` int(11) unsigned DEFAULT NULL,
+  `ended_month` varchar(50) DEFAULT NULL,
+  `ended_year` int(11) unsigned DEFAULT NULL,
+  `company_name` varchar(255) NOT NULL,
   `industry` varchar(45) NOT NULL,
+  `position` varchar(200) DEFAULT NULL,
   `description` text NOT NULL,
   `currently_work_here` tinyint(1) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `applicant_work_history`
+-- Table structure for table `blurbs`
 --
 
-INSERT INTO `applicant_work_history` (`id`, `applicant_id`, `started`, `ended`, `employer_name`, `industry`, `description`, `currently_work_here`, `created_at`, `updated_at`) VALUES
-(23, 2, '2013-02-01', '0000-00-00', 'Mitara', '14', 'Web Developer', 1, '2013-04-15 09:23:09', '2013-04-22 13:23:21');
+CREATE TABLE IF NOT EXISTS `blurbs` (
+  `id` int(11) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -495,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `secondary_contact` varchar(45) DEFAULT NULL,
   `fax` varchar(45) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
-  `industry` varchar(45) NOT NULL,
+  `industry` int(11) NOT NULL,
   `address` varchar(100) NOT NULL,
   `address_2` varchar(100) DEFAULT NULL,
   `suburb` varchar(45) DEFAULT NULL,
@@ -510,21 +498,15 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `logo_path` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_advertiser_user_idx` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `employers`
 --
 
 INSERT INTO `employers` (`id`, `title`, `first_name`, `last_name`, `application_email`, `contact`, `secondary_contact`, `fax`, `company`, `industry`, `address`, `address_2`, `suburb`, `postal`, `country`, `company_size`, `user_id`, `updated_at`, `created_at`, `guid`, `unique_folder`, `logo_path`) VALUES
-(1, 'Mr', 'Damien', 'Koh', 'zlkoh.damien@gmail.com', '0430131395', '0430131395', '0430131395', 'CareersHire', '', '123 Durham Street', 'St Lucia', 'St Lucia', 4067, '0', '30-40', 1, NULL, NULL, NULL, '8af479d69c80b60de952bf2cc565772f', ''),
-(7, 'Mr', 'Damien', 'Koh123', 'zlkoh.damien@gmail.com', '0430131395', NULL, '123456789', 'careershire', 'information tech', '159 Hellawell Road123', '', 'Sunnybank Hills', 2147483647, 'AUS', '>200', 11, '2013-03-23 07:47:09', '2013-01-27 02:41:35', NULL, '8af479d69c80b60de952bf2cc565772f', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/company-logo/Logo.png'),
-(8, 'Mr', 'Damien', 'KOh', 'zlkoh.damien@gmail.com', '61430131395', NULL, '', 'test', 'test', '159 Hellawell Road', '', 'Sunnybank Hills', 4109, 'AUS', '0', 12, '2013-03-13 11:35:25', '2013-03-13 11:35:25', NULL, '8af479d69c80b60de952bf2cc565772f', ''),
-(9, 'Mr', 'Damien', 'Koh', 'zlkoh.damien@gmail.com', '61430131395', NULL, '', 'test', 'test', '159 Hellawell Road', '', 'Sunnybank Hills', 4109, 'AUS', '0', 13, '2013-03-13 11:56:05', '2013-03-13 11:56:05', NULL, '52e271470da25b752444aa4cbe911562', ''),
-(10, 'Mr', 'Damien', 'Koh', 'zlkoh.damien@gmail.com', '61430131395', NULL, '', 'test', 'test', '159 Hellawell Road', '', 'Sunnybank Hills', 4109, 'AUS', '0', 14, '2013-03-13 11:57:02', '2013-03-13 11:57:02', NULL, 'f0b5368d5959f601db634e1f13c857c9', ''),
-(11, 'Mr', 'Damien', 'Koh', 'zlkoh.damien@gmail.com', '61430131395', NULL, '', 'test', 'test', '159 Hellawell Road', '', 'Sunnybank Hills', 4109, 'AUS', '0', 15, '2013-03-13 12:38:14', '2013-03-13 12:38:14', NULL, 'afd2d09de5087e89465850ed2c646946', ''),
-(12, 'Ms', 'test', 'Koh', 'zlkoh.damien@gmail.com', '61430131395', NULL, '', 'test', 'test', '159 Hellawell Road', '', 'Sunnybank Hills', 4109, 'AUS', '0', 16, '2013-03-13 12:38:56', '2013-03-13 12:38:56', NULL, '72a3dcef165d9122a45decf13ae20631', ''),
-(13, 'Mr', 'Victor', 'Lim', 'zlkoh.damien@gmail.com', '043212345', NULL, '', 'Brightlabs', 'IT', '13/612 Sherwood Road', 'SHERWOOD', 'Brisbane', 4075, 'AUS', '0', 19, '2013-03-23 08:11:41', '2013-03-23 08:11:41', NULL, 'ffc150a160d37e92012c196b6af4160d', '');
+(7, 'Mr', 'Damien', 'Koh123', 'zlkoh.damien@gmail.com', '0430131395', NULL, '123456789', 'careershire', 1, '159 Hellawell Road123', '', 'Sunnybank Hills', 2147483647, 'AUS', '>200', 11, '2013-06-23 05:39:31', '2013-01-27 02:41:35', NULL, '8af479d69c80b60de952bf2cc565772f', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/company-logo//prop_normal.png'),
+(14, 'Mr', 'tester', 'tester', 'zlkoh.damien@gmail.com', '123123', NULL, '123123', 'Brightlabs', 15, '159 Hellawell Road', '123123123', 'Sunnybank Hills', 4109, 'AUS', '0', 26, '2013-06-23 09:17:54', '2013-06-23 09:17:41', NULL, '334cb7e6af5e0f5aec9f65fd8a56601e', '/uploads/employer/334cb7e6af5e0f5aec9f65fd8a56601e/company-logo//test.png');
 
 -- --------------------------------------------------------
 
@@ -558,24 +540,22 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `apply` varchar(1000) DEFAULT NULL,
   `slug` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_2` (`slug`),
   KEY `fk_job_category_idx` (`category_id`),
   KEY `fk_job_sub_categor_idx` (`sub_category_id`),
   KEY `fk_advertiser_job_idx` (`employer_id`),
   KEY `fk_job_location_idx` (`location_id`),
+  KEY `slug` (`slug`),
   FULLTEXT KEY `title` (`title`,`description`,`summary`),
   FULLTEXT KEY `contact` (`contact`),
   FULLTEXT KEY `contact_2` (`contact`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `jobs`
 --
 
 INSERT INTO `jobs` (`id`, `title`, `summary`, `description`, `more_info`, `video`, `contact`, `category_id`, `sub_category_id`, `min_salary`, `max_salary`, `salary_range`, `payment_structure`, `location_id`, `sub_location_id`, `employer_id`, `created_at`, `updated_at`, `end_at`, `status`, `template_id`, `work_type`, `apply`, `slug`) VALUES
-(2, 'ASP .NET Developer ** 3 + 6 months contract **123123123', 'Talent International -Voted SARA’s Best Large IT Recruiter 2011/12 - SEEK Awards\r\n** Convenient long term contract to start 2013 ** Commence date: Mid Jan ** CBD Location **', '<p><strong>PERMANENT FULL-TIME ROLE INNOVATIVE &amp; GROWING SOFTWARE AS A SERVICE COMPANY NEW OFFICES IN TECHNOLOGY PRECINCT ON CITY FRINGE </strong></p>\r\n\r\n<p><strong><img alt="" src="http://www.smithink2020.com/files/images/content/Business%20Advisory%20Conference/MYP%20Logo%20Web.png" style="width: 130px; height: 130px;" /></strong></p>\r\n\r\n<p>MYP Corporation (MYPCorp) provides online business tools and information to Advisers to business, SMEs and educational organisations internationally. With a reputation for innovation and quality, we are seeking an IT Developer (AD) to join our dynamic team. Based conveniently on Brisbane&rsquo;s south east and reporting to the Director - Operations, you will work with a growing team of Developers providing exceptional development solutions:</p>\r\n\r\n<p>Applications Development</p>\r\n\r\n<p>(C#, ASP.NET Framework 4, Visual Studio 2010; HTML;&nbsp;<br />\r\n<span style="line-height: 1.6em;">Subversion and Tortoise SVN;<br />\r\nASP; Javascript;&nbsp;PHP, MySQL) </span></p>\r\n\r\n<p><br />\r\n<span style="line-height: 1.6em;">Report Development (Microsoft Reporting Services 2008)<br />\r\nBusiness Database Systems Development (SQL Server, MS-Access, Excel, Outlook, Word, PowerPoint VBA applications) </span></p>\r\n\r\n<p><span style="line-height: 1.6em;">Application programming interface (API) development.<br />\r\nWe are seeking an intelligent, highly motivated, experienced and innovative IT Developer (AD) with advanced technical skills and a genuine interest in business intelligence and analysis. If you are looking for a long-term career opportunity in a fast growing, positive, focused and solutions based environment, this is an opportunity for you. </span><br />\r\n&nbsp;</p>\r\n\r\n<p><span style="line-height: 1.6em;">Please forward your application in confidence to Jenny Eager (Director &ndash; Operations).</span></p>\r\n', 'Lorem ipsum dolor sit amet, orci nam sed erat', NULL, 'zlkoh.damien@gmail.com', 15, 1, '40000', '50000', '$40000 - $50000', 'weekly', 2, 1, 7, '2012-11-28 00:00:00', '2013-03-30 23:54:42', '2013-05-31 00:00:00', 1, 31, 'FT', '', NULL),
-(3, 'PHP WEB APPLICATION DEVELOPERS', 'A PHP successful, secure business within the Banking and Financial Industry, based city fringe', 'PERMANENT FULL-TIME ROLE\nINNOVATIVE & GROWING SOFTWARE AS A SERVICE COMPANY\nNEW OFFICES IN TECHNOLOGY PRECINCT ON CITY FRINGE\n \nMYP Corporation (MYPCorp) provides online business tools and information to Advisers to business, SMEs and educational organisations internationally.  With a reputation for innovation and quality, we are seeking an IT Developer (AD) to join our dynamic team.\n \nBased conveniently on Brisbane’s south east and reporting to the Director - Operations, you will work with a growing team of Developers providing exceptional development solutions:\n \nApplications Development (C#, ASP.NET Framework 4, Visual Studio 2010; HTML; Subversion and Tortoise SVN; ASP; Javascript; PHP, MySQL)\nReport Development (Microsoft Reporting Services 2008)\nBusiness Database Systems Development (SQL Server, MS-Access, Excel, Outlook, Word, PowerPoint VBA applications)\nApplication programming interface (API) development\n \nWe are seeking an intelligent, highly motivated, experienced and innovative IT Developer (AD) with advanced technical skills and a genuine interest in business intelligence and analysis.  If you are looking for a long-term career opportunity in a fast growing, positive, focused and solutions based environment, this is an opportunity for you.\n \nPlease forward your application in confidence to Jenny Eager (Director – Operations).', 'Represent one of the world''s most recognised ', NULL, 'zlkoh.damien@gmail.com', 15, 1, '44000', '55000', '$44000 - $55000', 'Weekly', 2, 1, 7, '2012-11-28 00:00:00', '2013-05-11 13:00:27', '2013-05-31 08:20:16', 1, 1, 'PT', '', NULL),
-(4, 'Junior / Graduate SharePoint Developer', 'Sharepoint Developer 3 months Adelaide based', 'c++', 'Represent one of the world''s most recognised ', NULL, 'zlkoh.damien@gmail.com', 15, 1, '44000', '55000', '$44000 - $55000', 'Monthly', 2, 1, 7, '2012-11-28 00:00:00', '2013-02-24 04:24:13', '2013-05-31 00:00:00', 1, 1, 'SW', '', NULL),
-(5, '.NET DEVELOPER', 'Incredible opportunity for a Junior SharePoint developer to join a leading software company, receive ongoing training and liaise with clients.', 'php', NULL, NULL, 'zlkoh.damien@gmail.com', 15, 2, '44000', '55000', '$44000 - $55000', 'Fortnightly', 2, 1, 7, '2012-11-28 00:00:00', '2013-02-24 04:24:13', '2013-06-28 00:00:00', 1, 1, 'CIH', '', NULL),
 (7, 'title', 'intro', '<p>test</p>\r\n', 'more-info', 'video', 'contact', 15, 1, '12', '12', 'salary-range', 'weekly', 1, 1, 7, '2013-02-20 13:42:02', '2013-02-24 04:24:13', NULL, 0, 1, '', '', NULL),
 (8, 'BUB Advertisement', 'intro', '<p>dfasfdas</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '123123', '32132131', 'salary-range', 'weekly', 1, 11, 7, '2013-03-10 04:15:49', '2013-03-30 06:18:48', NULL, 0, 1, '', '', NULL),
 (9, 'title', 'intro', '<p>gsfgfsd</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '234', '234', 'salary-range', 'weekly', 1, 11, 7, '2013-03-10 04:17:09', '2013-03-30 06:18:48', NULL, 0, 1, '', '', NULL),
@@ -587,13 +567,12 @@ INSERT INTO `jobs` (`id`, `title`, `summary`, `description`, `more_info`, `video
 (15, 'titlefasfdaf', 'intro', '<p>fdsafsa</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '32131', '2131', 'salary-range', 'weekly', 1, 11, 7, '2013-03-10 05:30:21', '2013-03-10 05:30:21', NULL, 0, 0, '', '', NULL),
 (16, 'titlefasfdaf', 'intro', '<p>fdsafsa</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '32131', '2131', 'salary-range', 'weekly', 1, 11, 7, '2013-03-10 05:36:57', '2013-03-10 05:36:57', NULL, 0, 0, '', '', NULL),
 (17, 'title', 'intro', '<p>fdsafsa</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '321', '321', 'salary-range', 'weekly', 1, 11, 7, '2013-03-10 05:51:58', '2013-03-10 05:58:53', NULL, 0, 1, '', '', NULL),
-(18, 'title', 'intro', '<p>fasfsad</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '32131', '3123', '321321', 'weekly', 1, 11, 7, '2013-03-10 11:56:37', '2013-03-17 06:00:06', '2013-06-15 23:00:00', 1, 1, '', '', NULL),
-(19, 'da', 'intro', '<p>desc</p>\r\n', 'more-info', 'video', 'contact', 1, 1, '321321', '321321312', '21321', 'weekly', 1, 1, 7, '2013-03-10 12:22:12', '2013-03-17 06:00:06', '2013-05-23 12:22:12', 1, 1, '', '', NULL),
-(21, 'New Job', 'test', '<p>test</p>\r\n', 'testset', 'test', 'test', 15, 2, '40000', '70000', '$40000 - $70000', 'fortnightly', 2, 1, 7, '2013-03-29 13:51:20', '2013-03-30 06:18:48', '2013-05-31 13:51:20', 1, 1, 'CIH', 'http://www.google.com', NULL),
-(22, 'titlefdsafdsa', 'introfdsafdsa', '<p>fafdsa</p>\r\n', 'more-info', 'video', 'contact', 15, 1, '0', '30000', '$0 - $30000', 'weekly', 1, 11, 7, '2013-03-29 13:57:41', '2013-03-29 13:57:41', '2013-05-17 13:57:41', 1, 1, 'PT', '', NULL),
-(23, 'title', '<p>afdsafa</p>\r\n', '<p>safdsf</p>\r\n', 'more-info', '', 'contact', 15, 4, '123', '123123', '$123 - $123123', 'weekly', 1, 11, 7, '2013-04-14 14:07:10', '2013-04-14 14:07:10', '2013-06-22 14:07:10', 1, 1, 'PT', NULL, NULL),
-(24, 'PHP Developer for Careershire', '<p>This is a major role for all good php developers</p>\r\n', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut diam nisl, gravida bibendum elit. Mauris ut posuere erat. Proin viverra augue enim, non accumsan turpis. Sed et auctor ante. Integer vehicula convallis purus et tincidunt. Curabitur et ullamcorper felis. Cras sit amet libero nisl. Etiam malesuada condimentum libero vitae lobortis. Pellentesque dapibus diam eget augue consequat adipiscing.</p>\r\n', 'no more infomoation', NULL, 'Please call 0430131305 or send your resume to zlkoh.damien@gmail.com', 15, 2, '40000', '60000', 'Good salary including SUPER', 'fortnightly', 2, 1, 7, '2013-05-12 11:34:02', '2013-05-12 11:34:02', '2013-06-12 11:34:02', 1, 1, 'PT', NULL, NULL),
-(25, 'test', '<p>test</p>\r\n', '<p>test</p>\r\n', 'testset', NULL, 'test', 15, 3, '12', '123', '12', 'weekly', 1, 13, 7, '2013-05-14 11:24:10', '2013-05-14 11:24:10', '2013-06-14 11:24:10', 1, 31, 'PT', NULL, NULL);
+(26, 'fda', '<p>fdsa</p>\r\n', '<p>fdsa</p>\r\n', 'fsa', NULL, 'fda', 15, 2, '23', '123', 'fdsa', 'weekly', 1, 11, 7, '2013-06-22 08:12:19', '2013-06-22 08:12:19', '2013-07-22 08:12:19', 1, 1, 'PT', NULL, NULL),
+(27, 'Web Developer (PHP)', 'Brightlabs is looking for a Web Developer (PHP) to join our award-winning team. Hands on experience with SCRUM methodology is desirable, but not mandatory', '<div class="templatetext" style="font-size: 10pt; word-wrap: break-word; color: rgb(69, 69, 69); font-family: Helvetica, Arial, sans-serif; line-height: normal;"><b>About Brightlabs</b>&nbsp;<br />\r\nWith a majority of our team in their mid 20s to early 30s there&#39;s a lot of internet humour around our office, but we still maintain a professional work environment. There are numerous perks for working for Brightlabs, among them morning teas for celebrating key events (and occasionally for no reason at all) and early knock-offs on Friday to socialise over a few drinks. The best perk of all, however, is the fact we don&#39;t support IE6!&nbsp;<br />\r\n<br />\r\n<b>About You</b>&nbsp;<br />\r\nWe are looking for someone that is a team player, is not afraid to bring up concerns or ideas and is capable of taking criticism and learning from their experiences. Agile values are key to the way our team operates, so if you enjoy an open, honest atmosphere - keep reading.<br />\r\n<br />\r\nAs a web developer you will be responsible for a variety of tasks, from implementing designs from our creative team to handling backend development using the LAMP stack on large eCommerce and Content Management solutions. You will have a wide array of work to deal with, from standard client websites to custom implementations and our own internal product suite.<br />\r\n<br />\r\nOur work environment is varied with the opportunity to move into other areas as your abilities and interests allow. Ideally, you are able to work in a self-guided manner, seeking support from the project and development team as required and able to handle constructive criticism and build your skill set to complement the team as a whole.&nbsp;<br />\r\n<br />\r\n<b>Essential Attributes and Skills</b>\r\n\r\n<ul style="margin: 8px 0px 9px; padding-right: 0px; padding-left: 0px; list-style: none;">\r\n	<li style="list-style: disc; margin-left: 15px;">3 + years experience in commercial web development and web applications at a digital agency</li>\r\n	<li style="list-style: disc; margin-left: 15px;">3 + years experience with PHP on the LAMP stack</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Having worked in a SCRUM methodology environment would be a distinct advantage, but it&#39;s not mandatory</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Proven application of test driven development, automated testing and continuous integration</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Ability to architect, scope, design and implement scalable technical solutions</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Knowledge of OOP practices</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Knowledge of source control systems (preferably GIT) to maintain project integrity</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Experience with MySQL database and query design</li>\r\n	<li style="list-style: disc; margin-left: 15px;">Advanced knowledge of HTML, CSS and JavaScript</li>\r\n</ul>\r\n</div>\r\n', 'fdas', NULL, 'Sounds like you? Please call our General Manager, Han te Riele, on 1300 420 130 and e-mail your cover letter and resume to jobs@brightlabs.com.au And please, no recruitment agencies.', 15, 1, '123', '12321', 'Include super', 'fortnightly', 2, 1, 7, '2013-06-22 08:33:34', '2013-06-22 08:33:34', '2013-07-22 08:33:34', 1, 1, 'FT', NULL, NULL),
+(28, 'PHP WEB APPLICATION DEVELOPERS (PHP ONLY)', 'test', '<p>test</p>\r\n', 'test', NULL, 'test', 15, 1, '123', '200000', '123', 'weekly', 2, 1, 7, '2013-06-22 12:49:19', '2013-06-30 12:14:17', '2013-07-22 12:49:19', 1, 1, 'FT', NULL, 'PHP_WEB_APPLICATION_DEVELOPERS_PHP_ONLY'),
+(30, 'e Commerce .Net Developer | P/T Optional (Q3)', 'This market leader in their sector has business goals of being one of Australia''s most recognised online stores, offering both local and international consumers their products.', '<p style="margin: 9px 0px; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-size: 10.909090995788574px; line-height: 16.988636016845703px;">This market leader in their sector has&nbsp;business&nbsp;goals of being one of Australia&#39;s most recognised online stores, offering both local and international consumers their products. This is an initial 3&nbsp;month contract based on the Southside of Brisbane with intentions of moving into a permanent position. (For the right candidate an initial part time contract (25 - 30hrs) a week arrangement could be made.</p>\r\n\r\n<p style="margin: 9px 0px; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-size: 10.909090995788574px; line-height: 16.988636016845703px;">They are looking for an experienced eCommerce .Net Developer to work in-house (Southside of Brisbane) initially working across the back end development side of things and assisting with security strategies and audits. You will be a confident developer with good communication skills and a passion for digital development utilising the latest web technologies.</p>\r\n\r\n<p style="margin: 9px 0px; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-size: 10.909090995788574px; line-height: 16.988636016845703px;">To be successful in this position you will have the following key skills and experience:</p>\r\n\r\n<ul style="margin: 8px 0px 9px; padding-right: 0px; padding-left: 0px; list-style: none; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-size: 10.909090995788574px; line-height: 16.988636016845703px;">\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Proven experience in eCommerce Web Design or&nbsp;.Net development</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Creating new websites to in-house guidelines</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Improving and enhancing the usability, functionality and design of existing websites</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">CSS3 HTML5 (Beneficial but not necessary)</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Understanding of penetration testing (Beneficial)</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Proven back end skills in implementing web application</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Strong background in a Microsoft Windows Environment</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Excellent time management and organisation skills</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Strong communication and inter-personal skills</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Tertiary Education in a related field (desirable)</li>\r\n	<li style="list-style: disc; font-size: 12px; margin-left: 25px !important;">Interest in Online Shopping and retail</li>\r\n</ul>\r\n', 'test', NULL, 'If you have the ability to work unsupervised, work well as a member of a multi-discipline team, please forward your resume ASAP and feel free to follow up with Greg Scharf on (07) 3232 2300 , I look forward to speaking with you soon.', 15, 1, '123123', '200000', 'Around $92K + Up to 12.75% Superannuation', 'fortnightly', 2, 1, 14, '2013-06-23 09:20:07', '2013-06-23 09:45:05', '2013-07-23 09:20:07', 1, 1, 'FT', NULL, 'e_commerce_net_developer__pt_optional_q3'),
+(31, 'test', 'tester', '<p>tester</p>\r\n', 'tester', NULL, 'tester', 15, 1, '100', '1000', '12213', 'weekly', 2, 1, 7, '2013-06-24 12:15:04', '2013-06-24 12:15:04', '2013-07-24 12:15:04', 1, 1, 'FT', NULL, 'test'),
+(32, 'test', 'test', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique bibendum tortor, nec consectetur ipsum gravida et. Ut mollis est quis mauris gravida, quis commodo ante semper. Nulla non sodales dolor. Nunc sed nunc a ante bibendum viverra. Vestibulum at nisi cursus, feugiat elit sed, dapibus massa. Sed nec vehicula nunc, quis dignissim ipsum. Etiam sed sem porttitor, euismod nisi nec, condimentum tortor. Integer sollicitudin urna in urna laoreet pharetra. Aenean quis mollis mauris, in blandit leo. Phasellus pretium, erat eget luctus commodo, tortor ipsum laoreet lorem, non adipiscing velit justo et massa. Maecenas sed leo enim. Sed et pharetra felis, eu facilisis arcu. Praesent vestibulum tellus lorem, nec venenatis lacus auctor sit amet. Mauris volutpat tortor sed tempor egestas.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique bibendum tortor, nec consectetur ipsum gravida et. Ut mollis est quis mauris gravida, quis commodo ante semper. Nulla non sodales dolor. Nunc sed nunc a ante bibendum viverra. Vestibulum at nisi cursus, feugiat elit sed, dapibus massa. Sed nec vehicula nunc, quis dignissim ipsum. Etiam sed sem porttitor, euismod nisi nec, condimentum tortor. Integer sollicitudin urna in urna laoreet pharetra. Aenean quis mollis mauris, in blandit leo. Phasellus pretium, erat eget luctus commodo, tortor ipsum laoreet lorem, non adipiscing velit justo et massa. Maecenas sed leo enim. Sed et pharetra felis, eu facilisis arcu. Praesent vestibulum tellus lorem, nec venenatis lacus auctor sit amet. Mauris volutpat tortor sed tempor egestas.</p>\r\n', 'test', NULL, 'test', 15, 3, '123', '1233', '123', 'monthly', 3, 16, 7, '2013-06-24 12:32:29', '2013-06-30 11:31:18', '2013-07-24 12:32:29', 1, 32, 'CIH', NULL, 'test_2');
 
 -- --------------------------------------------------------
 
@@ -704,6 +683,32 @@ INSERT INTO `locations` (`id`, `name`, `state`, `country_code`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `html` text NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `html`, `title`, `slug`, `updated_at`, `created_at`) VALUES
+(1, '<div class="test">\n    <input type="text">\n</div>', 'test', 'test', '2013-06-30 12:22:34', '2013-06-30 12:22:34'),
+(2, 'test', 'test2', 'test2', '2013-06-30 12:23:31', '2013-06-30 12:23:31'),
+(3, 'test', 'test', '', '2013-06-30 12:42:24', '2013-06-30 12:42:24'),
+(4, '<div class="test">\n    <input type="text">\n</div>', '', '', '2013-06-30 13:13:50', '2013-06-30 13:13:50');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prices`
 --
 
@@ -759,7 +764,7 @@ CREATE TABLE IF NOT EXISTS `shortlists` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `shortlists`
@@ -768,7 +773,11 @@ CREATE TABLE IF NOT EXISTS `shortlists` (
 INSERT INTO `shortlists` (`id`, `applicant_id`, `shortlist_category_id`, `job_id`, `created_at`, `updated_at`) VALUES
 (3, 1, NULL, 19, '2013-05-03 14:01:37', '2013-05-03 14:01:37'),
 (10, 2, NULL, 23, '2013-05-04 00:00:00', '2013-05-04 00:00:00'),
-(21, 1, NULL, 21, '2013-05-04 13:53:46', '2013-05-04 13:53:46');
+(21, 1, NULL, 21, '2013-05-04 13:53:46', '2013-05-04 13:53:46'),
+(24, 1, NULL, 18, '2013-05-30 13:38:46', '2013-05-30 13:38:46'),
+(25, 1, NULL, 2, '2013-05-30 13:39:33', '2013-05-30 13:39:33'),
+(26, 1, NULL, 5, '2013-05-30 13:39:35', '2013-05-30 13:39:35'),
+(35, 1, NULL, 30, '2013-06-23 10:37:17', '2013-06-23 10:37:17');
 
 -- --------------------------------------------------------
 
@@ -881,15 +890,17 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `templates`
 --
 
 INSERT INTO `templates` (`id`, `css`, `header`, `body`, `footer`, `name`, `data`, `updated_at`, `created_at`) VALUES
-(1, '.notice-container > header {\n /*HEADER-BACKGROUND-REPEAT*/\n  /*HEADER-BACKGROUND-IMAGE*/\n /*HEADER-BACKGROUND-POSITION*/\n  text-align: center;\n margin-bottom: 5px;\n overflow: hidden;\n /*TEXT-ALIGN*/\n}\n\n.notice-container > header > h1 {\n  display: inline;\n}\n\n.notice-container > article {\n  /*BODY-BACKGROUND-REPEAT*/\n  /*BODY-BACKGROUND-IMAGE*/\n /*BODY-BACKGROUND-POSITION*/\n  height: auto;\n margin-bottom: 5px;\n}\n\n.notice-container > footer {\n  /*FOOTER-BACKGROUND-REPEAT*/\n  /*FOOTER-BACKGROUND-IMAGE*/\n /*FOOTER-BACKGROUND-POSITION*/\n  height: 50px;\n margin-bottom: 5px;\n}\n.notice-container > header, .notice-container > article, .notice-container > footer {\n padding: 40px;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n', NULL, NULL, NULL, 'Default', '', NULL, NULL),
-(31, '.notice-container > header {\n  background-repeat: repeat-x;\n  background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/mastercard.png);\n  background-position: center ;\n text-align: center;\n margin-bottom: 5px;\n overflow: hidden;\n text-align: left;\n}\n\n.notice-container > header > h1 {\n display: inline;\n}\n\n.notice-container > article {\n  background-repeat: no-repeat;\n background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/template-icons.png);\n  background-position: center ;\n height: auto;\n margin-bottom: 5px;\n}\n\n.notice-container > footer {\n  \n  background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png);\n  \n  height: 50px;\n margin-bottom: 5px;\n}\n.notice-container > header, .notice-container > article, .notice-container > footer {\n padding: 40px;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/mastercard.png', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/template-icons.png', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png', 'test template', 'a:10:{s:17:"header_text_align";s:4:"left";s:13:"header_repeat";s:8:"repeat-x";s:15:"header_position";s:6:"center";s:11:"body_repeat";s:9:"no-repeat";s:13:"body_position";s:6:"center";s:13:"footer_repeat";s:0:"";s:15:"footer_position";s:0:"";s:17:"header_background";s:84:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/mastercard.png";s:15:"body_background";s:86:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/template-icons.png";s:17:"footer_background";s:78:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png";}', '2013-03-30 07:38:04', '2013-03-30 07:15:25');
+(1, '#content .notice-container > header {\n		background-repeat:  ;\n			\n		background-position: top left;\n		\n		background-color: ;\n		\n		text-align: ;\n		\n}\n\n#content .notice-container > header > h1 {\n		color: ;\n	}\n\n#content .notice-container > article {\n\n		background-repeat: ;\n				background-position: top left;\n			background-color: ;\n	}\n\n#content .notice-container > article > p {\n		color: ;\n	}\n\n#content .notice-container > footer {\n\n		background-repeat: ;\n				background-position: top left;\n			background-color: ;\n	\n}\n\n#content .notice-container > footer > p {\n			color: ;\n	}\n', NULL, NULL, NULL, 'Default', '', NULL, NULL),
+(31, '.notice-container > header {\n background-repeat: no-repeat;\n  background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/header.png);\n background-position: bottom right ;\n  text-align: center;\n margin-bottom: 5px;\n overflow: hidden;\n height: 110px;\n text-align: left;\n}\n\n.notice-container > header > h1 {\n  display: inline;\n}\n\n.notice-container > article {\n  background-repeat: repeat-y;\n  background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/body.png);\n background-position: center ;\n  height: auto;\n margin-bottom: 5px;\n}\n\n.notice-container > footer {\n  \n  background-image: url(/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png);\n \n margin-bottom: 5px;\n}\n.notice-container > header, .notice-container > article, .notice-container > footer {\n padding: 40px;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n.notice-container > header { padding-bottom: 10px; }\n.notice-container > article { padding-top:0; padding-bottom:0;}\n.notice-footer > footer { padding-top:0; }\n', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/header.png', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/body.png', '/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png', 'test template', 'a:10:{s:17:"header_text_align";s:4:"left";s:13:"header_repeat";s:9:"no-repeat";s:15:"header_position";s:12:"bottom right";s:11:"body_repeat";s:8:"repeat-y";s:13:"body_position";s:6:"center";s:13:"footer_repeat";s:0:"";s:15:"footer_position";s:0:"";s:17:"header_background";s:80:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/header/header.png";s:15:"body_background";s:76:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/body/body.png";s:17:"footer_background";s:78:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/backgrounds/footer/visa.png";}', '2013-06-26 12:28:33', '2013-03-30 07:15:25'),
+(32, '#content .notice-container > header {\r\n		background-repeat: repeat-y ;\r\n			\r\n		background-position: top right;\r\n		\r\n		background-color: #e16b6b;\r\n		\r\n		text-align: right;\r\n		\r\n}\r\n\r\n#content .notice-container > header > h1 {\r\n		color: #936c6c;\r\n	}\r\n\r\n#content .notice-container > article {\r\n\r\n		background-repeat: repeat;\r\n				background-position: top center;\r\n			background-color: #a22f2f;\r\n	}\r\n\r\n#content .notice-container > article > p {\r\n		color: #ffffff;\r\n	}\r\n\r\n#content .notice-container > footer {\r\n\r\n		background-repeat: repeat-x;\r\n				background-position: top center;\r\n			background-color: #ceb788;\r\n	\r\n}\r\n\r\n#content .notice-container > footer > p {\r\n			color: #0702a1;\r\n	}\r\n', NULL, NULL, NULL, 'test', 'a:16:{s:13:"template-name";s:4:"test";s:10:"title-type";s:5:"image";s:11:"title-color";s:7:"#936c6c";s:15:"head-text-align";s:5:"right";s:9:"hbg-color";s:7:"#e16b6b";s:13:"header-repeat";s:8:"repeat-y";s:15:"header-position";s:9:"top right";s:10:"body-color";s:7:"#ffffff";s:9:"bbg-color";s:7:"#a22f2f";s:11:"body-repeat";s:6:"repeat";s:13:"body-position";s:10:"top center";s:12:"footer-color";s:7:"#0702a1";s:9:"fbg-color";s:7:"#ceb788";s:13:"footer-repeat";s:8:"repeat-x";s:15:"footer-position";s:10:"top center";s:12:"header-image";s:80:"/uploads/employer/8af479d69c80b60de952bf2cc565772f/templates/header/IMAG0055.png";}', '2013-06-30 11:14:46', '2013-06-30 05:17:53'),
+(33, '#content .notice-container > header {\n		background-repeat:  ;\n			\n		background-position: top left;\n		\n		background-color: ;\n		\n		text-align: ;\n		\n}\n\n#content .notice-container > header > h1 {\n		color: ;\n	}\n\n#content .notice-container > article {\n\n		background-repeat: ;\n				background-position: top left;\n			background-color: ;\n	}\n\n#content .notice-container > article > p {\n		color: ;\n	}\n\n#content .notice-container > footer {\n\n		background-repeat: ;\n				background-position: top left;\n			background-color: ;\n	\n}\n\n#content .notice-container > footer > p {\n			color: ;\n	}\n', NULL, NULL, NULL, 'Default', 'a:15:{s:13:"template-name";s:7:"Default";s:10:"title-type";s:5:"title";s:11:"title-color";s:0:"";s:15:"head-text-align";s:0:"";s:9:"hbg-color";s:0:"";s:13:"header-repeat";s:0:"";s:15:"header-position";s:8:"top left";s:10:"body-color";s:0:"";s:9:"bbg-color";s:0:"";s:11:"body-repeat";s:0:"";s:13:"body-position";s:8:"top left";s:12:"footer-color";s:0:"";s:9:"fbg-color";s:0:"";s:13:"footer-repeat";s:0:"";s:15:"footer-position";s:8:"top left";}', '2013-06-30 11:58:33', '2013-06-30 11:58:33');
 
 -- --------------------------------------------------------
 
@@ -945,7 +956,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `cc_name` varchar(45) DEFAULT NULL,
   `cc_number` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`employer_id`,`job_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `transactions`
@@ -967,7 +978,14 @@ INSERT INTO `transactions` (`id`, `employer_id`, `job_id`, `payment_type`, `crea
 (14, 7, 24, 'PAYPAL', '2013-04-15 09:45:30', '2013-04-15 09:45:30', '0B1971012D051112S', 'expresscheckout', 'Completed', '0B1971012D051112S', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-04-15T09:45:30Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (15, 7, 25, 'EWAY- CREDIT CARD', NULL, NULL, NULL, NULL, 'APPROVED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, 'CSH-AU-000001', '312312123231', 'EWay w/ CVN (Test mode)', '21027', '00,Transaction Approved(Test CVN Gateway)', '1366019241', '0', '', '<ewaygateway>\r\n  <ewayCustomerID>87654321</ewayCustomerID>\r\n <ewayTotalAmount>1000</ewayTotalAmount>\r\n <ewayCustomerFirstName>231321231</ewayCustomerFirstName>\r\n  <ewayCustomerLastName>23112213</ewayCustomerLastName>\r\n <ewayCustomerEmail></ewayCustomerEmail>\r\n <ewayCustomerAddress>21321321123231213</ewayCustomerAddress>\r\n  <ewayCustomerPostcode></ewayCustomerPostcode>\r\n <ewayCustomerInvoiceDescription>312312123231</ewayCustomerInvoiceDescription>\r\n <ewayCustomerInvoiceRef>CSH-AU-000001</ewayCustomerInvoiceRef>\r\n  <ewayCardHoldersName>fdsaadfsfdsaf</ewayCardHoldersName>\r\n  <ewayCardNumber>4444XXXXXXXX1111</ewayCardNumber>\r\n <ewayCardExpiryMonth>10</ewayCardExpiryMonth>\r\n <ewayCardExpiryYear>31</ewayCardExpiryYear>\r\n \r\n  <ewayTrxnNumber>CSH-AU-000001</ewayTrxnNumber>\r\n  <ewayOption1></ewayOption1>\r\n <ewayOption2></ewayOption2>\r\n <ewayOption3></ewayOption3>\r\n</ewaygateway>', '<ewayResponse><ewayTrxnStatus>True</ewayTrxnStatus><ewayTrxnNumber>21027</ewayTrxnNumber><ewayTrxnReference>CSH-AU-000001</ewayTrxnReference><ewayTrxnOption1/><ewayTrxnOption2/><ewayTrxnOption3/><ewayAuthCode>123456</ewayAuthCode><ewayReturnAmount>1000</ewayReturnAmount><ewayTrxnError>00,Transaction Approved(Test CVN Gateway)</ewayTrxnError></ewayResponse>\r\n', '127.0.0.1', '', '231321231', '23112213', '21321321123231213', NULL, '213231213', '123231231', '', 'AZE', '312213213', NULL, 'fdsaadfsfdsaf', '4444XXXXXXXX1111'),
 (16, 7, 24, 'PAYPAL', '2013-05-12 11:34:02', '2013-05-12 11:34:02', '7BB159384T0200222', 'expresscheckout', 'Completed', '7BB159384T0200222', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-05-12T11:34:02Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 7, 25, 'PAYPAL', '2013-05-14 11:24:11', '2013-05-14 11:24:11', '0BT912218G920104Y', 'expresscheckout', 'Completed', '0BT912218G920104Y', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-05-14T11:24:12Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(17, 7, 25, 'PAYPAL', '2013-05-14 11:24:11', '2013-05-14 11:24:11', '0BT912218G920104Y', 'expresscheckout', 'Completed', '0BT912218G920104Y', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-05-14T11:24:12Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 7, 26, 'EWAY- CREDIT CARD', NULL, NULL, NULL, NULL, 'APPROVED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, 'CSH-AU-000001', 'fda', 'EWay w/ CVN (Test mode)', '20325', '00,Transaction Approved(Test CVN Gateway)', '1371888738', '0', '', '<ewaygateway>\r\n	<ewayCustomerID>87654321</ewayCustomerID>\r\n	<ewayTotalAmount>1000</ewayTotalAmount>\r\n	<ewayCustomerFirstName>fsdasdf</ewayCustomerFirstName>\r\n	<ewayCustomerLastName>sdaf</ewayCustomerLastName>\r\n	<ewayCustomerEmail></ewayCustomerEmail>\r\n	<ewayCustomerAddress>fasdfas</ewayCustomerAddress>\r\n	<ewayCustomerPostcode></ewayCustomerPostcode>\r\n	<ewayCustomerInvoiceDescription>fda</ewayCustomerInvoiceDescription>\r\n	<ewayCustomerInvoiceRef>CSH-AU-000001</ewayCustomerInvoiceRef>\r\n	<ewayCardHoldersName>fsafsad</ewayCardHoldersName>\r\n	<ewayCardNumber>4444XXXXXXXX1111</ewayCardNumber>\r\n	<ewayCardExpiryMonth>01</ewayCardExpiryMonth>\r\n	<ewayCardExpiryYear>15</ewayCardExpiryYear>\r\n	\r\n	<ewayTrxnNumber>CSH-AU-000001</ewayTrxnNumber>\r\n	<ewayOption1></ewayOption1>\r\n	<ewayOption2></ewayOption2>\r\n	<ewayOption3></ewayOption3>\r\n</ewaygateway>', '<ewayResponse><ewayTrxnStatus>True</ewayTrxnStatus><ewayTrxnNumber>20325</ewayTrxnNumber><ewayTrxnReference>CSH-AU-000001</ewayTrxnReference><ewayTrxnOption1/><ewayTrxnOption2/><ewayTrxnOption3/><ewayAuthCode>123456</ewayAuthCode><ewayReturnAmount>1000</ewayReturnAmount><ewayTrxnError>00,Transaction Approved(Test CVN Gateway)</ewayTrxnError></ewayResponse>\r\n', '127.0.0.1', '', 'fsdasdf', 'sdaf', 'fasdfas', NULL, 'fsad', 'fas', '', 'ABW', 'fas', NULL, 'fsafsad', '4444XXXXXXXX1111'),
+(19, 7, 27, 'EWAY- CREDIT CARD', NULL, NULL, NULL, NULL, 'APPROVED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, 'CSH-AU-000001', 'Web Developer (PHP)', 'EWay w/ CVN (Test mode)', '20241', '00,Transaction Approved(Test CVN Gateway)', '1371890014', '0', '', '<ewaygateway>\r\n	<ewayCustomerID>87654321</ewayCustomerID>\r\n	<ewayTotalAmount>1000</ewayTotalAmount>\r\n	<ewayCustomerFirstName>fafdfdsafsa</ewayCustomerFirstName>\r\n	<ewayCustomerLastName>fsafdsa</ewayCustomerLastName>\r\n	<ewayCustomerEmail></ewayCustomerEmail>\r\n	<ewayCustomerAddress>fsdadfsafdsfds</ewayCustomerAddress>\r\n	<ewayCustomerPostcode></ewayCustomerPostcode>\r\n	<ewayCustomerInvoiceDescription>Web Developer (PHP)</ewayCustomerInvoiceDescription>\r\n	<ewayCustomerInvoiceRef>CSH-AU-000001</ewayCustomerInvoiceRef>\r\n	<ewayCardHoldersName>safdsafas</ewayCardHoldersName>\r\n	<ewayCardNumber>4444XXXXXXXX1111</ewayCardNumber>\r\n	<ewayCardExpiryMonth>02</ewayCardExpiryMonth>\r\n	<ewayCardExpiryYear>15</ewayCardExpiryYear>\r\n	\r\n	<ewayTrxnNumber>CSH-AU-000001</ewayTrxnNumber>\r\n	<ewayOption1></ewayOption1>\r\n	<ewayOption2></ewayOption2>\r\n	<ewayOption3></ewayOption3>\r\n</ewaygateway>', '<ewayResponse><ewayTrxnStatus>True</ewayTrxnStatus><ewayTrxnNumber>20241</ewayTrxnNumber><ewayTrxnReference>CSH-AU-000001</ewayTrxnReference><ewayTrxnOption1/><ewayTrxnOption2/><ewayTrxnOption3/><ewayAuthCode>123456</ewayAuthCode><ewayReturnAmount>1000</ewayReturnAmount><ewayTrxnError>00,Transaction Approved(Test CVN Gateway)</ewayTrxnError></ewayResponse>\r\n', '127.0.0.1', '', 'fafdfdsafsa', 'fsafdsa', 'fsdadfsafdsfds', NULL, 'fddfs', 'fsdsdfa', '', 'CZE', 'fdaas', NULL, 'safdsafas', '4444XXXXXXXX1111'),
+(20, 7, 28, 'PAYPAL', '2013-06-22 12:49:20', '2013-06-22 12:49:20', '40N8164220789345W', 'expresscheckout', 'Completed', '40N8164220789345W', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-06-22T12:49:26Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 7, 29, 'EWAY- CREDIT CARD', NULL, NULL, NULL, NULL, 'APPROVED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, 'CSH-AU-000001', 'PHP WEB APPLICATION DEVELOPERS (PHP ONLY)', 'EWay w/ CVN (Test mode)', '10004', '00,Transaction Approved(Test CVN Gateway)', '1371906627', '0', '', '<ewaygateway>\r\n	<ewayCustomerID>87654321</ewayCustomerID>\r\n	<ewayTotalAmount>1000</ewayTotalAmount>\r\n	<ewayCustomerFirstName>123123</ewayCustomerFirstName>\r\n	<ewayCustomerLastName>123213</ewayCustomerLastName>\r\n	<ewayCustomerEmail></ewayCustomerEmail>\r\n	<ewayCustomerAddress>131313131</ewayCustomerAddress>\r\n	<ewayCustomerPostcode></ewayCustomerPostcode>\r\n	<ewayCustomerInvoiceDescription>PHP WEB APPLICATION DEVELOPERS (PHP ONLY)</ewayCustomerInvoiceDescription>\r\n	<ewayCustomerInvoiceRef>CSH-AU-000001</ewayCustomerInvoiceRef>\r\n	<ewayCardHoldersName>213131</ewayCardHoldersName>\r\n	<ewayCardNumber>4444XXXXXXXX1111</ewayCardNumber>\r\n	<ewayCardExpiryMonth>11</ewayCardExpiryMonth>\r\n	<ewayCardExpiryYear>28</ewayCardExpiryYear>\r\n	\r\n	<ewayTrxnNumber>CSH-AU-000001</ewayTrxnNumber>\r\n	<ewayOption1></ewayOption1>\r\n	<ewayOption2></ewayOption2>\r\n	<ewayOption3></ewayOption3>\r\n</ewaygateway>', '<ewayResponse><ewayTrxnStatus>True</ewayTrxnStatus><ewayTrxnNumber>10004</ewayTrxnNumber><ewayTrxnReference>CSH-AU-000001</ewayTrxnReference><ewayTrxnOption1/><ewayTrxnOption2/><ewayTrxnOption3/><ewayAuthCode>123456</ewayAuthCode><ewayReturnAmount>1000</ewayReturnAmount><ewayTrxnError>00,Transaction Approved(Test CVN Gateway)</ewayTrxnError></ewayResponse>\r\n', '127.0.0.1', '', '123123', '123213', '131313131', NULL, '32131', '3123', '', 'AIA', '12313', NULL, '213131', '4444XXXXXXXX1111'),
+(22, 14, 30, 'EWAY- CREDIT CARD', NULL, NULL, NULL, NULL, 'APPROVED', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, 'CSH-AU-000001', 'e Commerce .Net Developer | P/T Optional (Q3)', 'EWay w/ CVN (Test mode)', '20096', '00,Transaction Approved(Test CVN Gateway)', '1371979207', '0', '', '<ewaygateway>\r\n	<ewayCustomerID>87654321</ewayCustomerID>\r\n	<ewayTotalAmount>1000</ewayTotalAmount>\r\n	<ewayCustomerFirstName>Damien</ewayCustomerFirstName>\r\n	<ewayCustomerLastName>Koh</ewayCustomerLastName>\r\n	<ewayCustomerEmail></ewayCustomerEmail>\r\n	<ewayCustomerAddress>159 Hellawell Road123123123</ewayCustomerAddress>\r\n	<ewayCustomerPostcode></ewayCustomerPostcode>\r\n	<ewayCustomerInvoiceDescription>e Commerce .Net Developer | P/T Optional (Q3)</ewayCustomerInvoiceDescription>\r\n	<ewayCustomerInvoiceRef>CSH-AU-000001</ewayCustomerInvoiceRef>\r\n	<ewayCardHoldersName>fdafasfda</ewayCardHoldersName>\r\n	<ewayCardNumber>4444XXXXXXXX1111</ewayCardNumber>\r\n	<ewayCardExpiryMonth>01</ewayCardExpiryMonth>\r\n	<ewayCardExpiryYear>25</ewayCardExpiryYear>\r\n	\r\n	<ewayTrxnNumber>CSH-AU-000001</ewayTrxnNumber>\r\n	<ewayOption1></ewayOption1>\r\n	<ewayOption2></ewayOption2>\r\n	<ewayOption3></ewayOption3>\r\n</ewaygateway>', '<ewayResponse><ewayTrxnStatus>True</ewayTrxnStatus><ewayTrxnNumber>20096</ewayTrxnNumber><ewayTrxnReference>CSH-AU-000001</ewayTrxnReference><ewayTrxnOption1/><ewayTrxnOption2/><ewayTrxnOption3/><ewayAuthCode>123456</ewayAuthCode><ewayReturnAmount>1000</ewayReturnAmount><ewayTrxnError>00,Transaction Approved(Test CVN Gateway)</ewayTrxnError></ewayResponse>\r\n', '127.0.0.1', '', 'Damien', 'Koh', '159 Hellawell Road123123123', NULL, 'Sunnybank Hills', 'Queensland', '', 'AUS', '12312313', NULL, 'fdafasfda', '4444XXXXXXXX1111'),
+(23, 7, 31, 'PAYPAL', '2013-06-24 12:15:04', '2013-06-24 12:15:04', '3Y598132RA517273V', 'expresscheckout', 'Completed', '3Y598132RA517273V', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-06-24T12:15:05Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 7, 32, 'PAYPAL', '2013-06-24 12:32:29', '2013-06-24 12:32:29', '89D08810Y9119902F', 'expresscheckout', 'Completed', '89D08810Y9119902F', 'AUD', 'None', '0.64', '0.00', '0', 'Success', '2013-06-24T12:32:31Z', NULL, 10, 'AUD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -984,31 +1002,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   `salt` varchar(100) DEFAULT NULL,
   `role_id` int(11) NOT NULL,
   `guid` varchar(255) NOT NULL,
+  `reset_pwd` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_user_roles_idx` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `old_email`, `password`, `salt`, `role_id`, `guid`, `created_at`, `updated_at`) VALUES
-(11, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5e258a2748.32488991', '2013-01-27 02:41:35', '2013-03-23 07:47:49'),
-(12, 'zlkoh', 'zlkoh.damien@gmail.com', '', '$2a$08$w2//UxVPMsYgytVFPJ4/y.0am/o46vvuHuPgAna7PfMIlbKfuhzmu', NULL, 1, '', '2013-03-13 11:35:25', '2013-03-13 11:35:25'),
-(13, 'zlkoh123', 'zlkoh.damien@gmail.com', '', '$2a$08$rScAfv/SAG4aYd4p0jbd/eHdatP8qeGiLWCxotysDj1oy/ZThRloS', NULL, 1, '', '2013-03-13 11:56:05', '2013-03-13 11:56:05'),
-(14, 'zlkoh1231', 'zlkoh.damien@gmail.com', '', '$2a$08$f4r6d0NgD.5LynHTWBtlnOCp918N6uGoTGove3VbMyaoZGTVhz5v.', NULL, 1, '', '2013-03-13 11:57:02', '2013-03-13 11:57:02'),
-(15, 'zlkoh12333', 'zlkoh.damien@gmail.com', '', '$2a$08$kb.4UifZyVkJMWHwGjMvHOia52UB19eQUmhZwsinMjYAM8xRN0f4m', NULL, 1, '', '2013-03-13 12:38:14', '2013-03-13 12:38:14'),
-(16, 'tester1', 'zlkoh.damien@gmail.com', '', '$2a$08$y3pTiIQv0UhHS2lnrdVzJeQ3DWFGiKjhPQ29j7aBu5TuFvajlV58u', NULL, 1, '', '2013-03-13 12:38:56', '2013-03-13 12:38:56'),
-(17, 'damienkoh', 'zlkoh.damien@gmail.com', '', '$2a$08$ZP4jGsppIbUyBsK0CkNK7uGnizHBYoqeN3ENwEmRDIjMtxOiWs0mS', NULL, 2, '', '2013-03-20 11:53:23', '2013-03-20 11:53:23'),
-(18, 'vlim', 'victorlim86@gmail.com', '', '$2a$08$U2tGYjF2a2RBVVcxWnFyQOlWLtHIMuwPBwhKGR3z1PYW0izSSge2m', NULL, 2, '', '2013-03-23 07:54:43', '2013-03-23 07:54:43'),
-(19, 'victor', 'victor@test.com', '', '$2a$08$aVJNcGh3akd0eW9zbXJ4buNPfK7SUty4KOq14cYr39GyDW94NGjI2', NULL, 1, '', '2013-03-23 08:11:41', '2013-03-23 08:11:41'),
-(20, 'dkoh', 'damien@test.com', '', '$2a$08$VjBtV3c4aVdxNm1aSmNMQuIipDB8OlRLM5138lqpHLNl/wumKEsvi', NULL, 2, '', '2013-03-28 06:26:33', '2013-03-28 06:26:33'),
-(21, 'jess', 'Jesslyn21@gmail.com', '', '$2a$08$IRD6XiXtJd23zn.G0mu.FOC0MVjYqJoKnkbPIXuvyrmdXghLyNiKm', NULL, 2, '', '2013-03-30 13:18:16', '2013-03-30 13:18:16'),
-(22, 'jess123', 'Jesslyn21@gmail.com', '', '$2a$08$uL50rg1801FGnbBYTtcc/upl2.K5e2NZcJxIp74NzcCfFMEk6cSsW', NULL, 2, '', '2013-03-30 13:18:55', '2013-03-30 13:18:55'),
-(23, 'test', 'test@test.com', '', '$2a$08$LpQ4OkTN.JeZlAnvsTgpLOLZzQbo5NXFn5CvgcM.zpEcrlEZq9ZeG', NULL, 2, '', '2013-03-30 22:35:30', '2013-03-30 22:35:30');
+INSERT INTO `users` (`id`, `username`, `email`, `old_email`, `password`, `salt`, `role_id`, `guid`, `reset_pwd`, `created_at`, `updated_at`) VALUES
+(11, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51c68a1305b4d7.41565261', NULL, '2013-01-27 02:41:35', '2013-06-23 05:39:31'),
+(17, 'damienkoh', 'zlkoh.damien@gmail.com', '', '$2a$08$DcfnYiNofkT0SdZ6DuMJHOi3zJ82VYo00L..3xbCVCM.Q.KaNy9Ii', NULL, 2, '', NULL, '2013-03-20 11:53:23', '2013-06-08 14:21:51'),
+(18, 'vlim', 'victorlim86@gmail.com', '', '$2a$08$U2tGYjF2a2RBVVcxWnFyQOlWLtHIMuwPBwhKGR3z1PYW0izSSge2m', NULL, 2, '', NULL, '2013-03-23 07:54:43', '2013-03-23 07:54:43'),
+(19, 'victor', 'victor@test.com', '', '$2a$08$aVJNcGh3akd0eW9zbXJ4buNPfK7SUty4KOq14cYr39GyDW94NGjI2', NULL, 1, '', NULL, '2013-03-23 08:11:41', '2013-03-23 08:11:41'),
+(20, 'dkoh', 'damien@test.com', '', '$2a$08$VjBtV3c4aVdxNm1aSmNMQuIipDB8OlRLM5138lqpHLNl/wumKEsvi', NULL, 2, '', NULL, '2013-03-28 06:26:33', '2013-03-28 06:26:33'),
+(23, 'test', 'test@test.com', '', '$2a$08$LpQ4OkTN.JeZlAnvsTgpLOLZzQbo5NXFn5CvgcM.zpEcrlEZq9ZeG', NULL, 2, '', NULL, '2013-03-30 22:35:30', '2013-03-30 22:35:30'),
+(24, 'zlkoh@hotmail.com', 'zlkoh@hotmail.com', '', '$2a$08$V5lssB6m7AM7Ui9FKO8ya.U2aFokHJUr.cbGLei4sCKjPvKp0iL26', NULL, 2, '', NULL, '2013-06-18 11:07:08', '2013-06-18 11:07:08'),
+(26, 'jesslyn21@gmail.com', 'jesslyn21@gmail.com', '', '$2a$08$VvN0Vwz.EQmR1H4exaEIKO8L6xQ57p1vW4uJNHkdLFkd.44ko5Fyu', NULL, 1, '', NULL, '2013-06-23 09:17:41', '2013-06-23 09:17:41');
 
 -- --------------------------------------------------------
 
@@ -1028,7 +1042,7 @@ CREATE TABLE IF NOT EXISTS `user_account_backup` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `user_account_backup`
@@ -1048,7 +1062,13 @@ INSERT INTO `user_account_backup` (`id`, `username`, `email`, `old_email`, `pass
 (11, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5ceb9ac117.87124960', '2013-03-23 07:42:35', '2013-03-23 07:42:35'),
 (12, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5df0cd1ee9.24903516', '2013-03-23 07:46:56', '2013-03-23 07:46:56'),
 (13, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5dfd8249d7.79292265', '2013-03-23 07:47:09', '2013-03-23 07:47:09'),
-(14, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5e258a2748.32488991', '2013-03-23 07:47:49', '2013-03-23 07:47:49');
+(14, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$mx.KzWgcFyFdl8OJ3HEhHuA71TeUkxO7XsJHasphjRF9rFuKCiTg2', NULL, 1, '514d5e258a2748.32488991', '2013-03-23 07:47:49', '2013-03-23 07:47:49'),
+(15, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$KejLr31sNq6aWVJgzAVNYub0DMFi2s8jfB.UyP5nEPlwZZal0h6b2', NULL, 1, '51b7000b185dd9.98331869', '2013-06-11 10:46:35', '2013-06-11 10:46:35'),
+(16, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51b7008f2c04f0.56753343', '2013-06-11 10:48:47', '2013-06-11 10:48:47'),
+(17, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51b71b09cd2116.63841132', '2013-06-11 12:41:45', '2013-06-11 12:41:45'),
+(18, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51c0519de06357.88934791', '2013-06-18 12:25:01', '2013-06-18 12:25:01'),
+(19, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51c056ad94c125.70036245', '2013-06-18 12:46:37', '2013-06-18 12:46:37'),
+(20, 'damienk', 'zlkoh.damien@gmail.com', 'zlkoh.damien@gmail.com', '$2a$08$FHxZr7lXAeQXg9zikl6Eyu8/eZ0PgFp73C8gHFwJNgeOOORN1lLBy', NULL, 1, '51c68a1305b4d7.41565261', '2013-06-23 05:39:31', '2013-06-23 05:39:31');
 
 -- --------------------------------------------------------
 
