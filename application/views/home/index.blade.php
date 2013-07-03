@@ -3,7 +3,7 @@
 @section('content')
 
 
-
+<div class="row">
 <section id="job-search" class="span12 white-bg drop-shadow-black">
 
 	<h2 class="container-header">Start searching now!<a id="emp-reg" href="/employer/register"><i class="icon-hand-right"></i></a></h2>
@@ -112,7 +112,7 @@
 		<button type="submit" id="search" class="btn btn-primary">Search</button>
 	</form>
 </section>
-
+</div>
 
 <!--    <ul id="feature-jobs">
 		   

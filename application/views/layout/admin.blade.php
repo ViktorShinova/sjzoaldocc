@@ -31,7 +31,7 @@
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
 
-	<body>
+	<body class="employer">
 
 		@include ('layout.nav-bar')
 
@@ -39,9 +39,8 @@
 			<div class="row">
 			<div class="span2">
 				<ul>
-					<li><a href='/admin/page/'>Pages</a></li>
-					<li><a href='/admin/blurb/'>Blurbs</a></li>
-					<li><a href='/admin/price/'>Price</a></li>
+					<li><a href='/admin/page/list'>Pages</a></li>
+					<li><a href='/admin/price/list'>Price</a></li>
 				</ul>
 			</div>
 			@yield('content')
@@ -51,7 +50,16 @@
 		
 		@include('layout.footer')
 
-		@include ('layout.footer-scripts')
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+		<script src="/js/vendor/ckeditor/ckeditor.js"></script>
+		<script src="/js/plugins.js"></script>
+		@yield('scripts')
+		<script src="/js/admin.js"></script>
+		<script>
+		@yield('page-scripts')
+		</script>
 	</body>
 
 </html>

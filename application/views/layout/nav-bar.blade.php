@@ -10,10 +10,10 @@
 					<div class="nav-collapse collapse">
 						<ul class="nav">
 							<li class="active"><a href="/">Home</a></li>
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Pricing</a></li>
-							<li><a href="#">Career Advice</a></li>
-							<li><a href="/employer">Employers</a></li>
+							<li><a href="/page/about_us/">About Us</a></li>
+							<li><a href="/page/pricing/">Pricing</a></li>
+							<li><a href="/page/career_advice/">Career Advice</a></li>
+							<li><a href="/employer/">Employers</a></li>
 						</ul>
 						<ul class="nav pull-right">
 							@if ( !Auth::check() ) 

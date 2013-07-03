@@ -9,45 +9,48 @@
 		<div class="row links-container">
 				<ul>
 					<li class="span3">
-						<h3>Advertisers</h3>
+						<h3>Employers</h3>
 						<ul>
-							<li><a href="#">Create an Account</a></li>
-							<li><a href="#">Advertise a Job</a></li>
+							<li><a href="/employer/register/">Create an Account</a></li>
+							<li><a href="/employer/post/create/">Advertise a Job</a></li>
 						</ul>
 					</li>
 					<li class="span3">
 						<h3>Job Seekers</h3>
 						<ul>
-							<li><a href="#">Search Jobs</a></li>
-							<li><a href="#">Create an Account</a></li>
-							<li><a href="#">Upload Resume</a></li>
+							<li><a href="/">Search Jobs</a></li>
+							<li><a href="/register/">Create an Account</a></li>
 						</ul>
 					</li>
 					<li class="span3">
 						<h3>About Us</h3>
 						<ul>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Privacy Statement</a></li>
-							<li><a href="#">Terms &amp; Conditions</a></li>
-							<li><a href="#">Site Map</a></li>
-							<li><a href="#">Contact Us</a></li>
+							<li><a href="/page/faq/">FAQ</a></li>
+							<li><a href="/page/privacy/">Privacy Statement</a></li>
+							<li><a href="/page/toc/">Terms &amp; Conditions</a></li>
+							<li><a href="/page/contact_us/">Contact Us</a></li>
 						</ul>
 					</li>
 					<li class="span3">
 						<h3>More</h3>
 						<ul>
-							<li><a href="#">Pricing</a></li>
-							<li><a href="#">Career Advice</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">Tips</a></li>
+							<li><a href="/page/pricing/">Pricing</a></li>
+							<li><a href="/page/career_advice/">Career Advice</a></li>
+							<li><a href="/page/resume/">Resume</a></li>
+							<li><a href="/page/coverletter/">Coverletter</a></li>
 						</ul>
 					</li>
 				</ul>			
 		</div>
+		
+	</div>
+</footer>
+<div class="credit">
+	<div class="container">
 		<div class="row">
 			<div class="span12">
 				<p id="copyright"> Copyright &copy; CareersHire 2013. All rights reserved.</p>
 			</div>
 		</div>
 	</div>
-</footer>
+</div>

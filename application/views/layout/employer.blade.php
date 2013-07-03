@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<!-- /#content -->
-		@include('layout.footer')
+		
 
 		@include ('layout.emp-scripts')
 	</body>

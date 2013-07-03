@@ -22,11 +22,7 @@
 #home #top-feature h1 strong {
   color: #fbc544;
   font-family: 'Lato', sans-serif;
-  font-weight: 400;
-}
-#home #top-feature span {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 #home #top-feature #ads {
   float: right;

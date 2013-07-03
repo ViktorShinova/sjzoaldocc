@@ -2,6 +2,6 @@
 
 @section('content')
 
-{{$html}}
+{{$content}}
 
 @endsection
