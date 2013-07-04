@@ -1,5 +1,5 @@
 @layout('layout.level2')
-
+@section('page-class')applicant@endsection
 @section('content')
 
 <div class="row applicant">
@@ -26,37 +26,6 @@
 				Your profile has been saved!
 			</div>
 			@endif
-			<div id="profile-photo">
-				<div id="current-photo">
-					<div id="photo">
-
-						<img id="profilepic" src="{{ $applicant->profilepic }}" alt="{{$applicant->name}}"><!-- class="preview" factor=1 -->
-
-						<input type="hidden" id="x" name="x" />
-						<input type="hidden" id="y" name="y" />
-						<input type="hidden" id="w" name="w" />
-						<input type="hidden" id="h" name="h" />
-
-						<div id="photo-edit-btn">
-							<a href="#edit-photo" role="button" data-toggle="modal" id="upload-profile-pic-link">Change</a> | <a id="p1" href="javascript:void(0);" class="remove">Remove</a>
-						</div>
-					</div>
-					<small>(MAX. 2MB | JPG, PNG, GIF only)</small>
-					<input type="file" id="upload-profile-pic" name="upload-profile-pic"/>
-
-
-				</div>
-
-				<!-- Modal Edit Photo -->
-				<div id="edit-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-body">
-						<img id="profilepic-preview" src="#"  alt="Crop"/>
-						<button class="btn btn-primary pull-right" id="crop-profile-pic-btn" type="button" data-dismiss="modal" aria-hidden="true">Crop</button>
-						<button class="btn pull-right" data-dismiss="modal" aria-hidden="true" data-controls-modal="create-group">Cancle</button>
-					</div>
-				</div>
-			</div>
-
 			<ol>
 				<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', $applicant->first_name, array('class' => 'validate[required]')) }}</li>
 				<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', $applicant->last_name, array('class' => 'validate[required]')) }}</li>

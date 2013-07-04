@@ -53,4 +53,16 @@ class User extends Eloquent {
 		return false;
 		
 	}
+	
+	public function employer() {
+		
+		return $this->has_one('Employer');
+		
+	}
+	
+	public function applicant() {
+		
+		return $this->has_one('Applicant');
+		
+	}
 }

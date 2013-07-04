@@ -6217,18 +6217,77 @@ h1.span12 {
 #search-page #content {
   margin-top: 20px;
 }
-.wrapper {
-  padding: 10px;
+#content .wrapper {
   box-sizing: border-box;
   border-radius: 9px;
   margin-top: 21px;
 }
-.wrapper h2 {
+#content .wrapper h2 {
   color: #055285 !important;
+}
+#content .wrapper .pricing > div {
+  height: 250px ;
+  padding: 20px;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#content .wrapper .pricing > div h4 {
+  color: #055285;
+  font-size: 24px;
+  text-align: left;
+}
+#content .wrapper .pricing > div p {
+  font-size: 11px;
+}
+#content .wrapper .pricing > div .startprice {
+  color: #336696;
+  float: right;
+  font-weight: bold;
+  font-family: Arial;
+  padding-right: 35px;
+  position: relative;
+  top: -5px;
+}
+#content .wrapper .pricing > div .startcents {
+  float: right;
+  padding: 5px 0 0 0;
+  color: #b84a00;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative;
+  left: 130px;
+  top: 8px;
+}
+#content .wrapper .pricing > div .startamt {
+  float: right;
+  position: relative;
+  color: #b84a00;
+  font-size: 24px;
+  font-family: arial;
+  font-weight: bold;
+  padding: 4px 0 0 0;
+  top: 11px;
+  left: 50px;
+}
+#content .wrapper .pricing > div .btn {
+  clear: right;
+  bottom: 0;
+}
+#content .wrapper .pricing > div .bottom {
+  margin-top: 105px;
+  text-align: center;
+  clear: both;
 }
 /* =APPLICANT ACCOUNT
 =================================================================== */
 
+.applicant {
+  background: none;
+}
 .applicant #profile-basic input[type=text] {
   width: 245px;
 }
@@ -6282,10 +6341,9 @@ h1.span12 {
 .applicant .accordion-heading .accordion-toggle {
   font-family: 'Helvetica', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 20px;
-  font-weight: bold;
-  padding: 10px 10px;
+  padding: 6px 10px;
   color: #555555;
   text-shadow: 0 1px 0 white;
   display: block;
@@ -6298,6 +6356,7 @@ h1.span12 {
   margin: 0;
 }
 .applicant .accordion-heading .accordion-toggle h4 {
+  font-size: 12px;
   margin: 0;
 }
 .applicant .accordion-inner {
@@ -6509,7 +6568,7 @@ body #top-search-filter .span12.affix-top {
 }
 body #pull-down {
   background: white;
-  border: 5px solid #fbc544;
+  border: 5px solid #01a5e3;
   border-top: 0;
   bottom: -40px;
   cursor: pointer;
@@ -6526,7 +6585,7 @@ body #pull-down {
 body #side-feature,
 body #side-feature-mobile {
   clear: both;
-  background: #fbc544;
+  background: #055285;
   padding: 5px 0 5px 0;
   -webkit-box-shadow: 0px 5px 15px -4px #222222;
   -moz-box-shadow: 0px 5px 15px -4px #222222;
@@ -6833,12 +6892,11 @@ form input {
 .form h4 {
   font-family: 'Helvetica', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 20px;
-  padding: 10px 10px;
+  padding: 6px 10px;
   color: white;
   display: block;
-  border: 1px solid #cacaca;
   border-bottom: 0 none;
   background-color: #f09216;
   background-repeat: repeat-x;
@@ -6864,6 +6922,10 @@ form input {
   /* IE8+ */
 
   margin: 0;
+}
+.applicant .validate-form h4,
+.applicant .form h4 {
+  background: #055285;
 }
 .validate-form .pad,
 .form .pad {

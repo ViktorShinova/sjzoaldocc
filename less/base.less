@@ -206,12 +206,76 @@ h1.span12 { margin-bottom: 21px;}
 	}
 }
 
-.wrapper {
-	padding: 10px;
+#content .wrapper {
 	box-sizing: border-box;
 	border-radius: 9px;
 	margin-top: 21px;
 	h2 { color: @dark-blue !important;}
+	
+	.pricing {
+		
+		> div { 
+			height: 250px ;	
+			padding: 20px;
+			position: relative;
+			.box-sizing(border-box);
+			h4 { 
+				color: @dark-blue;
+				font-size: 24px;
+				text-align: left;
+				
+			}
+			
+			p { 
+				font-size: 11px;
+				
+			}
+			
+			.startprice {
+				color: #336696;
+				float: right;
+				font-weight: bold;
+				font-family: Arial;
+				padding-right: 35px;
+				position: relative;
+				top: -5px;
+			}
+			
+			.startcents {
+				float: right;
+				padding: 5px 0 0 0;
+				color: #B84A00;
+				font-family: arial;
+				font-weight: bold;
+				font-size: 18px;
+				position: relative;
+				left: 130px;
+				top: 8px;
+			}
+			.startamt {
+				float: right;
+				position: relative;
+				color: #B84A00;
+				font-size: 24px;
+				font-family: arial;
+				font-weight: bold;
+				padding: 4px 0 0 0;
+				top: 11px;
+				left: 50px;
+			}
+			
+			.btn {
+				clear: right;
+				bottom: 0;
+			}
+			.bottom {
+				margin-top: 105px;
+				text-align: center;
+				clear: both;
+			}
+			
+		}
+	}
 	
 }
 

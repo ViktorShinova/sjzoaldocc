@@ -1,24 +1,23 @@
 /* =FORMS STYLES 
 =================================================================== */
 .modal { padding : 0 !important;}
-
 .validate-form , .form {
 	h4 {
 		.lato-normal();
-		font-size: 16px;
+		font-size: 12px;
 		line-height: 20px;
-		
-		padding: 10px 10px;
+		padding: 6px 10px;
 		color: white;
-		
 		display: block;
-		border: 1px solid #CACACA;
 		border-bottom: 0 none;
-		
+		//background: @dark-blue;
 		#gradient .vertical( @light-orange, @dark-orange);
 		
 		margin: 0;
 		
+		.applicant & {
+			background: @dark-blue;
+		}
 	}
 
 	.pad {
