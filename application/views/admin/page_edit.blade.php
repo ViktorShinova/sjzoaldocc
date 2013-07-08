@@ -10,7 +10,7 @@
 		<input type="text" placeholder="Title" name="title" value="{{$page->title}}">
 		<label>Content</label>
 		<textarea name="content" class="ckeditor">{{$page->content}}</textarea><br/>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-warning">Submit</button>
 	
 	</form>
 </div>

@@ -10,16 +10,19 @@
 @import 'mixins/all';
 
 #home {
-	background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
+	//background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
 	#top-feature{
 		margin-top: 64px;
 		text-align: center;
 		h1 { 
-			color: #fff;
-			.lato-light(); 
-			strong {
-				color: @light-orange;
-				.lato-light();
+			font-size: 58px;
+			color: @dark-brown;
+			.lato-semibold();
+			margin-bottom: 21px;
+			.careers { color: @red-brown;}
+			.hire {
+				color: @dark-orange;
+				
 			}
 		}
 		
@@ -30,7 +33,7 @@
 		}
 	}
 	#job-search {
-		border: 5px solid @blue;
+		border: 5px solid @dark-brown;
 		border-top: 0;
 		padding-bottom: 10px;
 		input.input-xlarge { width: 256px;}
@@ -39,15 +42,6 @@
 			float: right;
 			margin-right: 119px;
 		}
-
-		#job-sub-category {
-			margin-left: 20px;
-		}
-
-		#job-sub-location {
-			margin-left: 20px;
-		}
-
 
 	}
 	#content {

@@ -22,8 +22,8 @@
 
 				</div>
 			</div>
-			<a id='back-btn' class="btn btn-primary"><i class="icon-backward icon-white"></i> Back </a>
-			<button class="btn btn-primary"><i class="icon-envelope icon-white"></i> Send </button>
+			<a id='back-btn' class="btn btn-warning"><i class="icon-backward icon-white"></i> Back </a>
+			<button class="btn btn-warning"><i class="icon-envelope icon-white"></i> Send </button>
 		</div>
 	</div>
 </form>

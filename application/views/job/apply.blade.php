@@ -138,7 +138,7 @@
 					<textarea type="text" name="write-coverletter" id="write-coverletter"></textarea>
 				</li>
 				@if(!$is_applied && !$is_employer)
-				<li><button class="btn btn-primary" type="submit" id="apply-job-btn">Apply</button></li>
+				<li><button class="btn btn-warning" type="submit" id="apply-job-btn">Apply</button></li>
 				@endif
 			</ol>
 

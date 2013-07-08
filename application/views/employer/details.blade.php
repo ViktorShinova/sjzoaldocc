@@ -100,7 +100,7 @@
 	
 		<h4>Email</h4>
 		
-		<div class="pad">
+		<div class="pad white-bg">
 		<p>Carreerhire offers you a simple and efficient way to notify your applicants of the outcome of their application. Please enter a success and unsuccessful message and Careershire will, on your behalf, notify each and every applicants above.</p>
 		<br/>
 		<ul>
@@ -125,7 +125,7 @@
 				
 			</li>
 		</ul>
-		<button type='submit' class='btn btn-primary'><i class='icon-envelope icon-white'> </i>Next</button>
+		<button type='submit' class='btn btn-warning'><i class='icon-envelope icon-white'> </i>Next</button>
 		</div>
 		
 	</form>

@@ -95,7 +95,7 @@
 			<li>{{ Form::label('postal', 'Postal'); echo Form::text('postal', $employer->postal, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('country', 'Country'); echo Form::select('country', $countries, $employer->country ) }}</li>
 			<li>{{ Form::label('company-size', 'Number of employees'); echo Form::select('company-size', array('1-10' => '1 - 10', '10-20' => '10 - 20', '20-30' => '20 - 30', '30-50' => '30 - 50', '50-100' => '50 - 100', '100-200' => '100 - 200', '>200' => '> 200') ,$employer->company_size, array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::submit("Update", array('class' => 'btn btn-primary pull-right')); }} </li>		
+			<li>{{ Form::submit("Update", array('class' => 'btn btn-warning pull-right')); }} </li>		
 		</ul>
 	</div>
     <div class="clearfix"></div>

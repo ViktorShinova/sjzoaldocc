@@ -38,7 +38,7 @@
 	</div>
 	</section>
 
-	<a class="btn btn-primary print-button pull-right" href="#" id="print" ><i class="icon-print icon-white"></i> Print</a>	
+	<a class="btn btn-warning print-button pull-right" href="#" id="print" ><i class="icon-print icon-white"></i> Print</a>	
 	
 </div>
 

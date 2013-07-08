@@ -297,7 +297,7 @@
 
 
 			<!-- /.form-content -->
-			<input class="btn-primary btn-large" id="submit-template" type="submit" value="Save Template" />
+			<input class="btn-warning btn-large" id="submit-template" type="submit" value="Save Template" />
 			<a href="/employer/template/list" class="btn btn-danger btn-large">Cancel Edit</a>
 			{{ Form::close() }}
 

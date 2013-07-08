@@ -179,7 +179,7 @@
 						</select>
 					</li>
 				</ul>
-				<input type="submit" class="btn btn-primary clearfix" value="Pay Now"/>
+				<input type="submit" class="btn btn-warning clearfix" value="Pay Now"/>
 			</form>
 		</div>
 

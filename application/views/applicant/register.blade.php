@@ -45,7 +45,7 @@
 	<div class="clearfix"></div>	
 </div>
 
-{{ Form::submit("Register", array('class' => 'btn btn-primary pull-right')); }} 
+{{ Form::submit("Register", array('class' => 'btn btn-warning pull-right')); }} 
 
 
 {{ Form::close(); }}

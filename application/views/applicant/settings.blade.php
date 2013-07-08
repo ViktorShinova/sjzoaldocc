@@ -249,7 +249,7 @@
 
 				<li><hr></li>
 
-				<li><button class="btn btn-primary" type="submit">Save</button></li>
+				<li><button class="btn btn-warning" type="submit">Save</button></li>
 			</ol>
 		</div>
 			{{ Form::close(); }}

@@ -66,10 +66,10 @@ class Formatter {
 		$pow = floor(($bytes ? log($bytes) : 0) / log(1024));
 		$pow = min($pow, count($units) - 1);
 
-		//$bytes /= pow(1024, $pow);
-		$bytes /= (1 << (10 * $pow));
+		$bytes /= pow(1024, $pow);
+		//$bytes /= (1 << (1024 * $pow));
 
-		return round($bytes, $precision) . ' ' . $units[$pow];
+		return round($bytes, $precision) . ' ' . $units[$pow+1];
 	}
 
 	public static function format_filetype($file) {

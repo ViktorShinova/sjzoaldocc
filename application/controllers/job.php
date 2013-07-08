@@ -136,6 +136,7 @@ class Job_Controller extends Base_Controller {
 		}
 
 		$select = array(
+			
 			'jobs.id',
 			'jobs.title',
 			'jobs.salary_range',
@@ -148,8 +149,10 @@ class Job_Controller extends Base_Controller {
 			'sub_locations.name as sub_location_name',
 			'job_category.name as category_name',
 			'job_category.id as category_id',
+			'employers.id as employer_id',
 			$relevancy,
 		);
+		
 		$select = array_filter($select);
 
 		$jobs = DB::table('jobs')
@@ -186,6 +189,10 @@ class Job_Controller extends Base_Controller {
 
 							if (isset($params['keywords']) && !empty($params['keywords'])) {
 								$query->raw_where("MATCH (jobs.title, jobs.description, jobs.summary) AGAINST ('" . $params['keywords'] . "' IN NATURAL LANGUAGE MODE)");
+							}
+							
+							if( isset($params['employer-id']) && !empty($params['employer-id'])) {
+								$query->where('jobs.employer_id', '=', $params['employer-id']);
 							}
 						})
 				->where(function ($query) use ($params) {
@@ -288,7 +295,6 @@ class Job_Controller extends Base_Controller {
 						->where('jobs.category_id', '=', $job->category_id)
 						->where('jobs.location_id', '=', $job->location_id)
 						->where('jobs.sub_category_id', '=', $job->sub_category_id)
-						->where('jobs.work_type', '=', $job->work_type)
 						->where('jobs.id', '!=', $job->id)
 						->where('jobs.status', '=', '1')
 						->where('jobs.end_at', '>', date('Y:m:d H:i:s'))

@@ -11,11 +11,15 @@
 //@import 'partial/colour-code.less';
 
 body {
-	background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
+	background:#efebe2;
+	//background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
 }
 @import 'shadow';
 
 a {
+	-webkit-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
+	-moz-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
+	transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
 	&:hover { text-decoration: none; }
 }
 .hidden { display:none; }
@@ -54,7 +58,7 @@ button, input[type=submit], .container-header, .btn {
 
 h1.span12 { margin-bottom: 21px;}
 .container-header {
-	background: @blue;
+	background: @dark-brown;
 	border: 0;
 	border-bottom: 1px solid #e5e5e5;
 	clear: both;
@@ -116,7 +120,7 @@ h1.span12 { margin-bottom: 21px;}
 			margin-bottom: 10px;
 		}
 
-		.btn-primary {
+		.btn-warning {
 			margin-top: 12px;
 		}
 	}*/

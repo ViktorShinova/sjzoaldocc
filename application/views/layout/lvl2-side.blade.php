@@ -99,7 +99,7 @@
 
 								</div>
 							</div>
-							<button type="submit" id="search"class="btn btn-primary">Search</button>
+							<button type="submit" id="search"class="btn btn-warning">Search</button>
 						</form>
 						<span id="pull-down" class="drop-shadow-black">Search Filter</span>
 					</div>
@@ -117,19 +117,24 @@
 					<div id="side-feature"  data-spy="affix" data-offset-top="575" data-offset-bottom="403">
 						<ul id="feature-listing">
 							<li>
-								<a href="#">How to write a resume.</a>
+								<a href="/pages/how_to_resume/">How to write a resume.</a>
 							</li>
 							<li>
-								<a href="#">How to write a cover letter.</a>
+								<a href="/pages/how_to_coverletter/">How to write a cover letter.</a>
 							</li>
 							<li>
-								<a href="#">What are employers looking for?</a>
+								<a href="/pages/employers_expectations/">What are employers looking for?</a>
 							</li>
 							<li>
-								<a href="#">Preparing for an interview</a>
+								<a href="/pages/prepare_for_interview/">Preparing for an interview</a>
 							</li>
 							<li>
-								<a href="/applicant/shortlists">View all shortlist</a>
+								
+								@if( $is_applicant) 
+								<a href="/applicant/shortlists">View my shortlists</a>
+								@else
+								<a data-target="#login-modal" role="button" href="#" data-toggle="modal">View my shortlists</a>
+								@endif
 							</li>
 						</ul>
 					</div>
@@ -187,7 +192,7 @@
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary">Sign in</button>
+					<button type="submit" class="btn btn-warning">Sign in</button>
 				</div>
 			</div>
 		</form>

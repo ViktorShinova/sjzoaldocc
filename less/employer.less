@@ -1,12 +1,11 @@
 .employer {
 	
 	h3 {
-		.lato-light();
-		color: white;
+		.lato-semibold();
 	}
 	
 	.wrapper {
-		.border-radius(6px);
+		
 		border: 1px solid #ccc;
 		padding: 10px 20px;
 		
@@ -28,7 +27,7 @@
 		margin-bottom: 21px;
 		
 		.table-header-wrapper {
-			.button-background();
+			background: @dark-brown;
 			height: 34px;
 			position: relative;
 			width: 100%;
@@ -41,7 +40,7 @@
 				margin: 0 0 0 4px;
 			}
 			.table-toolbar {
-				background: @button-blue;
+				background: @pastel-brown;
 				border: 0;
 				float: right;
 				
@@ -49,6 +48,8 @@
 					display: block;
 					color: #fff;
 					padding: 3px 5px 3px 5px;
+
+					&:hover { color: @light-orange;}
 					i {
 						font-size: 14px;
 						margin-right: 5px;
@@ -64,7 +65,7 @@
 				color: #fff;
 				th {
 					.lato-light();
-					background: @blue;
+					background: @pastel-brown;
 					padding: 4px;
 					font-size: 14px;
 					text-align: left;
@@ -85,18 +86,25 @@
 						color: #fff;
 					}
 				}
-				&:hover { background: @light-orange; }
+				&:hover { 
+					background: @green; 
+					a { 
+						color: #fff;
+						text-decoration: none;
+					}
+				}
 				
 				td {
 					font-size: 12px;
 					.lato-normal();
 					padding: 6px 10px;
 					border: 1px solid #ddd;
-					a { 
-						color: @button-blue; 
-						
-						i {
-							font-size: 14px;
+					
+					i { 
+						font-size: 15px;
+
+						&:hover {
+							text-decoration: none;
 						}
 					}
 					
@@ -227,20 +235,20 @@
 			}
 			.icon { text-align:center;}
 			th {
-				#gradient > .vertical ( #fafafa, #eaeaea );
+				background: @dark-brown;
+				color: #fff;
 			}
 			i { display: none;}
 			&.selected {
 				td { color: white; }
-				#gradient > .vertical ( #258DC8, #30a9d3 );
+				background: @pastel-brown;
 				i { display: block;}
 				a { color: white; }
 			}
 			
 			&:hover{
-				td { color: #333;}
-				#gradient > .vertical ( #ffffff, #cccccc );
-				a { color: @blue; }
+				td { color: #fff;}
+				background: @pastel-brown;
 			}
 		}
 	}//post-templates
@@ -276,7 +284,7 @@
 			}
 
 			&:hover { 
-				.button-background();
+				background: @pastel-brown;
 				border: 1px solid  @button-blue;
 				border-bottom: 0;
 				a { color: white; }
@@ -304,7 +312,7 @@
 				margin-bottom: 21px;
 			}
 			.tab {
-				.border-radius(5px);
+				
 				border: solid 1px #ccc;
 				display: block;
 				float: left;
@@ -396,7 +404,7 @@
 	   
 	   
 	   .nav li {
-		   &:first-child { a { .border-radius(4px 0 0 4px); } }
+		  
 			> ul {
 				background: #f3f3f4;
 				border: 1px solid #d4d4d4;
@@ -476,10 +484,7 @@
 	 > a { 
 		color: #fff;
 		text-decoration: none;
-	   .button-background();
-	   -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-		   -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
-				box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+	 	background: @pastel-brown;
 	 }
  
  

@@ -111,7 +111,7 @@
 			</table>
 		</div>
 	</div>
-	{{ Form::submit("Next Step" , array('class' => 'btn btn-primary clearfix')); }} 
+	{{ Form::submit("Next Step" , array('class' => 'btn btn-warning clearfix')); }} 
 </form>
 
 

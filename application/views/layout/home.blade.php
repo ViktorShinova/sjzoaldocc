@@ -32,7 +32,7 @@
 		@include ('layout.nav-bar')
 
 		<div id="top-feature" class="container">
-			<h1>Welcome to <strong>Careersh<span class-"blue">i</span>re</strong></h1>
+			<h1>Welcome to <span class="careers">Careers</span><span class="hire">Hire</span></h1>
 			<span>Worry about your future? Carreershire can help!</span>
 		</div>
 		<!-- BRAND LOGO -->

@@ -28,9 +28,9 @@
 		@if( $is_applicant )
 
 		@if ( in_array ($job->id, $applicant_shortlists )  )
-		<span class="shortlist-tag active"><i class="icon-star"></i><i class="arrow"></i></span>
+		<span class="shortlist-tag active"></span>
 		@else 
-		<span class="shortlist-tag"><i class="icon-star"></i><i class="arrow"></i></span>
+		<span class="shortlist-tag"></span>
 		@endif
 
 
@@ -48,14 +48,14 @@
 
 				@endif
 				<h2><a href="/job/article/{{$job->slug}}"><?php //echo preg_replace($tokens, $replacePattern, $job->title)  ?>{{$job->title}}</a></h2>
-				<p><a class="category" href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></p>
+				<p><a title="Find more from this category." class="category" href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></p>
 				<p>
 					{{$job->summary}}
 				</p>
 			</article>
 
 			<aside class="additional-info">
-				<h4 class="company">{{ $job->company }}</h4>
+				<h4 class="company"><a href="/job/search?employer-id={{$job->employer_id}}" title="Find more from the same employer.">{{ $job->company }}</a></h4>
 				<span class="location">{{ $job->location_name }}, {{ $job->sub_location_name }}</span>
 				<span class="salary">{{ $job->salary_range }}</span>
 				<span class="date">
@@ -64,18 +64,18 @@
 			</aside>
 		</div>
 		<div id="job-controls" class="pull-right">
-			<a href="/job/article/{{$job->slug}}" class="btn btn-primary"><i class="icon-eye-open"></i> View</a>
+			<a href="/job/article/{{$job->slug}}" class="btn btn-warning">View<i class="icon-chevron-sign-right"></i></a>
 			@if($is_applicant)
 
 				@if ( in_array ($job->id, $applicant_shortlists )  )
-				<button data-job-id="{{$job->id}}" class="btn shortlist-btn active"><i class="icon-star"></i> Shortlist</button>
+				<button data-job-id="{{$job->id}}" class="btn shortlist-btn active">Shortlisted<i class="icon-bookmark"></i></button>
 				@else
-				<button data-job-id="{{$job->id}}" class="btn shortlist-btn "><i class="icon-star"></i> Shortlist</button>
+				<button data-job-id="{{$job->id}}" class="btn shortlist-btn ">Shortlist<i class="icon-bookmark"></i></button>
 				@endif
 
 
 			@else
-			<a class="btn" data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-star"></i> Shortlist</a>
+			<a class="btn" data-target="#login-modal" role="button" href="#" data-toggle="modal">Shortlist<i class="icon-bookmark"></i></a>
 			@endif
 		</div>
 		<div class="clearfix"></div>

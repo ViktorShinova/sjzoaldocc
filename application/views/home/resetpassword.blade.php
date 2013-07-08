@@ -15,7 +15,7 @@
 			<p>Your password has been reset. Please check your email.</p>
 		</div>
 		@endif
-			{{ Form::label('email', 'Email Address'); echo Form::text('email', '' , array('class' => 'validate[required]')); }} {{ Form::submit("Reset Password" , array('class' => 'btn btn-primary')); }}
+			{{ Form::label('email', 'Email Address'); echo Form::text('email', '' , array('class' => 'validate[required]')); }} {{ Form::submit("Reset Password" , array('class' => 'btn btn-warning')); }}
 		</div>
 		{{ Form::close(); }}
 	</div>

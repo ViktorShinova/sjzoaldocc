@@ -16,7 +16,7 @@
 			<ol>
 				<li>{{ Form::label('username', 'Username'); echo Form::text('username', Input::old('username') , array('class' => 'validate[required]')); }}</li>
 				<li>{{ Form::label('password', 'Password'); echo Form::password('password' ,  array('class' => 'validate[required]')); }}</li>
-				<li>{{ Form::submit("Login" , array('class' => 'btn btn-primary pull-right')); }}</li>
+				<li>{{ Form::submit("Login" , array('class' => 'btn btn-warning pull-right')); }}</li>
 				<li><a class="reset-pwd" href="/resetpassword">Can't access your account? Reset your password</a></li>
 			</ol>
 			<div class='clearfix'></div>

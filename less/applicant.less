@@ -3,7 +3,11 @@
 	
 
 .applicant {
-	background: none;
+	
+	#add-employment,#add-qualification {
+		width: 150px;
+	}
+
 	#profile-basic {
 		input[type=text] { width: 245px;}
 		select { width: 259px;}
@@ -11,56 +15,7 @@
 	#profile-slug {
 		input[type=text] { width: 104px;}
 	}
-	#profile-photo {
-
-		float: right;
-
-		img {
-			max-width: inherit !important;
-		}
-
-		#current-photo {
-			float: left;
-
-			#photo { 
-
-				position: relative;
-				.size(150px, 150px);
-				overflow: hidden;
-
-				img {
-					.size(150px, 150px);
-					overflow: hidden;
-				}
-
-				#photo-edit-btn {
-					position: absolute;
-					bottom: 0;
-					background: url(/img/opac-bg.png);
-					width: 150px;
-					text-align: center;
-					color: #fff;
-					a { color: #fff; }
-				}	
-			}
-
-			#upload-profile-pic { display: none; }
-
-			p {
-				margin-top: 3px;
-				line-height: 18px;
-			}			
-		}
-
-		#edit-photo {
-
-			#crop-profile-pic-btn {
-				display: none;
-
-			}
-
-		}
-	}
+	
 	.accordion-heading .accordion-toggle {
 		.font-normal();
 		font-size: 12px;

@@ -132,8 +132,8 @@ var jSite = {
 				is_active = true;
 			}
 			var btn = $(this),
-					shortlist_tag = $(this).parent().siblings('.shortlist-tag'),
-					article_id = $(this).data('job-id');
+			shortlist_tags = $(this).parent().siblings('.shortlist-tag'),
+			article_id = $(this).data('job-id');
 
 			if (!is_active) {
 				$.ajax({
@@ -143,8 +143,17 @@ var jSite = {
 
 						_data = $.parseJSON(data);
 						if (_data.success) {
+							
+							if( btn.hasClass('apply')) {
+								btn.html('<i class="icon-bookmark"></i> Shortlisted');
+							} else {
+								btn.html('Shortlisted<i class="icon-bookmark"></i>');
+							}
+							
+							
 							btn.addClass('active');
-							shortlist_tag.addClass('active');
+							shortlist_tags.addClass('active');
+							
 
 						} else {
 							console.log(data);
@@ -160,8 +169,17 @@ var jSite = {
 					success: function(data) {
 						_data = $.parseJSON(data);
 						if (_data.success) {
+							
+								
+							if( btn.hasClass('apply')) {
+								btn.html('<i class="icon-bookmark"></i> Shortlist it!');
+							} else {
+								btn.html('Shortlist<i class="icon-bookmark"></i>');
+							}
+							
+							
 							btn.removeClass('active');
-							shortlist_tag.removeClass('active');
+							shortlist_tags.removeClass('active');
 						} else {
 							console.log(data);
 							alert(data.message);

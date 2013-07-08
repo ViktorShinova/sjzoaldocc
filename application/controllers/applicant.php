@@ -764,6 +764,37 @@ class Applicant_Controller extends Base_Controller {
 	}
 
 	public function get_shortlists() {
-		return View::make('applicant.shortlist');
+		
+		$applicant_id = Session::get('applicant_id');
+		
+		$shortlists = DB::table('shortlists')
+						->join('applicants', 'shortlists.applicant_id', '=','applicants.id')
+						->join('jobs', 'shortlists.job_id', '=', 'jobs.id')
+						->join('employers', 'jobs.employer_id', '=', 'employers.id')
+						->join('job_category', 'jobs.category_id', '=', 'job_category.id')
+						->join('locations', 'jobs.location_id', '=', 'locations.id')
+						->join('sub_locations', 'jobs.sub_location_id', '=', 'sub_locations.id')
+						->where('shortlists.applicant_id', '=', $applicant_id)
+						->where('jobs.end_at', '>', date('Y:m:d H:i:s'))
+						->paginate(10, array(
+							
+							'jobs.id',
+							'jobs.title',
+							'jobs.salary_range',
+							'jobs.summary',
+							'jobs.slug',
+							'employers.company',
+							'employers.logo_path as logo',
+							'jobs.created_at',
+							'locations.name as location_name',
+							'sub_locations.name as sub_location_name',
+							'job_category.name as category_name',
+							'job_category.id as category_id',
+							'employers.id as employer_id',
+						));
+				//Shortlists::with('job')->where('applicant_id','=',$applicant_id)->paginate(10);
+		
+		return View::make('applicant.shortlist')
+				->with('shortlists', $shortlists);
 	}
 }

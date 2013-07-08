@@ -33,7 +33,7 @@
 					<br/><em>Please enter new email address on a new line or separate them using ';'.</em>
 				</div>
 				<div class='controls'>
-					<button type="submit" class="btn btn-primary">Send</button>
+					<button type="submit" class="btn btn-warning">Send</button>
 				</div>
 			</div>
 			

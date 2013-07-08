@@ -18,16 +18,19 @@
 			//min-height: 202px;
 
 			h2 {
-				color: @dark-blue;
+				color: @orange;
 				.lato-semibold();
 				font-size: 18px;
 				line-height: 24px;
 				
 				margin: 0 ;
 				a {
-					color: @dark-blue;
+					color:  @dark-brown;
+					&:hover {color: @light-orange;}
 				}
 			}
+
+
 			
 			
 			li {
@@ -56,11 +59,11 @@
 		img { height: 40px;}
 		.shortlist-tag {
 			display: none;
-			background: @light-orange;
-			height: 40px;
-			width: 36px;
+			background: url(/img/icons/bookmark.png);
+			height: 51px;
+			width: 48px;
 			position: absolute;
-			top: -5px;
+			top: -10px;
 			right: 5px;
 			.icon-star {
 				font-size: 25px;
@@ -69,19 +72,7 @@
 				top: 7px;
 				left: 6px;
 			}
-			.arrow {
-				width: 0; 
-				height: 0; 
-				border-left: 18px solid transparent;
-				border-right: 18px solid transparent;
-				border-top: 5px solid @light-orange;
-				position: absolute;
-				bottom: -5px;
-
-
 			
-			}
-
 			//transition
 			-webkit-transition: display ease-in 0.1s;
 			-moz-transition: display ease-in 0.1s;
@@ -101,15 +92,11 @@
 			.box-sizing(border-box);
 
 			float: left;
-			width: 73%;
+			width: 70%;
 			padding-right: 15px;
-			h2 a {
-				&:hover { 
-					color: @light-orange;
-				}
-			}
+			
 			p > a {
-				color: @blue;
+				
 				&:hover { 
 					color: @light-orange;
 				}
@@ -117,10 +104,10 @@
 		}
 
 		.additional-info {
-			width: 27%;
+			width: 30%;
 			float: right;
 			h4 {
-				color: @dark-blue;
+				color: @dark-brown;
 				.lato-normal();
 				margin-top: 0;
 			}
@@ -145,7 +132,9 @@
 
 			.btn-group, a {
 				margin-top: 10px;
+
 			}
+
 		}
 
 		.dropdown-menu {
@@ -154,7 +143,25 @@
 			}
 		}
 		#job-controls {
-			width: 27%;
+			width: 30%;
+			a.btn {
+				width: 65px;
+				i { 
+					font-size: 16px;
+					margin-left: 6px;
+					position:relative;
+					top: 1px;
+				}
+			}
+			.shortlist-btn {
+				width: 100px;
+				i { 
+					font-size: 16px;
+					margin-left: 6px;
+					position:relative;
+					top: 1px;
+				}
+			}
 		}
 	}
 
@@ -189,12 +196,12 @@
 				> .icon {
 					float: right;
 					display: block;
-					.size(22px, 22px);
+					.size(15px, 20px);
 					
 					margin-right: 5px;
 				}	
-				> .doc, > .docx { background-image: url('/img/icon-doc.png'); }
-				> .pdf 			{ background-image: url('/img/icon-pdf.png'); }							
+				> .doc, > .docx { background-image: url('/img/icons/doc.png'); }
+				> .pdf 			{ background-image: url('/img/icons/pdf.png'); }							
 			}
 
 			span {
@@ -216,8 +223,7 @@
 
 	#feature-listing, #feature-listing-mobile {
 		background: @light-orange;
-		border-left: 1px solid #e4e4e4;
-		border-right: 1px solid #e4e4e4;
+		
 		margin-top: 10px;
 		margin-left: 0;
 		li {
@@ -231,11 +237,11 @@
 				padding: 12px 14px 12px;
 				line-height: 21px;
 				position: relative;
-				
+				i { color: @dark-brown;}
 				&.active {
-					color: white;
-					.button-background();
-					i { color: yellow;}
+					color: @light-orange;
+					background: @dark-green;
+					i { color: @light-orange;}
 				}
 			}
 		}
@@ -243,7 +249,14 @@
 		
 	}
 }
-
+@media (min-width: 1200px ) {
+	#content #job-listing {
+		#job-controls {
+			a.btn { width: 80px;}
+			.shortlist-btn { width: 104px;}
+		}
+	}
+}
 @media (min-width: 768px) and (max-width: 979px) { 
 	#content #job-listing {
 		.additional-info {
@@ -258,8 +271,10 @@
 
 		#job-controls {
 			float: none;
-			width: 181px;
+			width: 203px;
 			margin: 0 auto;
+			a.btn { width: 76px;}
+			.shortlist-btn { width: 100px;}
 		}
 	}
 	
@@ -271,10 +286,6 @@
 			width: 100%;
 			text-align: center;
 			margin-bottom: 21px;
-
-			img {
-				width: 100px;
-			}
 		}
 		.additional-info {
 			width: 100%;
@@ -288,8 +299,10 @@
 
 		#job-controls {
 			float: none;
-			width: 181px;
+			width: 203px;
 			margin: 0 auto;
+			a.btn { width: 76px;}
+			.shortlist-btn { width: 100px;}
 		}
 	} 
 }
@@ -301,10 +314,6 @@
 			width: 100%;
 			text-align: center;
 			margin-bottom: 21px;
-
-			img {
-				width: 100px;
-			}
 		}
 		.additional-info {
 			width: 100%;
@@ -317,8 +326,12 @@
 
 		#job-controls {
 			float: none;
-			width: 181px;
+			width: 200px;
 			margin: 0 auto;
+			width: 203px;
+			margin: 0 auto;
+			a.btn { width: 76px;}
+			.shortlist-btn { width: 100px;}
 		}
 	}
 }

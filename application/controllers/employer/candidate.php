@@ -26,17 +26,6 @@ class Employer_Candidate_Controller extends Base_Controller {
 		$sort = $_GET['sort'];
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

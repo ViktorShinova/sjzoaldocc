@@ -87,7 +87,7 @@
 					<th width="20%">Name</th>
 					<th>Preview</th>
 					<th>Created At</th>
-					<th width="10%"></th>
+					<th width="10%">Selected</th>
 				</tr>
 				@foreach ($templates as $template)
 				<tr data-id="{{ $template->id }}" class="template-item">
@@ -104,7 +104,7 @@
 		</div>
 	</div>
 
-	{{ Form::submit("Next" , array('class' => 'btn btn-primary clearfix pull-right')); }} 
+	{{ Form::submit("Next" , array('class' => 'btn btn-warning clearfix pull-right')); }} 
 </form>
 
 @endsection

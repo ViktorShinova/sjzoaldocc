@@ -52,9 +52,9 @@
 					This employer has used a custom application form. Please ensure that you have popup enabled in order to view. Alternatively, please hold down <strong>Ctrl</strong> (Windows) or <strong>Command</strong> (Mac) and click on "Apply Now". 
 				</div>
 
-				<a id="btn-apply" href="{{$job1->apply}}" class="btn btn-primary btn-large" rel="popup">Apply for this job</a>
+				<a id="btn-apply" href="{{$job1->apply}}" class="btn btn-warning btn-large" rel="popup">Apply Now</a>
 				@else 
-				<a id="btn-apply" href="/job/apply/{{$job1->slug}}" class="btn btn-primary btn-large">Apply for this job</a>
+				<a id="btn-apply" href="/job/apply/{{$job1->slug}}" class="btn btn-warning btn-large">Apply Now</a>
 				@endif
 				@endif
 
@@ -66,12 +66,12 @@
 				<li>
 					@if($is_applicant)
 					@if ( in_array ($job1->id, $applicant_shortlists )  )
-					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn active"><i class="icon-star"></i> Shortlist it!</a>
+					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn active apply"><i class="icon-bookmark"></i> Shortlisted</a>
 					@else 
-					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn"><i class="icon-star"></i> Shortlist it!</a>
+					<a data-job-id="{{$job1->id}}" href="#" class="shortlist-btn apply"><i class="icon-bookmark"></i> Shortlist it!</a>
 					@endif
 					@else
-					<a data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-star"></i>Shortlist it!</a>
+					<a data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-bookmark"></i>Shortlist it!</a>
 					@endif
 					
 				</li>
@@ -88,17 +88,17 @@
 					<a href="#"><i class="icon-twitter"></i>Share it on Twitter</a>
 				</li>
 				<li>
-					<a href="/applicant/shortlists"><i class="icon-star"></i>View all shortlist</a>
+					<a href="/applicant/shortlists"><i class="icon-star"></i>View my shortlists</a>
 				</li>
 			</ul>
 		</div>
 
 
-		@if (!empty($jobs))
+		@if (!empty($related_jobs))
 		<div class="white-bg drop-shadow-black">
 			<h3 class="container-header">Other related jobs</h3>
 			<ul id="related-jobs">
-				@foreach($jobs as $_job)
+				@foreach($related_jobs as $_job)
 				<li>
 					<strong><a href="/job/article/{{$_job->id}}">{{$_job->title}}</a></strong>
 					<p>
@@ -140,7 +140,7 @@
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" class="btn btn-primary">Sign in</button>
+				<button type="submit" class="btn btn-warning">Sign in</button>
 			</div>
 		</div>
 	</form>

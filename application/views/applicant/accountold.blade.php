@@ -25,7 +25,7 @@
 		<div class="input-prepend input-append">
 			<span class="add-on"><a id="slug-link" href="/applicant/profile/{{ $applicant->slug }}" target="_blank">{{$host}}/applicant/profile/</a></span>
 			<input class="span2" id="appendedPrependedInput" type="text" placeholder="<slug>" maxlength="12" name="slug" value="{{$applicant->slug}}">
-			<button class="btn btn-primary" type="button" id="save-slug">Save</button>
+			<button class="btn btn-warning" type="button" id="save-slug">Save</button>
 		</div>
 	</span>
 
@@ -59,7 +59,7 @@
 			<div id="edit-photo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-body">
 					<img id="profilepic-preview" src=""  />
-					<button class="btn btn-primary pull-right" id="crop-profile-pic-btn" type="button" data-dismiss="modal" aria-hidden="true">Crop</button>
+					<button class="btn btn-warning pull-right" id="crop-profile-pic-btn" type="button" data-dismiss="modal" aria-hidden="true">Crop</button>
 					<button class="btn pull-right" data-dismiss="modal" aria-hidden="true" data-controls-modal="create-group">Cancle</button>
 				</div>
 			</div>
@@ -70,7 +70,7 @@
 			<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', $applicant->last_name, array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('location', 'Preferred Location'); echo Form::select('location', $locations, $applicant->preferred_location) }}</li>
 			<li>{{ Form::label('category', 'Preferred Job'); echo Form::select('category', $job_categories, $applicant->preferred_job) }}</li>
-			<li>{{ Form::submit("Save", array('class' => 'btn btn-primary')); }} </li>	
+			<li>{{ Form::submit("Save", array('class' => 'btn btn-warning')); }} </li>	
 		</ol>
 		<input type="hidden" name="form-type" value="basic-profile">
 	</div>
@@ -186,7 +186,7 @@
 				</ol>
 			@endif
 		</div>
-		{{ Form::submit("Save", array('class' => 'btn btn-primary pull-right')); }} 
+		{{ Form::submit("Save", array('class' => 'btn btn-warning pull-right')); }} 
 		<button class="add-qualification btn pull-right" type="button"><i class="icon-plus icon-white"></i> Additional Qualification</button>
 		<input type="hidden" name="form-type" value="qualification">
 	</div>
@@ -322,7 +322,7 @@
 				</ol>
 			@endif			
 		</div>
-		{{ Form::submit("Save", array('class' => 'btn btn-primary pull-right')); }} 
+		{{ Form::submit("Save", array('class' => 'btn btn-warning pull-right')); }} 
 		<button class="add-workhistory btn pull-right" type="button"><i class="icon-plus icon-white"></i> Additional Work History</button>
 		<input type="hidden" name="form-type" value="workhistory">	
 	</div>
@@ -367,7 +367,7 @@
 			@endforeach
 		</ul>
 
-		<button id="add-resume" class="btn btn-primary pull-right" type="button"><i class="icon-plus icon-white"></i> Resume</button>
+		<button id="add-resume" class="btn btn-warning pull-right" type="button"><i class="icon-plus icon-white"></i> Resume</button>
 		<input type="file" id="resume-file" name="resume-file"/>
 	</div>
 	{{ Form::close(); }}
@@ -391,7 +391,7 @@
 			@endforeach
 		</ul>
 
-		<button id="add-coverletter" class="btn btn-primary pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
+		<button id="add-coverletter" class="btn btn-warning pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
 		<input type="file" id="coverletter-file" name="coverletter-file"/>
 	</div>
 	{{ Form::close(); }}	

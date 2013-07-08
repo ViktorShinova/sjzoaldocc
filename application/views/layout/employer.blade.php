@@ -56,9 +56,9 @@
 								</ul>
 							
 							</li>
-			<!--			<li class='page-employer-email'><i class="icon-envelope icon-white"></i> <a href="/employer/email/">Email templates</a></li>-->
+			
 							<li class='page-employer-invoice'><a href="/employer/invoices/">Transactions</a></li>
-							<li class='page-employer-search'><a href="/employer/candidate/search">Hunt for Candidates</a></li>
+							
 							<li class='page-employer-profile'><a href="/employer/profile/">My Account</a></li>
 						</ul>
 					</div>

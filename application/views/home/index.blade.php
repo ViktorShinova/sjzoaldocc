@@ -109,7 +109,7 @@
 
 			</div>
 		</div>
-		<button type="submit" id="search" class="btn btn-primary">Search</button>
+		<button type="submit" id="search" class="btn btn-warning">Search</button>
 	</form>
 </section>
 </div>
@@ -140,7 +140,7 @@
                     </div>
 
                     <footer>
-                            <a href="/job/article/{{ $job->id }}" class="btn btn-primary">View</a>
+                            <a href="/job/article/{{ $job->id }}" class="btn btn-warning">View</a>
                             <div class="btn-group">
                                 <button class="btn"><i class="icon-star"></i> Shortlist</button>
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">
