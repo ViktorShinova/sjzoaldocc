@@ -144,7 +144,7 @@ class Employer_Profile_Controller extends Base_Controller {
 				Session::flash('success', true);
 				//send mail to inform the user that his account has change
 
-				$mail = new PHPMailer();
+				$mail = new CHMailer();
 				$mail->IsHTML(true);
 				$mail->FromName = COMPANY_NAME;
 				$mail->From = ACCOUNT_EMAIL;

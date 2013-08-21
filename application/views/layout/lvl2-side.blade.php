@@ -28,84 +28,85 @@
 
 	<body id="search-page">
 
-		@include ('layout.nav-bar')
-		<div class="featurette">
-			<div class="container" id="top-search-filter">
-				<div class="row">
+		@include ('layout.header')
+		
+		<div class="container">
+			<div class="row">
+				<section id="job-search" class="span12">
+					<form class="row form-horizontal" method="get" action="/job/search">
+						<div class="span6">
 
-					<div id="search-wrapper" class="span12 white-bg drop-shadow-black" data-spy="affix" data-offset-top="440">
-						<h2 class="container-header">Can't find what you are searching for?</h2>
-						<form class="row form-horizontal" method="get" action="/job/search">
-							<div class="span6">
-
-								<div class="control-group">
-									<label class="control-label" for="keywords">Keywords</label>
-									<div class="controls">
-										{{ Form::text( 'keywords', $keywords, array( 'class'=> 'span2', 'placeholder' => 'Keywords', 'id' => 'keywords', 'class' => 'input-xlarge' ) ) }}
-									</div>
+							<div class="control-group">
+								<label class="control-label" for="job-keywords">Keywords:</label>
+								<div class="controls">
+									{{ Form::text( 'keywords', $keywords, array( 'class'=> 'span2', 'placeholder' => 'Keywords', 'id' => 'keywords', 'class' => 'input-xlarge' ) ) }}
 								</div>
-								<div class="control-group">
+							</div>
+							<div class="control-group">
 
-									<label class="control-label">Classification</label>
-									<div class="controls">
+								<label for="job-category" class="control-label">Industry:</label>
+								<div class="controls">
 
-										{{ Form::select('job-category', $categories, $selected_category , array('class' => 'input-xlarge', 'id' =>'job-category')); }}
+									{{ Form::select('job-category', $categories, $selected_category , array('class' => 'input-xlarge', 'id' =>'job-category')); }}
+
+								</div>
+							</div>
+							<div class="control-group">
+								<label for="job-sub-category" class="control-label">Position:</label>
+								<div class="controls">
+									
+									{{ Form::select('job-sub-category', $sub_categories, $selected_sub_category, array('class' => 'input-xlarge', 'id' =>'job-sub-category')); }}
+
+								</div>
+							</div>
+							<div class="control-group"> 
+								<label class="control-label">Salary Range:</label>
+								<div class="controls">
+
+									<div class="input-prepend">
+										<span class="add-on">$</span>
+										{{ Form::select('min-salary', $min_salary , $selected_min_salary, array('class' => 'span1', 'id'=>'min-salary')); }}
 
 									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Sub Classification</label>
-									<div class="controls">
+									<div class="input-prepend">
+										<span class="add-on">$</span>
+										{{ Form::select('max-salary', $max_salary , $selected_max_salary, array('class' => 'span1', 'id'=>'max-salary')); }}
+									</div>
+									<div class="input-prepend">
 										
-										{{ Form::select('job-sub-category', array("" => "Choose a sub category"), $selected_sub_category, array('class' => 'input-xlarge', 'id' =>'job-sub-category')); }}
+										{{ Form::select('salary-type', array('annually' => 'Annually', 'hourly' => 'Hourly'), $selected_salary_type, array('class' => 'span1', 'id'=>'salary-type')); }}
 
 									</div>
-								</div>
-								<div class="control-group"> 
-									<label class="control-label">Salary Range <br/>(Annual Rate)</label>
-									<div class="controls">
-
-										<div class="input-prepend">
-											<span class="add-on">$</span>
-											{{ Form::select('min-salary', $min_salary , $selected_min_salary, array('class' => 'span1', 'id'=>'min-salary')); }}
-
-										</div>
-										<div class="input-prepend">
-											<span class="add-on">$</span>
-											{{ Form::select('max-salary', $max_salary , $selected_max_salary, array('class' => 'span1', 'id'=>'max-salary')); }}
-										</div>
-
-									</div>
+									
 								</div>
 							</div>
-							<div class="span6">
-								<div class="control-group">
-									<label class="control-label">Location</label>
-									<div class="controls">
-										{{ Form::select('job-location', $locations,  $selected_location, array('class' => 'input-xlarge', 'id'=>'job-location')); }}
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Sub Location</label>
-									<div class="controls">
-										{{ Form::select('job-sub-location', array("" => "Choose a sub location"), $selected_sub_location, array('class' => 'input-xlarge', 'id'=>'job-sub-location')); }}
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Work Type</label>
-									<div class="controls">
-										{{ Form::select('work-type[]', $work_types, $selected_work_types, array('class' => 'input-xlarge', 'multiple' => 'multiple')); }}
-									</div>
-
+						</div>
+						<div class="span6">
+							<div class="control-group">
+								<label for="job-location" class="control-label">Location:</label>
+								<div class="controls">
+									{{ Form::select('job-location', $locations,  $selected_location, array('class' => 'input-xlarge', 'id'=>'job-location')); }}
 								</div>
 							</div>
-							<button type="submit" id="search"class="btn btn-warning">Search</button>
-						</form>
-						<span id="pull-down" class="drop-shadow-black">Search Filter</span>
-					</div>
-				</div>
+							<div class="control-group">
+								<label for="job-sub-location" class="control-label">Refined Location:</label>
+								<div class="controls">
+									{{ Form::select('job-sub-location', $sub_locations, $selected_sub_location, array('class' => 'input-xlarge', 'id'=>'job-sub-location')); }}
+								</div>
+							</div>
+							<div class="control-group">
+								<label for="work-type" class="control-label">Work Type:</label>
+								<div class="controls">
+									{{ Form::select('work-type[]', $work_types, $selected_work_types, array('class' => 'input-xlarge', 'multiple' => 'multiple', 'id' => 'work-type')); }}
+								</div>
+
+							</div>
+						</div>
+						<button type="submit" id="search"class="btn btn-primary btn-large">Search</button>
+					</form>
+					
+				</section>
 			</div>
-
 		</div>
 		<div id="content" class="container">
 			<form class="row"  method="get" action="/job/search">
@@ -114,7 +115,7 @@
 					@yield('content')
 				</div>
 				<aside class="span3 hidden-phone hidden-tablet">
-					<div id="side-feature"  data-spy="affix" data-offset-top="575" data-offset-bottom="403">
+					<div id="side-feature"  data-spy="affix" data-offset-top="575">
 						<ul id="feature-listing">
 							<li>
 								<a href="/pages/how_to_resume/">How to write a resume.</a>
@@ -168,12 +169,13 @@
 		<div class="modal-header">
 
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Please Login to Shortlist</h3>
+			<h3 id="myModalLabel">Please Login</h3>
+			<p>Do more by signing up with us!<p>
 		</div>
 		@if ( $is_employer ) 
 		<div class="modal-body">
 			
-			You are currently logged in as an employer. The shortlist function is only to available to applicants.
+			You are currently logged in as an employer. The function requested is only to available to applicants.
 			
 		</div>
 		@else 

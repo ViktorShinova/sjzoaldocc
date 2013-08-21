@@ -3,7 +3,7 @@
 @section('custom_styles')
 
 @if(isset($job1->template)) 
-<?php $data = unserialize($job1->template->data);  ?>
+<?php $data = unserialize($job1->template->data); ?>
 <style>
 	{{ $job1->template->css }}
 </style>
@@ -16,13 +16,13 @@
 
 	<section class="notice-container span8 white-bg drop-shadow-black">
 		<header class="notice-header">
-			
+
 			@if( isset($data['header-image']) && $data['title-type'] == 'image' ) 
 			<img src="{{$data['header-image']}}" />
 			@else
 			<h1>{{ $job1->title }}</h1>
 			@endif
-			
+
 		</header>
 		<article class="notice-body">
 			{{ $job1->description }}
@@ -73,22 +73,51 @@
 					@else
 					<a data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-bookmark"></i>Shortlist it!</a>
 					@endif
-					
+
 				</li>
 				<li>
-					<a href="/job/mail/{{$job1->id}}" rel="popup"><i class="icon-envelope"></i>Email this job</a>
+					<a href="/job/mail/{{$job1->id}}" rel="popup-small"><i class="icon-envelope-alt"></i>Email this job</a>
 				</li>
 				<li>
-					<a href="#"><i class="icon-print"></i>Print this job</a>
+					<a href="#">
+
+						<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id))
+									return;
+								js = d.createElement(s);
+								js.id = id;
+								js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=455254324505582";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));</script>
+						<div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+
+
+					</a>
 				</li>
 				<li>
-					<a href="#"><i class="icon-facebook-sign"></i>Share it on Facebook</a>
+					<a href="https://twitter.com/share" class="popup"><i class="icon-twitter"></i>Share it on Twitter!
+
+						<script>!function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+								if (!d.getElementById(id)) {
+									js = d.createElement(s);
+									js.id = id;
+									js.src = p + '://platform.twitter.com/widgets.js';
+									fjs.parentNode.insertBefore(js, fjs);
+								}
+							}(document, 'script', 'twitter-wjs');</script>
+					</a>
 				</li>
 				<li>
-					<a href="#"><i class="icon-twitter"></i>Share it on Twitter</a>
-				</li>
-				<li>
+					@if($is_applicant)
 					<a href="/applicant/shortlists"><i class="icon-star"></i>View my shortlists</a>
+					
+					@else
+					<a data-target="#login-modal" role="button" href="#" data-toggle="modal"><i class="icon-star"></i>View my shortlists</a>
+					@endif
+					
 				</li>
 			</ul>
 		</div>
@@ -116,16 +145,17 @@
 	<div class="modal-header">
 
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Please Login to Shortlist</h3>
+		<h3 id="myModalLabel">Please Login</h3>
+		<p>Do more by signing up with us!<p>
 	</div>
 	@if ( $is_employer ) 
 	<div class="modal-body">
-
 		You are currently logged in as an employer. The shortlist function is only to available to applicants.
-
 	</div>
 	@else 
+	
 	<form  class="modal-body form-horizontal  validate-form form " action="/login" method="post">
+		
 		<div class="control-group">
 			<label class="control-label" for="username">Email</label>
 			<div class="controls">

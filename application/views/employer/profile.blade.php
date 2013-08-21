@@ -8,7 +8,7 @@
 <h2 class='span12'>My Account</h2>
 <br/>
 @if ( $errors->all(':message') )
-<div class="validation error">
+<div class="span12 validation error">
 	<p>Please correct the following errors</p>
 	<ul>
 		@foreach($errors->all(':message') as $message)
@@ -19,12 +19,12 @@
 @endif
 
 @if (Session::get('success')) 
-<div class="validation success">
+<div class="span12 validation success">
 	<p>Your profile has been successfully updated.</p>
 </div>
 @elseif(Session::get('error'))
-<div class="validation success">
-	<p>Hohoho something is wrong .....</p>
+<div class="span12 validation success">
+	<p>Something just happened incorrectly on the server side.</p>
 </div>
 @endif
 {{ Form::open_for_files('employer/profile', 'post', array('class' => 'employer-form  validate-form form span8', 'id' => 'employer-profile')); }}

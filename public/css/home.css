@@ -7,144 +7,108 @@
 	© 2012 CareersHire. All Rights Reserved.
 	...................................................................... */
 
-#home #top-feature {
-  margin-top: 64px;
+#home #featured-jobs h2 {
+  margin-bottom: 30px;
+}
+#home #featured-jobs h3 {
+  font-size: 18px;
+  line-height: 36px;
+  height: 27px;
+  overflow: hidden;
+  margin: 0;
+  margin-bottom: 15px;
+}
+#home #featured-jobs ul {
+  margin-left: 0px;
+  margin-bottom: 50px;
+  overflow: hidden;
+}
+#home #featured-jobs ul li {
+  min-height: 400px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  list-style: none;
+}
+#home #featured-jobs ul li.alt-0 {
+  background: #333333;
+}
+#home #featured-jobs ul li.alt-1 {
+  background: #f39c12;
+}
+#home #featured-jobs ul li.alt-2 {
+  background: #333333;
+}
+#home #featured-jobs ul li figure {
+  background: white;
+  margin: 0;
+  margin-top: 20px;
+  height: 150px;
+  width: 100%;
   text-align: center;
 }
-#home #top-feature h1 {
-  font-size: 58px;
-  color: #38342b;
-  font-family: 'Lato', sans-serif;
-  font-weight: 600;
-  margin-bottom: 21px;
+#home #featured-jobs ul li figure img {
+  margin-top: 30px;
 }
-#home #top-feature h1 .careers {
-  color: #a24c44;
+#home #featured-jobs ul li .wrapper {
+  background: #f7f7f7;
+  padding: 10px 20px;
+  height: 190px;
 }
-#home #top-feature h1 .hire {
-  color: #f09216;
+#home #featured-jobs ul li p {
+  font-size: 16px;
+  height: 41px;
+  overflow: hidden;
+  clear: both;
 }
-#home #top-feature #ads {
-  float: right;
-  margin-top: 10px;
+#home #featured-jobs ul li span {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  float: left;
+  font-size: 14px;
+  margin-right: 30px;
+  margin-bottom: 6px;
 }
-#home #job-search {
-  border: 5px solid #38342b;
-  border-top: 0;
-  padding-bottom: 10px;
+#home #featured-jobs ul li span .icon-calendar-empty,
+#home #featured-jobs ul li span .icon-time {
+  color: #e74c3c;
+  font-size: 20px;
+  margin-right: 10px;
+  line-height: 10px;
 }
-#home #job-search input.input-xlarge {
-  width: 256px;
+#home #featured-jobs ul li .category {
+  padding-left: 0;
+  clear: both;
+  height: auto;
+  text-decoration: underline;
 }
-#home #job-search .span1 {
-  width: 92px;
+#home #featured-jobs ul li img {
+  max-height: 100px;
+  max-width: 250px;
 }
-#home #job-search #search {
-  float: right;
-  margin-right: 119px;
-}
-#home #content {
-  margin-top: 15px;
-}
-@media (min-width: 979px) and (max-width: 1199px) {
-  #home #job-search #search {
-    margin-right: 10px;
+@media (min-width: 1200px) {
+  #home #featured-jobs figure {
+    width: 200px;
   }
-  #home #job-search #job-sub-category,
-  #home #job-search #job-sub-location {
-    width: 89%;
+  #home #featured-jobs ul li img {
+    max-height: 100px;
+    max-width: 350px;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
-  #home #top-feature {
-    margin-top: 0px;
-  }
-  #home #job-search .span6 {
-    width: 710px;
-  }
-  #home #job-search .span6 input.input-xlarge {
-    width: 97%;
-  }
-  #home #job-search .span6 select {
-    width: 528px;
-  }
-  #home #job-search .span6 select#job-sub-category,
-  #home #job-search .span6 select#job-sub-location {
-    width: 508px;
-  }
-  #home #job-search .span6 select#min-salary,
-  #home #job-search .span6 select#max-salary {
-    width: 502px;
-  }
-  #home #job-search .span6 select#min-salary {
-    margin-bottom: 12px;
-  }
-  #home #job-search .span1 {
-    width: 165px;
-  }
-  #home #job-search #search {
-    margin-right: 15px;
-  }
+  
 }
 @media (max-width: 767px) {
-  #home #top-feature {
-    margin-top: 0px;
-  }
-  #home #job-search .span6 input.input-xlarge,
-  #home #job-search .span6 select {
-    width: 97%;
-  }
-  #home #job-search .span6 select#job-sub-category,
-  #home #job-search .span6 select#job-sub-location {
-    width: 90% !important;
-  }
-  #home #job-search .span6 select#min-salary {
-    margin-bottom: 12px;
-  }
-  #home #job-search #search {
-    margin-right: 13px;
-  }
-  #home #job-search .input-prepend {
-    width: 100%;
-  }
-  #home #job-search .input-prepend span {
-    float: left;
-  }
-  #home #job-search .input-prepend select {
-    float: left;
-    width: 88%;
-  }
+  
 }
 /* Landscape phones and down */
 
 @media (max-width: 480px) {
-  #home #top-feature {
-    margin-top: 0px;
-  }
-  #home #job-search .span6 label {
-    margin-left: 5px;
-  }
-  #home #job-search .span6 input.input-xlarge,
-  #home #job-search .span6 select {
-    width: 97%;
-    margin-left: 5px;
-  }
-  #home #job-search .span6 select#job-sub-category,
-  #home #job-search .span6 select#job-sub-location {
-    width: 92% !important;
-  }
-  #home #job-search .add-on {
-    margin-left: 5px;
-  }
-  #home #job-search .input-prepend {
-    width: 100%;
-  }
-  #home #job-search .input-prepend span {
-    float: left;
-  }
-  #home #job-search .input-prepend select {
-    float: left;
-    width: 88%;
-    margin-left: 0;
-  }
+  
 }

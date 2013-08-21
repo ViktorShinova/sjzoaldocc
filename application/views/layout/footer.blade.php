@@ -1,55 +1,69 @@
 <footer id="footer">
 	<div class="container ">
-		<div class="row">
-			<div class="span12">
-				<!--<a href="/"><img src="/img/logo-bottom.png" alt="Careershire"></a>-->
-			</div>
-			
-		</div>
-		<div class="row links-container">
+		<div class='row'>
+			<div class='span3'>
+				<h3>Quick Links</h3>
 				<ul>
-					<li class="span3">
-						<h3>Employers</h3>
-						<ul>
-							<li><a href="/employer/register/">Create an Account</a></li>
-							<li><a href="/employer/post/create/">Advertise a Job</a></li>
-						</ul>
-					</li>
-					<li class="span3">
-						<h3>Job Seekers</h3>
-						<ul>
-							<li><a href="/">Search Jobs</a></li>
-							<li><a href="/register/">Create an Account</a></li>
-						</ul>
-					</li>
-					<li class="span3">
-						<h3>About Us</h3>
-						<ul>
-							<li><a href="/page/faq/">FAQ</a></li>
-							<li><a href="/page/privacy/">Privacy Statement</a></li>
-							<li><a href="/page/toc/">Terms &amp; Conditions</a></li>
-							<li><a href="/page/contact_us/">Contact Us</a></li>
-						</ul>
-					</li>
-					<li class="span3">
-						<h3>More</h3>
-						<ul>
-							<li><a href="/page/pricing/">Pricing</a></li>
-							<li><a href="/page/career_advice/">Career Advice</a></li>
-							<li><a href="/page/resume/">Resume</a></li>
-							<li><a href="/page/coverletter/">Coverletter</a></li>
-						</ul>
-					</li>
-				</ul>			
+					<li><a href='#'>FAQ</a></li>
+					<li><a href='#'>Pricing</a></li>
+					<li><a href='#'>Career Advice</a></li>
+					<li><a href='#'>How to</a></li>
+					<li><a href='#'>Contact Us</a></li>
+				</ul>
+			</div>
+			<div class='span4 social'>
+				
+				<blockquote class='twitter-feed'>
+					<p>Twitter Feed Twitter FeedTwitter Feed Twitter FeedTwitter Feed Twitter FeedTwitter Feed Twitter FeedTwitter Feed Twitter FeedTwitter Feed Twitter FeedTwitter Feed Twitter Feed<p>
+				</blockquote>
+				<span id='twitter-logo'></span>
+				<a class='facebook'><img src='/img/icons/facebook.png'/></a>
+				<a class='twitter'><img src='/img/icons/twitter.png'/></a>
+			</div>
+			<div class='span5'>
+				
+				<h3>Sign up to our Newsletter</h3>
+				<form action='#' method='post' class="validate-form">
+					<ul>
+						<li>
+							<input type='text' placeholder='Name' class="x-large validate[required]"/>
+						</li>
+						<li>
+							<input type='text' placeholder='Email' class="x-large validate[required]"/>
+						</li>
+						<li>
+							<button type='submit' class='btn btn-primary btn-large'>Sign up</button>
+						</li>
+					</ul>
+					
+					
+				</form>
+			</div>
 		</div>
-		
+
 	</div>
 </footer>
 <div class="credit">
-	<div class="container">
-		<div class="row">
-			<div class="span12">
-				<p id="copyright"> Copyright &copy; CareersHire 2013. All rights reserved.</p>
+	<div class="container ">
+		<div class='row'>
+			<div class='span7'>
+				<ul>
+					<li>
+						<a href="#">Privacy Policy</a>
+						
+					</li>
+					<li>
+						<a href="#">Terms and Conditions</a>
+					
+					</li>
+					<li>
+						<a href="#">Disclaimer</a>
+						
+					</li>
+				</ul>
+			</div>
+			<div class='span5'>
+				<a href='http://wedesgn.com' title='weDesgn web design'>we.De.sgn</a>
 			</div>
 		</div>
 	</div>

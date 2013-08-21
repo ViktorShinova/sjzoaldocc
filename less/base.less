@@ -7,42 +7,19 @@
 	© 2013 CareersHire. All Rights Reserved.
 	...................................................................... */
 
-//@import 'mixins/all';
-//@import 'partial/colour-code.less';
-
 body {
-	background:#efebe2;
-	//background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
+	background:#fff;
 }
-@import 'shadow';
 
 a {
-	-webkit-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
-	-moz-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
-	transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s;
+	-webkit-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s, text-shadow ease-in 0.2s;
+	-moz-transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s, text-shadow ease-in 0.2s;
+	transition: background ease-in 0.1s, border ease-in 0.1s, color ease-in 0.1s, text-shadow ease-in 0.2s;
 	&:hover { text-decoration: none; }
 }
 .hidden { display:none; }
 .white-bg { background: white; }
 
-.navbar.navbar-fixed-top {
-	a{
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 12px;
-	}
-	.brand {
-		padding: 0;
-		padding-right: 20px;
-		margin-top: 2px;
-		width: 26px;
-		display: block;
-		position: relative;
-		img {
-			position:absolute;
-		}
-	}
-}
 .login {
 	ul {
 		margin-left: 0;
@@ -52,79 +29,9 @@ a {
 		}
 	}
 }
-button, input[type=submit], .container-header, .btn {
-	.lato-light();
-}
 
-h1.span12 { margin-bottom: 21px;}
-.container-header {
-	background: @dark-brown;
-	border: 0;
-	border-bottom: 1px solid #e5e5e5;
-	clear: both;
-	color: #fff;
-	display: block;
-	font-size: 21px;
-	
-	line-height: 40px;
-	text-indent: 10px;
-	margin-bottom: 21px;
-	margin-top: 0;
-	padding: 0;
-
-
-	#emp-reg {
-		float: right;
-		color: white;
-		font-size:12px;
-		margin-right: 20px;
-		font-weight: bold;
-		&:hover{
-			text-decoration: underline;
-
-		}
-	}
-	
-}
-
-//@import "header";
 
 #content {
-	margin-top: 80px;
-	margin-bottom: 60px;
-
-
-
-/*	#search-filter { 
-
-		font-size: 11px !important;
-		background: #fff;
-		border: 1px solid #dadada;
-		.box-sizing(border-box);
-		#search-filter-form {
-			padding:  0 10px 10px;
-			select { width: 97%; }
-		}
-
-		h4 { .font-normal(); }
-		
-		#search-filter-form > ul { margin: 0;}
-		ul {
-
-			li {
-				list-style: none;
-			}
-		}
-
-		#min-salary {
-			margin-bottom: 10px;
-		}
-
-		.btn-warning {
-			margin-top: 12px;
-		}
-	}*/
-
 	#emp-register {
 		.container-header{
 			margin-bottom: 0;
@@ -210,79 +117,50 @@ h1.span12 { margin-bottom: 21px;}
 	}
 }
 
-#content .wrapper {
-	box-sizing: border-box;
-	border-radius: 9px;
-	margin-top: 21px;
-	h2 { color: @dark-blue !important;}
+#content .emp-home {
+	margin: 0 auto;
+	float: none !important;
 	
-	.pricing {
-		
-		> div { 
-			height: 250px ;	
-			padding: 20px;
-			position: relative;
-			.box-sizing(border-box);
-			h4 { 
-				color: @dark-blue;
-				font-size: 24px;
-				text-align: left;
-				
-			}
-			
-			p { 
-				font-size: 11px;
-				
-			}
-			
-			.startprice {
-				color: #336696;
-				float: right;
-				font-weight: bold;
-				font-family: Arial;
-				padding-right: 35px;
-				position: relative;
-				top: -5px;
-			}
-			
-			.startcents {
-				float: right;
-				padding: 5px 0 0 0;
-				color: #B84A00;
-				font-family: arial;
-				font-weight: bold;
-				font-size: 18px;
-				position: relative;
-				left: 130px;
-				top: 8px;
-			}
-			.startamt {
-				float: right;
-				position: relative;
-				color: #B84A00;
-				font-size: 24px;
-				font-family: arial;
-				font-weight: bold;
-				padding: 4px 0 0 0;
-				top: 11px;
-				left: 50px;
-			}
-			
-			.btn {
-				clear: right;
-				bottom: 0;
-			}
-			.bottom {
-				margin-top: 105px;
-				text-align: center;
-				clear: both;
-			}
-			
+	.login , .notice {
+		width: 50%;
+		float: left;
+		padding: 5px 10px;
+		.box-sizing(border-box);
+		height: 233px;
+		text-align:center;
+		h3 { 
+			color: white; 
+			.lato-light;
 		}
+		strong { color: @brown;}
+		p { font-size: 14px; color: white; }
+		a {font-size: 14px;}
+		
 	}
 	
+	.login { 
+		background: @brown; 
+		text-align:center;
+		h3 { 
+			color: white; 
+			.lato-light;
+		}
+		.reset-pwd { 
+			margin-top: 22px;
+			display: block;
+		}
+	}
+	.notice { background: @green;}
+	
 }
+#recaptcha_widget_div {  margin-bottom: 21px !important;}
+#recaptcha_table { line-height: 0 !important; }
 
+
+@import 'shadow';
+@import 'navigation';
+@import 'header';
+@import 'search';
 @import "applicant";
 @import "feature";
 @import "guide";

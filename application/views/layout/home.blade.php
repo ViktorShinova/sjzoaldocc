@@ -29,14 +29,7 @@
 
 	<body id="home">
 
-		@include ('layout.nav-bar')
-
-		<div id="top-feature" class="container">
-			<h1>Welcome to <span class="careers">Careers</span><span class="hire">Hire</span></h1>
-			<span>Worry about your future? Carreershire can help!</span>
-		</div>
-		<!-- BRAND LOGO -->
-
+		@include('layout.header')
 		<div id="content" class="container">
 			@yield('content')
 		</div>

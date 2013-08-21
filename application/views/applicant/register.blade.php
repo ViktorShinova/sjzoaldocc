@@ -40,6 +40,8 @@
 			<li>{{ Form::label('email', 'Email'); echo Form::text('email', Input::old('email'), array('class' => 'validate[required, custom[email]]')) }}</li>
 			<li>{{ Form::label('password', 'Password'); echo Form::password('password', array(), array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array(), array('class' => 'validate[required]')) }}</li>
+			<li>{{Recaptcha::recaptcha_get_html(CAPTCHA_PUB_KEY);}}</li>
+			
 		</ol>
 	</div>
 	<div class="clearfix"></div>	

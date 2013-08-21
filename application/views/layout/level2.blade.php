@@ -12,8 +12,14 @@
 		<meta charset="utf-8" />
 
 		<meta name="description" content="" />
-
+		
+		@if ( isset($not_indexed) && $not_index )
+		<meta name="robots" content="noindex">
+		@else 
 		<meta name="robots" content="index,follow" />
+		@endif
+		
+		
 		<meta name="revisit-after" content="7 days" />
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
@@ -30,7 +36,7 @@
 
 	<body class="@yield('page-class')">
 
-		@include ('layout.nav-bar')
+		@include ('layout.header')
 
 		<div id="content" class="container">
 			@yield('content')

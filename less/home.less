@@ -10,289 +10,116 @@
 @import 'mixins/all';
 
 #home {
-	//background: url('/img/backgrounds/gradient-blue.png') repeat-x top center;
-	#top-feature{
-		margin-top: 64px;
-		text-align: center;
-		h1 { 
-			font-size: 58px;
-			color: @dark-brown;
-			.lato-semibold();
-			margin-bottom: 21px;
-			.careers { color: @red-brown;}
-			.hire {
-				color: @dark-orange;
+	
+	#featured-jobs {
+		h2 { margin-bottom: 30px;}
+		
+		h3 { 
+			
+			font-size: 18px;
+			line-height: 36px;
+			height: 27px;
+			overflow: hidden;
+			margin: 0;
+			margin-bottom: 15px;
+
+			
+		} 
+		ul {
+			margin-left: 0px;
+			margin-bottom: 50px;
+			overflow: hidden;
+			li {
+
+				min-height: 400px;
+				.box-sizing(border-box);
+				.border-radius(5px);
+				overflow: hidden;
+				list-style: none;
 				
+				&.alt-0 { background: @charcoal; }
+				&.alt-1 { background: @orange; }
+				&.alt-2 { background: @charcoal; }
+				figure { 
+					background: white;
+					margin: 0;
+					margin-top: 20px;
+					height: 150px;					
+					width: 100%;
+					text-align: center;
+					img { margin-top: 30px;}
+				}
+				.wrapper { 
+					background: #f7f7f7;
+					padding: 10px 20px; 
+					height: 190px;
+				}
+				
+				p { 
+					font-size: 16px;
+					height: 41px;
+					overflow: hidden;
+					clear: both;
+				}
+				span { 
+					display: block; 
+					height: 24px;
+					line-height: 24px;
+					float: left; 
+					font-size: 14px;
+					margin-right: 30px;
+					margin-bottom: 6px;
+					.icon-calendar-empty, .icon-time { 
+						color: #e74c3c;
+						font-size: 20px;
+						margin-right: 10px;
+						line-height: 10px;
+					}
+				}
+				.category { 
+					padding-left: 0; 
+					clear:both;
+					height: auto;
+					text-decoration: underline;
+				}
+
+				img {
+					max-height: 100px;
+					max-width: 250px;
+				}
 			}
 		}
-		
-		
-		#ads {
-			float: right;
-			margin-top: 10px;
-		}
-	}
-	#job-search {
-		border: 5px solid @dark-brown;
-		border-top: 0;
-		padding-bottom: 10px;
-		input.input-xlarge { width: 256px;}
-		.span1 { width: 92px;}
-		#search {
-			float: right;
-			margin-right: 119px;
-		}
-
-	}
-	#content {
-		margin-top: 15px;
 	}
 }
 
-
-// MEDIA QUERIES
-
-@media (min-width: 979px) and (max-width: 1199px) {
+@media (min-width: 1200px) {
 	#home {
-		
-		#job-search {
-			#search {
-				margin-right: 10px;
+		#featured-jobs {
+			figure { width: 200px; }
+			ul {
+				li {
+					
+					img {
+						max-height: 100px;
+						max-width: 350px;
+					}
+				}
 			}
-			#job-sub-category, #job-sub-location {
-				width: 89%;
-			}
-
 		}
 	}
+	
+	
 }
+
 @media (min-width: 768px) and (max-width: 979px) { 
-	#home {
-		#top-feature{
-			margin-top: 0px;
-		}
-		#job-search {
-			.span6 {
-				width: 710px;
-				input.input-xlarge {
-					width: 97%;
-				}
-				select{
-					width: 528px;
 
-					&#job-sub-category, &#job-sub-location {
-						width: 508px;
-					}
-				
-					&#min-salary, &#max-salary {
-						width: 502px;
-					}
-
-					&#min-salary { margin-bottom: 12px;}
-				}
-
-				
-			}
-			.span1 { width: 165px; }
-			#search {
-				margin-right: 15px;
-			}
-		}
-	}
 }
 
 @media (max-width: 767px) { 
-#home {
-	#top-feature{
-			margin-top: 0px;
-		}
-		#job-search {
-			.span6 {
-				
-				input.input-xlarge, select {
-					width: 97%;
-				}
 
-				select {
-					&#job-sub-category, &#job-sub-location {
-						width: 90% !important;
-					} 
-					&#min-salary { margin-bottom: 12px;}
-				}
-			}
-			#search {
-				margin-right: 13px;
-			}
-
-			.input-prepend { width: 100%; 
-				span { float: left;}
-				select { float: left; width: 88%; }
-
-			}
-		}
-	}
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) {
-	#home {
-		#top-feature{
-			margin-top: 0px;
-		}
-		#job-search {
-			.span6 {
-				label { margin-left: 5px;}
-				input.input-xlarge, select {
-					width: 97%;
-					margin-left: 5px;
-				}
-				select {
-					&#job-sub-category, &#job-sub-location {
-						width: 92% !important;
-
-					}
-				}
-			}
-			.add-on {margin-left: 5px;}
-
-			.input-prepend { width: 100%; 
-				span { float: left;}
-				select { float: left; width: 88%; margin-left: 0;}
-
-			}
-		}
-	}
+	
 }
-	// #content {
-	// 	margin-top: 15px;
-
-	// 	#primary {
-	// 		float: left;
-	// 		width: 100%;
-
-	// 		#job-search {
-	// 			background: #fff;
-	// 			.border-radius(3px);
-	// 			.box-shadow(0px 5px 9px #d5d5d5);
-	// 			height: 260px;
-
-	// 			.span6 { width: auto; }
-
-	// 			#job-category { width: 338px; }
-	// 			#job-keywords { width: 324px; }
-	// 			select[multiple] {
-	// 				height: 90px !important;
-	// 			}
-
-	// 			button {
-	// 				margin: 0 auto;
-	// 				width: 620px;
-	// 				display: block;
-	// 			}
-	// 		}
-
-	// 		#feature-jobs {	
-	// 			margin-top: 15px;
-												
-	// 			> li {
-	// 				.size(311px, 365px);
-	// 				list-style: none;
-	// 				border: 1px solid @gray;
-	// 				float: left;
-	// 				margin: 0 10px 10px 0;
-	// 				background: #fff;
-	// 				position: relative;
-	// 				.box-shadow(1px 1px 9px #ddd);
-
-	// 				> .job {
-						
-	// 					h3 {
-	// 						overflow: hidden;
-	// 						font-weight: normal;
-	// 						line-height: 35px;
-	// 						color: @gray-dark;
-	// 						margin-left: 10px;
-	// 					}
-
-	// 					header[role="job-category"] {
-	// 						span { 
-	// 							color: #fff;
-	// 							font-size: 13px;
-	// 						}
-	// 					}
-	// 					header[role="job-category"], footer {
-	// 						padding: 10px;
-	// 					}
-
-	// 					.arrow-down {
-	// 						width: 0; 
-	// 						height: 0; 
-	// 						border-left: 10px solid transparent;
-	// 						border-right: 10px solid transparent;
-	// 						margin-left: 10px;
-	// 					}
-
-	// 					.description {
-
-	// 						padding: 0 10px;
-
-	// 						img {
-	// 							margin-bottom: 5px;
-	// 						}
-
-	// 						span { 
-	// 							display: block;
-	// 							&.location { color: @gray-dark;}
-	// 							&.salary { .font(12px, bold, normal); }
-	// 						}
-
-	// 						p {
-
-	// 							color: @gray-darker;
-	// 						}
-							
-	// 						> .date {
-	// 							.font(10px, normal, italic);
-	// 							float: right;
-	// 						}												
-	// 					}
-
-	// 					footer {
-	// 						position: absolute;
-	// 						bottom: 0;
-	// 						width: 291px;
-	// 						#gradient .vertical(#ffffff, #f5f5f5);
-	// 						border-top: 1px solid #e4e4e4;
-
-
-	// 					}
-
-	// 				}
-	// 			} 
-
-	// 			.advertise {
-	// 				background: @gray;
-	// 				text-align: center;
-	// 				div {
-	// 					margin-top: 160px;
-	// 					color:#3b3b3b;
-	// 					text-shadow: 0 1px 0px #fff;
-	// 				}
-
-	// 				&:hover {
-	// 					cursor: pointer;
-	// 					background: @gray-dark;
-	// 				}		
-	// 			}			
-	// 		}		 
-	// 	}
-
-	// 	#secondary {
-	// 		aside {}
-	// 	}
-
-	//}
-
-
-
-

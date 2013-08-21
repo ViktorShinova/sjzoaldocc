@@ -33,3 +33,6 @@ define("DATABASE_PWD",				"c@reErsH1re");
 
 define('PAYPAL_TYPE',				'PAYPAL');
 define('EWAY_TYPE',					'EWAY- CREDIT CARD');
+
+define('CAPTCHA_PUB_KEY',			'6LctUeQSAAAAAN0rlXBAK3iOanmR85Nbvnm8Ip_X');
+define('CAPTCHA_PRIVATE_KEY',		'6LctUeQSAAAAAHfWR_gJ_txofetinsg5D3sCxy3Q');

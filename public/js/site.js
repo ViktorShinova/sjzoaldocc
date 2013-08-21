@@ -17,6 +17,7 @@ var jSite = {
 		//jSite.attachPrivacySettings();
 		//jSite.attachResumeVisibility();
 		jSite.attachSalaryChange();
+		jSite.attachSalaryTypeChange();
 		jSite.attachSwitchToggle();
 		jSite.attachAccordion();
 
@@ -59,11 +60,24 @@ var jSite = {
 		}
 	},	
 	attachPopup: function() {
+		
+		
 		if ($('[rel=popup]').length) {
 			$('[rel=popup]').click(function(e) {
+				var left = (screen.width/2)-(800/2);
+				var top = (screen.height/2)-(700/2);
 				e.preventDefault();
 				url = $(this).attr("href");
-				window.open(url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+				window.open(url, 'popUpWindow', 'height=700,width=800,left='+left+',top='+top+',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+			});
+		}
+		if ($('[rel=popup-small]').length) {
+			$('[rel=popup-small]').click(function(e) {
+				var left = (screen.width/2)-(480/2);
+				var top = (screen.height/2)-(500/2);
+				e.preventDefault();
+				url = $(this).attr("href");
+				window.open(url, 'popUpWindow', 'height=500,width=480,left='+left+',top='+top+',resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes');
 			});
 		}
 
@@ -1006,7 +1020,7 @@ var jSite = {
 				});
 			});
 
-			job_cat.trigger('change');
+			//job_cat.trigger('change');
 
 		}
 		if ($("#job-location").length) {
@@ -1040,43 +1054,95 @@ var jSite = {
 					}
 				});
 			});
-			job_loc.trigger('change');
+			//job_loc.trigger('change');
 		}
 	},
 	attachSalaryChange: function() {
 		if ($('#min-salary').length) {
 
 			$('#min-salary').change(function() {
+				
+				var salary_type = $("#salary-type").val();
 				var multiply = 10000;
+				var append = 'k';
+				
+				if( salary_type == 'hourly') {
+					
+					multiply = 10;
+					append = '/hr';
+					
+				}
+				
+				
 				var min_value = $(this).val();
 				var factor = 2;
 
 				if (min_value !== '0') {
 					factor = min_value / multiply;
 				}
-
+				
 				//do max value select box
 				var options = "";
+				
+				
 				for (i = factor + 1; i <= 20; i++) {
 					if (i === 20) {
 						if (min_value === 0) {
 
-							options += "<option selected='selected' value='" + i * multiply + "'>" + i * 10 + "k+</option>";
+							options += "<option selected='selected' value='" + i * multiply + "'>" + i * 10 + append+ "+</option>";
 
 						} else {
-							options += "<option value='" + i * multiply + "'>" + i * 10 + "k+</option>";
+							options += "<option value='" + i * multiply + "'>" + i * 10 + append+"</option>";
 
 						}
 					} else {
-						options += "<option value='" + i * multiply + "'>" + i * 10 + "k</option>";
+						options += "<option value='" + i * multiply + "'>" + i * 10 + append + "</option>";
 					}
-
-
 				}
+				 
 				$('#max-salary').html(options);
 			});
 
 		}
+	},
+			
+	attachSalaryTypeChange: function() {
+	
+		if( $("#salary-type").length ) {
+			
+			$('#salary-type').change( function() {
+				var left_options =	'<option value="0">0</option>';
+				var right_options = '';
+				//check the value and then set the salary
+				if( $('#salary-type').val() == 'hourly' ) {
+					
+					
+					for( i=30; i <= 200; i=i+10) {
+						left_options += '<option value="'+i+'">'+i+'/hr</option>';
+					}
+					for( i=40; i <= 200; i=i+10) {
+						right_options += '<option value="'+i+'">'+i+'/hr</option>';
+					}
+					
+					
+					
+				} else if ( $('#salary-type').val() == 'annually' ) {
+
+					for( i=30; i <= 150; i=i+10	) {
+						left_options += '<option value="'+i*1000+'">'+i+'k</option>';
+					}
+					for( i=40; i <= 150; i=i+10) {
+						right_options += '<option value="'+i*1000+'">'+i+'k</option>';
+					}				
+					
+					
+				}
+				$('#min-salary').html(left_options);
+				$('#max-salary').html(right_options);
+			});
+			
+		}
+
 	},
 	
 	attachEasyTabs: function() {

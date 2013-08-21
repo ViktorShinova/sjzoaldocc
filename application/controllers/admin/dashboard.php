@@ -17,5 +17,3 @@ class Admin_Dashboard_Controller extends Base_Controller {
 		return View::make('admin.dashboard');
 	}
 }
-
-?>

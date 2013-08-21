@@ -11,7 +11,7 @@ class Home_Controller extends Base_Controller {
 		$work_types = WorkType::lists('name', 'abbr');
 		
 		
-		$jobs = DB::table('jobs')->take(4)
+		$jobs = DB::table('jobs')->take(9)
 				->order_by('created_at', 'asc')
 				->join('employers', 'jobs.employer_id', '=', 'employers.id')
 				->join('job_category', 'jobs.category_id', '=', 'job_category.id')
@@ -23,10 +23,14 @@ class Home_Controller extends Base_Controller {
 					'jobs.title',
 					'jobs.salary_range',
 					'jobs.summary',
+					'jobs.slug as slug',
 					'employers.company',
 					'jobs.created_at',
 					'locations.name as location_name',
-					'job_category.name as category_name'
+					'job_category.name as category_name',
+					'job_category.id as category_id',
+					'jobs.created_at as created_at',
+					'employers.logo_path as logo'
 				)
 		);
 		$i = 0;
@@ -127,7 +131,7 @@ class Home_Controller extends Base_Controller {
 		}
 		
 		
-		$mail = new PHPMailer();
+		$mail = new CHMailer();
 		$mail->IsHTML(true);
 		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
 			$mail->isSMTP();

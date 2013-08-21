@@ -124,7 +124,7 @@ class Employer_Email_Controller extends Base_Controller {
 		$emp = Employer::where('id', '=', Session::get('employer_id'))->first();
 		$sign_off = "Yours Sincerely,<br/>
 			" . $emp->company;
-		$mail = new PHPMailer();
+		$mail = new CHMailer();
 		$success_body = View::make('email.master')->with(
 				array(
 					'email_to' => 'Candidate',

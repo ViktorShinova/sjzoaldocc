@@ -103,7 +103,11 @@
 				<tr data-id="{{ $template->id }}" class="template-item {{ ($template->id == $job->template_id) ? 'selected': '' }}" data-id="{{ $template->id }}">
 					<td>{{ $template->name }}</td>
 					<td><a href="/employer/template/preview/{{$template->id}}" rel="popup" class="template-preview">Preview</a></td>
+					@if( $template->id == 1 ) 
+					<td></td>
+					@else
 					<td>{{ Formatter::format_date($template->created_at, Formatter::DATE_LONG_W_TIME) }}</td>
+					@endif
 					<td class="icon"><i class="icon-check"></i></td>
 				</tr>
 				@endforeach

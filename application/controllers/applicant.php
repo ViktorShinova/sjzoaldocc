@@ -1,15 +1,26 @@
 <?php
 
 class Applicant_Controller extends Base_Controller {
-
+	protected $_secure_pages = array(
+		'account',
+		'experience',
+		'qualification',
+		'shortlists',
+		'delete_expertise',
+		'edit_expertise',
+		'expertise',
+		'password',
+		'privacy',
+		'qualification',
+		'upload_resumecoverletter',
+	);
 	public function __construct() {
 		parent::__construct();
 		$this->filter('before', 'auth')->only(
-				array('account',
-				)
+				$this->_secure_pages
 		);
 		$this->filter('before', 'applicant')->only(
-				array('account')
+				$this->_secure_pages
 		);
 	}
 
@@ -796,5 +807,15 @@ class Applicant_Controller extends Base_Controller {
 		
 		return View::make('applicant.shortlist')
 				->with('shortlists', $shortlists);
+	}
+	
+	public function get_careermail() {
+		
+		$values = serialize(Input::all());
+		$applicant = Applicant::find(Session::get('applicant_id'));
+		$applicant->job_mail = $values;
+		$applicant->save();
+		
+		return Redirect::to($_SERVER['HTTP_REFERER']);
 	}
 }

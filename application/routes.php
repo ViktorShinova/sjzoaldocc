@@ -74,6 +74,7 @@ Route::controller('employer');
 Route::controller('applicant');
 //ADMIN
 Route::controller('admin.dashboard');
+Route::controller('cron');
 
 Route::controller(Controller::detect());
 /*

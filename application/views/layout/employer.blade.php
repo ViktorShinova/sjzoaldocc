@@ -57,8 +57,6 @@
 							
 							</li>
 			
-							<li class='page-employer-invoice'><a href="/employer/invoices/">Transactions</a></li>
-							
 							<li class='page-employer-profile'><a href="/employer/profile/">My Account</a></li>
 						</ul>
 					</div>

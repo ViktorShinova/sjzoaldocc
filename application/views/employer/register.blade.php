@@ -48,6 +48,7 @@
 			<li>{{ Form::label('postal', 'Postal'); echo Form::text('postal', Input::old('postal'), array('class' => 'validate[required]')) }}</li>
 			<li>{{ Form::label('country', 'Country'); echo Form::select('country', $countries, Input::old('country')) }}</li>
 			<li>{{ Form::label('company-size', 'Number of employees'); echo Form::select('company-size', array('1 - 10', '10 - 20', '20 - 30', '30 - 40', '50 - 100', '100 - 200', '> 200') ,Input::old('company-size'), array('class' => 'validate[required]')) }}</li>
+			<li>{{Recaptcha::recaptcha_get_html(CAPTCHA_PUB_KEY);}}</li>
 			<li>{{ Form::submit("Register", array('class' => 'btn btn-warning pull-right')); }} </li>		
 		</ol>
 		</div>

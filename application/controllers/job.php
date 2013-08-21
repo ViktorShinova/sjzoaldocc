@@ -95,21 +95,37 @@ class Job_Controller extends Base_Controller {
 	public function get_search() {
 		$job_categories = array('' => 'All Categories') + Category::lists('name', 'id');
 		$locations = array('' => 'All of Australia') + Location::lists('name', 'id');
+		
 		$work_types = WorkType::lists('name', 'abbr');
 
 		//get the pre selected work type
 		$selected_work_types = Input::get('work-type');
-
+		
 		$params = Input::all();
+		$sub_categories = array('' => 'Choose a sub category');
+		$sub_locations = array('' => 'Choose a sub location');
+		
+		if( isset( $params['job-category'] ) && !empty($params['job-category']) ) {
+			$sub_categories = SubCategory::where('category_id', "=", $params['job-category'])->lists("name", "id");
+			
+			$sub_categories = array('' => 'Choose a sub category') + $sub_categories;
+		}
+		
+		if( isset( $params['job-location'] ) && !empty($params['job-location']) ) {
+			$sub_locations = SubLocation::where('location_id', "=", $params['job-location'])->lists("name", "id");
+			
+			$sub_locations = array('' => 'Choose a sub location') + $sub_locations;
+		}
 
+		
 		//tokenize the keywords
 		//$filtered_keywords = $this->tokenizer($params['keywords']);
 
 		if (isset($params['min-salary'])) {
 			$min_salary = $params['min-salary'];
-			$max_salary = $this->_calculate_max_salary($min_salary);
+			$max_salary = $this->_calculate_max_salary($min_salary, Input::get('salary-type'));
 		} else {
-			$max_salary = $this->_calculate_max_salary(0);
+			$max_salary = $this->_calculate_max_salary(0, Input::get('salary-type'));
 		}
 		//var_dump($max_salary);
 		$relevancy = null;
@@ -217,14 +233,13 @@ class Job_Controller extends Base_Controller {
 		$is_applicant = false;
 		$is_employer = false;
 		$applicant_shortlists = null;
+		$applicant = null;
 		//check if the user is login and if he is employer or applicant
 		if (User::is_applicant()) {
 
 			$applicant_id = Session::get('applicant_id');
-
 			$is_applicant = true;
-
-
+			$applicant = Applicant::find($applicant_id);
 			//Get shortlist	
 			$applicant_shortlists = Shortlists::where('applicant_id', '=', $applicant_id)->lists('job_id');
 		} else if (User::is_employer()) {
@@ -232,7 +247,11 @@ class Job_Controller extends Base_Controller {
 		}
 
 
-
+		if( Input::get('salary-type') == 'hourly') {
+			$_min_salary = $this->_h_min_salary;
+		} else {
+			$_min_salary = $this->_min_salary;
+		}
 
 
 		//The search field can be search in title, desciption, company. Search for each word instead of searching the pharse which will yield more results
@@ -249,6 +268,8 @@ class Job_Controller extends Base_Controller {
 					"jobs" => $jobs,
 					'locations' => $locations,
 					'categories' => $job_categories,
+					'sub_categories' => $sub_categories,
+					'sub_locations' => $sub_locations,
 					'work_types' => $work_types,
 					'selected_work_types' => $selected_work_types,
 					'selected_category' => Input::get('job-category'),
@@ -257,14 +278,16 @@ class Job_Controller extends Base_Controller {
 					'selected_sub_location' => Input::get('job-sub-location'),
 					'selected_min_salary' => Input::get('min-salary'),
 					'selected_max_salary' => Input::get('max-salary'),
-					'min_salary' => $this->_min_salary,
+					'min_salary' => $_min_salary,
 					'max_salary' => $max_salary,
 					'keywords' => Input::get('keywords'),
 					'sort_order' => Input::get('sort'),
 					'is_applicant' => $is_applicant,
 					'applicant_shortlists' => $applicant_shortlists,
-					'is_employer' => $is_employer
-						)
+					'is_employer' => $is_employer,
+					'applicant' => $applicant,
+					'selected_salary_type' => Input::get('salary-type'),
+					)
 		);
 	}
 
@@ -280,7 +303,10 @@ class Job_Controller extends Base_Controller {
 			$job = Job::where('slug', '=', $slug)->first();
 		}
 		
-		
+		if(  !$job->verify ) {
+			
+			return View::make('job.verify');
+		}
 		
 		if( !$job || $job->end_at > date('Y:m:d H:i:s')) {
 			return View::make('job.expired');
@@ -563,7 +589,7 @@ class Job_Controller extends Base_Controller {
 		$employer = $job->employer;
 
 		//email employer
-		$mail = new PHPMailer();
+		$mail = new CHMailer();
 		$data['submissionData'] = Input::all();
 		if (strpos($_SERVER['HTTP_HOST'], '.localhost')) {
 			$mail->isSMTP();
@@ -710,27 +736,54 @@ class Job_Controller extends Base_Controller {
 		
 		$inputs = Input::all();
 		
-		$job = Job::find($id);
 		
-		$mail = new PHPMailer();
-		$mail->IsHTML();
+		Laravel\Validator::register('captcha', function() {
+			$resp = Recaptcha::recaptcha_check_answer (CAPTCHA_PRIVATE_KEY,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+			
+			return $resp->is_valid;
+		});
+		
+		$message = array('captcha' => 'The security captcha entered was incorrect.');
+		
+		$rules = array(
+			'friends_name' => 'required',
+			'friends_email' => 'email|required',
+			'recaptcha_response_field' => 'captcha',
+		);
+		
+		
+		$validator = Laravel\Validator::make(Input::all(), $rules, $message);
+		if( $validator->fails() ) {
+			
+			return Laravel\Redirect::back()->with_errors($validator)->with_input();
+			
+		}
+		
+		
+		$job = Job::find($id);
+		$mail = new CHMailer();
 		$mail->Subject = 'Your friend has recommended a new job for you.';
 		
 		$friends_email = $inputs['friends_email'];
 		
-		$friends_email = explode('\n', $friends_email);
 		
-		foreach( $friends_email as $email ) {
-			
-			$mail->AddAddress($email);			
-		}
-		
+		//do validation first
+		$mail->AddAddress(Input::get('friends_email'));			
 		$mail->From = 'jobmailer@careershire.com';
 		$mail->FromName = COMPANY_NAME;
+		$mail->Body = View::make('email.singlejob')
+				->with('job', $job)
+				->with('name', Input::get('friends_name'))
+				->render();
 		
-		$mail->Body = View::make('email.jobmail')->with($job)->render();
-		
-	
+		if( $mail->send()) {
+			return View::make('job.thankyou')->with('success', true);
+		} else {
+			return View::make('job.thankyou')->with('success', false);
+		}
 		
 		
 		

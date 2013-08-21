@@ -74,7 +74,7 @@ class Employer_Post_Controller extends Base_Controller {
 		$work_types = WorkType::lists('name', 'abbr');
 		$templates = Template::all();
 		$min_salary = $this->_min_salary;
-		$max_salary = $this->_calculate_max_salary(0);
+		$max_salary = $this->_calculate_max_salary(0, 'annually');
 
 
 		if (!$id) {

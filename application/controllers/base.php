@@ -21,6 +21,23 @@ class Base_Controller extends Controller {
 		'140000' => '140k',
 		'150000' => '150k',
 	);
+	
+	protected $_h_min_salary = array(
+		'0' => '0',
+		'30' => '30/hr',
+		'40' => '40/hr',
+		'50' => '50/hr',
+		'60' => '60/hr',
+		'70' => '70/hr',
+		'80' => '80/hr',
+		'90' => '90/hr',
+		'100' => '10/hr',
+		'110' => '110/hr',
+		'120' => '140/hr',
+		'130' => '130/hr',
+		'140' => '140/hr',
+		'150' => '150/hr',
+	);
 	public $colors = array("green", "red", "yellow", "purple");
 
 	/**
@@ -78,15 +95,25 @@ class Base_Controller extends Controller {
 		}
 	}
 
-	protected function _calculate_max_salary($min_salary = 0) {
+	protected function _calculate_max_salary($min_salary = 0, $type) {
 		$max_salary = array();
 		$factor = 3;
+		$multiply = 10000;
+		$append = 'k';
+		$_j = 10;
+		if ($type == 'hourly') {
+			$multiply = 10;
+			
+			$append = '/hr';
+		}
+		
+		
 		if ($min_salary != 0) {
-			$factor = $min_salary / 10000;
+			$factor = $min_salary / $multiply;
 		}
 
 		for ($i = $factor; $i <= 20; $i++) {
-			$max_salary[$i * 10000] = $i * 10 . 'k';
+			$max_salary[$i * $multiply] = $i * $_j . $append;
 		}
 
 		return $max_salary;

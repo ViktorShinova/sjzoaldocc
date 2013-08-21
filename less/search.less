@@ -1,0 +1,156 @@
+#job-search {
+	padding-bottom: 10px;
+	label { 
+		font-size: 14px;
+		line-height: 38px;
+		width: 120px;
+	}
+	input.input-xlarge { 
+		height: 38px;
+		font-size: 14px;
+		width: 295px;
+	}
+	select.input-xlarge {
+		font-size: 14px;
+		height: 48px;
+		width: 309px;
+		padding-top: 13px;
+		padding-bottom: 13px;
+	}
+	.span1 { 
+		font-size: 14px;
+		width: 84px;
+		height: 48px;
+		padding-top: 13px;
+		padding-bottom: 13px;
+	}
+	.add-on {
+		height: 38px;
+		line-height: 38px;
+		font-size: 16px;
+	}
+	#search {
+		float: right;
+		margin-right: 8px;
+	}
+	h2 { color: white; .lato-light(); }
+	
+	.controls {
+		margin-left: 140px;
+	}
+	#work-type { height: 116px; }
+}
+
+@media (min-width: 1200px) {
+
+	#job-search {
+		label { width: 120px; }
+		input.input-xlarge { width: 404px; }
+		select.input-xlarge { width: 420px; }
+		.span1 { width: 92px;}
+		.controls {	margin-left: 140px;	}
+		.span1 {
+			width: 121px;
+		}
+	}
+	
+	
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+	#home {
+		#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				width: 710px;
+				input.input-xlarge {
+					width: 97%;
+				}
+				select{
+					width: 528px;
+
+					&#job-sub-category, &#job-sub-location {
+						width: 508px;
+					}
+				
+					&#min-salary, &#max-salary {
+						width: 502px;
+					}
+
+					&#min-salary { margin-bottom: 12px;}
+				}
+
+				
+			}
+			.span1 { width: 165px; }
+			#search {
+				margin-right: 15px;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) { 
+#home {
+	#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				
+				input.input-xlarge, select {
+					width: 97%;
+				}
+
+				select {
+					&#job-sub-category, &#job-sub-location {
+						width: 90% !important;
+					} 
+					&#min-salary { margin-bottom: 12px;}
+				}
+			}
+			#search {
+				margin-right: 13px;
+			}
+
+			.input-prepend { width: 100%; 
+				span { float: left;}
+				select { float: left; width: 88%; }
+
+			}
+		}
+	}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	#home {
+		#top-feature{
+			margin-top: 0px;
+		}
+		#job-search {
+			.span6 {
+				label { margin-left: 5px;}
+				input.input-xlarge, select {
+					width: 97%;
+					margin-left: 5px;
+				}
+				select {
+					&#job-sub-category, &#job-sub-location {
+						width: 92% !important;
+
+					}
+				}
+			}
+			.add-on {margin-left: 5px;}
+
+			.input-prepend { width: 100%; 
+				span { float: left;}
+				select { float: left; width: 88%; margin-left: 0;}
+
+			}
+		}
+	}
+}

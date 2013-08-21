@@ -1,49 +1,132 @@
 #footer {
 
-	background: rgb(197, 191, 177);
-	bottom: 0;
-	
-	
-
-	// a { color: #ccc; }
-	h3 {
-		color: @dark-brown;
-		.lato-semibold();
+	background: @charcoal;
+	height: 350px;
+	h3 { 
+		color: white;
+		font-size: 24px;
+		.lato-normal();
+		margin-top: 26px;
 	}
-	ul {
-		margin-left: 0;
-		li {
-			font-size: 11px;
-			.font-normal();
-			float: left;
-			list-style: none;
-			ul {
-				margin-top: 5px;
-
-				li {
-					float: none;
+	.span5 {
+		background: @orange;
+		height: 350px;
+		text-align: center;
+		ul {
+			li {
+				margin-top:15px;
+				input.x-large {
+					font-size: 14px;
+					height: 42px;
+					width: 295px;
+					
 				}
 			}
 		}
 	}
-	.links-container {
-		margin-bottom: 21px;
-		> ul > li {
-			padding-left: 30px;
+
+	.social {
+		height: 350px;
+		blockquote {
+			background: url(/img/backgrounds/bubble.png) no-repeat center;
+			border: 0;
 			.box-sizing(border-box);
+			display: block;
+			margin: 0 auto;
+			margin-top: 26px;
+			padding: 15px;
+			.size(300px, 274px);
+
+			p {
+				font-size: 14px;
+				line-height: 27px;
+				height: 168px;
+				overflow: hidden;
+				.lato-normal();
+			}
+		}
+
+		#twitter-logo {
+			background: url(/img/icons/twitter-logo.png) no-repeat center;
+			.size(71px, 57px);
+			background-size: 42px;
+			display: block;
+			float: right;
+			position: relative;
+			top: -28px;
+			right: 3px;
+		}
+
+		.facebook, .twitter {
+			display: block;
+			.size(30px, 30px);
+			background-size: 30px;
+			float: left;
+			margin-right: 20px;
+			margin-top: -20px;
+			cursor: pointer;
+		}
+
+
+	}
+
+	ul {
+		margin-left: 0;
+		li {
+			font-size: 14px;
+			list-style: none;
+			a { 
+				color: @orange;
+				display: block;
+				padding: 15px 0px;
+				&:hover { color: white;}
+				&:active { color: @orange-dark;}
+
+			}
+			+ li { border-top: 1px solid @orange;}
 		}
 	}
-	
 }
 
 .credit {
-	background: @dark-brown;
-	#copyright { 
-		color: white;
-		.font-normal();
-		font-size: 12px;
-		line-height: 30px;
-		margin-bottom: 0;
-		text-align: center;
+	background: @darker-charcoal;
+	height: 50px;
+	.span5 {
+		background: @orange-dark;
+		height: 50px;
+		a { 
+			line-height: 50px;
+			font-size: 14px;
+			color: white;
+			float: right;
+			margin-right: 45px;
+		}
+	}
+
+	ul {
+		margin-left: 0;
+		li {
+			line-height: 50px;
+			float: left;
+			list-style: none;
+			a { 
+				color: white; 
+				&:hover { color: @orange-light;}
+				&:active { color: @orange-dark;}
+				font-size: 14px;
+			}
+			+ li { margin-left: 52px;}
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	#footer {
+		.social {
+			.facebook {
+				margin-left: 34px;
+			}
+			#twitter-logo { right: 23px;}
+		}
 	}
 }

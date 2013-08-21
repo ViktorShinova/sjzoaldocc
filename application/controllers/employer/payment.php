@@ -23,7 +23,8 @@ class Employer_Payment_Controller extends Base_Controller {
 
 		$price = Price::where('status', '=', 'active')->first();
 		$countries = Country::lists('name', 'code');
-		return View::make("employer.payment")->with(array('post' => Session::get('notice'), 'price' => $price, 'countries' => $countries));
+		//return View::make("employer.payment")->with(array('post' => Session::get('notice'), 'price' => $price, 'countries' => $countries));
+		return View::make("employer.captcha")->with(array('post' => Session::get('notice'), 'price' => $price, 'countries' => $countries));
 	}
 
 	public function post_submit() {
@@ -31,63 +32,68 @@ class Employer_Payment_Controller extends Base_Controller {
 		$price = Price::where('status', '=', 'active')->first()->price;
 		Session::put('price', $price);
 		
-		if (Session::get('notice') != null) {
-
-			$job_ads = Session::get('notice');
-			if (isset($_POST['paypal_submit_x'])) {
-				$this->process_payment($job_ads);
-			} else {
-				//Credit card payment
-				
-		
-				$payment = new EWaySinglePayment();
-				$payment->setTestMode(true);
-				$payment->setCustomerFirstName($_POST['bill_fname']);
-				$payment->setCustomerSurname($_POST['bill_lname']);
-				
-				$payment->setCustomerPhone($_POST['bill_contact']);
-				$payment->setCustomerAddress($_POST['bill_address'] . $_POST['bill_address2']);
-				$payment->setCustomerSuburb($_POST['bill_suburb']);
-				$payment->setCustomerState($_POST['bill_state']);
-				$payment->setCustomerCountry($_POST['bill_country']);
-				
-				$payment->setCCName($_POST['cc_name']);
-				$payment->setCCNumber($_POST['cc_num']);
-				$payment->setCCCVN($_POST['cc_cvn']);
-				$payment->setCCExpMonth($_POST['cc_month']);
-				$payment->setCCExpYear($_POST['cc_year']);
-				
-				$payment->setOrderTotal($price);
-				
-				$payment->setOrderDescription($job_ads['title']);
-				
-				$payment->setOrderReference($payment->generateOrderReference());
-				$payment->setOrderTXID($payment->generateOrderReference());
-				$payment->setPaymentType(EWAY_TYPE);
-				var_dump($payment);
-				if( $payment->process() ) {
-					$job = $this->_create_job();
-					
-					$payment->setEmployerID(Session::get('employer_id'));
-					$payment->set_jobId($job->id);
-					$payment->save();
-					
-					return Redirect::to('employer/payment/complete');
-					
-				} else {
-					$payment->save();
-					die();
-				}
-			
-				
-				
-				//$payment->
-				
-				
-			}
-		} else {
+		if (Session::get('notice') == null) {
 			return "Session has time out. Please close this window and try again";
 		}
+		
+		$resp = Recaptcha::recaptcha_check_answer (CAPTCHA_PRIVATE_KEY,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+		
+		if( !$resp->is_valid) {
+			Session::flash('error', 'Incorrect security code entered. Please try again');
+			return Redirect::back();
+		}
+		
+		$this->_create_job();
+		return Redirect::to('employer/payment/complete');
+		
+//		if (isset($_POST['paypal_submit_x'])) {
+//			$this->process_payment($job_ads);
+//		} else {
+//			//Credit card payment
+//			$payment = new EWaySinglePayment();
+//			$payment->setTestMode(true);
+//			$payment->setCustomerFirstName($_POST['bill_fname']);
+//			$payment->setCustomerSurname($_POST['bill_lname']);
+//
+//			$payment->setCustomerPhone($_POST['bill_contact']);
+//			$payment->setCustomerAddress($_POST['bill_address'] . $_POST['bill_address2']);
+//			$payment->setCustomerSuburb($_POST['bill_suburb']);
+//			$payment->setCustomerState($_POST['bill_state']);
+//			$payment->setCustomerCountry($_POST['bill_country']);
+//
+//			$payment->setCCName($_POST['cc_name']);
+//			$payment->setCCNumber($_POST['cc_num']);
+//			$payment->setCCCVN($_POST['cc_cvn']);
+//			$payment->setCCExpMonth($_POST['cc_month']);
+//			$payment->setCCExpYear($_POST['cc_year']);
+//
+//			$payment->setOrderTotal($price);
+//
+//			$payment->setOrderDescription($job_ads['title']);
+//
+//			$payment->setOrderReference($payment->generateOrderReference());
+//			$payment->setOrderTXID($payment->generateOrderReference());
+//			$payment->setPaymentType(EWAY_TYPE);
+//			var_dump($payment);
+//			if( $payment->process() ) {
+//				$job = $this->_create_job();
+//
+//				$payment->setEmployerID(Session::get('employer_id'));
+//				$payment->set_jobId($job->id);
+//				$payment->save();
+//
+//				return Redirect::to('employer/payment/complete');
+//
+//			} else {
+//				$payment->save();
+//				die();
+//			}
+//
+//		}
+		
 	}
 
 	private function process_payment($job) {
@@ -158,6 +164,7 @@ class Employer_Payment_Controller extends Base_Controller {
 			'end_at' => date("Y-m-d H:i:s", strtotime("+1 month", strtotime(date('Y-m-d H:i:s')))),
 			'slug' => $job_ads['slug'],
 			'status' => 1,
+			'verify' => 0,
 		);
 		
 		if( isset($job_ads['video'])) {

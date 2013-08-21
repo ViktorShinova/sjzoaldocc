@@ -16,8 +16,33 @@
 <p><strong>Your search yield no results. Please enter a different set of keyword(s).</strong></p>
 
 @endif
+<div class='form-inline pull-left' id='sort-toolbar'>
+	@if( $applicant && $applicant->job_mail ) 
+	<div id="confirm-modal" class="modal hide fade" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="create-group-label" aria-hidden="true">
+		<div class="modal-header">
+
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Are you sure?</h3>
+		</div>
+		<div class="modal-body">
+			You already have an existing career mail settings. By clicking ok, your previous settings will be overwritten.
+		</div>
+		<div class="modal-footer">
+			<a href="/applicant/careermail?{{$_SERVER['QUERY_STRING']}}" class="btn btn-warning" aria-hidden="true">Ok</a>
+			<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+		</div>
+
+	</div>
+	<a class="btn btn-warning" data-target="#confirm-modal" data-toggle="modal" >Email me similar jobs!</a>
+	@elseif( $applicant )
+	<a class="btn btn-warning" href="/applicant/careermail?{{$_SERVER['QUERY_STRING']}}">Email me similar jobs!</a>
+	@else
+	<a class="btn btn-warning" data-target="#login-modal" role="button" href="#" data-toggle="modal">Email me similar jobs!</a>
+	@endif
+	
+</div>
 <div class='form-inline pull-right' id='sort-toolbar'>
-	<label>Sort By </label>
+	<label>Sort By&nbsp;&nbsp;&nbsp;&nbsp;</label>
 	{{Form::select( 'sort', array('score'=>'Most Relevant', 'date-desc' => 'Latest','date-asc'=>'Oldest','title'=>'Title','today'=>'Show today\'s post'), $sort_order ,array('onchange'=>'this.form.submit()'))}}
 </div>
 
@@ -88,17 +113,5 @@
 </ul>
 <!-- #listings -->
 
-
-@endsection
-@section('page-scripts')
-
-setTimeout( function() {
-
-$("#job-sub-category option").removeAttr('selected');
-$("#job-sub-category option").eq({{$selected_sub_category}}).attr('selected', 'selected');
-
-$("#job-sub-location option").removeAttr('selected');
-$("#job-sub-location option").eq({{$selected_sub_location}}).attr('selected', 'selected');
-}, 500);
 
 @endsection
