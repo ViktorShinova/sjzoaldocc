@@ -95,7 +95,7 @@
 				<ul>
 					<?php $i=0; ?>
 					@foreach ($jobs as $job) 
-					<li class="span4 alt-{{$i%3}}">
+					<li class="span4 alt-{{$i%3}} drop-shadow">
 						<figure>
 							<img src="{{$job->logo}}" alt="{{$job->company}}" />
 						</figure>

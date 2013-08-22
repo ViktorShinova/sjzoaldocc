@@ -26,14 +26,14 @@
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>		
 	</head>
 
-	<body id="search-page">
-
-		@include ('layout.header')
-		
+<body id="search-page">
+	
+	@include ('layout.header')
+	<form method="get" action="/job/search">	
 		<div class="container">
 			<div class="row">
 				<section id="job-search" class="span12">
-					<form class="row form-horizontal" method="get" action="/job/search">
+					<div class="row form-horizontal">
 						<div class="span6">
 
 							<div class="control-group">
@@ -103,65 +103,15 @@
 							</div>
 						</div>
 						<button type="submit" id="search"class="btn btn-primary btn-large">Search</button>
-					</form>
-					
 				</section>
 			</div>
 		</div>
 		<div id="content" class="container">
-			<form class="row"  method="get" action="/job/search">
-
-				<div class="span9 pull-left">
+			<div class="row">
+				<div class="span12">
 					@yield('content')
 				</div>
-				<aside class="span3 hidden-phone hidden-tablet">
-					<div id="side-feature"  data-spy="affix" data-offset-top="575">
-						<ul id="feature-listing">
-							<li>
-								<a href="/pages/how_to_resume/">How to write a resume.</a>
-							</li>
-							<li>
-								<a href="/pages/how_to_coverletter/">How to write a cover letter.</a>
-							</li>
-							<li>
-								<a href="/pages/employers_expectations/">What are employers looking for?</a>
-							</li>
-							<li>
-								<a href="/pages/prepare_for_interview/">Preparing for an interview</a>
-							</li>
-							<li>
-								
-								@if( $is_applicant) 
-								<a href="/applicant/shortlists">View my shortlists</a>
-								@else
-								<a data-target="#login-modal" role="button" href="#" data-toggle="modal">View my shortlists</a>
-								@endif
-							</li>
-						</ul>
-					</div>
-				</aside>
-
-				<aside class="span3 hidden-desktop">
-					<div id="side-feature-mobile">
-						<ul id="feature-listing-mobile">
-							<li>
-								<a href="#">How to write a resume.</a>
-							</li>
-							<li>
-								<a href="#">How to write a cover letter.</a>
-							</li>
-							<li>
-								<a href="#">What are employers looking for?</a>
-							</li>
-							<li>
-								<a href="#">Preparing for an interview</a>
-							</li>
-							<li>
-								<a href="/applicant/shortlists">View all shortlist</a>
-							</li>
-						</ul>
-					</div>
-				</aside>
+			</div>
 		</div>
 	</form>
 	<!-- Modal Create Group -->

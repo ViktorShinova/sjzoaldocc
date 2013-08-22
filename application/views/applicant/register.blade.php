@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{ Form::open_for_files('applicant/register', 'POST', array('class' => 'applicant-register-form  validate-form form  row')); }}
+{{ Form::open_for_files('applicant/register', 'POST', array('class' => 'validate-form row register-form')); }}
 
 @if ( $errors->all(':message') )
 <div class="validation error span12">
@@ -16,38 +16,66 @@
 	</ul>
 </div>
 @endif
+<h1 class='span12'>Join us to enhance your career</h1>
 
-<h1 class='span12'>Registration</h1>
-
-<div class="span6 white-bg drop-shadow-butterfly">
-	<h4>Personal Details</h4>
-	<div class='pad'>
-		<ol>
-			<li>{{ Form::label('firstname', 'First Name'); echo Form::text('firstname', Input::old('firstname'), array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('lastname', 'Last Name'); echo Form::text('lastname', Input::old('lastname'), array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('location', 'Preferred Location'); echo Form::select('location', $locations, Input::old('location')) }}</li>
-			<li>{{ Form::label('category', 'Preferred Job'); echo Form::select('category', $job_categories, Input::old('category')) }}</li>	
-		</ol>
+<h4>Personal Details</h4>
+<div class="form-horizontal span6">
+	<div class="control-group">
+		<label class="control-label" for="firstname">First Name:</label>
+		<div class="controls">
+			{{Form::text('firstname', Input::old('firstname'), array('class' => 'validate[required] input-xlarge')) }}
+		</div>
 	</div>
-	<div class="clearfix"></div>
-</div>
-
-<div class="form-field span6 white-bg drop-shadow-butterfly">
-	<h4>Login Information</h4>
-	<div class='pad'>
-		<ol>
-			<!--<li>{{ Form::label('username', 'Username'); echo Form::text('username', Input::old('username'), array('class' => 'validate[required]')) }}</li>-->
-			<li>{{ Form::label('email', 'Email'); echo Form::text('email', Input::old('email'), array('class' => 'validate[required, custom[email]]')) }}</li>
-			<li>{{ Form::label('password', 'Password'); echo Form::password('password', array(), array('class' => 'validate[required]')) }}</li>
-			<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array(), array('class' => 'validate[required]')) }}</li>
-			<li>{{Recaptcha::recaptcha_get_html(CAPTCHA_PUB_KEY);}}</li>
-			
-		</ol>
+	<div class="control-group">
+		<label class="control-label" for="lastname">Last Name:</label>
+		<div class="controls">
+			{{Form::text('lastname', Input::old('lastname'), array('class' => 'validate[required] input-xlarge')) }}
+		</div>
 	</div>
-	<div class="clearfix"></div>	
+	<div class="control-group">
+		<label class="control-label" for="location">Preferred Location:</label>
+		<div class="controls">
+			{{Form::select('location', $locations, Input::old('location'), array('class' => 'input-xlarge')) }}
+		</div> 
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="category">Preferred Job:</label>
+		<div class="controls">
+			{{ Form::select('category', $job_categories, Input::old('category'), array('class' => 'input-xlarge'))}}
+		</div>
+	</div>
 </div>
+<h4>Login Information</h4>
+<div class="form-horizontal span6">
+	<div class="control-group">
+		<label class="control-label" for="email">Email:</label>
+		<div class="controls">
+			{{Form::text('email', Input::old('email'), array('class' => 'validate[required, custom[email]] input-xlarge')) }}
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="password">Passowrd:</label>
+		<div class="controls">
+			{{Form::password('password', array('class' => 'validate[required] input-xlarge')) }}
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="password_confirmation">Confirm password:</label>
+		<div class="controls">
+			{{Form::password('password_confirmation', array('class' => 'validate[required] input-xlarge')) }}
+		</div>
+	</div>
+	
+	<div class="control-group">
+	
+		<div class="controls">
+			{{ Form::submit("Register", array('class' => 'btn')); }} 
+		</div>
+	</div>
+</div>
+	
 
-{{ Form::submit("Register", array('class' => 'btn btn-warning pull-right')); }} 
+
 
 
 {{ Form::close(); }}

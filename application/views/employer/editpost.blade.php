@@ -51,7 +51,7 @@
 				<li> {{ Form::label('work-type', 'Employment type'); echo Form::select('work-type', $workTypes, $job->work_type); }}</li>	
 				<li> {{ Form::label('pay-struct', 'Payment Structure'); echo Form::select('pay-struct', array( "weekly" => "Weekly", "fortnightly" => "Fortnightly" , "monthly" => "Monthly" ), $job->payment_structure ); }}</li>
 
-				<li> {{ Form::label('sal-type', 'Salary Type'); echo  Form::select('sal-type', array('annual' => 'Annually Rates', 'hour' => 'Hourly Rates') , array('class' => 'validate[required]', 'id'=>'sal-type')); }}</li>
+				<li> {{ Form::label('sal-type', 'Salary Type'); echo  Form::select('sal-type', array('annual' => 'Annually Rates', 'hour' => 'Hourly Rates') , $job->salary_type ,array('class' => 'validate[required]', 'id'=>'sal-type')); }}</li>
 				<li> {{ Form::label('min-salary', 'Minimum Salary'); echo  Form::text('min-salary', $job->min_salary, array('class' => 'validate[required,custom[money], funcCall[salaryMinCheck]]', 'id'=>'min-salary')); }}</li>
 				<li> {{ Form::label('max-salary', 'Maximum Salary'); echo Form::text('max-salary', $job->max_salary, array('class' => 'validate[required,custom[money], funcCall[salaryMaxCheck]]', 'id'=>'max-salary')); }}</li>
 				<li> {{ Form::label('salary-range', 'Salary Description'); echo Form::text('salary-range', $job->salary_range) }} <a href="#" rel="tooltip" data-toggle="tooltip" title="You can enter an interesting note for your salary description. E.g (Good $$$ with super). Only a maximum of 70 characters allowed."><i class="icon-question-sign"></i></a></li>

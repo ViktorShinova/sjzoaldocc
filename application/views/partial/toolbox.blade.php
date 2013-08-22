@@ -1,4 +1,4 @@
-<ul class="nav pull-right">
+<ul class="reg-toolbar pull-right">
 	@if ( !Auth::check() ) 
 	<li>
 		<a href="/register">Register</a>
@@ -31,9 +31,9 @@
 			<li>
 				<form class="login" action="/home/login" method="post" style="padding: 15px;">
 					<ul>
-						<li><label for="nav-username">Email/Username</label><input type="text" id="nav-username" name="username" /></li>
-						<li><label for="nav-password">Password</label><input type="password" id="nav-password" name="password" /></li>
-						<li><input type="submit" class="btn btn-warning pull-right" value="Sign In" /></li>
+						<li><label for="nav-username">Email/Username</label><input type="text" id="nav-username" name="username" class="input-xlarge"/></li>
+						<li><label for="nav-password">Password</label><input type="password" id="nav-password" name="password"  class="input-xlarge" /></li>
+						<li><input type="submit" class="btn pull-right" value="Sign In" /></li>
 					</ul>
 				</form>	
 			</li>

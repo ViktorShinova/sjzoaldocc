@@ -182,9 +182,9 @@ class Employer_Post_Controller extends Base_Controller {
 		$work_types = WorkType::lists('name', 'abbr');
 		$templates = Template::all();
 		$min_salary = $this->_min_salary;
-		$max_salary = $this->_calculate_max_salary(0);
-		$post = Job::find($id);
 		
+		$post = Job::find($id);
+		$max_salary = $this->_calculate_max_salary(0, $post->salary_type);
 		$sub_categories = SubCategory::where('category_id', "=", $post->category_id)->lists("name", "id");
 		$sub_categories = array('' => 'Choose a sub category') + $sub_categories;
 		
@@ -248,6 +248,7 @@ class Employer_Post_Controller extends Base_Controller {
 			$job->min_salary = $job_ads['min-salary'];
 			$job->max_salary = $job_ads['max-salary'];
 			$job->salary_range = $job_ads['salary-range'];
+			$job->salary_type = $job_ads['sal-type'];
 			$job->payment_structure = $job_ads['pay-struct'];
 			$job->work_type = $job_ads['work-type'];
 			$job->location_id = $job_ads['job-location'];

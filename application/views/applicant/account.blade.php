@@ -39,7 +39,7 @@
 
 
 				</li>
-				<li>{{ Form::submit("Save", array('class' => 'btn btn-warning pull-right')); }} </li>	
+				<li>{{ Form::submit("Save", array('class' => 'btn pull-right')); }} </li>	
 			</ol>
 			<input type="hidden" name="form-type" value="basic-profile">
 			<div class='clearfix'></div>
@@ -89,7 +89,7 @@
 				<li>{{ Form::label('password', 'New Password'); echo Form::password('password', array('class' => 'validate[required]')) }}</li>
 				<li>{{ Form::label('password_confirmation', 'Confirm Password'); echo Form::password('password_confirmation', array('class' => 'validate[required]')) }}</li>
 				
-				<li>{{ Form::submit("Save", array('class' => 'btn btn-warning pull-right')); }} </li>	
+				<li>{{ Form::submit("Save", array('class' => 'btn pull-right')); }} </li>	
 
 			</ol>
 			<div class='clearfix'></div>
@@ -141,7 +141,7 @@
 							</table>
 							@endif
 						</div>
-						<a id="add-qualification" class="btn btn-warning pull-right add" href="#qualification-form" data-toggle="modal"><i class="icon-plus icon-white"></i> Add Qualification</a>
+						<a id="add-qualification" class="btn pull-right add" href="#qualification-form" data-toggle="modal"><i class="icon-plus icon-white"></i> Add Qualification</a>
 					</div>
 				</div>
 
@@ -165,7 +165,7 @@
 
 									<h4>{{$experience->company_name}} 
 										<button title="Delete" class="btn btn-mini btn-danger eremove pull-right" type="button" data-eid="{{ $experience->id }}"><i class="icon-remove"></i></button>
-										<button title="Edit" class="btn btn-mini eedit btn-warning pull-right" type="button" data-eid="{{ $experience->id }}"><i class="icon-pencil"></i></button>
+										<button title="Edit" class="btn btn-mini eedit pull-right" type="button" data-eid="{{ $experience->id }}"><i class="icon-pencil"></i></button>
 									</h4>
 									<p>From: {{$experience->started_month}} {{$experience->started_year}} to 
 										@if ($experience->ended_year == 1)
@@ -185,7 +185,7 @@
 
 						</div>
 
-						<a id="add-employment" class="btn btn-warning pull-right add" href="#employment-form" data-toggle="modal"><i class="icon-plus icon-white"></i> Add Experience</a>
+						<a id="add-employment" class="btn pull-right add" href="#employment-form" data-toggle="modal"><i class="icon-plus icon-white"></i> Add Experience</a>
 
 					</div>
 				</div>
@@ -202,7 +202,7 @@
 						<form class="form validate-form form-horizontal" action="/applicant/expertise" id="expertise-add-form">
 
 							<input type="text" class="input-xxlarge validate[required]" name="expertise" data-prompt-position="bottomRight">
-							<button class="btn btn-warning" id="add-expertise">Add!</button>
+							<button class="btn" id="add-expertise">Add!</button>
 						</form>
 						<div id="expertise-list">
 							<table>
@@ -256,7 +256,7 @@
 								@endforeach
 							</ul>
 						</div>
-						<button id="add-resume" class="btn pull-right add btn-warning" type="button"><i class="icon-plus icon-white"></i> Resume</button>
+						<button id="add-resume" class="btn pull-right add" type="button"><i class="icon-plus icon-white"></i> Resume</button>
 						<input type="file" id="resume-file" name="resume-file"/>
 						{{ Form::close(); }}
 					</div>
@@ -288,7 +288,7 @@
 								@endforeach
 							</ul>
 						</div>
-						<button id="add-coverletter" class="btn btn-warning pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
+						<button id="add-coverletter" class="btn pull-right" type="button"><i class="icon-plus icon-white"></i> Coverletter</button>
 						<input type="file" id="coverletter-file" name="coverletter-file"/>
 						{{ Form::close(); }}
 					</div>
@@ -359,7 +359,7 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button class="btn btn-warning" type="submit" id="btn-qualification-save">Save changes</button>
+		<button class="btn" type="submit" id="btn-qualification-save">Save changes</button>
 		<input type="hidden" value="" id="qualification-id" />
 	</div>
 </div>
@@ -445,7 +445,7 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button class="btn btn-warning" type="submit" id="btn-employment-save">Save changes</button>
+		<button class="btn" type="submit" id="btn-employment-save">Save changes</button>
 		<input type="hidden" value="" id="employment-id" />
 	</div>
 </div>
@@ -472,7 +472,7 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button class="btn btn-warning" type="submit" id="btn-expertise-save">Save changes</button>
+		<button class="btn" type="submit" id="btn-expertise-save">Save changes</button>
 		<input type="hidden" value="" id="prev-expertise-value" name="prev-expertise-value" />
 	</div>
 </div>

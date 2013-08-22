@@ -6,4 +6,45 @@
 	.brand img {
 		height: 100px;
 	}
+
+	.reg-toolbar {
+		margin-top: 30px;
+		.dropdown-menu { right: 0; left: auto;}
+		> li { 
+			float: left;
+			list-style: none;
+			font-size: 14px;
+			font-weight: bold;
+			margin-left: 20px;
+			a { 
+				.font-normal();
+				font-weight: bold;
+				font-size: 14px;
+				color: @charcoal; 
+				text-transform: uppercase;
+				&:hover {
+					color: @orange;
+				}
+				&:active {
+					color: @orange-light;
+				}
+
+				.caret {
+					color: #ccc;
+					position: relative;
+					top: 1px;
+				}
+			}
+
+			form {
+				overflow: hidden;
+				margin-bottom: 0;
+				.btn { text-transform: uppercase;}
+				label, input { font-size: 14px;}
+				input[type=text], input[type=password] {
+					height: 30px;
+				}
+			}
+		}
+	}
 }

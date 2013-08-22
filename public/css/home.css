@@ -48,7 +48,7 @@
   background: white;
   margin: 0;
   margin-top: 20px;
-  height: 150px;
+  height: 100px;
   width: 100%;
   text-align: center;
 }
@@ -56,9 +56,9 @@
   margin-top: 30px;
 }
 #home #featured-jobs ul li .wrapper {
-  background: #f7f7f7;
+  background: rgba(255, 255, 255, 0.51);
   padding: 10px 20px;
-  height: 190px;
+  height: 240px;
 }
 #home #featured-jobs ul li p {
   font-size: 16px;
@@ -77,8 +77,8 @@
 }
 #home #featured-jobs ul li span .icon-calendar-empty,
 #home #featured-jobs ul li span .icon-time {
-  color: #e74c3c;
-  font-size: 20px;
+  color: #2581bc;
+  font-size: 23px;
   margin-right: 10px;
   line-height: 10px;
 }
