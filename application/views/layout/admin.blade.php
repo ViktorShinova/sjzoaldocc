@@ -25,7 +25,7 @@
 		{{ HTML::style('/css/font-awesome.min.css') }}
 		{{ HTML::style('/js/vendor/markitup/skins/markitup/style.css') }}
 		{{ HTML::style('/js/vendor/markitup/sets/default/style.css') }}
-		
+
 		@yield('custom_styles')
 
 		<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
@@ -33,32 +33,45 @@
 
 	<body class="employer">
 
-		@include ('layout.nav-bar')
+		<div class="navbar navbar">
+			<div class="navbar-inner">
+				<div class="container">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
+							<li><a href='/'>Home</a></li>
+							<li><a href='/admin/page/list'>Pages</a></li>
+							<li><a href='/admin/price/list'>Price</a></li>
+							<li><a href='/admin/post/list'>Post</a></li>
+							<li><a href='/admin/user/list'>Users</a></li>
+							<li><a href='/logout'>Logout</a></li>
+						</ul>						
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div id="content" class="container">
 			<div class="row">
-			<div class="span2">
-				<ul>
-					<li><a href='/admin/page/list'>Pages</a></li>
-					<li><a href='/admin/price/list'>Price</a></li>
-				</ul>
-			</div>
-			@yield('content')
+				<div class="span12">
+					@yield('content')
+				</div>
 			</div>
 		</div>
 		<!-- /#content -->
-		
-		@include('layout.footer')
 
-		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 		<script src="/js/vendor/ckeditor/ckeditor.js"></script>
-		<script src="/js/plugins.js"></script>
+		<script src="/js/vendor/jquery.dataTables.js"></script>
 		@yield('scripts')
 		<script src="/js/admin.js"></script>
 		<script>
-		@yield('page-scripts')
+			@yield('page-scripts')
 		</script>
 	</body>
 

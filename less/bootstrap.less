@@ -238,7 +238,7 @@ a {
 
 a:hover,
 a:focus {
-	color: @orange;
+	color: @green;
 }
 
 .img-rounded {
@@ -1153,7 +1153,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 select:focus,
 .uneditable-input:focus {
-	border-color: @orange;
+	border-color: @green;
 	outline: 0;
 	.lt-ie7 &, .lt-ie8 & { outline: thin dotted; }
 /* IE6-9 */
@@ -2892,7 +2892,7 @@ table th[class*="span"],
 	display: block;
 	padding: 3px 20px;
 	clear: both;
-	font-weight: normal;
+	font-weight: normal !important;
 	line-height: 20px;
 	color: #333333;
 	white-space: nowrap;
@@ -2902,9 +2902,10 @@ table th[class*="span"],
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
-	color: #ffffff;
+	color: #ffffff !important;
+	font-weight: normal !important;
 	text-decoration: none;
-	background: @pastel-brown;
+	background: @green;
 }
 
 .dropdown-menu > .active > a,
@@ -3133,7 +3134,7 @@ button.close {
 .btn.disabled,
 .btn[disabled] {
 	color: #fff;
-	background-color: @orange-light;
+	background-color: @green-light;
 }
 
 .btn:active,
@@ -4361,7 +4362,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
 	text-decoration: none;
-	background-color: @orange;
+	background-color: @green;
 }
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
@@ -4730,9 +4731,13 @@ input[type="submit"].btn.btn-mini {
 .pagination ul > li > a:focus,
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-	background-color: #f5f5f5;
+	
 }
-
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+	background: @blue;
+	color: white;
+}
 .pagination ul > .active > a,
 .pagination ul > .active > span {
 	color: #999999;

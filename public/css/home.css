@@ -7,13 +7,27 @@
 	© 2012 CareersHire. All Rights Reserved.
 	...................................................................... */
 
+.tile {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: #fbfbfb;
+  background: -moz-linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(92%, #fbfbfb), color-stop(100%, #efefef));
+  background: linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+}
 #home #featured-jobs h2 {
+  margin-top: 30px;
   margin-bottom: 30px;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 #home #featured-jobs h3 {
   font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
   line-height: 36px;
-  height: 27px;
   overflow: hidden;
   margin: 0;
   margin-bottom: 15px;
@@ -22,47 +36,37 @@
   margin-left: 0px;
   margin-bottom: 50px;
   overflow: hidden;
+  padding-bottom: 21px;
 }
 #home #featured-jobs ul li {
-  min-height: 400px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   overflow: hidden;
-  list-style: none;
-}
-#home #featured-jobs ul li.alt-0 {
-  background: #333333;
-}
-#home #featured-jobs ul li.alt-1 {
-  background: #f39c12;
-}
-#home #featured-jobs ul li.alt-2 {
-  background: #333333;
+  max-height: 356px;
 }
 #home #featured-jobs ul li figure {
   background: white;
+  border-radius: 6px;
   margin: 0;
   margin-top: 20px;
-  height: 100px;
+  max-height: 85px;
   width: 100%;
   text-align: center;
 }
 #home #featured-jobs ul li figure img {
-  margin-top: 30px;
+  max-height: 85px;
 }
 #home #featured-jobs ul li .wrapper {
   background: rgba(255, 255, 255, 0.51);
   padding: 10px 20px;
-  height: 240px;
+  height: 250px;
 }
 #home #featured-jobs ul li p {
-  font-size: 16px;
-  height: 41px;
+  font-size: 12px;
+  line-height: 27px;
+  font-family: 'Lora', serif;
   overflow: hidden;
   clear: both;
 }
@@ -71,13 +75,13 @@
   height: 24px;
   line-height: 24px;
   float: left;
-  font-size: 14px;
+  font-size: 12px;
   margin-right: 30px;
   margin-bottom: 6px;
 }
 #home #featured-jobs ul li span .icon-calendar-empty,
 #home #featured-jobs ul li span .icon-time {
-  color: #2581bc;
+  color: #6db43f;
   font-size: 23px;
   margin-right: 10px;
   line-height: 10px;
@@ -86,7 +90,6 @@
   padding-left: 0;
   clear: both;
   height: auto;
-  text-decoration: underline;
 }
 #home #featured-jobs ul li img {
   max-height: 100px;
@@ -95,10 +98,6 @@
 @media (min-width: 1200px) {
   #home #featured-jobs figure {
     width: 200px;
-  }
-  #home #featured-jobs ul li img {
-    max-height: 100px;
-    max-width: 350px;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {

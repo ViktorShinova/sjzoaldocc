@@ -12,13 +12,19 @@
 #home {
 	
 	#featured-jobs {
-		h2 { margin-bottom: 30px;}
+		h2 { 
+			margin-top: 30px; 
+			margin-bottom: 30px;
+			.font-normal();
+		}
 		
 		h3 { 
 			
 			font-size: 18px;
+			font-weight: bold;
+			text-transform: uppercase;
 			line-height: 36px;
-			height: 27px;
+			
 			overflow: hidden;
 			margin: 0;
 			margin-bottom: 15px;
@@ -29,35 +35,35 @@
 			margin-left: 0px;
 			margin-bottom: 50px;
 			overflow: hidden;
+			padding-bottom: 21px;
 			li {
 
-				min-height: 400px;
 				.box-sizing(border-box);
-				.border-radius(5px);
 				overflow: hidden;
-				list-style: none;
+				max-height: 356px;
 				
-				&.alt-0 { background: @charcoal; }
-				&.alt-1 { background: @orange; }
-				&.alt-2 { background: @charcoal; }
 				figure { 
 					background: white;
+					border-radius: 6px;
 					margin: 0;
 					margin-top: 20px;
-					height: 100px;					
+					max-height:85px;
 					width: 100%;
 					text-align: center;
-					img { margin-top: 30px;}
+					img { max-height:85px; }
 				}
+				
 				.wrapper { 
 					background: rgba(255, 255, 255, 0.51);
 					padding: 10px 20px; 
-					height: 240px;
+					height: 250px;
 				}
 				
 				p { 
-					font-size: 16px;
-					height: 41px;
+					font-size: 12px;
+					line-height: 27px;
+					.font-serif();
+					
 					overflow: hidden;
 					clear: both;
 				}
@@ -66,21 +72,23 @@
 					height: 24px;
 					line-height: 24px;
 					float: left; 
-					font-size: 14px;
+					font-size: 12px;
 					margin-right: 30px;
 					margin-bottom: 6px;
+					
 					.icon-calendar-empty, .icon-time { 
-						color: @blue;
+						color: #6DB43F;
 						font-size: 23px;
 						margin-right: 10px;
 						line-height: 10px;
 					}
 				}
 				.category { 
+
 					padding-left: 0; 
 					clear:both;
 					height: auto;
-					text-decoration: underline;
+					
 				}
 
 				img {
@@ -98,11 +106,6 @@
 			figure { width: 200px; }
 			ul {
 				li {
-					
-					img {
-						max-height: 100px;
-						max-width: 350px;
-					}
 				}
 			}
 		}

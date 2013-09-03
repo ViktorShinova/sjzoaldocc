@@ -29,7 +29,7 @@
 <div class="row">
 
 	<h2 class="span12">Application Form</h2>
-	<div class="span4 white-bg drop-shadow-butterfly">
+	<div class="span4 tile">
 		@if ( $errors->all(':message') )
 			<div class="validation error">
 				@foreach($errors->all('<p>:message</p>') as $message)
@@ -39,7 +39,7 @@
 		@endif
 		{{ Form::open_for_files('job/apply/'.$job->id, 'POST', array('id' => 'job-apply', 'class' => ' validate-form form ')); }}
 		<h4>Your Details</h4>
-		<div class="pad">
+		
 			<ol>
 				<li>
 					<label for="email">First Name *</label>
@@ -142,7 +142,7 @@
 				@endif
 			</ol>
 
-		</div>
+		
 		{{ Form::close(); }}
 	</div>
 

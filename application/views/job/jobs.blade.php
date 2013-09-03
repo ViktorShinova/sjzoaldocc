@@ -49,7 +49,7 @@
 <ul class="listings" id="job-listing">
 
 	@foreach($jobs->results as $job)
-	<li class="white-bg">
+	<li class="white-bg tile">
 		@if( $is_applicant )
 			@if ( in_array ($job->id, $applicant_shortlists )  )
 			<span class="shortlist-tag active"></span>
@@ -63,9 +63,7 @@
 
 			<article class="main-info">
 				<h2><a href="/job/article/{{$job->slug}}"><?php //echo preg_replace($tokens, $replacePattern, $job->title)   ?>{{$job->title}}</a></h2>
-				<span class="date"><i class="icon-calendar-empty"></i>{{ date('d F Y', strtotime($job->created_at)) }}</span>
-				<span class="time"><i class="icon-time"></i>{{ date('g:ia', strtotime($job->created_at)) }}</span>
-				
+							
 				<a title="Find more from this category." class="category" href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a>
 				<p>
 					{{$job->summary}}
@@ -81,7 +79,7 @@
 				<h4 class="company"><a href="/job/search?employer-id={{$job->employer_id}}" title="Find more from the same employer.">{{ $job->company }}</a></h4>
 				<span class="location"><i class="icon-map-marker"></i> {{ $job->location_name }}, {{ $job->sub_location_name }}</span>
 				<span class="salary"><i class="icon-info"></i>{{ $job->salary_range }}</span>
-				
+				<span class="date"><i class="icon-calendar"></i>{{ date('d F Y', strtotime($job->created_at)) }} {{ date('g:ia', strtotime($job->created_at)) }}</span>	
 			</aside>
 		</div>
 		<div id="job-controls" class="pull-right">

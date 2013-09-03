@@ -65,4 +65,38 @@ class User extends Eloquent {
 		return $this->has_one('Applicant');
 		
 	}
+	
+	
+	public static function transfer($user) {
+		
+		$follow_referer = true;
+		if (User::is_in_role('employer', $user)) {
+			$employer_id = Employer::where('user_id', '=', $user->id)->first()->id;
+			Session::put('employer_id', $employer_id);
+			//default if refer is empty
+			$referer = '/employer/post/list';
+
+		} elseif ( User::is_in_role ('applicant', $user) ) {
+
+			$applicant_id = Applicant::where('user_id', '=', $user->id)->first()->id;
+			Session::put('applicant_id', $applicant_id);
+
+			$referer = "/applicant/account";
+		} elseif( User::is_in_role('administrator', $user)) {
+			$referer = "/admin/dashboard/";
+			$follow_referer = false;
+			
+		}
+		
+		if (Session::has('referer') && !Session::get('impersonate') && $follow_referer) {
+
+			if( !strpos(Session::get('referer'), "login") ) {
+				$referer = Session::get('referer');
+			} 				
+		} 
+
+
+		return $referer;
+		
+	}
 }

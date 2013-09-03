@@ -32,7 +32,7 @@
 	<form method="get" action="/job/search">	
 		<div class="container">
 			<div class="row">
-				<section id="job-search" class="span12">
+				<section id="job-search" class="span12 tile">
 					<div class="row form-horizontal">
 						<div class="span6">
 

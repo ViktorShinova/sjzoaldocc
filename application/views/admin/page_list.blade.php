@@ -1,16 +1,16 @@
 @layout('layout.admin')
 
 @section('content')
-<div class="span10">
 	<h2>Pages</h2>
 	
-	<div class="table-container drop-shadow-butterfly">
+	<div class="table-container">
         <div class="table-header-wrapper">
 			<div class="table-toolbar">
-				<a href="/admin/page/"><i class="icon-plus-sign icon-white"></i>Add a new page</a>
+				<a href="/admin/user/add"><i class="icon-plus-sign icon-white"></i>Add a new page</a>
 			</div>
         </div>
 		<table>
+			<thead>
 			<tr class="table-header-row">
 				<th>Title</th>
 				<th>Created on</th>
@@ -18,6 +18,7 @@
 				<th></th>
 				<th></th>
 			</tr>
+			</thead>
 			@foreach($pages as $page)
 			<tr class="table-data-row">
 				<td><a rel="external" href="/page/{{$page->slug}}">{{ $page->title }}</a></td>
@@ -31,5 +32,5 @@
 		</table>
 
     </div>
-</div>
+
 @endsection

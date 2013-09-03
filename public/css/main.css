@@ -1,3 +1,13 @@
+.tile {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: #fbfbfb;
+  background: -moz-linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(92%, #fbfbfb), color-stop(100%, #efefef));
+  background: linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+}
 /* Base
 =============================================================== */
 
@@ -204,7 +214,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;
@@ -212,12 +222,12 @@ body {
   background-color: white;
 }
 a {
-  color: #333333;
+  color: #191816;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #f39c12;
+  color: #3faea5;
 }
 .img-rounded {
   -webkit-border-radius: 6px;
@@ -883,7 +893,7 @@ input,
 button,
 select,
 textarea {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
 label {
@@ -972,7 +982,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 select:focus,
 .uneditable-input:focus {
-  border-color: #f39c12;
+  border-color: #3faea5;
   outline: 0;
   /* IE6-9 */
 
@@ -2359,7 +2369,7 @@ table th[class*="span"],
   display: block;
   padding: 3px 20px;
   clear: both;
-  font-weight: normal;
+  font-weight: normal !important;
   line-height: 20px;
   color: #333333;
   white-space: nowrap;
@@ -2368,9 +2378,10 @@ table th[class*="span"],
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
-  color: white;
+  color: white !important;
+  font-weight: normal !important;
   text-decoration: none;
-  background: #6d6b99;
+  background: #3faea5;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -2545,14 +2556,14 @@ button.close {
   margin-bottom: 0;
   *margin-left: .3em;
   font-size: 16px;
-  font-family: 'Helvetica', sans-serif !important;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif !important;
   font-weight: 400 !important;
   line-height: 20px;
   color: white;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  background-color: #333333;
+  background-color: #191816;
   border: 0;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -2565,7 +2576,7 @@ button.close {
 .btn.disabled,
 .btn[disabled] {
   color: white;
-  background-color: #ffa312;
+  background-color: #58cac1;
 }
 .btn:first-child {
   *margin-left: 0;
@@ -2662,7 +2673,7 @@ input[type="button"].btn-block {
 .btn-secondary {
   text-align: center;
   cursor: pointer;
-  background-color: #333333;
+  background-color: #191816;
 }
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -3387,7 +3398,7 @@ input[type="submit"].btn.btn-mini {
   min-height: 60px;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: #333333;
+  background-color: #191816;
 }
 .navbar-inner:before,
 .navbar-inner:after {
@@ -3479,7 +3490,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   padding: 4px 14px;
   margin-bottom: 0;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 13px;
   font-weight: normal;
@@ -3538,7 +3549,7 @@ input[type="submit"].btn.btn-mini {
   float: none;
   padding: 20px 27px 20px;
   color: white;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 16px;
   text-transform: uppercase;
@@ -3553,7 +3564,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   text-decoration: none;
-  background-color: #f39c12;
+  background-color: #3faea5;
 }
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
@@ -3874,11 +3885,10 @@ input[type="submit"].btn.btn-mini {
   border: 1px solid #dddddd;
   border-left-width: 0;
 }
-.pagination ul > li > a:hover,
-.pagination ul > li > a:focus,
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-  background-color: whitesmoke;
+  background: #2581bc;
+  color: white;
 }
 .pagination ul > .active > a,
 .pagination ul > .active > span {
@@ -5917,7 +5927,7 @@ a:hover {
   font-size: 13px;
 }
 #content .validation p {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   margin: 0;
 }
@@ -5926,7 +5936,7 @@ a:hover {
 }
 #content .validation ul li {
   background: none;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 12px;
   list-style: disc;
@@ -5961,7 +5971,7 @@ a:hover {
   padding: 32px;
 }
 #content .alert-info {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
 #search-page #content {
@@ -5986,7 +5996,7 @@ a:hover {
 #content .emp-home .login h3,
 #content .emp-home .notice h3 {
   color: white;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 300;
 }
 #content .emp-home .login strong,
@@ -6008,7 +6018,7 @@ a:hover {
 }
 #content .emp-home .login h3 {
   color: white;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 300;
 }
 #content .emp-home .login .reset-pwd {
@@ -6016,7 +6026,7 @@ a:hover {
   display: block;
 }
 #content .emp-home .notice {
-  background: #99cc33;
+  background: #3faea5;
 }
 #recaptcha_widget_div {
   margin-bottom: 21px !important;
@@ -6074,10 +6084,7 @@ a:hover {
   height: 180px;
 }
 .header h1 {
-  margin-top: 33px;
-}
-.header .brand img {
-  height: 100px;
+  margin-top: 53px;
 }
 .header .reg-toolbar {
   margin-top: 30px;
@@ -6094,18 +6101,18 @@ a:hover {
   margin-left: 20px;
 }
 .header .reg-toolbar > li a {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-weight: bold;
   font-size: 14px;
-  color: #333333;
+  color: #191816;
   text-transform: uppercase;
 }
 .header .reg-toolbar > li a:hover {
-  color: #f39c12;
+  color: #3faea5;
 }
 .header .reg-toolbar > li a:active {
-  color: #ffa312;
+  color: #58cac1;
 }
 .header .reg-toolbar > li a .caret {
   color: #cccccc;
@@ -6128,7 +6135,8 @@ a:hover {
   height: 30px;
 }
 #job-search {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 45px;
 }
 #job-search label {
   font-size: 14px;
@@ -6136,36 +6144,36 @@ a:hover {
   width: 120px;
 }
 #job-search input.input-xlarge {
-  height: 38px;
+  height: 28px;
   font-size: 14px;
-  width: 295px;
+  width: 281px;
 }
 #job-search select.input-xlarge {
   font-size: 14px;
-  height: 48px;
-  width: 309px;
-  padding-top: 13px;
-  padding-bottom: 13px;
+  height: 38px;
+  width: 295px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 #job-search .span1 {
   font-size: 14px;
-  width: 84px;
-  height: 48px;
-  padding-top: 13px;
-  padding-bottom: 13px;
+  width: 78px;
+  height: 38px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 #job-search .add-on {
-  height: 38px;
-  line-height: 38px;
+  height: 28px;
+  line-height: 28px;
   font-size: 16px;
 }
 #job-search #search {
   float: right;
-  margin-right: 8px;
+  margin-right: 24px;
 }
 #job-search h2 {
   color: white;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 300;
 }
 #job-search .controls {
@@ -6187,10 +6195,10 @@ a:hover {
     width: 120px;
   }
   #job-search input.input-xlarge {
-    width: 404px;
+    width: 384px;
   }
   #job-search select.input-xlarge {
-    width: 420px;
+    width: 400px;
   }
   #job-search .span1 {
     width: 92px;
@@ -6199,7 +6207,10 @@ a:hover {
     margin-left: 140px;
   }
   #job-search .span1 {
-    width: 121px;
+    width: 114px;
+  }
+  #job-search #search {
+    margin-right: 28px;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
@@ -6312,7 +6323,7 @@ a:hover {
   width: 104px;
 }
 .applicant .accordion-heading .accordion-toggle {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 20px;
@@ -6807,15 +6818,15 @@ body #side-info #feature-listing i {
 }
 #content h1,
 .content h1 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #333333;
+  color: #191816;
 }
 #content h2,
 .content h2 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 600;
-  color: #333333;
+  color: #191816;
 }
 #content p,
 .content p {
@@ -6824,7 +6835,7 @@ body #side-info #feature-listing i {
 }
 form label {
   font-size: 12px;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
 form input {
@@ -6832,15 +6843,12 @@ form input {
   -moz-border-radius: 0;
   border-radius: 0;
 }
-.reset-pwd {
-  color: #3129cc;
-}
-.reset-pwd:hover {
-  text-decoration: underline;
-}
 /* =FORMS STYLES 
 =================================================================== */
 
+.form li {
+  list-style: none;
+}
 .register-form h1 {
   text-align: center;
   font-size: 24px;
@@ -6848,7 +6856,7 @@ form input {
 }
 .register-form h4 {
   clear: both;
-  color: #333333;
+  color: #191816;
   display: block;
   font-size: 18px;
   font-style: italic;
@@ -6871,20 +6879,21 @@ form input {
   right: 0;
 }
 .register-form .span6 {
+  padding: 40px 45px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   background: #fbfbfb;
   background: -moz-linear-gradient(top, #fbfbfb 92%, #efefef 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(92%, #fbfbfb), color-stop(100%, #efefef));
   background: linear-gradient(top, #fbfbfb 92%, #efefef 100%);
   margin: 0 auto;
   float: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 40px 45px;
 }
 .register-form .span6 label,
-.register-form .span6 input {
+.register-form .span6 input[type=text],
+.register-form .span6 input[type=password] {
   font-size: 14px;
   line-height: 30px;
 }
@@ -6893,6 +6902,63 @@ form input {
 }
 .register-form .span6 select {
   height: 40px;
+}
+.login-form {
+  margin-bottom: 42px;
+}
+.login-form .span6 {
+  padding: 40px 45px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: #fbfbfb;
+  background: -moz-linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(92%, #fbfbfb), color-stop(100%, #efefef));
+  background: linear-gradient(top, #fbfbfb 92%, #efefef 100%);
+  margin: 0 auto;
+  float: none;
+}
+.login-form .span6 label,
+.login-form .span6 input[type=text],
+.login-form .span6 input[type=password] {
+  font-size: 14px;
+  line-height: 30px;
+}
+.login-form .span6 input {
+  height: 30px;
+}
+.login-form .span6 select {
+  height: 40px;
+}
+.login-form h4 {
+  clear: both;
+  color: #191816;
+  display: block;
+  font-size: 18px;
+  font-style: italic;
+  position: relative;
+  margin: 20px auto;
+  text-align: center;
+  width: 600px;
+}
+.login-form h4:before,
+.login-form h4:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 1px;
+  width: 30%;
+  background: #d8d8d8;
+  top: 10px;
+}
+.login-form h4:after {
+  right: 0;
+}
+.login-form a {
+  display: block;
+  text-align: center;
+  text-decoration: underline;
 }
 #form-reset label {
   display: block;
@@ -7064,8 +7130,6 @@ form input {
   margin-left: 0;
 }
 #content .listings > li {
-  border: solid 1px #dedede;
-  box-shadow: inset 0 0 10px #dddddd;
   clear: both;
   list-style: none;
   padding: 20px;
@@ -7079,9 +7143,9 @@ form input {
   margin-bottom: 12px;
 }
 #content .listings > li h2 a {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
-  color: #333333;
+  color: #191816;
   display: block;
 }
 #content .listings > li h2 a:hover {
@@ -7100,7 +7164,7 @@ form input {
 #content #job-listing {
   margin-top: 50px;
 }
-#content #job-listing li {
+#content #job-listing > li {
   border-bottom: 1px solid #cccccc;
   min-height: 200px;
 }
@@ -7125,8 +7189,14 @@ form input {
   width: 70%;
   padding-right: 15px;
 }
+#content #job-listing .main-info h2 a {
+  color: black;
+}
+#content #job-listing .main-info h2 a:hover {
+  color: #3faea5;
+}
 #content #job-listing .main-info span {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   display: block;
   height: 24px;
@@ -7138,7 +7208,7 @@ form input {
 }
 #content #job-listing .main-info span .icon-calendar-empty,
 #content #job-listing .main-info span .icon-time {
-  color: #f39c12;
+  color: #2581bc;
   font-size: 23px;
   margin-right: 10px;
   line-height: 10px;
@@ -7147,30 +7217,32 @@ form input {
   display: block;
   clear: both;
   font-size: 14px;
-  font-family: 'Helvetica', sans-serif;
-  font-weight: 400;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: #3faea5;
   margin-bottom: 12px;
 }
 #content #job-listing .main-info .category:hover {
-  color: #fbc544;
+  color: #58cac1;
 }
 #content #job-listing .main-info p {
-  font-size: 14px;
-  font-family: 'Helvetica', sans-serif;
-  font-weight: 400;
+  font-size: 13px;
+  font-family: 'Lora', serif;
+  line-height: 27px;
 }
 #content #job-listing .additional-info {
   width: 30%;
   float: right;
+  margin-bottom: 36px;
 }
 #content #job-listing .additional-info h4 {
-  color: #f39c12;
-  font-family: 'Helvetica', sans-serif;
+  color: #3faea5;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   margin-top: 0;
 }
 #content #job-listing .additional-info > span {
-  font-size: 14px;
+  font-size: 12px;
   display: block;
   margin-bottom: 10px;
   line-height: 24px;
@@ -7182,7 +7254,7 @@ form input {
   width: 28px;
   margin-right: 10px;
   text-align: center;
-  color: #f39c12;
+  color: #2581bc;
 }
 #content #job-listing .additional-info img {
   max-height: 40px;
@@ -7211,13 +7283,15 @@ form input {
   right: 0;
 }
 #content #job-listing #job-controls a {
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   margin-right: 10px;
   line-height: 24px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 #content #job-listing #job-controls a i {
-  color: #f39c12;
+  color: #2581bc;
   font-size: 23px;
   margin-left: 10px;
   position: relative;
@@ -7655,18 +7729,18 @@ form input {
   margin-right: 0;
 }
 #footer {
-  background: #333333;
+  background: #191816;
   height: 350px;
 }
 #footer h3 {
   color: white;
   font-size: 24px;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   margin-top: 26px;
 }
 #footer .span5 {
-  background: #f39c12;
+  background: #3faea5;
   height: 350px;
   text-align: center;
 }
@@ -7700,7 +7774,7 @@ form input {
   line-height: 27px;
   height: 168px;
   overflow: hidden;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
 #footer .social #twitter-logo {
@@ -7733,7 +7807,7 @@ form input {
   list-style: none;
 }
 #footer ul li a {
-  color: #f39c12;
+  color: #3faea5;
   display: block;
   padding: 15px 0px;
 }
@@ -7741,17 +7815,17 @@ form input {
   color: white;
 }
 #footer ul li a:active {
-  color: #d1850d;
+  color: #1f7972;
 }
 #footer ul li + li {
-  border-top: 1px solid #f39c12;
+  border-top: 1px solid #3faea5;
 }
 .credit {
   background: #222222;
   height: 50px;
 }
 .credit .span5 {
-  background: #d1850d;
+  background: #1f7972;
   height: 50px;
 }
 .credit .span5 a {
@@ -7774,10 +7848,10 @@ form input {
   font-size: 14px;
 }
 .credit ul li a:hover {
-  color: #ffa312;
+  color: #58cac1;
 }
 .credit ul li a:active {
-  color: #d1850d;
+  color: #1f7972;
 }
 .credit ul li + li {
   margin-left: 52px;
@@ -8005,7 +8079,7 @@ img.jcrop-preview {
   }
 }
 .employer h3 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 600;
 }
 .employer .wrapper {
@@ -8026,37 +8100,23 @@ img.jcrop-preview {
 .employer .table-container {
   margin-bottom: 21px;
 }
-.employer .table-container .table-header-wrapper {
-  background: #177db2;
-  height: 34px;
-  position: relative;
-  width: 100%;
-}
-.employer .table-container .table-header-wrapper h2 {
-  color: white;
-  font-family: 'Helvetica', sans-serif;
-  font-weight: 300;
-  font-size: 19px;
-  line-height: 34px;
-  float: left;
-  margin: 0 0 0 4px;
-}
-.employer .table-container .table-header-wrapper .table-toolbar {
-  background: #6d6b99;
-  border: 0;
+.employer .table-container .dataTables_filter {
   float: right;
 }
-.employer .table-container .table-header-wrapper .table-toolbar a {
-  display: block;
-  color: white;
-  padding: 3px 5px 3px 5px;
+.employer .table-container .dataTables_length {
+  float: left;
 }
-.employer .table-container .table-header-wrapper .table-toolbar a:hover {
-  color: #fbc544;
+.employer .table-container .dataTables_info {
+  margin-top: 21px;
+  float: left;
 }
-.employer .table-container .table-header-wrapper .table-toolbar a i {
-  font-size: 14px;
-  margin-right: 5px;
+.employer .table-container .dataTables_paginate {
+  float: right;
+  margin-top: 21px;
+}
+.employer .table-container .dataTables_paginate a {
+  margin-left: 10px;
+  cursor: pointer;
 }
 .employer .table-container table {
   width: 100%;
@@ -8066,9 +8126,9 @@ img.jcrop-preview {
   color: white;
 }
 .employer .table-container table .table-header-row th {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 300;
-  background: #6d6b99;
+  background: #1f7972;
   padding: 4px;
   font-size: 14px;
   text-align: left;
@@ -8084,18 +8144,16 @@ img.jcrop-preview {
 }
 .employer .table-container table .table-data-row a:hover {
   text-decoration: underline;
-  color: white;
 }
 .employer .table-container table .table-data-row:hover {
-  background: #99cc33;
+  background: #f1f1f1;
 }
 .employer .table-container table .table-data-row:hover a {
-  color: white;
   text-decoration: none;
 }
 .employer .table-container table .table-data-row td {
   font-size: 12px;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   padding: 6px 10px;
   border: 1px solid #dddddd;
@@ -8338,7 +8396,7 @@ img.jcrop-preview {
   float: right;
 }
 .employer #credit-card h3 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 300;
 }
 .employer #credit-card p {
@@ -8629,6 +8687,7 @@ img.jcrop-preview {
 }*/
 
 #content .notice-container {
+  overflow: hidden;
   max-width: 768px;
 }
 #content .notice-container > header {
@@ -8637,7 +8696,7 @@ img.jcrop-preview {
 }
 #content .notice-container > header h1 {
   color: #333333;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 600;
   font-size: 24px;
   margin: 0;
@@ -8661,9 +8720,17 @@ img.jcrop-preview {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+#content .notice-container > article p {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+}
 #content .notice-container > footer {
   padding-top: 20px;
   min-height: 100px;
+}
+#content .notice-container > footer p {
+  font-family: 'Lora', serif;
+  font-size: 14px;
 }
 #custom-template {
   color: #333333;
@@ -9105,7 +9172,7 @@ img.jcrop-preview {
   color: black;
   width: 150px;
   font-size: 11px;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, Helvetica, sans-serif;
   font-weight: 400;
   border: 2px solid #f4b6b6;
   box-shadow: 0 0 6px black;

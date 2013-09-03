@@ -41,6 +41,7 @@
 
 #content {
 	.notice-container { 
+		overflow: hidden;
 		max-width: 768px;
 	}
 	.notice-container > header {
@@ -73,11 +74,19 @@
 	.notice-container > article {
 		padding-top: 30px;
 		padding-bottom: 30px;
+		p {
+			.font-serif();
+			font-size: 14px;
+		}
 	}
 
 	.notice-container > footer {
 		padding-top:20px;
 		min-height: 100px;
+		p {
+			.font-serif();
+			font-size: 14px;
+		}
 	}
 }
 

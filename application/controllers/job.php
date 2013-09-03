@@ -227,7 +227,7 @@ class Job_Controller extends Base_Controller {
 				->where('end_at', '>', date('Y:m:d H:i:s'))
 				->order_by($column, $direction)
 				//->raw_where("CONTAINS (jobs.title,")
-				->paginate(20, $select);
+				->paginate(2, $select);
 
 
 		$is_applicant = false;
@@ -308,7 +308,7 @@ class Job_Controller extends Base_Controller {
 			return View::make('job.verify');
 		}
 		
-		if( !$job || $job->end_at > date('Y:m:d H:i:s')) {
+		if( !$job || $job->end_at < date('Y:m:d H:i:s')) {
 			return View::make('job.expired');
 		}
 		

@@ -74,6 +74,7 @@ Route::controller('employer');
 Route::controller('applicant');
 //ADMIN
 Route::controller('admin.dashboard');
+Route::controller('admin.post');
 Route::controller('cron');
 
 Route::controller(Controller::detect());
@@ -165,6 +166,12 @@ Route::filter('applicant', function() {
 
 Route::filter('employer', function() {
 	if(Auth::user()->role->name != "employer") {
+		return Redirect::to('login');
+	}
+});
+
+Route::filter('administrator', function() {
+	if(Auth::user()->role->name != "administrator") {
 		return Redirect::to('login');
 	}
 });

@@ -735,7 +735,7 @@ class Applicant_Controller extends Base_Controller {
 	public function post_register() {
 
 		$rules = array(
-			'email' => 'required|email|max:255|unique:users', //user table
+			'email' => 'unique:users|required|email|max:255', //user table
 			'password' => 'required|confirmed',
 			'password_confirmation' => 'required',
 			'email' => 'required|email',
@@ -744,32 +744,77 @@ class Applicant_Controller extends Base_Controller {
 		);
 
 		$validation = Validator::make(Input::all(), $rules);
-
+var_dump($validation); die;
 		if ($validation->fails()) {
 			return Redirect::to('applicant/register')->with_errors($validation)->with_input();
 		} else {
 
-			$register_input = Input::all();
-			$user = new User();
-			$user->username = $register_input['email'];
-			$user->role_id = 2;
-			$user->email = $register_input['email'];
-			$user->password = Hash::make($register_input['password']);
+			
+			//generate a unique key
+			$key = md5(uniqid());
 
-			if ($user->save()) {
-				$applicant = new Applicant();
-				$applicant->user_id = $user->id;
-				$applicant->first_name = $register_input['firstname'];
-				$applicant->last_name = $register_input['lastname'];
-				$applicant->preferred_location = $register_input['location'];
-				$applicant->preferred_job = $register_input['category'];
-				$applicant->viewable = 1;
-				$applicant->slug = md5($user->username);
-				$applicant->create_base_directory();
-				if ($applicant->save()) {
-					//send an email and then redirects them to the confirmation page.
-					return Redirect::to('/login/');
+			$pending = new PendingUser();
+			$pending->values = serialize(Input::all());
+			$pending->uniqid = $key;
+			$pending->save();	
+			//send email to user
+			$email = Input::get('email');
+
+			$mailer = new CHMailer();
+			$mailer->AddAddress($email);
+			$mailer->Subject = 'Look for jobs registration confirmation.';
+			$mailer->IsHTML(true);
+			$mailer->Body = "
+
+			Thank you for registering with 'Look for Jobs'. We are happy to invite you to join our community. However before proceeding, please activate your account by clicking or copy and paste the link below.
+			<a href='http://lookforjobs.localhost/applicant/verify_user/$key'>http://lookforjobs.localhost/applicant/verify_user/$key</a>
+
+			Please activate your account within 30 days of registering. Accounts that are not activated will be removed after 30 days.
+			";
+
+			$mailer->send();
+		}
+	}
+
+	public function get_verify_user($key = null) {
+		if( !$key ) {
+			return false;
+		}
+
+		$pending_forms = PendingUser::where('uniqid', '=', $key)->first();
+		
+		if( !$pending_forms ) {
+			return false;
+		}
+
+
+		$register_input = unserialize($pending_forms->values);
+
+		$user = new User();
+		$user->username = $register_input['email'];
+		$user->role_id = 2;
+		$user->email = $register_input['email'];
+		$user->password = Hash::make($register_input['password']);
+
+		if ($user->save()) {
+			$applicant = new Applicant();
+			$applicant->user_id = $user->id;
+			$applicant->first_name = $register_input['firstname'];
+			$applicant->last_name = $register_input['lastname'];
+			$applicant->preferred_location = $register_input['location'];
+			$applicant->preferred_job = $register_input['category'];
+			$applicant->viewable = 1;
+			$applicant->slug = md5($user->username);
+			$applicant->create_base_directory();
+			if ($applicant->save()) {
+				//remove from pending form
+				$pending_forms->delete();
+				//send an email and then redirects them to the confirmation page.
+				//force login and redirect
+				if( Auth::login($user->id) ) {
+					Session::set('applicant_id', $applicant_id);
 				}
+				return Redirect::to('/applicant/account');
 			}
 		}
 	}

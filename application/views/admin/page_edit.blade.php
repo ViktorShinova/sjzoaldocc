@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="span10">
+
 	<h2>Edit Page</h2>
 	<form method="post" action="/admin/page/edit/{{$page->id}}">
 		
@@ -13,7 +13,6 @@
 		<button type="submit" class="btn btn-warning">Submit</button>
 	
 	</form>
-</div>
 
 
 @endsection

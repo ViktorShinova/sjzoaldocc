@@ -58,6 +58,7 @@
 							</li>
 			
 							<li class='page-employer-profile'><a href="/employer/profile/">My Account</a></li>
+							<li><a href="/logout/">Logout</a></li>
 						</ul>
 					</div>
 				</div>

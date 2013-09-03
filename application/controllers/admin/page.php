@@ -10,8 +10,22 @@
  *
  * @author Damien
  */
+require_once('dashboard.php');
 class Admin_Page_Controller extends Base_Controller {
 	//put your code here
+	
+	public function __construct() {
+
+		parent::__construct();
+		
+		$this->filter('before', 'auth')->only(
+				array('index')
+		);
+
+		$this->filter('before', 'administrator')->only(
+				array('index')
+		);
+	}
 	
 	
 	public function get_index() {

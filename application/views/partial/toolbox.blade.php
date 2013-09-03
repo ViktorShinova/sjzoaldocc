@@ -12,10 +12,12 @@
 
 			@if( Auth::user()->role_id == 1 )
 			<li><a href="/employer/post/list"><i class="icon-book"></i> My Dashboard</a></li>
-			@else
+			@elseif( Auth::user()->role_id == 2)
 			<li><a href="/applicant/account/"><i class="icon-book"></i> My Profile</a></li>
 			<li><a href="/applicant/inbox/"><i class="icon-envelope-alt"></i> My Inbox</a></li>
 			<li><a href="/applicant/shortlists/"><i class="icon-bookmark"></i> My Shortlist</a></li>
+			@elseif( Auth::user()->role_id == 999) 
+			<li><a href="/admin/dashboard"><i class="icon-book"></i> Dashboard</a></li>
 			@endif
 
 

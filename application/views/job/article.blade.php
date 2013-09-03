@@ -14,7 +14,7 @@
 <div class="row">
 
 
-	<section class="notice-container span8 white-bg drop-shadow-black">
+	<section class="notice-container span8 tile">
 		<header class="notice-header">
 
 			@if( isset($data['header-image']) && $data['title-type'] == 'image' ) 
@@ -34,7 +34,7 @@
 
 	<aside class="span4" id="side-info">
 
-		<div class="white-bg drop-shadow-black summary">
+		<div class="tile summary">
 			<h3 class="container-header">Summary</h3>
 			<p>{{Formatter::format_date($job1->created_at, Formatter::DATE_LONG);}}</p>
 			<ul class="data-list">
@@ -124,7 +124,7 @@
 
 
 		@if (!empty($related_jobs))
-		<div class="white-bg drop-shadow-black">
+		<div class="tile">
 			<h3 class="container-header">Other related jobs</h3>
 			<ul id="related-jobs">
 				@foreach($related_jobs as $_job)

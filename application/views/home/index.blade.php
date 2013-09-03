@@ -4,7 +4,7 @@
 
 
 <div class="row">
-	<section id="job-search" class="span12">
+	<section id="job-search" class="span12 tile">
 
 		<form class="row form-horizontal" method="get" action="/job/search">
 			<div class="span6">
@@ -95,15 +95,15 @@
 				<ul>
 					<?php $i=0; ?>
 					@foreach ($jobs as $job) 
-					<li class="span4 alt-{{$i%3}} drop-shadow">
+					<li class="span4 alt-{{$i%3}} tile">
 						<figure>
 							<img src="{{$job->logo}}" alt="{{$job->company}}" />
 						</figure>
 						<div class="wrapper">
 							<h3><a href="/job/article/{{$job->slug}}">{{ $job->title }}</a></h3>
-							<span class="date"><i class="icon-calendar-empty"></i>{{ date('d F Y', strtotime($job->created_at)) }}</span>
-							<span class="time"><i class="icon-time"></i>{{ date('g:ia', strtotime($job->created_at)) }}</span>
-							<span class="category"><a href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></span>
+							<span class="date">Posted on: {{ date('d F Y', strtotime($job->created_at)) }} {{ date('g:ia', strtotime($job->created_at)) }}</span>
+							
+							<span class="category">Ind: <a href="/job/search?job-category={{$job->category_id}}">{{ $job->category_name }}</a></span>
 							
 							<p>
 								{{ $job->summary }}

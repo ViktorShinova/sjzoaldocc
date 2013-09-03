@@ -57,37 +57,18 @@ class Home_Controller extends Base_Controller {
 		$password = Input::get('password');
 
 		$user = User::login($username, $password);
-		
-		
+	
 		
 		if (!$user) {
 			return Redirect::to('login')->with('error', true);
-		} else {
-			$referer = "";
-			if (User::is_in_role('employer', $user)) {
-				$employer_id = Employer::where('user_id', '=', $user->id)->first()->id;
-				Session::put('employer_id', $employer_id);
-				//default if refer is empty
-				$referer = '/employer/post/list';
-				
-			} elseif ( User::is_in_role ('applicant', $user) ) {
-				
-				$applicant_id = Applicant::where('user_id', '=', $user->id)->first()->id;
-				Session::put('applicant_id', $applicant_id);
-	
-				$referer = "/applicant/account";
-			}
-			
-			if (Session::has('referer')) {
-				
-				if( !strpos(Session::get('referer'), "login") ) {
-					$referer = Session::get('referer');
-				} 				
-			} 
-			
-			
-			return Redirect::to( $this->_cleanReturnUrl($referer) );
 		}
+		
+		Session::put('user', $user);
+		
+		$referer = User::transfer($user);
+
+		return Redirect::to( $this->_cleanReturnUrl($referer) );
+		
 		
 	}
 
@@ -96,6 +77,16 @@ class Home_Controller extends Base_Controller {
 			
 			$is_employer = Auth::user()->is_in_role('employer', Auth::user());			
 			Auth::logout();
+			
+			
+			if( Session::get('impersonate') ) {
+				
+				//cancel impersonation here
+				Session::put('impersonate', false);
+				Auth::login(Session::get('admin_id'));
+				return Redirect::to('/admin/user/list');
+			}
+			
 			Session::flush();
 			
 			if($is_employer) {
