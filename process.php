@@ -5,31 +5,7 @@ include('admin/inc/functions.php');
 session_start();
 error_reporting(5);
 
-				/*
-				firstName:Victor
-				lastName: Lim
-				contact:0432719204
-				country:Australia
-				state:Queensland
-				city:Brisbane
-				address1:13/612 Sherwood Road
-				address2:Sherwood
-				zip:4075
-				countrycode:AU
-				*/
-
-				//update => 1 <----------- VERY IMPORTANT FOR _CART!
-			/*	'custom' => '1,' <------ USER ID IF LOGGED IN MEMBER
-				'first_name' => '$_POST['firstName']',
-				'last_name' => '$_POST['lastName']',
-				'country' => '$_POST['country']',
-				'city' => '$_POST['city']',
-				'lc' => '$_POST['countrycode']',
-				'state' => '$_POST['state']',
-				'address1' => '$_POST['address1']',
-				'address2' => '$_POST['address2']',
-				'zip' => '$_POST['zip']',
-				'email' => '$_SESSION['KDM_Username']',	*/	
+	
 $arrayDiscountedProducts = CheckDiscountedProducts();
 $arrayKidsProducts = CheckKidsProducts();
 
